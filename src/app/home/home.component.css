@@ -17,14 +17,29 @@
 .jogo-card {
     display: flex;
     flex-direction: column;
+    position: relative;
     align-items: center;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.jogo-nota {
+    position: absolute;
+    padding: .5rem;
+    color: whitesmoke;
+    background-color: crimson;
+    border-radius: 50%;
+    top: -.5rem;
+    right: -.5rem;
+}
+
+
+
 .jogo-card:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     cursor: pointer;
+    scale: 1.05;
+    transition: .2s;
 }
 
 .jogo-img {
@@ -36,11 +51,11 @@
 .jogo-info {
     margin: .5rem;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    width: 90%;
     gap: .25rem;
+    width: 160px;    
 }
+
 
 .jogo-btn {
     width: 100%;
@@ -53,13 +68,10 @@
     background-color: green;
     cursor: pointer;
     color: whitesmoke;
+    scale: 1;
 }
 
-p {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-}
+
 
 @media (width <= 1050px)  {
     .container {

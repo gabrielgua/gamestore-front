@@ -2,3 +2,13 @@
     margin: 0;
     background-color: whitesmoke;
 }
+
+p {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
