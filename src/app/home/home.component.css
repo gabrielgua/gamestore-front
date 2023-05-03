@@ -1,0 +1,68 @@
+.container {
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+    margin-top: 5rem;
+}
+
+
+
+.jogo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.jogo-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    cursor: pointer;
+}
+
+.jogo-img {
+    width: 180px;
+    height: 100px;
+    background-color: grey;
+}
+
+.jogo-info {
+    margin: .5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 90%;
+    gap: .25rem;
+}
+
+.jogo-btn {
+    width: 100%;
+    border: 1px solid green;
+    padding: .5rem;
+    border-radius: .25rem;
+}
+
+.jogo-btn:hover {
+    background-color: green;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+@media (width <= 1050px)  {
+    .container {
+        width: 80%;
+    }
+}

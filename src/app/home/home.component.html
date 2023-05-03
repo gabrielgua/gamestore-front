@@ -1,0 +1,10 @@
+<div class="container">
+    <div *ngFor="let jogo of jogos" class="jogo-card">
+        <div class="jogo-img"></div>
+        <div class="jogo-info" >
+            <p title="{{jogo.nome}}">{{ (jogo.nome.length>19)? (jogo.nome | slice:0:19)+'...':(jogo.nome) }}</p>
+            <p>{{(jogo.preco == 0) ? 'Grátis': 'R$ '+ jogo.preco}}</p>
+            <button class="jogo-btn">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
