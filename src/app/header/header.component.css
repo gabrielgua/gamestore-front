@@ -1,0 +1,60 @@
+.header {
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    height: 5rem;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0rem 1rem;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 60rem;
+    flex-grow: 1;
+}
+
+.logo {
+    position: relative;
+    top: -.25rem;
+    color: var(--green);
+    font-family: 'Oswald', sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.login {
+    display: flex;
+    gap: 1rem;
+    height: 5rem;
+}
+
+.btn-header {
+    background-color: transparent;
+    border: none;
+    font-size: medium;
+    padding: 0 1rem;
+}
+
+.btn-header:hover {
+    
+    cursor: pointer;
+    color: var(--green);
+    border-bottom: 5px solid var(--green);
+    transition: .1s;
+}
+
+.btn-entrar {
+   
+}
+
+.btn-entrar:hover {
+}
+
+.btn-cadastro:hover {
+}

@@ -1,11 +1,25 @@
 <div class="container">
-    <div *ngFor="let jogo of jogos" class="jogo-card">
-        <div class="jogo-img"></div>
-        <div class="jogo-nota" title="Avaliações: {{jogo.nota}}/10">{{jogo.nota}}</div>
-        <div class="jogo-info" >
-            <p title="{{jogo.nome}}">{{jogo.nome}}</p>
-            <p>{{(jogo.preco == 0) ? 'Grátis': 'R$ '+ jogo.preco}}</p>
-            <button class="jogo-btn">Adicionar ao Carrinho</button>
+    <h1>Catálogo</h1>
+    <div class="buscar">
+        <input type="search" placeholder="🔍 Buscar">
+    </div>
+    <div class="jogos-lista">
+        <div *ngFor="let jogo of jogos" class="jogo-card">
+            <img class="jogo-img" src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg?t=1680840402">
+            <div class="jogo-info">
+                <p class="paragrafo-truncate" title="{{jogo.nome}}">{{jogo.nome}}</p>
+                <div class="preco-nota">
+                    <div class="jogo-preco">
+                        <p class="paragrafo-truncate">{{(jogo.preco == 0) ? 'Gratuito p/ jogar': 'R$ '+ jogo.preco}}</p>
+                    </div>
+                    <div class="jogo-nota" title="Avaliações: {{jogo.nota}}/10">
+                        <p>⭐ {{jogo.nota}}</p>
+                    </div>
+                </div>
+                <button class="btn jogo-btn">+ Carrinho 🛒</button>
+            </div>
         </div>
     </div>
 </div>
+
+

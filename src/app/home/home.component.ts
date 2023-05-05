@@ -10,13 +10,17 @@ import { Jogo } from '../models/jogo';
 export class HomeComponent implements OnInit {
 
   jogos: Jogo[] = [];
+  jogoDestaque = new Jogo();
 
   constructor(private homeService: HomeService) {}
   
   ngOnInit(): void {
     this.homeService.listarJogos()
       .then((jogos) => {        
+        this.jogoDestaque = jogos[0];
         this.jogos = jogos;
+        // this.jogos.shift();
+
       }).catch((error) => {
         console.log(error.error);
       })
