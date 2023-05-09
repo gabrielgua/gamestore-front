@@ -9,7 +9,7 @@
 }
 
 .buscar {
-    width: 100%;
+    min-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,40 +20,34 @@
     border: 1px solid black;
     padding: 1rem;
     border-radius: .2rem;
-    max-width: 50rem;
     flex-grow: 1;
 }
 
 .jogos-lista {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: .5rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 1.5rem;
+    border-radius: .5rem;
     margin-bottom: 2rem;
 }
 
 .jogo-card {
     display: flex;
-    min-width: 22.9%;
-    max-width: 22.9%;
     flex-direction: column;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border: 1px solid white;
     border-radius: .5rem;
 }
 
-.jogo-card:last-child {
-    /* margin-right: auto; */
-}
 
 .jogo-card:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     cursor: pointer;
-    scale: 1.01;
+    transform: scale(1.05);
+    transition: 50ms ease-in-out;
 }
+
 
 .jogo-img {
     background-color: grey;
@@ -92,7 +86,9 @@
     font-size: medium;
     color: var(--green);
     margin-right: auto;
+    max-width: 70%;
 }
+
 
 .jogo-nota {
     width: 3rem;
@@ -110,50 +106,25 @@
     padding: .5rem;
     border-radius: .25rem;
     font-size: small;
-    
 }
 
 .jogo-btn:hover {
-    background-color: var(--green);
+    border-color: var(--green);
     cursor: pointer;
-    color: whitesmoke;
+    color: var(--green);
+}
+
+.jogo-btn:active {
+    color: white;
+    background-color: var(--green);
 }
 
 @media (width <= 64rem)  {
     .container {
         margin: 2rem;
     }
-
-    .jogo-card {
-        flex-basis: 20%;
-        max-width: 31.4%;
-        flex-grow: 1;
-    }
 }
 
-@media (width <= 55.5rem) {
-    .jogo-card {
-        flex-basis: 20%;
-        max-width: 31%;
-        flex-grow: 1;
-    }
-}
 
-@media (width <= 50rem) {
-    .jogo-card {
-        flex-basis: 20%;
-        max-width: 30.7%;
-        flex-grow: 1;
-    }
-}
-
-@media (width <= 46rem) {
-    
-    .jogo-card {
-        max-width: 47.8%;
-        flex-basis: 45%;
-    }
-
-}
 
 
