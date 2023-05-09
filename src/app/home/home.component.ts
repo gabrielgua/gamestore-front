@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from './home.service';
-import { Jogo } from '../models/jogo';
+import { JogoService } from '../service/jogo.service';
+import { JogoResumo } from '../models/jogo.resumo';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +9,10 @@ import { Jogo } from '../models/jogo';
 })
 export class HomeComponent implements OnInit {
 
-  jogos: Jogo[] = [];
-  jogoDestaque = new Jogo();
+  jogos: JogoResumo[] = [];
+  jogoDestaque = new JogoResumo();
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: JogoService) {}
   
   ngOnInit(): void {
     this.homeService.listarJogos()

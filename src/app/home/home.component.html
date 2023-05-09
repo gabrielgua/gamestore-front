@@ -4,7 +4,7 @@
         <input type="search" placeholder="🔍 Buscar">
     </div>
     <div class="jogos-lista">
-        <div *ngFor="let jogo of jogos" class="jogo-card">
+        <a routerLink="/jogos/{{jogo.uriNome}}" *ngFor="let jogo of jogos" class="jogo-card">
             <img class="jogo-img" src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg?t=1680840402">
             <div class="jogo-info">
                 <p class="paragrafo-truncate" title="{{jogo.nome}}">{{jogo.nome}}</p>
@@ -18,7 +18,7 @@
                 </div>
                 <button class="btn jogo-btn">+ Carrinho 🛒</button>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 

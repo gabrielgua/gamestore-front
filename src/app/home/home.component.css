@@ -20,7 +20,7 @@
     border: 1px solid black;
     padding: 1rem;
     border-radius: .2rem;
-    flex-grow: 1;
+    width: 100%;
 }
 
 .jogos-lista {
@@ -44,7 +44,6 @@
 .jogo-card:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     cursor: pointer;
-    transform: scale(1.05);
     transition: 50ms ease-in-out;
 }
 
