@@ -21,7 +21,7 @@
                     
             </div>
             <div class="preco-comprar">
-                <p class="jogo-preco">R$ {{jogo.preco}}</p>
+                <p class="jogo-preco">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</p>
                 <button class="btn btn-carrinho">+ Carrinho 🛒</button>
             </div>
         </div>
