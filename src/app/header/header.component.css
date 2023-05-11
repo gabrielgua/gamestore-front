@@ -9,7 +9,7 @@ header {
     align-items: center;
     justify-content: center;
     padding: 0 2rem;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 }
 
 .wrapper {
@@ -29,6 +29,9 @@ header {
     color: var(--green);
 }
 
+.dropdown li {
+    display: none;
+}
 
 
 nav {
@@ -81,8 +84,6 @@ nav ul li a:active {
 }
 
 
-
-
 .btn-header {
     background-color: transparent;
     border: none;
@@ -97,4 +98,21 @@ nav ul li a:active {
     border-bottom: 5px solid var(--green);
     transition: .1s;
 }
+
+@media (width <= 25rem) {
+
+    .wrapper {
+        margin: 0;
+    }
+
+    .account-actions li {
+        display: none;
+    }
+
+    .dropdown li {
+        display: block;
+    }
+}
+
+
 
