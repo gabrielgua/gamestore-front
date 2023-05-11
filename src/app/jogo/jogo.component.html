@@ -4,9 +4,7 @@
         {{jogo.nome}}   
     </h1>
     <div class="principal">
-        <div class="video">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/bWZ61JWLq30" title="Dark Souls™ II: Scholar of The First Sin Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/bWZ61JWLq30" title="Dark Souls™ II: Scholar of The First Sin Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <div class="jogo-info">
             <img class="jogo-img" src="https://cdn.cloudflare.steamstatic.com/steam/apps/335300/header.jpg?t=1682651964">
             <div class="info-wrapper">
@@ -27,21 +25,24 @@
             </div>
         </div>
     </div>
-    <!-- <h3>Categorias</h3>  -->
     <div class="tag-row">
         <div *ngFor="let categoria of jogo.categorias" class="categoria">
             <p>{{categoria.nome}}</p>
         </div>
-    </div>
-    <!-- <h3>Plataformas</h3> -->
-    <div class="tag-row">
+        <span class="spacer-vertical">|</span>
         <div *ngFor="let plataforma of jogo.plataformas" class="plataforma">
             <p>{{plataforma.nome}}</p>
         </div>
     </div>
-    <div class="preco card">
+    
+    <div class="jogo-info-secundaria">
+        <div class="card">
+            <h4>Sobre o jogo</h4>
+            <p class="descricao-completa">{{jogo.descricao}} {{jogo.descricao}}</p></div>
+        <div class="card">
+            ⭐{{jogo.nota}}
+        </div>
         
-        R$ {{jogo.preco}}
     </div>
 
 </div>

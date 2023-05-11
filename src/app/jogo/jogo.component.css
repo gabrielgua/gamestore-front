@@ -21,23 +21,22 @@
 
 .principal {
     display: grid;
-    grid-template-columns: 2.5fr 1fr;
+    grid-template-columns: auto 1fr;
     gap: 1rem;
 }
 
 .video {
-    display: flex;
-    align-items: center;
     aspect-ratio: 16 / 9;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .jogo-img {
-    width: 20rem;
+    max-width: 20rem;
     border-radius: .5rem .5rem 0 0;
 }
 
 .jogo-info {
+    max-width: min-content;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -145,10 +144,58 @@
     .container {
         margin: 2rem;
     }
+
+   
 }
 
-@media (width <= 50rem) {
+@media (width <= 60rem) {
     .principal {
-        grid-template-columns: 1fr;
+        grid-template-columns: auto;
+    }
+
+    .jogo-desenvolvedora {
+        display: flex;
+        margin-bottom: 0;
+    }
+
+    .jogo-img {
+        max-width: 20rem;
+        max-height: none;
+        border-radius: .5rem 0 0 .5rem;
+    }
+
+    .jogo-info {
+        flex-direction: row;
+        max-width: none;
+    }
+
+    .info-wrapper {
+        padding: .75rem;
+        gap: .5rem;
+    }
+
+    .jogo-descricao > p {
+        -webkit-line-clamp: 3;
+    }
+}
+
+@media (width <= 40rem) {
+    
+    .jogo-desenvolvedora {
+        display: flex;
+        margin-bottom: 0;
+    }
+
+    .jogo-img {
+        display: none;
+    }
+
+    .info-wrapper {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .jogo-descricao > p {
+        -webkit-line-clamp: 6;
     }
 }

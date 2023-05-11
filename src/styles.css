@@ -52,6 +52,10 @@ a {
     text-decoration: none;
 }
 
+.spacer-vertical {
+    font-size: large;
+}
+
 @media (width <= 64rem)  {
     .container {
         margin: 2rem;
