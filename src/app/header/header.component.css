@@ -16,18 +16,20 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 62rem;
+    width: 65rem;
 }
 
 .logo {
     display: flex;
     align-items: center;
-}
-
-.logo > h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-block-start: -.75rem;
     font-family: 'Oswald', sans-serif;
     color: var(--green);
 }
+
+
 
 nav {
     display: flex;
@@ -66,11 +68,15 @@ a {
 }
 
 a:hover {
-    color: var(--green);
+    
     cursor: pointer;
 }
 
-a:active {
+nav ul li a:hover {
+    color: var(--green);
+}
+
+nav ul li a:active {
     color: var(--links-active-green);
 }
 

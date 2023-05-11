@@ -1,7 +1,8 @@
 :root {
+    --roxo: #533566;
     --green: #50A060;
-    --links-active-green: #2e5f38;
     --red: crimson;
+    --links-active-green: #2e5f38;
 }
 
 html,
@@ -13,9 +14,8 @@ body {
 
 }
 
-p, h1, h2, h3 {
+p, h1, h2, h3, h4, h5 {
     margin: 0;
-    margin-block-start: -.75rem;
     background-color: transparent;
 }
 
@@ -31,11 +31,31 @@ p, h1, h2, h3 {
     cursor: pointer;
 }
 
-.paragrafo-truncate {
+.multiline-truncate {
+    width:100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    font-size: small;
+  
+}
+
+.singleline-truncate {
     white-space: nowrap;
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (width <= 64rem)  {
+    .container {
+        margin: 2rem;
+    }
 }
 
 

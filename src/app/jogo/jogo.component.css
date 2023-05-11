@@ -1,0 +1,154 @@
+.container {
+    max-width: 65rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-navigation {
+
+}
+
+
+
+.card {
+    background-color: white;
+    border-radius: .5rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.principal {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 1rem;
+}
+
+.video {
+    display: flex;
+    align-items: center;
+    aspect-ratio: 16 / 9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.jogo-img {
+    width: 20rem;
+    border-radius: .5rem .5rem 0 0;
+}
+
+.jogo-info {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.info-wrapper {
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-wrapper > h3 {
+    font-size: small;
+}
+
+.jogo-descricao {
+    background-color: whitesmoke;
+    padding: .25rem;
+    border-radius: .25rem;
+    font-size: small;
+}
+
+.jogo-desenvolvedora {
+    max-width: 18rem;
+    font-size: small;
+    margin-bottom: auto;
+
+}
+
+.jogo-desenvolvedora > .label {
+    font-weight: bold;
+    max-width: max-content;
+    background-color: whitesmoke;
+    padding: .25rem;
+    border-radius: .25rem .25rem 0 0;
+}
+
+.jogo-desenvolvedora > p {
+    border-radius: 0 .25rem .25rem .2rem;
+    background-color: whitesmoke;
+    max-width: max-content;
+    padding: .25rem;
+}
+
+.preco-comprar {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 2fr;
+    gap: 1rem;
+}
+
+.preco-comprar > .jogo-preco {
+    padding: .5rem;
+    background-color: var(--roxo);
+    border-radius: .25rem;
+    color: white;
+    font-size: large;
+}
+
+.btn-carrinho {
+    border: 1px solid var(--green);
+    padding: .5rem;
+    border-radius: .25rem;
+    font-size: medium;
+}
+
+.btn-carrinho:hover {
+    border-color: var(--green);
+    cursor: pointer;
+    color: var(--green);
+}
+
+.btn-carrinho:active {
+    color: white;
+    background-color: var(--green);
+}
+
+.tag-row {
+    display: flex;
+    gap: .5rem;
+    font-size: .75rem;
+    flex-wrap: wrap;
+}
+
+
+.categoria, .plataforma {
+    border-radius: .25rem;
+    padding: .25rem;
+    color: white;
+}
+
+.categoria {
+    background-color: var(--green);
+}
+
+.plataforma {
+    background-color: var(--roxo);
+}
+
+@media (width <= 70rem)  {
+    .container {
+        margin: 2rem;
+    }
+}
+
+@media (width <= 50rem) {
+    .principal {
+        grid-template-columns: 1fr;
+    }
+}
