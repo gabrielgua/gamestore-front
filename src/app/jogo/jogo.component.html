@@ -16,12 +16,13 @@
                     <p class="singleline-truncate">
                         <a href="#">FromSoftware, Inc</a>
                     </p>
+                </div>
                     
-                </div>
-                <div class="preco-comprar">
-                    <p class="jogo-preco">R$ {{jogo.preco}}</p>
-                    <button class="btn btn-carrinho">+ Carrinho 🛒</button>
-                </div>
+                    
+            </div>
+            <div class="preco-comprar">
+                <p class="jogo-preco">R$ {{jogo.preco}}</p>
+                <button class="btn btn-carrinho">+ Carrinho 🛒</button>
             </div>
         </div>
     </div>
@@ -35,10 +36,37 @@
         </div>
     </div>
     
-    <div class="jogo-info-secundaria">
-        <div class="card">
-            <h4>Sobre o jogo</h4>
-            <p class="descricao-completa">{{jogo.descricao}} {{jogo.descricao}}</p></div>
+    <div class="info-secundaria-wrapper">
+        <div class="info-secundaria card">
+            <div>
+                <h4>🖊️ Sobre o jogo</h4>
+                <div class="descricao-completa">
+                    <p>{{jogo.descricao}}</p>
+                </div>
+            </div>
+            <div>
+                <h4>🖥️ Requisitos de Sistema</h4>
+                <div class="requisitos">
+                    <div>
+                        <h5>Minimos</h5>
+                        <p><span>OS: </span> Windows 10</p>
+                        <p><span>Processador: </span>Intel i5 3470, AMD FX 6350</p>
+                        <p><span>Memória: </span>8 GB</p>
+                        <p><span>Placa de Vídeo: </span>NVIDIA GeForce 670 GTX or AMD Radeon R9 285 (2 GB of VRAM, Shader Model 5.0)</p>
+                        <p><span>Armazenamento: </span> 60 GB de espaço disponível</p>
+                    </div>
+                    <div>
+                        <h5>Recomendados</h5>
+                        <p><span>OS: </span> Windows 10</p>
+                        <p><span>Processador: </span>Intel i5 4690k, AMD Ryzen 5 1400</p>
+                        <p><span>Memória: </span>16 GB</p>
+                        <p><span>Placa de Vídeo: </span>NVIDIA GeForce 970 GTX or AMD Radeon RX 480 (4 GB of VRAM, Shader Model 5.1)</p>
+                        <p><span>Armazenamento: </span> 60 GB de espaço disponível</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="card">
             ⭐{{jogo.nota}}
         </div>
