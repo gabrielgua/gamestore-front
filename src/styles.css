@@ -5,21 +5,29 @@
     --links-active-green: #2e5f38;
 
     --bg-dark: rgb(48, 48, 48);
-    --bg-light: whitesmoke;
+    --bg-light: rgb(240, 240, 240);
 
     --accent-dark: rgb(0, 0, 0, .2);
     --accent-light: white;
 
     --box-shadow-header-dark: rgba(0, 0, 0, .5) 0px 1px 15px;
     --box-shadow-header-light: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    --box-shadow-dark: rgba(0, 0, 0, .5) 0px 1px 4px;
+    --box-shadow-dark: rgba(0, 0, 0, .2) 0px 1px 15px;
     --box-shadow-light: rgba(0, 0, 0, .13) 0px 1px 4px;
+
+    --card-green-dark: rgb(80, 160, 96, .2);
+    --card-roxo-dark: rgb(83, 53, 102, .1);
+
+    --border-green-light: rgb(80, 160, 96, .5);
+    --border-roxo-light: rgb(83, 53, 102, .3);
+
+    --secondary-text-dark: rgba(255, 255, 255, .8);
 }
 
 html,
 body {
-    background-color: var(--bg-dark);
-    color-scheme: dark;
+    background-color: var(--bg-light);
+    color-scheme: light;
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
@@ -62,8 +70,12 @@ a {
     text-decoration: none;
 }
 
-.spacer-vertical {
+.divider-vertical {
     font-size: large;
+}
+
+.divider-horizontal {
+    height: .1rem;
 }
 
 @media (width <= 64rem)  {

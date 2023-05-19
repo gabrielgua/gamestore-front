@@ -17,27 +17,30 @@
                         <a href="#">FromSoftware, Inc</a>
                     </p>
                 </div>
-                    
+                
+                
                     
             </div>
             <div class="preco-comprar">
-                <p class="jogo-preco">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</p>
+                <p class="jogo-preco">
+                    <span *ngIf="jogo.preco == 0">Gratuito</span>
+                    <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                </p>
                 <button class="btn btn-carrinho">+ Carrinho 🛒</button>
             </div>
         </div>
-    </div>
-    <div class="tag-row">
-        <div *ngFor="let categoria of jogo.categorias" class="categoria">
-            <p>{{categoria.nome}}</p>
+
+        <div class="tags-row">
+            <div *ngFor="let categoria of jogo.categorias" class="categoria">
+                <p>{{categoria.nome}}</p>
+            </div>
+            <span class="divider-vertical">|</span>
+            <div *ngFor="let plataforma of jogo.plataformas" class="plataforma">
+                <p>{{plataforma.nome}}</p>
+            </div>
         </div>
-        <span class="spacer-vertical">|</span>
-        <div *ngFor="let plataforma of jogo.plataformas" class="plataforma">
-            <p>{{plataforma.nome}}</p>
-        </div>
-    </div>
-    
-    <div class="info-secundaria-wrapper">
-        <div class="info-secundaria card">
+            
+        <div class="info-secundaria">
             <div>
                 <h4>🖊️ Sobre o jogo</h4>
                 <div class="descricao-completa">
@@ -46,31 +49,33 @@
             </div>
             <div>
                 <h4>🖥️ Requisitos de Sistema</h4>
-                <div class="requisitos">
-                    <div>
-                        <h5>Minimos</h5>
-                        <p><span>OS: </span> Windows 10</p>
-                        <p><span>Processador: </span>Intel i5 3470, AMD FX 6350</p>
-                        <p><span>Memória: </span>8 GB</p>
-                        <p><span>Placa de Vídeo: </span>NVIDIA GeForce 670 GTX or AMD Radeon R9 285 (2 GB of VRAM, Shader Model 5.0)</p>
-                        <p><span>Armazenamento: </span> 60 GB de espaço disponível</p>
+                <p *ngIf="jogo.requisitos.length == 0">Não há nada por aqui.</p>
+                <div *ngIf="jogo.requisitos.length != 0" class="requisitos">
+                    <div *ngFor="let requisito of requisitosPc">
+                        <h5>{{requisito.tipo === "MINIMOS" ? 'Mínimos' : 'Recomendados'}}</h5>
+                        <p><span>Observações: </span>{{requisito.observacoes}}</p>
+                        <p><span>OS: </span>{{requisito.sistema}}</p>
+                        <p><span>Processador: </span>{{requisito.processador}}</p>
+                        <p><span>Memória: </span>{{requisito.memoria}}</p>
+                        <p><span>Placa de Vídeo: </span>{{requisito.placaDeVideo}}</p>
+                        <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
                     </div>
-                    <div>
-                        <h5>Recomendados</h5>
-                        <p><span>OS: </span> Windows 10</p>
-                        <p><span>Processador: </span>Intel i5 4690k, AMD Ryzen 5 1400</p>
-                        <p><span>Memória: </span>16 GB</p>
-                        <p><span>Placa de Vídeo: </span>NVIDIA GeForce 970 GTX or AMD Radeon RX 480 (4 GB of VRAM, Shader Model 5.1)</p>
-                        <p><span>Armazenamento: </span> 60 GB de espaço disponível</p>
-                    </div>
+                    <div *ngFor="let requisito of requisitosConsole">
+                        <h5>{{requisito.observacoes}}</h5>
+                        <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
+                    </div>                    
                 </div>
             </div>
         </div>
-        
-        <div class="card">
-            ⭐{{jogo.nota}}
+        <div class="mais-info">
+            <div class="info-card">
+                <h5>Avaliações</h5>
+                <p><span>⭐ {{jogo.nota}}</span> /10</p>
+            </div>
+            <div class="info-card">
+                <h5>Lançamento</h5>
+                <p>30/06/2001</p>
+            </div>
         </div>
-        
     </div>
-
 </div>

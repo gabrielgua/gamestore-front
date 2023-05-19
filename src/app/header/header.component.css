@@ -3,8 +3,8 @@ header {
     z-index: 999;
     position: sticky;
     height: 5rem;
-    box-shadow: var(--box-shadow-header-dark);
-    background-color: var(--bg-dark);
+    box-shadow: var(--box-shadow-header-light);
+    background-color: var(--bg-light);
     display: flex;
     align-items: center;
     justify-content: center;
