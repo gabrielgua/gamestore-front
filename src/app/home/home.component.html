@@ -1,11 +1,15 @@
+
 <div class="container">
+    <app-slider></app-slider>
     <h1>Catálogo</h1>
+
     <div class="buscar">
         <input type="search" placeholder="🔍 Buscar">
     </div>
+    
     <div class="jogos-lista">
         <a routerLink="/jogos/{{jogo.uriNome}}" *ngFor="let jogo of jogos" class="jogo-card">
-            <img class="jogo-img" src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg?t=1680840402">
+            <img class="jogo-img" [src]="jogo.urlImagem | safe">
             <div class="jogo-info">
                 <p class="paragrafo-truncate" title="{{jogo.nome}}">{{jogo.nome}}</p>
                 <div class="preco-nota">

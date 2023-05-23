@@ -4,9 +4,9 @@
         {{jogo.nome}}   
     </h1>
     <div class="principal">
-        <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/bWZ61JWLq30" title="Dark Souls™ II: Scholar of The First Sin Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe class="video" width="100%" height="100%" [src]="jogo.urlVideo | safe" title="Dark Souls™ II: Scholar of The First Sin Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <div class="jogo-info">
-            <img class="jogo-img" src="https://cdn.cloudflare.steamstatic.com/steam/apps/335300/header.jpg?t=1682651964">
+            <img class="jogo-img" [src]="jogo.urlImagem | safe">
             <div class="info-wrapper">
                 <div class="jogo-descricao">
                     <p class="multiline-truncate">{{jogo.descricao}}</p>
@@ -14,7 +14,7 @@
                 <div class="jogo-desenvolvedora">
                     <p class="label">Desenvolvedora: </p>
                     <p class="singleline-truncate">
-                        <a href="#">FromSoftware, Inc</a>
+                        <a href="#">{{jogo.desenvolvedora.nome}}</a>
                     </p>
                 </div>
                 
@@ -61,7 +61,8 @@
                         <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
                     </div>
                     <div *ngFor="let requisito of requisitosConsole">
-                        <h5>{{requisito.observacoes}}</h5>
+                        <h5>Consoles</h5>
+                        <p><span>Observações: </span>{{requisito.observacoes}}</p>
                         <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
                     </div>                    
                 </div>
@@ -74,7 +75,7 @@
             </div>
             <div class="info-card">
                 <h5>Lançamento</h5>
-                <p>30/06/2001</p>
+                <p>{{jogo.dataLancamento | date: 'dd/MM/yyyy'}}</p>
             </div>
         </div>
     </div>

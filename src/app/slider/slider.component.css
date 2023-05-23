@@ -1,0 +1,239 @@
+.container {
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    grid-template-columns: auto;
+}
+
+.carousel {
+    --carousel-width: 75rem;
+    display: flex;
+    max-width: var(--carousel-width);
+    overflow-x: hidden;
+    gap: 1rem;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;    
+}
+
+.btn-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-self: center; 
+    font-size: x-large;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
+    border-radius: 50%;
+}
+
+.btn-arrow:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+.video {
+    aspect-ratio: 16 / 9;
+}
+
+.hero {
+    z-index: 99;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-radius: .5rem;
+    overflow: hidden;
+    min-width: max-content;
+    background-color: var(--bg-light);
+    transition: transform .5s ease-in-out;
+}
+
+
+.info {
+    display: flex;
+    flex-direction: column;
+    max-width: 25rem;
+    overflow: hidden;
+}
+
+.info > .img {
+    max-width: 100%;
+    max-height: 15rem;
+}
+
+.padding-info {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.padding-info > p {
+    font-size: small;
+}
+
+.preco-comprar {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 2fr;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+.preco-comprar > .preco {
+    padding: .5rem;
+    background-color: var(--green);
+    border-radius: .25rem;
+    color: white;
+    font-size: large;
+}
+
+.btn-carrinho {
+    border: 1px solid var(--roxo);
+    padding: .5rem;
+    border-radius: .25rem;
+    font-size: medium;
+}
+
+.btn-carrinho:hover {
+    outline: 2px solid var(--roxo);
+    cursor: pointer;
+}
+
+.btn-carrinho:active {
+    color: white;
+    background-color: var(--roxo);
+}
+
+.jumpers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    grid-column: span 3;
+}
+
+.jumper {
+    height: .7rem;
+    width: .7rem;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-light);
+    transition: .2s;
+}
+
+.jumper:hover {
+    cursor: pointer;
+    background-color: rgb(192, 192, 192);
+    scale: 1.05;
+    transition: .1s;
+}
+
+.selected {
+    transition: .2s;
+    background-color: var(--roxo);
+}
+
+.arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.arrow {
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--roxo);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 10) 0px 1px 4px;
+}
+
+@media (width <= 80rem) {
+    .container {
+        margin-inline: 2rem;
+    }
+
+    .ofuscated-card {
+        max-width: 5rem;
+        min-height: 75%;
+        transition: .2s;
+    }
+
+    .ofuscated-card > img {
+        max-height: 8rem;
+    }
+   
+}
+
+
+@media (width <= 65rem) {
+    .multiline-truncate {
+        -webkit-line-clamp: 4;
+    }
+
+    .preco-comprar {
+        grid-template-columns: 1fr;
+    }
+
+    .ofuscated-card {
+        max-width: 5rem;
+        min-height: 73%;
+        transition: .2s;
+    }
+
+    .ofuscated-card > img {
+        max-height: 8rem;
+        max-width: 15rem;
+        transition: .2s;
+    }
+}
+
+@media (width <= 60rem) {
+
+    .ofuscated-card {
+        max-width: 7rem;
+        min-height: 72%;
+        transition: .2s;
+    }
+
+    .ofuscated-card > img {
+        max-height: 9rem;
+        max-width: 25rem;
+        transition: .2s;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .info {
+        max-width: 28rem;
+    }
+    
+    .video {
+        display: none;
+    }
+}
+
+@media (width <= 40rem) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .ofuscated-card {
+        display: none;
+    }
+}
+
+@media (width >= 40rem) {
+    .arrows {
+        display: none;
+    }
+}

@@ -1,0 +1,38 @@
+<meta http-equiv="Permissions-Policy" content="ch-ua-form-factor=()">
+<div class="container">
+    
+    <div class="btn-arrow" (click)="prev()"><</div>
+
+    <div class="carousel" >
+        <div class="hero" (mouseover)="pauseAutoSlide()" (mouseout)="playAutoSlide()" [ngStyle]="{ 'transform': 'translateX(' + positionX + 'rem)' }" *ngFor="let jogo of jogos">
+            <iframe class="video" width="100%" height="100%" [src]="jogo.urlVideo | safe" title="{{jogo.uriNome}} Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="info">
+                <img class="img" [src]="jogo.urlImagem | safe">
+                <div class="padding-info">
+                    <p class="multiline-truncate">{{jogo.descricao}}</p>
+                    
+                </div>
+                <div class="preco-comprar">
+                    <div class="preco">
+                        <span *ngIf="jogo.preco == 0">Gratuito</span>
+                        <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                    </div>
+                        
+                    <button class="btn-carrinho">+ Carrinho 🛒</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-arrow" (click)="next()">></div>
+
+    <div class="jumpers">
+        <div class="jumper" 
+            *ngFor="let jogo of jogos; let i = index" 
+            [ngClass]="i === currentIndex ? 'selected' : ''"
+            (click)="jumpTo(i)"
+            >
+        </div>
+    </div>
+
+</div>

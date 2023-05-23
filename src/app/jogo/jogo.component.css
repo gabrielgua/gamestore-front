@@ -48,7 +48,7 @@
 }
 
 .jogo-desenvolvedora {
-    max-width: 18rem;
+    max-width: 95%;
     font-size: small;
 }
 
@@ -245,7 +245,7 @@
     }
 
     .jogo-img {
-        max-width: 20rem;
+        max-width: 21rem;
         max-height: none;
         border-radius: .5rem 0 0 .5rem;
         grid-row: span 2;

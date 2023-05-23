@@ -11,7 +11,8 @@
     --accent-light: white;
 
     --box-shadow-header-dark: rgba(0, 0, 0, .5) 0px 1px 15px;
-    --box-shadow-header-light: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --box-shadow-header-light: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
     --box-shadow-dark: rgba(0, 0, 0, .2) 0px 1px 15px;
     --box-shadow-light: rgba(0, 0, 0, .13) 0px 1px 4px;
 
@@ -22,6 +23,10 @@
     --border-roxo-light: rgb(83, 53, 102, .3);
 
     --secondary-text-dark: rgba(255, 255, 255, .8);
+
+
+    --hero-content-width: 90rem;
+    --secondary-content-width: 65rem;
 }
 
 html,
