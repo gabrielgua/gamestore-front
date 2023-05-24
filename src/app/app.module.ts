@@ -18,6 +18,7 @@ import { SafePipe } from './safe.pipe';
 
 
 
+
 registerLocaleData(localePt);
 
 @NgModule({

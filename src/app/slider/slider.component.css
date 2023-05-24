@@ -1,35 +1,50 @@
 .container {
     display: grid;
-    gap: 2rem;
     justify-content: center;
     grid-template-columns: auto;
 }
 
 .carousel {
-    --carousel-width: 75rem;
+    /* --carousel-width: 75rem; */
     display: flex;
     max-width: var(--carousel-width);
     overflow-x: hidden;
     gap: 1rem;
     border-radius: .5rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;    
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, .5) 0px 1px 50px;    
 }
 
 .btn-arrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4rem;
+    height: 10rem;
     align-self: center; 
-    font-size: x-large;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
-    border-radius: 50%;
+    border-radius: .5rem;
+    transition: transform .2s ease-out;
+    color: var(--roxo);
+}
+
+.btn-arrow span {
+    font-size: xx-large;
+    text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .btn-arrow:hover {
+    scale: 1.2;
     cursor: pointer;
-    background-color: whitesmoke;
+    opacity: 1;
+}
+
+.prev:hover {
+    transform: translateX(10%);
+
+}
+
+.next:hover {
+    transform: translateX(-10%);
 }
 
 .video {
@@ -43,10 +58,10 @@
     border-radius: .5rem;
     overflow: hidden;
     min-width: max-content;
+    max-width: var(--carousel-width);
     background-color: var(--bg-light);
     transition: transform .5s ease-in-out;
 }
-
 
 .info {
     display: flex;
@@ -57,7 +72,8 @@
 
 .info > .img {
     max-width: 100%;
-    max-height: 15rem;
+    max-height: 12rem;
+    transition: .2s ease-in-out;
 }
 
 .padding-info {
@@ -67,8 +83,43 @@
     gap: 1rem;
 }
 
-.padding-info > p {
+.padding-info > h3 {
+    max-width: 100%;
+}
+
+.padding-info > .multiline-truncate {
+    -webkit-line-clamp: 4;
+}
+
+.padding-info > p, a {
     font-size: small;
+}
+
+.desenvolvedora {
+    max-width: 100%;
+    font-size: small;
+    display: flex;
+}
+
+.categorias-nota {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: small;
+}
+
+.categorias {
+    display: flex;
+    flex-direction: row;
+   
+    gap: .5rem;
+}
+
+.categoria {
+    padding: .25rem .5rem;
+    background-color: var(--roxo);
+    color: white;
+    border-radius: .25rem;
 }
 
 .preco-comprar {
@@ -76,8 +127,9 @@
     align-items: center;
     grid-template-columns: auto 2fr;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
     margin-top: auto;
+
 }
 
 .preco-comprar > .preco {
@@ -89,8 +141,11 @@
 }
 
 .btn-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--roxo);
-    padding: .5rem;
+    padding: .7rem;
     border-radius: .25rem;
     font-size: medium;
 }
@@ -98,6 +153,10 @@
 .btn-carrinho:hover {
     outline: 2px solid var(--roxo);
     cursor: pointer;
+}
+
+.btn-carrinho > span {
+    font-size: medium;
 }
 
 .btn-carrinho:active {
@@ -111,6 +170,7 @@
     justify-content: center;
     gap: 1rem;
     grid-column: span 3;
+    margin-top: 1rem;
 }
 
 .jumper {
@@ -124,13 +184,16 @@
 
 .jumper:hover {
     cursor: pointer;
-    background-color: rgb(192, 192, 192);
-    scale: 1.05;
+    scale: 1.5;
     transition: .1s;
 }
 
 .selected {
-    transition: .2s;
+    transition: .1s;
+    background-color: var(--roxo);
+}
+
+.selected:hover {
     background-color: var(--roxo);
 }
 
@@ -159,17 +222,6 @@
     .container {
         margin-inline: 2rem;
     }
-
-    .ofuscated-card {
-        max-width: 5rem;
-        min-height: 75%;
-        transition: .2s;
-    }
-
-    .ofuscated-card > img {
-        max-height: 8rem;
-    }
-   
 }
 
 
@@ -181,18 +233,6 @@
     .preco-comprar {
         grid-template-columns: 1fr;
     }
-
-    .ofuscated-card {
-        max-width: 5rem;
-        min-height: 73%;
-        transition: .2s;
-    }
-
-    .ofuscated-card > img {
-        max-height: 8rem;
-        max-width: 15rem;
-        transition: .2s;
-    }
 }
 
 @media (width <= 60rem) {
@@ -203,12 +243,6 @@
         transition: .2s;
     }
 
-    .ofuscated-card > img {
-        max-height: 9rem;
-        max-width: 25rem;
-        transition: .2s;
-    }
-
     .hero {
         grid-template-columns: 1fr;
     }
@@ -216,24 +250,14 @@
     .info {
         max-width: 28rem;
     }
-    
-    .video {
-        display: none;
-    }
 }
 
 @media (width <= 40rem) {
     .container {
         grid-template-columns: 1fr;
     }
-
-    .ofuscated-card {
-        display: none;
-    }
 }
 
 @media (width >= 40rem) {
-    .arrows {
-        display: none;
-    }
+   
 }

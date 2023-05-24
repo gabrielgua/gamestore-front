@@ -28,7 +28,7 @@ export class SliderComponent implements OnInit {
   interval: any;
 
   ngOnInit(): void {
-    this.jogoService.listarJogos()
+    this.jogoService.listarDestaques()
       .then((jogos: Jogo[]) => {
         this.jogos = jogos; 
         this.playAutoSlide();      
@@ -78,7 +78,6 @@ export class SliderComponent implements OnInit {
   }
 
   playAutoSlide(): void {
-    
     this.autoSlide = true;
     this.resetAutoSlide();
   }

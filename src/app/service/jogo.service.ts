@@ -11,6 +11,10 @@ export class JogoService {
 
   constructor(private http: HttpClient) { }
 
+  listarDestaques(): Promise<any> {
+    return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos/destaques`));
+  }
+
   listarJogos(): Promise<any>{
     return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos`));
   }
