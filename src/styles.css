@@ -83,10 +83,5 @@ a {
     height: .1rem;
 }
 
-@media (width <= 64rem)  {
-    .container {
-        margin: 2rem;
-    }
-}
 
 

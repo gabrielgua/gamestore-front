@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { JogoService } from '../service/jogo.service';
 import { Jogo } from '../models/jogo';
 import { Fade } from '../animations/animations';
@@ -14,32 +14,43 @@ import { Fade } from '../animations/animations';
 export class SliderComponent implements OnInit {
 
 
-  constructor(private jogoService: JogoService) {}
+  constructor(private jogoService: JogoService) {}  
+  
   
   jogos: Jogo[] = [];
   currentIndex: number = 0;
 
-  carouselWidth = 0;
-  heroWidth = 75;
-  gapBetweenHeros = 1;
+  heroWidth = 1200;
+  gapBetweenHeros = 16;
   positionX: string = '';
   autoSlide = false;
 
   interval: any;
+
 
   ngOnInit(): void {
     this.jogoService.listarDestaques()
       .then((jogos: Jogo[]) => {
         this.jogos = jogos; 
         this.playAutoSlide();      
-        this.calculateCarouselWidth();
+        // this.calculateCarouselWidth();
       }).catch((error: any) => {
         console.log(error.error);
       })
+
+      
   }
 
-  calculateCarouselWidth() {
-    this.carouselWidth = this.heroWidth * this.jogos.length + (this.gapBetweenHeros * this.jogos.length - 1); 
+  calculateCarouselWidth(carouselWidth: number) {
+    this.heroWidth = carouselWidth;    
+  } 
+
+  setPositionAnimation(carouselWidth?: number) {
+    carouselWidth ? this.heroWidth = carouselWidth : null;
+
+    this.positionX = '-' + (this.heroWidth * this.currentIndex + (this.currentIndex * this.gapBetweenHeros));        
+    console.log(this.positionX);
+    
   }
 
   next(): void {
@@ -64,9 +75,7 @@ export class SliderComponent implements OnInit {
     this.resetAutoSlide();
   }
 
-  setPositionAnimation() {
-    this.positionX = '-' + (this.heroWidth * this.currentIndex + this.currentIndex);    
-  }
+  
 
   resetAutoSlide(): void {
     clearInterval(this.interval);
@@ -78,7 +87,7 @@ export class SliderComponent implements OnInit {
   }
 
   playAutoSlide(): void {
-    this.autoSlide = true;
+    // this.autoSlide = true;
     this.resetAutoSlide();
   }
 
