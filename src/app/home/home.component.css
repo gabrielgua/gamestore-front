@@ -121,7 +121,7 @@
 
 @media (width <= 70rem)  {
     .container {
-        margin: 1.5rem;
+        margin-inline: 1.5rem;
     }
 
     .jogos-lista {

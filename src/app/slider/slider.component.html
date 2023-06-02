@@ -1,73 +1,61 @@
 <meta http-equiv="Permissions-Policy" content="ch-ua-form-factor=()">
 <div class="container">
-    
-    <div class="btn-arrow prev" (click)="prev()">
+
+    <div class="carousel__arrow carousel__arrow--prev" (click)="goToPrevious()">
         <span class="material-symbols-rounded">
             arrow_back_ios_new
         </span>
     </div>
 
-    <div #carousel  
-        class="carousel" 
-        (window:resize)="setPositionAnimation(carousel.offsetWidth)" 
-        [ngStyle]="{'--carousel-width': calculateCarouselWidth(carousel.offsetWidth) + 'px'}" 
+    <div class="carousel" 
+        #carousel 
+        (window:resize)="updateCarouselWidth(carousel.offsetWidth)"  
         
         >
-        <div class="hero" (mouseover)="pauseAutoSlide()" (mouseout)="playAutoSlide()" [ngStyle]="{ 'transform': 'translateX(' + positionX + 'px)' }" *ngFor="let jogo of jogos">
-            <iframe class="video" width="100%" height="100%" [src]="jogo.urlVideo | safe" title="{{jogo.uriNome}} Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <div class="info">
-                <img class="img" [src]="jogo.urlImagem | safe">
-                <div class="padding-info">
-                    <h3 class="singleline-truncate" title="{{jogo.nome}}">{{jogo.nome}}</h3>
-
-                    <p class="multiline-truncate descricao">{{jogo.descricao}}</p>
-
-                    <div class="desenvolvedora">
-                        <p class="singleline-truncate"> 
-                            <strong>Desenvolvedora: </strong><a href="#">{{jogo.desenvolvedora.nome}}</a> 
-                        </p>
-                    </div>
-
-                    <div class="categorias">
-                        <div class="categoria" *ngFor="let categoria of jogo.categorias">
-                            {{categoria.nome}}
-                        </div>
-                    </div>
-                    
+        <div *ngFor="let jogo of jogos; let i = index" class="carousel__jogo" [ngStyle]="{'transform': 'translateX(-' + positionX + 'px)'}">
+            <iframe (load)="getInitialCarouselWidth(carousel.offsetWidth)" class="carousel__jogo__video" [src]="jogo.urlVideo | safe" title="{{jogo.nome}} - trailer video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="carousel__jogo__card">
+                <img class="jogo__card__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+                <div class="jogo__card__info">
+                    <h3 class="card__info__nome singleline-truncate" title="{{jogo.nome}}">
+                        {{jogo.nome}}
+                    </h3>
+                    <p class="card__info__descricao multiline-truncate">
+                        {{jogo.descricao}}
+                    </p>
                 </div>
-                <div class="preco-comprar">
-                    <div class="preco">
-                        <span *ngIf="jogo.preco == 0">Gratuito</span>
-                        <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
-                    </div>
-                        
-                    <button routerLink="/jogos/{{jogo.uriNome}}" class="btn-ver-mais">Ver mais <span class="material-symbols-rounded">arrow_forward_ios</span></button>
-                </div>
+                <p class="jogo__card__preco">
+                    <span *ngIf="jogo.preco == 0">Gratuito p/ Jogar</span>
+                    <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                </p>
+                <button class="jogo__card__btn" routerLink="/jogos/{{jogo.uriNome}}">
+                    Ver mais 
+                    <span class="material-symbols-rounded">
+                        arrow_forward_ios
+                    </span>
+                </button>
             </div>
         </div>
     </div>
 
-    <div class="btn-arrow next" (click)="next()">
+    <div class="carousel__arrow carousel__arrow--next" (click)="goToNext()">
         <span class="material-symbols-rounded">
             arrow_forward_ios
         </span>
     </div>
 
-    
-
-    <div class="jumpers">
-        <div class="btn-arrow prev" (click)="prev()">
+    <div class="carousel__controls">
+        <div class="carousel__arrow carousel__arrow--mobile" (click)="goToPrevious()">
             <span class="material-symbols-rounded">
                 arrow_back_ios_new
             </span>
         </div>
-        <div class="jumper" 
-            *ngFor="let jogo of jogos; let i = index" 
-            [ngClass]="i === currentIndex ? 'selected' : ''"
-            (click)="jumpTo(i)"
-            >
+        
+        <div class="carousel__jumpers">
+            <div class="jumper" *ngFor="let jogo of jogos; let i = index" [ngClass]="{'jumper--current': i === currentIndex}"></div>
         </div>
-        <div class="btn-arrow next" (click)="next()">
+    
+        <div class="carousel__arrow carousel__arrow--mobile" (click)="goToNext()">
             <span class="material-symbols-rounded">
                 arrow_forward_ios
             </span>

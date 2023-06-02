@@ -15,10 +15,6 @@ import localePt from '@angular/common/locales/pt';
 import { SliderComponent } from './slider/slider.component';
 import { SafePipe } from './safe.pipe';
 
-
-
-
-
 registerLocaleData(localePt);
 
 @NgModule({

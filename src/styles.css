@@ -34,7 +34,7 @@ body {
     background-color: var(--bg-light);
     color-scheme: light;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Saira', sans-serif;
 }
 
 p, h1, h2, h3, h4, h5 {
@@ -55,13 +55,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .multiline-truncate {
-    width:100%;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    font-size: small;
-  
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;  
 }
 
 .singleline-truncate {
