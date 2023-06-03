@@ -129,6 +129,18 @@
     }
 }
 
+@media (width >= 55rem) {
+    .slider-mobile {
+        display: none;
+    }
+}
+
+@media (width <= 55rem) {
+    .slider-desktop {
+        display: none;
+    }
+}
+
 
 
 

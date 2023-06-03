@@ -1,0 +1,31 @@
+<div class="container">
+
+    
+    <div class="carousel" #carousel 
+        (window:resize)="updateCarouselWidth(carousel.offsetWidth)" 
+        (window:resize)="populateMap(carousel.offsetWidth)" 
+        (mouseover)="pauseAutoSlide()"
+        (mouseout)="playAutoSlide()"
+        (scroll)="handleScrollEvent()">
+        <div class="carousel__jogo" *ngFor="let jogo of jogos">
+            <img 
+                (load)="populateMap(carousel.offsetWidth)" 
+                
+                class="carousel__jogo__img" src="{{jogo.urlImagem}}">
+            <div class="info-wrapper">
+                <div class="carousel__jogo__info">
+                    <p class="jogo__info__preco">
+                        <span *ngIf="jogo.preco == 0">Gratuito</span>
+                        <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                    </p>
+                    <p class="jogo__info__nota">⭐ {{jogo.nota}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="carousel__jumpers">
+        <div class="jumper" *ngFor="let jogo of jogos; let i = index" [ngClass]="{'jumper--current': i === currentIndex}" (click)="scrollToIndex(i)"></div>
+    </div>
+</div>

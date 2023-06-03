@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, firstValueFrom } from 'rxjs';
 import { Jogo } from '../models/jogo';
 import { environment } from 'src/environments/environment';
 
@@ -9,11 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class JogoService {
 
-  constructor(private http: HttpClient) { }
 
-  listarDestaques(): Promise<any> {
-    return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos/destaques`));
-  }
+  constructor(private http: HttpClient) {}
+
+ 
 
   listarJogos(): Promise<any>{
     return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos`));

@@ -1,0 +1,73 @@
+.container {
+    gap: 1rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 3rem;
+    grid-template-columns: 1fr;
+}
+
+.carousel {
+    display: flex;
+    max-width: 55rem;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel__jogo {
+    min-width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.carousel__jogo__img {
+    width: 100%;
+    display: block;
+}
+
+.info-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: .5rem;
+}
+
+.carousel__jogo__info {
+   display: flex;
+   padding: .25rem;
+   background-color: black;
+   border-radius: .5rem;
+}
+
+.carousel__jogo__info > p {
+    color: white;
+    padding: 0 .25rem;
+    border-radius: .25rem;
+}
+
+.jogo__info__preco {
+    background-color: var(--green);
+}
+
+.carousel__jumpers {
+    display: flex;
+    gap: .5rem;
+}
+
+.carousel__jumpers > .jumper {
+   width: .75rem;
+   height: .75rem;
+   border-radius: 50%;
+   transition: 75ms ease-in-out;
+   background-color: rgb(83, 53, 102, .2);
+
+}
+
+.jumper--current {
+    transition: 75ms ease-in-out;
+    background-color: var(--roxo) !important;
+}

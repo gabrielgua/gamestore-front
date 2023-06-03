@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { JogoService } from '../service/jogo.service';
 import { Jogo } from '../models/jogo';
 import { Fade } from '../animations/animations';
+import { JogosDestaque } from '../service/jogos-destaque.service';
 
 @Component({
-  selector: 'app-slider',
+  selector: 'app-slider-desktop',
   templateUrl: './slider-desktop.component.html',
   styleUrls: ['./slider-desktop.component.css'],
   animations: [
@@ -13,28 +14,23 @@ import { Fade } from '../animations/animations';
 })
 export class SliderDesktopComponent implements OnInit {
 
-
-  constructor(private jogoService: JogoService) {}  
+  constructor(private service: JogosDestaque) {}  
   
-  jogos: Jogo[] = [];
   jogosGroup: Jogo[][] = [];
 
-  currentIndex: number = 0;
-  carouselWidth: number = 0;
-  carouselGap: number = 16;
-  positionX: number = 0;
-
   
+  interval: any;
+  autoPlay: boolean = false;
+  autoPlayInterval: number = 5000;
+
+  currentIndex: number = 0;
   carouselGroupSize: number = 3;
 
   ngOnInit(): void {
-    this.jogoService.listarDestaques()
-      .then((jogos: Jogo[]) => {
-        this.jogos = jogos; 
-        this.jogosGroup = this.setJogosGroups(this.jogos, this.carouselGroupSize);
-      }).catch((error: any) => {
-        console.log(error.error);
-      })
+    this.service.getJogosDestaque().subscribe((jogos) => {
+      this.jogosGroup = this.setJogosGroups(jogos, this.carouselGroupSize); 
+      this.playAutoSlide();
+    })   
   }
 
   setJogosGroups<Jogo>(jogos: Jogo[], groupSize: number): Jogo[][] {
@@ -45,25 +41,39 @@ export class SliderDesktopComponent implements OnInit {
     }, [] as Jogo[][]); 
   }
 
-  getInitialCarouselWidth(width: number): void {   
-    this.updateCarouselWidth(width);    
-  }
-
-  updateCarouselWidth(width: number): void {
-    this.carouselWidth = width;    
-  }
-
   goToIndex(index: number) {
     this.currentIndex = index;
+    this.resetAutoPlay();
   }
 
   goToNext(): void {
     const isLastJogo = this.currentIndex === this.jogosGroup.length - 1;
     this.currentIndex = isLastJogo ? 0 : this.currentIndex + 1;
+    this.resetAutoPlay();
   }
 
   goToPrevious(): void {
     const isFirstJogo = this.currentIndex === 0;
     this.currentIndex = isFirstJogo ? this.jogosGroup.length - 1 : this.currentIndex - 1;
+    this.resetAutoPlay();
+  }
+
+  resetAutoPlay(): void {
+    clearInterval(this.interval);
+    if (this.autoPlay) {
+      this.interval = setInterval(() => {
+        this.goToNext();
+      }, this.autoPlayInterval);
+    }
+  }
+
+  pauseAutoSlide(): void {
+    this.autoPlay = false;
+    this.resetAutoPlay();
+  }
+
+  playAutoSlide(): void {
+    this.autoPlay = true;
+    this.resetAutoPlay();
   }
 }

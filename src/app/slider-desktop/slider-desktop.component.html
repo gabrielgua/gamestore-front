@@ -7,15 +7,12 @@
         </span>
     </div>
 
-    <div class="carousel" #carousel (window:resize)="updateCarouselWidth(carousel.offsetWidth)">
-        <div 
-            *ngFor="let group of jogosGroup; let i = index" 
-            class="carousel__jogos" 
-            [ngStyle]="{'transform': 'translateX(-' + positionX + 'px)'}"
-            [ngClass]="{'carousel__jogos--current': i === currentIndex}"
-            >
-            <div *ngFor="let jogo of group" class="carousel__jogo">
-                <img (load)="getInitialCarouselWidth(carousel.offsetWidth)" class="carousel__jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">    
+    <div class="carousel" #carousel>
+        <div class="carousel__jogos" *ngFor="let group of jogosGroup; let i = index" [ngClass]="{'carousel__jogos--current': i === currentIndex}">
+            <div *ngFor="let jogo of group" class="carousel__jogo" (mouseover)="pauseAutoSlide()" (mouseout)="playAutoSlide()">
+                <a routerLink="/jogos/{{jogo.uriNome}}">
+                    <img class="carousel__jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">    
+                </a>
                 <div class="info-wrapper">
                     <div class="carousel__jogo__info">
                         <p class="jogo__info__preco">
