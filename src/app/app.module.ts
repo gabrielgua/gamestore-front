@@ -12,7 +12,7 @@ import { JogoComponent } from './jogo/jogo.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { SliderComponent } from './slider/slider.component';
+import { SliderDesktopComponent } from './slider-desktop/slider-desktop.component';
 import { SafePipe } from './safe.pipe';
 
 registerLocaleData(localePt);
@@ -23,7 +23,7 @@ registerLocaleData(localePt);
     HomeComponent,
     HeaderComponent,
     JogoComponent,
-    SliderComponent,
+    SliderDesktopComponent,
     SafePipe
   ],
   imports: [

@@ -23,10 +23,10 @@
     --border-roxo-light: rgb(83, 53, 102, .3);
 
     --secondary-text-dark: rgba(255, 255, 255, .8);
-
-
-    --hero-content-width: 90rem;
+    
     --secondary-content-width: 65rem;
+
+    --border-carousel: 2px solid var(--roxo);
 }
 
 html,

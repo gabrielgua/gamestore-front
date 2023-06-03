@@ -1,88 +1,89 @@
 .container {
-    display: grid;
-    grid-template-columns: auto 3fr auto;
-    place-items: center;
     gap: 1.5rem;
+    display: grid;
     max-width: 75rem;
     margin: 1rem auto;
+    place-items: center;
+    grid-template-columns: auto 3fr auto;
 }
 
 .carousel {
-    --carousel-width: 68rem;
-    display: flex;
-    width: 100%;
-    max-width: var(--carousel-width);
+    display: grid;
     overflow: hidden;
-    gap: 1rem;
+    border-radius: .5rem;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    border: var(--border-carousel);
+    box-shadow: var(--box-shadow-header-dark);
+}
+
+.carousel__jogos {
+    --content-border-radius: .5rem;
+    gap: 2px;
+    background-color: var(--roxo);
+    opacity: 0;
+    display: grid;
+    grid-area: 1 / 1 / 2 / 2;
+    grid-template-columns: 2fr 1fr;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel__jogos--current {
+    z-index: 99;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
 }
 
 .carousel__jogo {
-    --content-border-radius: .5rem;
-    min-width: 100%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 2fr 1fr;
-    transition: transform 500ms ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-.carousel__jogo__video {
-    min-width: none;
-    border-radius: var(--content-border-radius);
-    aspect-ratio: 16 / 9;
-    background-color: white;
+.carousel__jogo:first-child {
+    grid-row: span 2;
+}
+
+.carousel__jogo__img {
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+    transition: all 250ms ease-in-out;
 }
 
-.carousel__jogo__card {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    min-width: 15rem;
+.carousel__jogo__img:hover {
+    scale: 1.05;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
 }
 
-.jogo__card__img {
-    max-width: 100%;
-    border-radius: var(--content-border-radius);
+.info-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: .5rem;
 }
 
-.jogo__card__info {
-    padding-inline: .25rem;
+.carousel__jogo__info {
+   display: flex;
+   padding: .25rem;
+   background-color: black;
+   border-radius: .5rem;
 }
 
-.card__info__descricao {
-    font-size: medium;
-    line-height: 1.25em;
-}
-
-.jogo__card__preco {
-    margin-top: auto;
-    color: var(--green);
-    font-size: large;
-    margin-bottom: .25rem;
-    padding-inline: .25rem;
-}
-
-.jogo__card__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    padding: .75rem;
+.carousel__jogo__info > p {
     color: white;
-    border: none;
-    background-color: var(--roxo);
-    border-radius: var(--content-border-radius);
-    font-size: medium;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
 }
 
-.jogo__card__btn > span {
-    font-size: medium;
+.jogo__info__preco {
+    background-color: var(--green);
 }
 
 .carousel__arrow {
     display: grid;
-    place-items: center;
     color: var(--roxo);
+    place-items: center;
 }
 
 .carousel__arrow--mobile {
@@ -118,6 +119,10 @@
     height: .75rem;
     border-radius: 50%;
     box-shadow: 0 1px 15px 1px rgba(0, 0, 0, .3);
+}
+
+.carousel__jumpers > .jumper:hover {
+    cursor: pointer;
 }
 
 .jumper--current {
@@ -170,10 +175,6 @@
 @media (width <= 55rem) {
     .carousel__jogo {
         grid-template-columns: 1fr;
-    }
-
-    .jogo__card__img {
-        display: none;
     }
 }
 
