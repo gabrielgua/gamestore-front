@@ -1,31 +1,30 @@
 header {
     top: 0;
     z-index: 999;
-    position: sticky;
     height: 5rem;
-    box-shadow: var(--box-shadow-header-light);
-    background-color: var(--bg-light);
     display: flex;
+    padding: 0 1rem;
+    position: sticky;
     align-items: center;
     justify-content: center;
-    padding: 0 2rem;
+    box-shadow: var(--box-shadow-header-dark);
+    background-color: var(--background-primary);
+    border-bottom: 1px solid var(--primary-100);
 }
 
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 65rem;
+    width: 68rem;
 }
 
 .logo {
     display: flex;
-    align-items: center;
     font-size: 2em;
     font-weight: bold;
-    margin-block-start: -.75rem;
-    font-family: 'Oswald', sans-serif;
-    color: var(--green);
+    align-items: center;
+    color: var(--primary);
 }
 
 .dropdown li {
@@ -40,18 +39,18 @@ nav {
 }
 
 nav ul {
-    list-style: none;
+    gap: 1rem;
     padding: 0;
     display: flex;
+    list-style: none;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
 }
 
 .link-entrar {
-    border: 1px solid var(--green);
     padding: .75rem;
     border-radius: .25rem;
+    border: 1px solid var(--primary);
 }
 
 .link-entrar:hover {
@@ -60,8 +59,8 @@ nav ul {
 }
 
 .link-entrar:active, .link-entrar:active > a {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
     background-color: var(--green);
 }
 
@@ -70,32 +69,14 @@ a {
 }
 
 a:hover {
-    
     cursor: pointer;
 }
 
 nav ul li a:hover {
-    color: var(--green);
+    color: var(--primary);
 }
 
 nav ul li a:active {
-    color: var(--links-active-green);
-}
-
-
-.btn-header {
-    background-color: transparent;
-    border: none;
-    font-size: medium;
-    padding: 0 1rem;
-}
-
-.btn-header:hover {
-    
-    cursor: pointer;
-    color: var(--green);
-    border-bottom: 5px solid var(--green);
-    transition: .1s;
 }
 
 @media (width <= 25rem) {

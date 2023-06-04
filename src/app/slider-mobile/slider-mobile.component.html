@@ -15,9 +15,12 @@
                 <div class="carousel__jogo__info">
                     <p class="jogo__info__preco">
                         <span *ngIf="jogo.preco == 0">Gratuito</span>
-                        <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                        <span *ngIf="jogo.preco != 0"><strong>R$</strong> {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
                     </p>
                     <p class="jogo__info__nota">⭐ {{jogo.nota}}</p>
+                    <button class="jogo__info__btn-fav">
+                        <span class="material-symbols-rounded">favorite</span>
+                    </button>
                 </div>
             </div>
         </div>

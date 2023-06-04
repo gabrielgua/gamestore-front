@@ -1,11 +1,11 @@
 <meta http-equiv="Permissions-Policy" content="ch-ua-form-factor=()">
 <div class="container">
 
-    <div class="carousel__arrow carousel__arrow--prev" (click)="goToPrevious()">
+    <button class="carousel__arrow carousel__arrow--prev" (click)="goToPrevious()">
         <span class="material-symbols-rounded">
             arrow_back_ios_new
         </span>
-    </div>
+    </button>
 
     <div class="carousel" #carousel>
         <div class="carousel__jogos" *ngFor="let group of jogosGroup; let i = index" [ngClass]="{'carousel__jogos--current': i === currentIndex}">
@@ -20,34 +20,37 @@
                             <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
                         </p>
                         <p class="jogo__info__nota">⭐ {{jogo.nota}}</p>
+                        <button class="jogo__info__btn-fav">
+                            <span class="material-symbols-rounded">favorite</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="carousel__arrow carousel__arrow--next" (click)="goToNext()">
+    <button class="carousel__arrow carousel__arrow--next" (click)="goToNext()">
         <span class="material-symbols-rounded">
             arrow_forward_ios
         </span>
-    </div>
+    </button>
 
     <div class="carousel__controls">
-        <div class="carousel__arrow carousel__arrow--mobile" (click)="goToPrevious()">
+        <button class="carousel__arrow carousel__arrow--mobile" (click)="goToPrevious()">
             <span class="material-symbols-rounded">
                 arrow_back_ios_new
             </span>
-        </div>
+        </button>
         
         <div class="carousel__jumpers carousel__jumpers--max-size">
-            <div class="jumper" *ngFor="let group of jogosGroup; let i = index" [ngClass]="{'jumper--current': i === currentIndex}" (click)="goToIndex(i)"></div>
+            <button class="jumper" *ngFor="let group of jogosGroup; let i = index" [ngClass]="{'jumper--current': i === currentIndex}" (click)="goToIndex(i)"></button>
         </div>
     
-        <div class="carousel__arrow carousel__arrow--mobile" (click)="goToNext()">
+        <button class="carousel__arrow carousel__arrow--mobile" (click)="goToNext()">
             <span class="material-symbols-rounded">
                 arrow_forward_ios
             </span>
-        </div>
+        </button>
     </div>
 
 </div>

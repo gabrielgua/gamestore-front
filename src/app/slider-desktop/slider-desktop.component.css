@@ -1,20 +1,19 @@
 .container {
-    gap: 1.5rem;
+    gap: 1rem;
     display: grid;
     max-width: 75rem;
     margin: 1rem auto;
     place-items: center;
-    grid-template-columns: auto 3fr auto;
+    grid-template-columns: auto;
 }
 
 .carousel {
     display: grid;
     overflow: hidden;
-    /* border-radius: .5rem; */
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
-    /* border: var(--border-carousel); */
-    box-shadow: var(--box-shadow-header-dark);
+    border: 1px solid var(--accent-100);
+    box-shadow: var(--box-shadow-primary);
 }
 
 .carousel__jogos {
@@ -28,14 +27,14 @@
 }
 
 .carousel__jogos--current {
-    z-index: 99;
     opacity: 1;
+    z-index: 99;
     transition: opacity 1s ease-in-out;
 }
 
 .carousel__jogo {
-    position: relative;
     overflow: hidden;
+    position: relative;
 }
 
 .carousel__jogo:first-child {
@@ -43,46 +42,66 @@
 }
 
 .carousel__jogo__img {
-    display: block;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    display: block;
     transition: all 250ms ease-in-out;
 }
 
 .carousel__jogo__img:hover {
     scale: 1.05;
-    transition: all 250ms ease-in-out;
     cursor: pointer;
+    transition: all 250ms ease-in-out;
 }
 
 .info-wrapper {
-    position: absolute;
     left: 0;
     bottom: 0;
     padding: .5rem;
+    position: absolute;
 }
 
 .carousel__jogo__info {
-   display: flex;
-   padding: .25rem;
-   border-radius: .25rem;
-   background-color: black;
+    gap: 1px;
+    display: flex;
+    box-shadow: var(--box-shadow-primary);
+    border: 1px solid var(--subtle-border-color);
+    background-color: var(--subtle-border-color);
 }
 
 .carousel__jogo__info > p {
-    color: white;
-    padding: 0 .25rem;
-    border-radius: .125rem;
+    padding: .25rem .5rem;
+    background-color: black;
 }
 
 .jogo__info__preco {
-    background-color: var(--green);
+    color: var(--primary);    
+}
+
+.jogo__info__btn-fav {
+    border: none;
+    display: grid;
+    place-items: center;
+    background-color: black;
+}
+
+.jogo__info__btn-fav > span {
+    cursor: pointer;
+    color: var(--primary);
+    font-size: 1.5em;
+}
+
+.jogo__info__btn-fav:hover > span {
+    font-variation-settings:
+    'FILL' 1; 
 }
 
 .carousel__arrow {
+    border: none;
     display: grid;
-    color: var(--roxo);
     place-items: center;
+    color: var(--primary-500);
+    background-color: transparent;
 }
 
 .carousel__arrow--mobile {
@@ -91,11 +110,11 @@
 
 .carousel__arrow:hover {
     cursor: pointer;
-    scale: 1.1;
+    color: var(--primary);
+
 }
 
 .carousel__arrow:active {
-    scale: 1;
     user-select: none;
 }
 
@@ -109,16 +128,17 @@
 }
 
 .carousel__jumpers {
-    display: flex;
     gap: .75rem;
+    display: flex;
 }
 
 .carousel__jumpers > .jumper {
+    border: none;
     width: .75rem;
     height: .75rem;
     border-radius: 50%;
-    background-color: rgb(83, 53, 102, .2);
     transition: 75ms ease-in-out;
+    background-color: var(--primary-500);
 }
 
 .carousel__jumpers > .jumper:hover {
@@ -126,12 +146,11 @@
 }
 
 .jumper--current {
-    background-color: var(--roxo);
     transition: 75ms ease-in-out;
-    background-color: var(--roxo) !important;
+    background-color: var(--primary) !important;
 }
 
-@media (width <= 75rem) {
+@media (width <= 75rem) {   
     .container {
         margin-inline: .25rem;
     }

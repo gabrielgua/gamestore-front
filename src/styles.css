@@ -1,45 +1,61 @@
 :root {
-    --roxo: #533566;
-    --green: #50A060;
+    /* --roxo: #533566; */
+    --background-primary: #121212;
+    --background-secondary: #393E46;
+
+    --primary: #00ADB5;
+    --primary-100: rgb(0, 173, 181, .1);
+    --primary-500: rgb(0, 173, 181, .5);
+
+    --accent: #EEEEEE;
+    --accent-500: rgb(238, 238, 238, .5);
+    --accent-100: rgb(238, 238, 238, .1);
+
+    --subtle-border-color: rgb(36, 36, 36);
+
+    --box-shadow-primary: rgba(0, 0, 0, 1) 0px 7px 29px 0px;
+
     --red: crimson;
     --links-active-green: #2e5f38;
 
-    --bg-dark: rgb(48, 48, 48);
-    --bg-light: rgb(240, 240, 240);
-
-    --accent-dark: rgb(0, 0, 0, .2);
-    --accent-light: white;
-
-    --box-shadow-header-dark: rgba(0, 0, 0, .5) 0px 1px 15px;
-    --box-shadow-header-light: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    --box-shadow-header-dark: rgb(0, 0, 0, .5) 0px 1px 15px;
+    --box-shadow-header-light: #B6EADA 0px 1px 4px;
 
     --box-shadow-dark: rgba(0, 0, 0, .2) 0px 1px 15px;
     --box-shadow-light: rgba(0, 0, 0, .13) 0px 1px 4px;
 
-    --card-green-dark: rgb(80, 160, 96, .2);
-    --card-roxo-dark: rgb(83, 53, 102, .1);
 
-    --border-green-light: rgb(80, 160, 96, .5);
-    --border-roxo-light: rgb(83, 53, 102, .3);
+
 
     --secondary-text-dark: rgba(255, 255, 255, .8);
     
     --secondary-content-width: 65rem;
-
     --border-carousel: 2px solid var(--roxo);
 }
 
 html,
 body {
-    background-color: var(--bg-light);
-    color-scheme: light;
     margin: 0;
+    color-scheme: dark;
     font-family: 'Saira', sans-serif;
+    background-color: var(--background-primary);
 }
 
 p, h1, h2, h3, h4, h5 {
     margin: 0;
     background-color: transparent;
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.icon--filled {
+    font-variation-settings: 'FILL' 1;
 }
 
 .btn {

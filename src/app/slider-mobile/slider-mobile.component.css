@@ -11,8 +11,8 @@
     max-width: 55rem;
     overflow-x: scroll;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
+    scroll-snap-type: x mandatory;
 }
 
 .carousel::-webkit-scrollbar {
@@ -50,20 +50,39 @@
 }
 
 .carousel__jogo__info {
-   display: flex;
-   padding: .25rem;
-   border-radius: .25rem;
-   background-color: black;
+    gap: 1px;
+    display: flex;
+    box-shadow: var(--box-shadow-primary);
+    border: 1px solid var(--subtle-border-color);
+    background-color: var(--subtle-border-color);
 }
 
 .carousel__jogo__info > p {
     color: white;
-    padding: 0 .25rem;
-    border-radius: .125rem;
+    padding: .25rem .5rem;
+    background-color: black;
 }
 
 .jogo__info__preco {
-    background-color: var(--green);
+    color: var(--primary) !important;
+}
+
+.jogo__info__btn-fav {
+    border: none;
+    display: grid;
+    place-items: center;
+    background-color: black;
+}
+
+.jogo__info__btn-fav > span {
+    cursor: pointer;
+    color: var(--primary);
+    font-size: 1.5em;
+}
+
+.jogo__info__btn-fav:hover > span {
+    font-variation-settings:
+    'FILL' 1; 
 }
 
 .carousel__jumpers {
@@ -76,11 +95,11 @@
    height: .75rem;
    border-radius: 50%;
    transition: 75ms ease-in-out;
-   background-color: rgb(83, 53, 102, .2);
+   background-color: var(--primary-500);
 
 }
 
 .jumper--current {
     transition: 75ms ease-in-out;
-    background-color: var(--roxo) !important;
+    background-color: var(--primary) !important;
 }
