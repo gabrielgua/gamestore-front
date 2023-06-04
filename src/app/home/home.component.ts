@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { JogoService } from '../service/jogo.service';
 import { JogoResumo } from '../models/jogo.resumo';
 
@@ -13,21 +13,22 @@ export class HomeComponent implements OnInit {
   showCarousel: boolean = false;
   mobileCarouselWidth: number = 800; //px 
 
+  @ViewChild('container') container!: ElementRef;
+
+
   constructor(private homeService: JogoService) {}
   
   ngOnInit(): void {
     this.homeService.listarJogos()
       .then((jogos) => {        
         this.jogos = jogos;
+        this.manageScreenSize(this.container.nativeElement.offsetWidth);
       }).catch((error) => {
         console.log(error.error);
       })
   }
 
   manageScreenSize(screenWidth: number) {
-    const mobileWidth = screenWidth <= this.mobileCarouselWidth;
-    this.showCarousel = mobileWidth ? true : false;
+    this.showCarousel = screenWidth <= this.mobileCarouselWidth;
   }
-
-
 }

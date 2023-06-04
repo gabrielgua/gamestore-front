@@ -30,8 +30,6 @@ export class SliderMobileComponent implements OnInit {
       this.jogos = jogos;
       this.playAutoSlide();
     });
-
-    console.log('mobile');
   }
 
   

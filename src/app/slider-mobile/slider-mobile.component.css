@@ -12,6 +12,7 @@
     overflow-x: scroll;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
 }
 
 .carousel::-webkit-scrollbar {
@@ -23,6 +24,7 @@
     overflow: hidden;
     position: relative;
     scroll-snap-align: start;
+
 }
 
 .carousel__jogo__img {

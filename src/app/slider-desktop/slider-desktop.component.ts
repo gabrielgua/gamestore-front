@@ -30,11 +30,7 @@ export class SliderDesktopComponent implements OnInit {
     this.service.getJogosDestaque().subscribe((jogos) => {
       this.jogosGroup = this.setJogosGroups(jogos, this.carouselGroupSize); 
       this.playAutoSlide();
-
-    })
-    
-    console.log('desktop');
-    
+    })    
   }
 
   setJogosGroups<Jogo>(jogos: Jogo[], groupSize: number): Jogo[][] {

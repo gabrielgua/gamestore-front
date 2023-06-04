@@ -1,10 +1,7 @@
 
 <app-slider-mobile *ngIf="showCarousel" class="slider-mobile"></app-slider-mobile>
 <app-slider-desktop *ngIf="!showCarousel" class="slider-desktop"></app-slider-desktop>
-<div class="container" #container 
-    (window:load)="manageScreenSize(container.offsetWidth)"
-    (window:resize)="manageScreenSize(container.offsetWidth)"
-    >
+<div class="container" #container (window:resize)="manageScreenSize(container.offsetWidth)">
     <h1>Catálogo</h1>
 
     <div class="buscar">
