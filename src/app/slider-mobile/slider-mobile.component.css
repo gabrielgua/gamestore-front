@@ -20,33 +20,44 @@
 
 .carousel__jogo {
     min-width: 100%;
-    scroll-snap-align: start;
+    overflow: hidden;
     position: relative;
+    scroll-snap-align: start;
 }
 
 .carousel__jogo__img {
     width: 100%;
     display: block;
+    transition: 75ms ease-in-out;
+}
+
+.carousel__jogo__img:hover {
+    cursor: pointer;
+}
+
+.carousel__jogo__img:active {
+    scale: 1.05;
+    transition: 75ms ease-in-out;
 }
 
 .info-wrapper {
-    position: absolute;
     left: 0;
     bottom: 0;
     padding: .5rem;
+    position: absolute;
 }
 
 .carousel__jogo__info {
    display: flex;
    padding: .25rem;
+   border-radius: .25rem;
    background-color: black;
-   border-radius: .5rem;
 }
 
 .carousel__jogo__info > p {
     color: white;
     padding: 0 .25rem;
-    border-radius: .25rem;
+    border-radius: .125rem;
 }
 
 .jogo__info__preco {

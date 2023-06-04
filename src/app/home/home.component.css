@@ -1,34 +1,34 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .buscar {
-    min-width: 100%;
     display: flex;
+    min-width: 100%;
     align-items: center;
     justify-content: center;
 }
 
 .buscar > input {
     max-width: var(--secondary-content-width);
-    background-color: transparent;
-    border: 1px solid black;
+    width: 100%;
     padding: 1rem;
     border-radius: .2rem;
-    width: 100%;
+    border: 1px solid black;
+    background-color: transparent;
 }
 
 .jogos-lista {
     max-width: var(--secondary-content-width);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 1.5rem;
-    border-radius: .5rem;
+    display: grid;
     margin-bottom: 2rem;
+    border-radius: .5rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
 }
 
 .jogo-card {
@@ -43,9 +43,9 @@
 
 
 .jogo-card:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     cursor: pointer;
     transition: 50ms ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 
@@ -56,8 +56,8 @@
 
 .jogo-info {
     display: flex;
-    flex-direction: column;
     padding: .75rem;
+    flex-direction: column;
     background-color: white;
     border-radius: 0 0 .5rem .5rem;
 }
@@ -65,53 +65,53 @@
 .jogo-info > p {
     margin: 0;
     padding: 0;
-    background-color: transparent;
-    white-space: nowrap;
-    overflow: hidden;
     display: block;
-    text-overflow: ellipsis;
+    overflow: hidden;
     font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: transparent;
 }
 
 .preco-nota {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .4rem 0rem;
     gap: .5rem;
+    display: flex;
+    padding: .4rem 0rem;
+    align-items: center;
     background-color: transparent;
+    justify-content: space-between;
 }
 
 .jogo-preco {
-    font-size: medium;
-    color: var(--green);
-    margin-right: auto;
     max-width: 70%;
+    font-size: medium;
+    margin-right: auto;
+    color: var(--green);
 }
 
 
 .jogo-nota {
     width: 3rem;
-    height: 1.5rem;
-    padding-bottom: .1rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: .25rem;
+    height: 1.5rem;
     font-size: small;
+    align-items: center;
+    padding-bottom: .1rem;
+    border-radius: .25rem;
+    justify-content: center;
 }
 
 .jogo-btn {
-    border: 1px solid var(--green);
     padding: .5rem;
-    border-radius: .25rem;
     font-size: small;
+    border-radius: .25rem;
+    border: 1px solid var(--green);
 }
 
 .jogo-btn:hover {
-    border-color: var(--green);
     cursor: pointer;
     color: var(--green);
+    border-color: var(--green);
 }
 
 .jogo-btn:active {
@@ -129,17 +129,7 @@
     }
 }
 
-@media (width >= 55rem) {
-    .slider-mobile {
-        display: none;
-    }
-}
 
-@media (width <= 55rem) {
-    .slider-desktop {
-        display: none;
-    }
-}
 
 
 

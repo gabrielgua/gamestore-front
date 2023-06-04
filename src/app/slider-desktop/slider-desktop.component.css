@@ -65,14 +65,14 @@
 .carousel__jogo__info {
    display: flex;
    padding: .25rem;
+   border-radius: .25rem;
    background-color: black;
-   border-radius: .5rem;
 }
 
 .carousel__jogo__info > p {
     color: white;
     padding: 0 .25rem;
-    border-radius: .25rem;
+    border-radius: .125rem;
 }
 
 .jogo__info__preco {
@@ -110,7 +110,7 @@
 
 .carousel__jumpers {
     display: flex;
-    gap: 1rem;
+    gap: .75rem;
 }
 
 .carousel__jumpers > .jumper {

@@ -8,10 +8,9 @@
         (mouseout)="playAutoSlide()"
         (scroll)="handleScrollEvent()">
         <div class="carousel__jogo" *ngFor="let jogo of jogos">
-            <img 
-                (load)="populateMap(carousel.offsetWidth)" 
-                
-                class="carousel__jogo__img" src="{{jogo.urlImagem}}">
+            <a routerLink="/jogos/{{jogo.uriNome}}">
+                <img (load)="populateMap(carousel.offsetWidth)" class="carousel__jogo__img" src="{{jogo.urlImagem}}">
+            </a>
             <div class="info-wrapper">
                 <div class="carousel__jogo__info">
                     <p class="jogo__info__preco">

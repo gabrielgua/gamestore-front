@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { JogoService } from '../service/jogo.service';
 import { Jogo } from '../models/jogo';
 import { JogosDestaque } from '../service/jogos-destaque.service';
@@ -11,14 +11,15 @@ import { JogosDestaque } from '../service/jogos-destaque.service';
 export class SliderMobileComponent implements OnInit {
 
   constructor(private service: JogosDestaque) {}
+  
 
   @ViewChild('carousel') carousel!: ElementRef;
 
   jogos: Jogo[] = [];
+  autoSlideInterval: any;
+  lastOffset: number = 0;
   currentIndex: number = 0;
   carouselWidth: number = 0;
-  lastOffset: number = 0;
-  autoSlideInterval: any;
   autoSlide: boolean = false;
   autoSlideInvervalAmount: number = 5000;
 
@@ -29,7 +30,11 @@ export class SliderMobileComponent implements OnInit {
       this.jogos = jogos;
       this.playAutoSlide();
     });
+
+    console.log('mobile');
   }
+
+  
 
   populateMap(width: number): void {
     this.jogos.forEach((jogo, index) => {

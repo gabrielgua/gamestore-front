@@ -10,20 +10,23 @@ import { JogoResumo } from '../models/jogo.resumo';
 export class HomeComponent implements OnInit {
 
   jogos: JogoResumo[] = [];
-  jogoDestaque = new JogoResumo();
+  showCarousel: boolean = false;
+  mobileCarouselWidth: number = 800; //px 
 
   constructor(private homeService: JogoService) {}
   
   ngOnInit(): void {
     this.homeService.listarJogos()
       .then((jogos) => {        
-        this.jogoDestaque = jogos[0];
         this.jogos = jogos;
-        // this.jogos.shift();
-
       }).catch((error) => {
         console.log(error.error);
       })
+  }
+
+  manageScreenSize(screenWidth: number) {
+    const mobileWidth = screenWidth <= this.mobileCarouselWidth;
+    this.showCarousel = mobileWidth ? true : false;
   }
 
 
