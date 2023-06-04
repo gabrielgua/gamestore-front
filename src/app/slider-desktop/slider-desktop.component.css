@@ -1,7 +1,7 @@
 .container {
     gap: 1rem;
     display: grid;
-    max-width: 75rem;
+    max-width: 85rem;
     margin: 1rem auto;
     place-items: center;
     grid-template-columns: auto;
@@ -119,8 +119,7 @@
 }
 
 .carousel__arrow > span {
-    font-size: xx-large;
-    font-weight: bolder;
+    font-size: 3em;
 }
 
 .carousel__controls {

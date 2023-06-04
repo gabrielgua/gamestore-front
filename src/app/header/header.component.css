@@ -16,13 +16,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 68rem;
+    width: 76.5rem;
 }
 
 .logo {
     display: flex;
     font-size: 2em;
-    font-weight: bold;
+    font-family: 'Saira Stencil One', cursive;
     align-items: center;
     color: var(--primary);
 }

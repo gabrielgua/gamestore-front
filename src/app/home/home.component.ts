@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { JogoService } from '../service/jogo.service';
 import { JogoResumo } from '../models/jogo.resumo';
+import { JogoPageable } from '../models/jogo.pageable';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,13 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private homeService: JogoService) {}
+
+  pageable: JogoPageable = {
+    size: '5',
+  }
   
   ngOnInit(): void {
-    this.homeService.listarJogos()
+    this.homeService.listarJogos(this.pageable)
       .then((jogos) => {        
         this.jogos = jogos;
         this.manageScreenSize(this.container.nativeElement.offsetWidth);

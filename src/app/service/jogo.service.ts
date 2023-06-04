@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, firstValueFrom } from 'rxjs';
 import { Jogo } from '../models/jogo';
 import { environment } from 'src/environments/environment';
+import { JogoPageable } from '../models/jogo.pageable';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class JogoService {
 
  
 
-  listarJogos(): Promise<any>{
-    return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos`));
+  listarJogos(pageable?: JogoPageable): Promise<any>{
+    console.log(pageable);
+    
+
+    return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos?page=${pageable?.page}&size=${pageable?.size}&${pageable?.sort}`));
   }
 
   buscarJogoPorId(jogoId: number): Promise<Jogo> {
