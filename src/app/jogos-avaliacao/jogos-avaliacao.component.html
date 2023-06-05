@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="jogo-wrapper" *ngFor="let jogo of jogos; index as i" >
+        <p class="jogo__position">{{i + 1}}</p>
+        <div class="jogo">
+            <a routerLink="/jogos/{{jogo.uriNome}}">
+                <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+            </a>
+            <div class="jogo__info">
+                <p class="jogo__info__preco">
+                    <span *ngIf="jogo.preco == 0">Gratuito</span>
+                    <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
+                </p>
+                <p>⭐ {{jogo.nota}}</p>
+                <button>
+                    <span class="material-symbols-rounded">favorite</span>
+                </button>
+            </div>
+            
+        </div>      
+    </div>
+</div>

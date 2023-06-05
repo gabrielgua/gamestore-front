@@ -15,6 +15,7 @@ import localePt from '@angular/common/locales/pt';
 import { SliderDesktopComponent } from './slider-desktop/slider-desktop.component';
 import { SafePipe } from './safe.pipe';
 import { SliderMobileComponent } from './slider-mobile/slider-mobile.component';
+import { JogosAvaliacaoComponent } from './jogos-avaliacao/jogos-avaliacao.component';
 
 registerLocaleData(localePt);
 
@@ -26,7 +27,8 @@ registerLocaleData(localePt);
     JogoComponent,
     SliderDesktopComponent,
     SafePipe,
-    SliderMobileComponent
+    SliderMobileComponent,
+    JogosAvaliacaoComponent
   ],
   imports: [
     BrowserModule,

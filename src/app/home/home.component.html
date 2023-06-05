@@ -1,30 +1,9 @@
 
-<app-slider-mobile *ngIf="showCarousel" class="slider-mobile"></app-slider-mobile>
-<app-slider-desktop *ngIf="!showCarousel" class="slider-desktop"></app-slider-desktop>
+<app-slider-mobile *ngIf="mobile" class="slider-mobile"></app-slider-mobile>
+<app-slider-desktop *ngIf="!mobile" class="slider-desktop"></app-slider-desktop>
 <div class="container" #container (window:resize)="manageScreenSize(container.offsetWidth)">
-    <h1>Catálogo</h1>
-
-    <div class="buscar">
-        <input type="search" placeholder="🔍 Buscar">
-    </div>
-    
-    <div class="jogos-lista">
-        <a routerLink="/jogos/{{jogo.uriNome}}" *ngFor="let jogo of jogos" class="jogo-card">
-            <img class="jogo-img" [src]="jogo.urlImagem | safe">
-            <div class="jogo-info">
-                <p class="paragrafo-truncate" title="{{jogo.nome}}">{{jogo.nome}}</p>
-                <div class="preco-nota">
-                    <div class="jogo-preco">
-                        <p class="singleline-truncate">{{(jogo.preco == 0) ? 'Gratuito p/ jogar': 'R$ '+ jogo.preco}}</p>
-                    </div>
-                    <div class="jogo-nota" title="Avaliações: {{jogo.nota}}/10">
-                        <p>⭐ {{jogo.nota}}</p>
-                    </div>
-                </div>
-                <button class="btn jogo-btn">+ Carrinho 🛒</button>
-            </div>
-        </a>
-    </div>
+    <h2>Mais bem avaliados</h2>
+    <app-jogos-avaliacao></app-jogos-avaliacao>
 </div>
 
 

@@ -1,39 +1,24 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { JogoService } from '../service/jogo.service';
-import { JogoResumo } from '../models/jogo.resumo';
-import { JogoPageable } from '../models/jogo.pageable';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  jogos: JogoResumo[] = [];
-  showCarousel: boolean = false;
-  mobileCarouselWidth: number = 800; //px 
-
+export class HomeComponent implements AfterViewInit {
+  
+  constructor(private changeDetector: ChangeDetectorRef) {}
   @ViewChild('container') container!: ElementRef;
 
+  mobile: boolean = false;
+  breakToMobileWidth: number = 800; //px 
 
-  constructor(private homeService: JogoService) {}
-
-  pageable: JogoPageable = {
-    size: '5',
-  }
-  
-  ngOnInit(): void {
-    this.homeService.listarJogos(this.pageable)
-      .then((jogos) => {        
-        this.jogos = jogos;
-        this.manageScreenSize(this.container.nativeElement.offsetWidth);
-      }).catch((error) => {
-        console.log(error.error);
-      })
+  ngAfterViewInit(): void {
+    this.manageScreenSize(this.container.nativeElement.offsetWidth);
+    this.changeDetector.detectChanges();
   }
 
   manageScreenSize(screenWidth: number) {
-    this.showCarousel = screenWidth <= this.mobileCarouselWidth;
+    this.mobile = screenWidth <= this.breakToMobileWidth;
   }
 }

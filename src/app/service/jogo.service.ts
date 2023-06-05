@@ -9,16 +9,9 @@ import { JogoPageable } from '../models/jogo.pageable';
   providedIn: 'root'
 })
 export class JogoService {
-
-
   constructor(private http: HttpClient) {}
 
- 
-
   listarJogos(pageable?: JogoPageable): Promise<any>{
-    console.log(pageable);
-    
-
     return firstValueFrom(this.http.get<any>(`${environment.API_URL}/jogos?page=${pageable?.page}&size=${pageable?.size}&${pageable?.sort}`));
   }
 
