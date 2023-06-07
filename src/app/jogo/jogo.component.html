@@ -1,81 +1,17 @@
 <div class="container">
-    <h5>🏠 > Jogos > {{jogo.nome}}</h5>
-    <h1 class="jogo-titulo">
-        {{jogo.nome}}   
-    </h1>
-    <div class="principal">
-        <iframe class="video" width="100%" height="100%" [src]="jogo.urlVideo | safe" title="Dark Souls™ II: Scholar of The First Sin Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <div class="jogo-info">
-            <img class="jogo-img" [src]="jogo.urlImagem | safe">
-            <div class="info-wrapper">
-                <div class="jogo-descricao">
+    <div class="hero">
+        <img class="hero__img" src="https://cdn2.steamgriddb.com/file/sgdb-cdn/hero/708a232f1a9298595d27057e2bda7fa2.png" alt="hero jogo">
+    </div>
+    <div class="jogo">
+        <h1>{{jogo.nome}}</h1>
+        <div class="jogo__principal">
+            <iframe class="jogo__video border-grey box-shadow-primary" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
+
+            <div class="jogo__principal__info">
+                <img class="jogo__img box-shadow-primary border-grey" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+                <div class="jogo__descricao">
                     <p class="multiline-truncate">{{jogo.descricao}}</p>
                 </div>
-                <div class="jogo-desenvolvedora">
-                    <p class="label">Desenvolvedora: </p>
-                    <p class="singleline-truncate">
-                        <a href="#">{{jogo.desenvolvedora.nome}}</a>
-                    </p>
-                </div>
-                
-                
-                    
-            </div>
-            <div class="preco-comprar">
-                <p class="jogo-preco">
-                    <span *ngIf="jogo.preco == 0">Gratuito</span>
-                    <span *ngIf="jogo.preco != 0">R$ {{ jogo.preco | number: '1.2-2':'pt-BR' }}</span>
-                </p>
-                <button class="btn btn-carrinho">+ Carrinho 🛒</button>
-            </div>
-        </div>
-
-        <div class="tags-row">
-            <div *ngFor="let categoria of jogo.categorias" class="categoria">
-                <p>{{categoria.nome}}</p>
-            </div>
-            <span class="divider-vertical">|</span>
-            <div *ngFor="let plataforma of jogo.plataformas" class="plataforma">
-                <p>{{plataforma.nome}}</p>
-            </div>
-        </div>
-            
-        <div class="info-secundaria">
-            <div>
-                <h4>🖊️ Sobre o jogo</h4>
-                <div class="descricao-completa">
-                    <p>{{jogo.descricao}}</p>
-                </div>
-            </div>
-            <div>
-                <h4>🖥️ Requisitos de Sistema</h4>
-                <p *ngIf="jogo.requisitos.length == 0">Não há nada por aqui.</p>
-                <div *ngIf="jogo.requisitos.length != 0" class="requisitos">
-                    <div *ngFor="let requisito of requisitosPc">
-                        <h5>{{requisito.tipo === "MINIMOS" ? 'Mínimos' : 'Recomendados'}}</h5>
-                        <p><span>Observações: </span>{{requisito.observacoes}}</p>
-                        <p><span>OS: </span>{{requisito.sistema}}</p>
-                        <p><span>Processador: </span>{{requisito.processador}}</p>
-                        <p><span>Memória: </span>{{requisito.memoria}}</p>
-                        <p><span>Placa de Vídeo: </span>{{requisito.placaDeVideo}}</p>
-                        <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
-                    </div>
-                    <div *ngFor="let requisito of requisitosConsole">
-                        <h5>Consoles</h5>
-                        <p><span>Observações: </span>{{requisito.observacoes}}</p>
-                        <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-        <div class="mais-info">
-            <div class="info-card">
-                <h5>Avaliações</h5>
-                <p><span>⭐ {{jogo.nota}}</span> /10</p>
-            </div>
-            <div class="info-card">
-                <h5>Lançamento</h5>
-                <p>{{jogo.dataLancamento | date: 'dd/MM/yyyy'}}</p>
             </div>
         </div>
     </div>

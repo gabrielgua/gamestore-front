@@ -4,6 +4,7 @@ import { Jogo } from '../models/jogo';
 import { ActivatedRoute } from '@angular/router';
 import { Requisito } from '../models/requisito';
 import { TipoRequisito } from '../models/tipoRequisito';
+import { JogoBuscarService } from '../service/jogo-buscar.service';
 
 @Component({
   selector: 'app-jogo',
@@ -14,37 +15,19 @@ export class JogoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private jogoService: JogoService) {}
+    private service: JogoBuscarService) {}
 
   jogo = new Jogo();
-  requisitosPc: Requisito[] = [];
-  requisitosConsole: Requisito[] = [];
 
   ngOnInit(): void {
     let uriNome = this.route.snapshot.paramMap.get('uriNome')!;
-    this.buscarJogo(uriNome);
+    this.getJogo(uriNome);
   }
 
-  buscarJogo(uriNome: string): void {
-    this.jogoService.buscarJogoPorUriNome(uriNome)
-      .then((jogo: Jogo) => {
-        this.jogo = jogo;
-        this.ordenarRequisitos(jogo.requisitos);
-      }).catch((error: any) => {
-        console.log(error.error);
-      })
+  getJogo(uriNome: string): void {
+    this.service.getJogoByUri(uriNome).subscribe((jogo) => this.jogo = jogo);
   }
 
-  ordenarRequisitos(requisitos: Requisito[]) {
-    requisitos.forEach(requisito => {
-      if (requisito.tipo === TipoRequisito.CONSOLES) {
-        this.requisitosConsole.push(requisito);
-      } else {
-        this.requisitosPc.push(requisito);
-      }
-    })
-    
-    this.requisitosPc.unshift(this.requisitosPc.splice(this.requisitosPc.findIndex(requisito => requisito.tipo === TipoRequisito.MINIMOS), 1)[0]);
 
-  }
+
 }
