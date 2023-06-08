@@ -2,7 +2,7 @@
 <app-slider-mobile *ngIf="mobile" class="slider-mobile"></app-slider-mobile>
 <app-slider-desktop *ngIf="!mobile" class="slider-desktop"></app-slider-desktop>
 <div class="container" #container (window:resize)="manageScreenSize(container.offsetWidth)">
-    <h2>Mais bem avaliados</h2>
+    <h2>Mais avaliados</h2>
     <app-jogos-avaliacao></app-jogos-avaliacao>
 </div>
 

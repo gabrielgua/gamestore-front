@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { JogoService } from '../service/jogo.service';
 import { Jogo } from '../models/jogo';
 import { ActivatedRoute } from '@angular/router';
-import { Requisito } from '../models/requisito';
-import { TipoRequisito } from '../models/tipoRequisito';
 import { JogoBuscarService } from '../service/jogo-buscar.service';
 
 @Component({
@@ -18,6 +15,7 @@ export class JogoComponent implements OnInit {
     private service: JogoBuscarService) {}
 
   jogo = new Jogo();
+  notaPositive: number = 7;
 
   ngOnInit(): void {
     let uriNome = this.route.snapshot.paramMap.get('uriNome')!;
@@ -26,6 +24,14 @@ export class JogoComponent implements OnInit {
 
   getJogo(uriNome: string): void {
     this.service.getJogoByUri(uriNome).subscribe((jogo) => this.jogo = jogo);
+  }
+
+  maiorQueMetade(nota: number): boolean {
+    return nota % 1 >= .5;
+  }
+
+  roundNota(nota: number): number {
+    return Math.round(nota);
   }
 
 

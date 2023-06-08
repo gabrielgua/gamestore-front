@@ -3,16 +3,55 @@
         <img class="hero__img" src="https://cdn2.steamgriddb.com/file/sgdb-cdn/hero/708a232f1a9298595d27057e2bda7fa2.png" alt="hero jogo">
     </div>
     <div class="jogo">
-        <h1>{{jogo.nome}}</h1>
+        <h1 class="jogo__nome">{{jogo.nome}}</h1>
         <div class="jogo__principal">
-            <iframe class="jogo__video border-grey box-shadow-primary" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
+            <iframe class="jogo__video border-subtle box-shadow-primary" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
 
-            <div class="jogo__principal__info">
-                <img class="jogo__img box-shadow-primary border-grey" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+            <div class="jogo__info">
+                <img class="jogo__img box-shadow-primary border-subtle" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
                 <div class="jogo__descricao">
                     <p class="multiline-truncate">{{jogo.descricao}}</p>
+                    <a href="#descricao">Ver mais</a>
+                </div>
+
+                <!-- <div class="jogo__categorias">
+                    <div class="categoria" *ngFor="let categoria of jogo.categorias">{{categoria.nome}}</div>
+                </div> -->
+                
+                    
+                <div class="jogo__nota" [ngStyle]="{'--color': jogo.nota < notaPositive ? 'var(--error)': 'var(--success)'}" title="Avaliações: {{jogo.nota}}/10">
+                    <div class="stars">
+                        <span *ngFor="let star of [].constructor(5); index as i" 
+                            class="material-symbols-rounded" 
+                            [ngClass]="{'icon--filled': i + 1 <= jogo.nota / 2}">
+                            
+                            {{ i + 1 === roundNota(jogo.nota / 2) && maiorQueMetade(jogo.nota / 2) ? 'star_half' : 'star'}}
+                        </span>
+                        <p>{{ jogo.nota / 2 }}</p>
+                    </div>
+                    
+                    <p>Maioria <span>{{jogo.nota >= notaPositive ? 'positiva': 'negativa'}}</span>.</p> 
+                </div>
+                <div class="jogo__actions">
+                    <div class="jogo__preco ">
+                        <p *ngIf="jogo.preco == 0">Gratuito</p>
+                        <p *ngIf="jogo.preco != 0">{{ jogo.preco | currency: 'BRL' }}</p>
+                    </div>
+                    
+                    <button class="favorite-btn ">
+                        <span class="material-symbols-rounded">favorite</span>
+                    </button>
+                    <button class="carrinho-btn ">+ Carrinho 
+                        <span class="material-symbols-rounded">
+                            shopping_cart
+                        </span>
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <div id="descricao" class="jogo__descricao--completa">
+            {{jogo.descricao}}
         </div>
     </div>
 </div>
