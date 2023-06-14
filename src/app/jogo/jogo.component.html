@@ -1,57 +1,110 @@
-<div class="container">
+<div class="container" *ngIf="jogo else loading">
     <div class="hero">
-        <img class="hero__img" src="https://cdn2.steamgriddb.com/file/sgdb-cdn/hero/708a232f1a9298595d27057e2bda7fa2.png" alt="hero jogo">
+        <img class="hero__img" src="{{jogo.urlImgHero}}" alt="{{jogo.nome}} - hero img">
     </div>
     <div class="jogo">
         <h1 class="jogo__nome">{{jogo.nome}}</h1>
         <div class="jogo__principal">
             <iframe class="jogo__video border-subtle box-shadow-primary" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
 
-            <div class="jogo__info">
-                <img class="jogo__img box-shadow-primary border-subtle" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
-                <div class="jogo__descricao">
-                    <p class="multiline-truncate">{{jogo.descricao}}</p>
-                    <a href="#descricao">Ver mais</a>
+            <div class="jogo__card border-subtle box-shadow-primary">
+                <img class="jogo__img box-shadow-primary" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+                <div class="jogo__nota-desenvolvedora">
+                    
+    
+                    <div class="jogo__desenvolvedora singleline-truncate">
+                        <h5>Desenvolvedora</h5>
+                        <p *ngIf="jogo.desenvolvedora" class="singleline-truncate">{{jogo.desenvolvedora.nome}}</p>
+                    </div>
+
+                    <div class="jogo__nota" [ngStyle]="{'--color': jogo.nota < notaPositive ? 'var(--error)': 'var(--success)'}" title="Avaliações: {{jogo.nota / 2}}/5">
+                        <h5>Avaliações</h5>
+                        <div class="stars">
+                            <span *ngFor="let star of [].constructor(5); index as i" 
+                            class="material-symbols-rounded" 
+                            [ngClass]="{'icon--filled': isFilled(i + 1, jogo.nota / 2) }"
+                            >
+                            
+                            {{ getStarIcon(i + 1, jogo.nota / 2)}}
+                            </span>
+                        </div>
+                        <p>{{ jogo.nota / 2 }}</p> 
+                    </div>
                 </div>
 
-                <!-- <div class="jogo__categorias">
-                    <div class="categoria" *ngFor="let categoria of jogo.categorias">{{categoria.nome}}</div>
-                </div> -->
                 
-                    
-                <div class="jogo__nota" [ngStyle]="{'--color': jogo.nota < notaPositive ? 'var(--error)': 'var(--success)'}" title="Avaliações: {{jogo.nota}}/10">
-                    <div class="stars">
-                        <span *ngFor="let star of [].constructor(5); index as i" 
-                            class="material-symbols-rounded" 
-                            [ngClass]="{'icon--filled': i + 1 <= jogo.nota / 2}">
-                            
-                            {{ i + 1 === roundNota(jogo.nota / 2) && maiorQueMetade(jogo.nota / 2) ? 'star_half' : 'star'}}
-                        </span>
-                        <p>{{ jogo.nota / 2 }}</p>
-                    </div>
-                    
-                    <p>Maioria <span>{{jogo.nota >= notaPositive ? 'positiva': 'negativa'}}</span>.</p> 
-                </div>
+
+            
                 <div class="jogo__actions">
-                    <div class="jogo__preco ">
-                        <p *ngIf="jogo.preco == 0">Gratuito</p>
-                        <p *ngIf="jogo.preco != 0">{{ jogo.preco | currency: 'BRL' }}</p>
+                    <p class="actions-title singleline-truncate" title="Comprar {{jogo.nome}}">Comprar {{jogo.nome}}</p>
+                    <p class="actions-preco">
+                        <span *ngIf="jogo.preco === 0">Gratuito</span>
+                        <span *ngIf="jogo.preco != 0">{{jogo.preco | currency: 'BRL'}}</span>
+                    </p>
+                    <div class="actions-btns">
+                        <button class="btn btn-desejo">
+                            <span class="material-symbols-rounded">favorite</span>
+                            DESEJO
+                        </button>
+                        <button class="btn btn-carrinho">
+                            <span class="material-symbols-rounded">shopping_cart</span>
+                            COMPRAR
+                        </button>
                     </div>
-                    
-                    <button class="favorite-btn ">
-                        <span class="material-symbols-rounded">favorite</span>
-                    </button>
-                    <button class="carrinho-btn ">+ Carrinho 
-                        <span class="material-symbols-rounded">
-                            shopping_cart
-                        </span>
-                    </button>
                 </div>
             </div>
         </div>
 
-        <div id="descricao" class="jogo__descricao--completa">
-            {{jogo.descricao}}
+        
+
+        <div class="jogo__secundario">
+            <div class="jogo__secundario-section-1">
+                
+    
+                <article id="descricao" class="jogo__descricao">
+                    <h4>Sobre o jogo</h4>
+                    <p>{{jogo.descricao}}</p>
+                </article>
+                
+                <div class="jogo__requisitos" >
+                    <h4>Requisitos</h4>
+                    <p *ngIf="jogo.requisitos && !jogo.requisitos.length">Não há nada por aqui.</p>
+                    <div class="requisito" *ngFor="let requisito of jogo.requisitos">
+                        <h5>{{requisito.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'}}</h5>
+                        <p *ngIf="requisito.observacoes"><span>Observações: </span>{{requisito.observacoes}}</p>
+                        <p><span>OS: </span>{{requisito.sistema}}</p>
+                        <p><span>Processador: </span>{{requisito.processador}}</p>
+                        <p><span>Memória: </span>{{requisito.memoria}}</p>
+                        <p><span>Placa de Vídeo: </span>{{requisito.placaDeVideo}}</p>
+                        <p><span>Armazenamento: </span>{{requisito.armazenamento}}</p>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="jogo__secundario-section-2 border-subtle box-shadow-primary">
+                <div class="jogo__tags">
+                    <h4>Categorias</h4>
+                    <div class="tags-wrapper">
+                        <p class="tags" *ngFor="let categoria of jogo.categorias">{{categoria.nome}}</p>
+                    </div>
+                </div>
+                <div class="jogo__tags">
+                    <h4>Todas plataformas</h4>
+                    <div class="tags-wrapper">
+                        <p class="tags" *ngFor="let plataforma of jogo.plataformas">{{plataforma.nome}}</p>
+                    </div>
+                </div>
+                <div class="jogo__tags">
+                    <h4>Modos de jogo</h4>
+                    <div class="tags-wrapper">
+                        <p class="tags" *ngFor="let modo of jogo.modos">{{modo.nome}}</p>
+                    </div>
+                </div>
+                <div class="jogo__mais-info">
+                    <h5>Lançamento</h5>
+                    {{jogo.dataLancamento | date: 'dd/MM/yyyy'}}
+                </div>
+            </div>
         </div>
     </div>
 </div>

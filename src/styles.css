@@ -1,25 +1,21 @@
 :root {
-    /* --roxo: #533566; */
-    --success: 152, 216, 170;
-    /* --error: 220, 20, 60; */
-
-
-    --error: 180, 96, 96;
-
-    --success-200: rgb(152, 216, 170, .2);
-
-    --error-200: rgb(220, 20, 60, .2);
+    
 
     --background-primary: #121212;
     --background-secondary: #393E46;
 
-    --primary: #00ADB5;
+    --primary: rgb(0, 173, 181);
+    --primary-number: 0, 173, 181;
     --primary-100: rgb(0, 173, 181, .1);
     --primary-500: rgb(0, 173, 181, .5);
 
     --accent: #EEEEEE;
+    --accent-number: 238, 238, 238;
     --accent-500: rgb(238, 238, 238, .5);
     --accent-100: rgb(238, 238, 238, .1);
+
+    --success: 152, 216, 170;
+    --error: 180, 96, 96;
 
     --subtle-border-color: rgb(36, 36, 36);
 
@@ -34,19 +30,20 @@
     --box-shadow-dark: rgba(0, 0, 0, .2) 0px 1px 15px;
     --box-shadow-light: rgba(0, 0, 0, .13) 0px 1px 4px;
 
-
-
-
     --secondary-text-dark: rgba(255, 255, 255, .8);
-    
     --border-carousel: 2px solid var(--roxo);
+
+    --font-normal: .9rem;
+    --font-subtitles: 1.1rem;
+    --font-titles: 1.5rem;
+    --font-family: 'Saira', sans-serif;
 }
 
 html,
 body {
     margin: 0;
     color-scheme: dark;
-    font-family: 'Saira', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--background-primary);
 }
 
@@ -77,18 +74,6 @@ p, h1, h2, h3, h4, h5 {
 
 .icon--bolder {
     font-variation-settings: 'wght' 800;
-}
-
-.btn {
-    padding: 1rem;
-    background-color: transparent;
-    border-radius: .4rem;
-    border: none;
-    font-size: medium;
-}
-
-.btn:hover {
-    cursor: pointer;
 }
 
 .multiline-truncate {

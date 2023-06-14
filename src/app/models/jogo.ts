@@ -1,5 +1,6 @@
 import { Categoria } from "./categoria";
 import { DesenvolvedoraResumo } from "./desenvolvedora";
+import { Modo } from "./modo";
 import { Plataforma } from "./plataforma";
 import { Requisito } from "./requisito";
 
@@ -8,6 +9,7 @@ export class Jogo {
     nome!: string;
     uriNome!: string;
     urlVideo!: string;
+    urlImgHero!: string;
     urlImagem!: string;
     dataLancamento!: string;
     descricao!: string;
@@ -17,5 +19,6 @@ export class Jogo {
     categorias!: Categoria[];
     plataformas!: Plataforma[];   
     requisitos!: Requisito[];
+    modos!: Modo[];
 
 }
