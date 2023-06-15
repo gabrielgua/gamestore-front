@@ -100,9 +100,12 @@
                         <p class="tags" *ngFor="let modo of jogo.modos">{{modo.nome}}</p>
                     </div>
                 </div>
-                <div class="jogo__mais-info">
-                    <h5>Lançamento</h5>
-                    {{jogo.dataLancamento | date: 'dd/MM/yyyy'}}
+                <div class="jogo__detalhes">
+                    <h4>Mais detalhes</h4>
+                    <div class="jogo__lancamento">
+                        <h5>Lançamento</h5>
+                        <p>{{jogo.dataLancamento | date: 'longDate': 'pt_br'}}.</p>
+                    </div>
                 </div>
             </div>
         </div>

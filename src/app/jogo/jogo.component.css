@@ -277,11 +277,11 @@
 }
 
 .jogo__secundario-section-2 {
-    grid-row: span 2;
     display: flex;
     flex-direction: column;
+    grid-row: span 2;
     padding: var(--section-gap);
-    gap: var(--section-gap);
+    gap: .5rem;
 }
 
 
@@ -314,18 +314,86 @@
     background-color: rgba(var(--primary-number), .5);
 }
 
-.jogo__mais-info {
-    padding: .5rem;
+.jogo__detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.jogo__lancamento {
+
+    font-size: var(--font-normal);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .25rem;
+    padding: .25rem .5rem;
+    background-color: rgba(var(--primary-number), .1);
+    color: var(--accent);
+
+    > h5 {
+        font-size: var(--font-normal);
+        color: var(--primary);
+    }
 }
 
 @media (width <= 1050px) {
     .jogo__nota-desenvolvedora {
         grid-template-columns: 1fr;
     }
+
+    
 }
 
-@media (width <= 900px) {
-    .jogo__actions > .actions-btns {
+@media (width <= 900px) and (width >= 760px) {
+    .jogo__principal {
+        grid-template-columns: 1fr;
+    }
+
+    .jogo__card {
+        max-width: none;
+        grid-template-columns: 2fr 2fr;
+        grid-template-rows: auto 2fr;
+    }
+
+    .jogo__img {
+        grid-row: span 2;
+    }
+
+    .jogo__nota-desenvolvedora {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .btn {
+        padding: .25rem;
+    }
+}
+
+@media (width <= 760px) {
+    .jogo__principal {
+        grid-template-columns: 1fr;
+    }
+
+    .jogo__card {
+        max-width: none;
+    }
+
+    .jogo__secundario {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (width <= 400px) {
+    .jogo__requisitos > h4 {    
+        grid-column: span 1;
+        
+    }
+
+    .jogo__requisitos {
+        display: grid;
+        gap: 1rem;
         grid-template-columns: 1fr;
     }
 }
