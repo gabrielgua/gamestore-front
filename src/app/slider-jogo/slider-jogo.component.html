@@ -1,0 +1,38 @@
+<div class="carousel__wrapper">
+    <div #carousel 
+        class="carousel box-shadow-primary"
+        (window:resize)="updateCarouselWidth(carousel.offsetWidth)"
+        (window:resize)="populateMap(carousel.offsetWidth)"  
+        (scroll)="handleScrollEvent()">
+        <div class="carousel__item" *ngFor="let item of carouselItems">
+            <iframe 
+                *ngIf="item.tipo === 'VIDEO'"
+                (load)="populateMap(carousel.offsetWidth)" 
+                [src]="item.url | safe" frameborder="0" allowfullscreen></iframe>
+
+            <img 
+                *ngIf="item.tipo === 'IMG'" 
+                (load)="populateMap(carousel.offsetWidth)"
+                src="{{item.url}}" alt="{{jogo.nome}} - img">
+        </div>
+    </div>
+
+
+     <div class="carousel__controls">
+        <button class="carousel__arrow carousel__arrow" (click)="scrollToPrevious()">
+            <span class="material-symbols-rounded icon--bolder">
+                arrow_back_ios_new
+            </span>
+        </button>
+        
+        <div class="carousel__jumpers carousel__jumpers--max-size">
+            <button class="jumper" *ngFor="let jumper of carouselItems; let i = index" [ngClass]="{'jumper--current': i === currentIndex}" (click)="scrollToIndex(i)"></button>
+        </div>
+    
+        <button class="carousel__arrow carousel__arrow" (click)="scrollToNext()">
+            <span class="material-symbols-rounded icon--bolder">
+                arrow_forward_ios
+            </span>
+        </button>
+    </div>
+</div>

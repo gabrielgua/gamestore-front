@@ -1,0 +1,83 @@
+.carousel__wrapper {
+    gap: 1rem;
+    display: grid;
+    margin-bottom: 1rem;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-stop: always;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel__item {
+    min-width: 100%;
+    overflow: hidden;
+    scroll-snap-align: start;
+
+}
+
+.carousel__item > * {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+.carousel__controls {
+    display: flex;
+    align-items: center;
+    place-self: center;
+}
+
+.carousel__arrow {
+    font-size: .5rem;
+    border: none;
+    display: grid;
+    place-items: center;
+    color: var(--primary-500);
+    background-color: transparent;
+}
+
+.carousel__arrow:hover {
+    cursor: pointer;
+    color: var(--primary);
+
+}
+
+.carousel__arrow:active {
+    user-select: none;
+}
+
+.carousel__arrow > span {
+    font-size: 3em;
+}
+
+.carousel__jumpers {
+    gap: .75rem;
+    display: flex;
+}
+
+.carousel__jumpers > .jumper {
+    border: none;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+    transition: 75ms ease-in-out;
+    background-color: var(--primary-500);
+}
+
+.carousel__jumpers > .jumper:hover {
+    cursor: pointer;
+}
+
+.jumper--current {
+    transition: 75ms ease-in-out;
+    background-color: var(--primary) !important;
+}

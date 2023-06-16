@@ -13,7 +13,7 @@ export class JogoBuscarService {
 
   constructor(private http: HttpClient) { }
 
-  private fetchJogoData(uriNome: string): void {
+  public fetchJogoData(uriNome: string): void {
     this.http.get<Jogo>(`${environment.API_URL}/jogos?nome=${uriNome}`)
     .subscribe((jogo) => {
       this.jogo$.next(jogo);
@@ -21,8 +21,7 @@ export class JogoBuscarService {
   }
 
 
-  getJogoByUri(uriNome: string): Observable<Jogo> {
-    this.fetchJogoData(uriNome);
+  public getJogo(): Observable<Jogo> {
     return this.jogo$.asObservable();
   }
 }

@@ -32,8 +32,6 @@ export class SliderMobileComponent implements OnInit {
     });
   }
 
-  
-
   populateMap(width: number): void {
     this.jogos.forEach((jogo, index) => {
       this.carouselWidthMap.set(index, this.calculateJogoWidth(index, width)); 
@@ -45,10 +43,6 @@ export class SliderMobileComponent implements OnInit {
   calculateJogoWidth(index: number, width: number): number {
     const isZero = index === 0;
     return isZero ? 0 : index * width;
-  }
-
-  setInitialCarouselWidth(width: number) {
-    this.updateCarouselWidth(width);
   }
 
   updateCarouselWidth(width: number) {

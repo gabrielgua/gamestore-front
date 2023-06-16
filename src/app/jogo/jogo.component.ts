@@ -1,38 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Jogo } from '../models/jogo';
 import { ActivatedRoute } from '@angular/router';
 import { JogoBuscarService } from '../service/jogo-buscar.service';
 import { TipoRequisito } from '../models/tipoRequisito';
-import { Observable, share } from 'rxjs';
 
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
   styleUrls: ['./jogo.component.css']
 })
-export class JogoComponent implements OnInit {
+export class JogoComponent implements OnInit, AfterViewInit {
+
+  
 
   constructor(
     private route: ActivatedRoute,
-    private service: JogoBuscarService) {}
+    private service: JogoBuscarService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+  
+  @ViewChild('container') container!: ElementRef;
 
-  jogo = new Jogo();
-  notaPositive: number = 7;
-
-  jogoAsync: Observable<Jogo> | undefined;
   loading: any;
+  jogo = new Jogo();
+  mobile: boolean = false;
+  notaPositive: number = 7;
+  breakToMobileWidth: number = 765; //px 
 
   ngOnInit(): void {
     let uriNome = this.route.snapshot.paramMap.get('uriNome')!;
     this.getJogo(uriNome);
+  }
 
-    // this.jogoAsync = this.service.getJogoByUri(uriNome).pipe(share());
+  ngAfterViewInit(): void {
+    this.manageScreenSize(this.container.nativeElement.offsetWidth);
+    this.changeDetector.detectChanges();
+  }
+
+  manageScreenSize(screenWidth: number) {
+    this.mobile = screenWidth <= this.breakToMobileWidth;        
   }
 
   getJogo(uriNome: string): void {
-    this.service.getJogoByUri(uriNome).subscribe((jogo) => {
+    this.service.fetchJogoData(uriNome);
+    this.service.getJogo().subscribe((jogo) => {
       this.jogo = jogo;
-      this.arangeRequisitos();
+      this.arangeRequisitos(this.jogo);
     });
   }
 
@@ -52,12 +65,10 @@ export class JogoComponent implements OnInit {
     return index === this.roundNota(nota) && this.maiorQueMetade(nota) ? 'star_half': 'star';
   }
 
-  arangeRequisitos(): void {
-    if (this.jogo.requisitos && this.jogo.requisitos[0].tipo != TipoRequisito.MINIMOS) {
-      this.jogo.requisitos.push(this.jogo.requisitos.shift()!);
+  arangeRequisitos(jogo: Jogo): void {
+
+    if (jogo.requisitos && jogo.requisitos[0].tipo != TipoRequisito.MINIMOS) {
+      jogo.requisitos.push(jogo.requisitos.shift()!);
     }
   }
-
-
-
 }

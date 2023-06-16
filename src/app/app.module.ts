@@ -16,6 +16,7 @@ import { SliderDesktopComponent } from './slider-desktop/slider-desktop.componen
 import { SafePipe } from './safe.pipe';
 import { SliderMobileComponent } from './slider-mobile/slider-mobile.component';
 import { JogosAvaliacaoComponent } from './jogos-avaliacao/jogos-avaliacao.component';
+import { SliderJogoComponent } from './slider-jogo/slider-jogo.component';
 
 registerLocaleData(localePt);
 
@@ -28,7 +29,8 @@ registerLocaleData(localePt);
     SliderDesktopComponent,
     SafePipe,
     SliderMobileComponent,
-    JogosAvaliacaoComponent
+    JogosAvaliacaoComponent,
+    SliderJogoComponent
   ],
   imports: [
     BrowserModule,

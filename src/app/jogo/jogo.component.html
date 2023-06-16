@@ -1,14 +1,15 @@
-<div class="container" *ngIf="jogo else loading">
+<div #container class="container" *ngIf="jogo else loading" (window:resize)="manageScreenSize(container.offsetWidth)">
     <div class="hero">
         <img class="hero__img" src="{{jogo.urlImgHero}}" alt="{{jogo.nome}} - hero img">
     </div>
     <div class="jogo">
         <h1 class="jogo__nome">{{jogo.nome}}</h1>
+        <app-slider-jogo *ngIf="mobile"></app-slider-jogo>
         <div class="jogo__principal">
-            <iframe class="jogo__video border-subtle box-shadow-primary" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
+            <iframe *ngIf="!mobile" class="jogo__video border-subtle box-shadow-primary hidden-mobile" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
 
             <div class="jogo__card border-subtle box-shadow-primary">
-                <img class="jogo__img box-shadow-primary" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
+                <img *ngIf="!mobile" class="jogo__img box-shadow-primary hidden-mobile" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">
                 <div class="jogo__nota-desenvolvedora">
                     
     
@@ -70,7 +71,7 @@
                     <h4>Requisitos</h4>
                     <p *ngIf="jogo.requisitos && !jogo.requisitos.length">Não há nada por aqui.</p>
                     <div class="requisito" *ngFor="let requisito of jogo.requisitos">
-                        <h5>{{requisito.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'}}</h5>
+                        <h5>{{ requisito.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'}}</h5>
                         <p *ngIf="requisito.observacoes"><span>Observações: </span>{{requisito.observacoes}}</p>
                         <p><span>OS: </span>{{requisito.sistema}}</p>
                         <p><span>Processador: </span>{{requisito.processador}}</p>
