@@ -3,37 +3,31 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Jogo } from '../models/jogo';
 import { environment } from 'src/environments/environment';
-import { JogoPageable } from '../models/jogo.pageable';
+import { JogoPageableRequest } from '../models/jogo.pageable';
+import { PageableModel } from '../models/pageable.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JogosAvaliacaoService implements OnInit {
+export class JogosAvaliacaoService {
 
-  constructor(private http: HttpClient) {
-    this.init();
+  constructor(private http: HttpClient) {}
+
+  public jogosPageable$ = new BehaviorSubject<PageableModel<Jogo>>(new PageableModel());
+  
+
+  public init(pageable: JogoPageableRequest): void {
+    this.fetchJogosAvaliados(pageable);
   }
 
-  public jogos$ = new BehaviorSubject<Jogo[]>([]);
-  private pageable = {
-    size: '4',
-    sort: 'nota,desc',
+  private fetchJogosAvaliados(pageable: JogoPageableRequest): void {
+    this.http.get<PageableModel<Jogo>>(`${environment.API_URL}/jogos?size=${pageable.size}&sort=${pageable.sort}&page=${pageable.page}`)
+    .subscribe((pageable) => this.jogosPageable$.next(pageable));
   }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  public init(): void {
-    this.fetchJogosAvaliados(this.pageable);
-  }
-
-  private fetchJogosAvaliados(pageable: JogoPageable): void {
-    this.http.get<Jogo[]>(`${environment.API_URL}/jogos?size=${pageable.size}&sort=${pageable.sort}`)
-    .subscribe((jogos) => this.jogos$.next(jogos));
-  }
-
-  getJogosAvaliados(): Observable<Jogo[]> {
-    return this.jogos$.asObservable();
+  getJogosAvaliados(): Observable<PageableModel<Jogo>> {
+    return this.jogosPageable$.asObservable();
   } 
+
+
 }

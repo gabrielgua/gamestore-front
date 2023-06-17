@@ -1,5 +1,6 @@
+<input type="text" [(ngModel)]="search">
 <div class="container">
-    <div class="jogo-wrapper" *ngFor="let jogo of jogos; index as i" >
+    <div class="jogo-wrapper" @fadeIn *ngFor="let jogo of jogos | filter: search; index as i; " >
         <p class="jogo__position">{{i + 1}}</p>
         <div class="jogo">
             <a routerLink="/jogos/{{jogo.uriNome}}">
@@ -16,6 +17,11 @@
                 </button>
             </div>
             
-        </div>      
+        </div>     
+        
     </div>
 </div>
+<button *ngIf="!isLastPage()" style="margin-bottom: 10rem;" (click)="nextPage()" [disabled]="loading">
+    <span *ngIf="loading">Carregando ...</span>
+    <span *ngIf="!loading">Carregar mais</span>
+</button>

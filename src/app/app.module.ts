@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,12 +15,14 @@ import { HeaderComponent } from './header/header.component';
 import { JogoComponent } from './jogo/jogo.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
 import { SliderDesktopComponent } from './slider-desktop/slider-desktop.component';
 import { SafePipe } from './safe.pipe';
 import { SliderMobileComponent } from './slider-mobile/slider-mobile.component';
 import { JogosAvaliacaoComponent } from './jogos-avaliacao/jogos-avaliacao.component';
 import { SliderJogoComponent } from './slider-jogo/slider-jogo.component';
+
+import localePt from '@angular/common/locales/pt';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 registerLocaleData(localePt);
 
@@ -30,13 +36,17 @@ registerLocaleData(localePt);
     SafePipe,
     SliderMobileComponent,
     JogosAvaliacaoComponent,
-    SliderJogoComponent
+    SliderJogoComponent,
   ],
   imports: [
+  
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }    
