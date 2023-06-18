@@ -5,8 +5,8 @@
             <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
         </button>
         <div class="filter__dropdown" *ngIf="filter.show" @fadeIn>
-            <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i">
-                {{option}}
+            <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="log(option)">
+                {{option.nome}}
             </button>
         </div>
     </div>

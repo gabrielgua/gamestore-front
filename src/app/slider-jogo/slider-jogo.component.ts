@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Jogo } from '../models/jogo';
-import { JogoBuscarService } from '../service/jogo-buscar.service';
+import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
 import { ActivatedRoute } from '@angular/router';
 
 export interface CarouselItem {

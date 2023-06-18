@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JogosListService } from '../service/jogos-list.service.service';
+import { JogosListService } from '../service/jogos/jogos-list.service';
 import { FadeFromTop } from '../animations/animations';
 import { Jogo } from '../models/jogo';
 import { PageableModel } from '../models/pageable.model';
