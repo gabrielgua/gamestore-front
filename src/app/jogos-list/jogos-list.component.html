@@ -7,8 +7,28 @@
     <app-filter [closeAll]="closeFilters"></app-filter>
 
     <section class="jogos">
-        <div class="jogo" *ngFor="let jogo of jogos | filter: search; index as i">
-            {{jogo.nome}}
+        <div class="jogo box-shadow-primary" *ngFor="let jogo of jogos | filter: search; index as i" @fadeIn>
+            <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
+                <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
+            </a>
+            <div class="jogo__detalhes">
+                <div class="jogo__categorias">
+                    <p class="categoria" *ngFor="let categoria of jogo.categorias">{{categoria.nome}},</p>
+                </div>
+                <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
+                <p class="jogo__preco">
+                    {{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}
+                </p>
+                <div class="jogo__actions">
+                    <button class="btn btn-desejo">
+                        <span class="material-symbols-rounded">favorite</span>
+                    </button>
+                    <button class="btn btn-carrinho">
+                        <span class="material-symbols-rounded">shopping_cart</span>
+                        Carrinho
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JogosListService } from '../service/jogos/jogos-list.service';
-import { FadeFromTop } from '../animations/animations';
+import { FadeFromBottom } from '../animations/animations';
 import { Jogo } from '../models/jogo';
 import { PageableModel } from '../models/pageable.model';
 import { JogoPageableRequest } from '../models/jogo.pageable';
+import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-jogos-list',
   templateUrl: './jogos-list.component.html',
   styleUrls: ['./jogos-list.component.css'],
-  animations: [ FadeFromTop ]
+  animations: [ FadeFromBottom ]
 })
 export class JogosListComponent implements OnInit {
 
   constructor(private service: JogosListService) {}
+  
   
   jogos: Jogo[] = [];
   pageableJogos: PageableModel<Jogo> = new PageableModel();
@@ -33,12 +35,16 @@ export class JogosListComponent implements OnInit {
     this.fetchJogos();
   }
 
+  
+
   fetchJogos(): void {
     this.service.pageableJogos$.subscribe((pageableJogos) => {
-      if (pageableJogos.content.length) {
+      if (pageableJogos.content.length && !this.jogos.length) {
         this.pageableJogos = pageableJogos;
-        pageableJogos.content.forEach((jogo) => {
-          this.jogos.push(jogo);
+        pageableJogos.content.forEach((jogo, index) => {
+          setTimeout(() => {
+            this.jogos.push(jogo);
+          }, 50 * index);
         })
       }
     })
@@ -49,5 +55,9 @@ export class JogosListComponent implements OnInit {
     if (event.target.offsetParent.id != 'filter' && event.target.id != 'filter__option') {      
       this.closeFilters = !this.closeFilters;
     }
+  }
+
+  clearJogos(): void {
+    this.jogos = [];
   }
 }

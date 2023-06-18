@@ -31,9 +31,9 @@ export class JogosAvaliacaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.jogos = [];
-    this.service.init(this.pageable);
+    // this.service.init(this.pageable);
     this.loading = true;
-    this.getJogos();
+    // this.getJogos();
   }
 
   getJogos(): void {
