@@ -1,0 +1,13 @@
+<section class="filters">
+    <div  class="filter" id="filter" *ngFor="let filter of filters; index as i">
+        <button class="filter__btn" (click)="handleFilterClick(i)" [ngClass]="{'filter__btn--opened': filter.show}">
+            <p class="filter__title">{{filter.nome}}</p>
+            <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
+        </button>
+        <div class="filter__dropdown" *ngIf="filter.show" @fadeIn>
+            <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i">
+                {{option}}
+            </button>
+        </div>
+    </div>
+</section>

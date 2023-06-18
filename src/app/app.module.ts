@@ -25,6 +25,7 @@ import localePt from '@angular/common/locales/pt';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FooterComponent } from './footer/footer.component';
 import { JogosListComponent } from './jogos-list/jogos-list.component';
+import { FilterComponent } from './jogos-list/filter/filter.component';
 
 registerLocaleData(localePt);
 
@@ -41,6 +42,7 @@ registerLocaleData(localePt);
     SliderJogoComponent,
     FooterComponent,
     JogosListComponent,
+    FilterComponent,
   ],
   imports: [
   

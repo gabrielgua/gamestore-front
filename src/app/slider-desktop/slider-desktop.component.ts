@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Jogo } from '../models/jogo';
-import { FadeInOut } from '../animations/animations';
+import { FadeFromTop } from '../animations/animations';
 import { JogosDestaque } from '../service/jogos-destaque.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { JogosDestaque } from '../service/jogos-destaque.service';
   templateUrl: './slider-desktop.component.html',
   styleUrls: ['./slider-desktop.component.css'],
   animations: [
-    FadeInOut
+    FadeFromTop
   ]
 })
 export class SliderDesktopComponent implements OnInit {
