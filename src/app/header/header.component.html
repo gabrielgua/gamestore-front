@@ -1,6 +1,5 @@
-<meta http-equiv="Permissions-Policy" content="ch-ua-form-factor=()">
 
-<header>
+<header #header (window:resize)="manageScreenSize(header.offsetWidth)">
     <div class="wrapper">
         <a class="logo" routerLink="/">
             gamestore 
@@ -8,18 +7,34 @@
                 joystick
             </span>
         </a>
-        <nav>
+        <nav class="desktop" *ngIf="!mobile">
             <ul class="links">
                 <li><a routerLink="jogos">Jogos</a></li>
+                <li><a routerLink="">Desenvolvedoras</a></li>
+                <li><a routerLink="">Promoções</a></li>
+                
             </ul>
             <ul class="account-actions">
                 <li><a>Cadastrar</a></li>
                 <li class="link-entrar"><a>Entrar</a></li>
             </ul>
-            <ul class="dropdown">
-                <li><a>Drop</a></li>
-            </ul>
+        </nav>
+        <nav class="mobile" *ngIf="mobile" >
+            <button class="mobile-menu-btn" (click)="showMobileMenu = !showMobileMenu" [ngClass]="{'mobile--opened': showMobileMenu}">
+                Menu 
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': showMobileMenu}">expand_more</span>
+            </button>
         </nav>
     </div>
+    
 </header>
+<div class="mobile-menu" *ngIf="showMobileMenu" @fadeIn>
+    <ul class="links">
+        <li><a routerLink="jogos">Jogos</a></li>
+        <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
+        <li><a routerLink="promocoes">Promoções</a></li>
+        <li><a>Cadastrar</a></li>
+        <li><a>Entrar</a></li>
+    </ul>
+</div>
 <router-outlet></router-outlet>
