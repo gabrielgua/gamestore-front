@@ -21,7 +21,7 @@
         
     </div>
 </div>
-<button *ngIf="!isLastPage()" style="margin-bottom: 10rem;" (click)="nextPage()" [disabled]="loading">
+<button *ngIf="!isLastPage()" (click)="nextPage()" [disabled]="loading">
     <span *ngIf="loading">Carregando ...</span>
     <span *ngIf="!loading">Carregar mais</span>
 </button>

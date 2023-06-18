@@ -23,6 +23,8 @@ import { SliderJogoComponent } from './slider-jogo/slider-jogo.component';
 
 import localePt from '@angular/common/locales/pt';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FooterComponent } from './footer/footer.component';
+import { JogosListComponent } from './jogos-list/jogos-list.component';
 
 registerLocaleData(localePt);
 
@@ -37,6 +39,8 @@ registerLocaleData(localePt);
     SliderMobileComponent,
     JogosAvaliacaoComponent,
     SliderJogoComponent,
+    FooterComponent,
+    JogosListComponent,
   ],
   imports: [
   

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { JogoService } from './jogo.service';
 import { Jogo } from '../models/jogo';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';

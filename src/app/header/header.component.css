@@ -16,7 +16,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 76.5rem;
+    width: var(--container-max-size);
 }
 
 .logo {

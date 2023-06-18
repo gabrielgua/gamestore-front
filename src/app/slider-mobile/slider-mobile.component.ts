@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { JogoService } from '../service/jogo.service';
 import { Jogo } from '../models/jogo';
 import { JogosDestaque } from '../service/jogos-destaque.service';
 

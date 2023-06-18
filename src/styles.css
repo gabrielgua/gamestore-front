@@ -35,8 +35,14 @@
 
     --font-normal: .9rem;
     --font-subtitles: 1.1rem;
-    --font-titles: 1.5rem;
+    --font-titles: 2rem;
     --font-family: 'Saira', sans-serif;
+
+    --container-max-size: 75rem;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html,

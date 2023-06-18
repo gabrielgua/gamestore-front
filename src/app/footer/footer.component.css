@@ -1,0 +1,7 @@
+.container {
+    background-color: black;
+    padding: 5rem;
+    display: grid;
+    place-items: center;
+
+}

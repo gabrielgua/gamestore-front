@@ -1,0 +1,75 @@
+<div class="container">
+    <section class="header">
+        <p class="header__title">🔍 Buscar Jogos</p>
+        <input class="header__search-input box-shadow-primary border-subtle" type="text" placeholder="Busque por algo..." [(ngModel)]="search">
+    </section>
+
+    <section class="filters">
+        
+        <div class="filter">
+            <button class="filter__btn" (click)="showDropCategorias = !showDropCategorias" [ngClass]="{'filter__btn--opened': showDropCategorias}">
+                <p class="filter__title">Categorias</p>
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': showDropCategorias}">expand_more</span>
+            </button>
+            <div class="filter__dropdown" *ngIf="showDropCategorias" @fadeIn>
+                <div class="filter__checks">
+                    <p>RPG</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter">
+            <button class="filter__btn" (click)="showDropPlataformas = !showDropPlataformas" [ngClass]="{'filter__btn--opened': showDropPlataformas}">
+                <p class="filter__title">Plataformas</p>
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': showDropPlataformas}">expand_more</span>
+            </button>
+            <div class="filter__dropdown box-shadow-primary" *ngIf="showDropPlataformas"  @fadeIn>
+                <div class="filter__checks">
+                    <p>Playstation</p>
+                </div>
+                <div class="filter__checks">
+                    <p>Xbox</p>
+                </div>
+                <div class="filter__checks">
+                    <p>PC</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter">
+            <button class="filter__btn" (click)="showDropPreco = !showDropPreco" [ngClass]="{'filter__btn--opened': showDropPreco}">
+                <p class="filter__title">Preço</p>
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': showDropPreco}">expand_more</span>
+            </button>
+            <div class="filter__dropdown" *ngIf="showDropPreco"  @fadeIn>
+                <div class="filter__checks">
+                    <p>Gratuito</p>
+                </div>
+                <div class="filter__checks">
+                    <p>Decrescente</p>
+                </div>
+                <div class="filter__checks">
+                    <p>Crescente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="jogos">
+        <div class="jogo" *ngFor="let jogo of jogos | filter: search; index as i">
+            {{jogo.nome}}
+        </div>
+    </section>
+
+    <section class="page-actions">
+        <button class="prev arrow">
+            <span class="material-symbols-rounded">arrow_back_ios_new</span>
+        </button>
+        <div class="pages">
+            1 . 2 . 3
+        </div>
+        <button class="prev arrow">
+            <span class="material-symbols-rounded">arrow_forward_ios</span>
+        </button>
+    </section>
+</div>
