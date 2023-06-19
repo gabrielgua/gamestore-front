@@ -1,13 +1,3 @@
-.container {
-    max-width: 70rem;
-    margin: auto;    
-}
-
-@media (width <= 73rem) {
-    .container {
-        margin-inline: 1rem;
-    }
-}
 
 
 

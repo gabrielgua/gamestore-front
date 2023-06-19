@@ -1,12 +1,13 @@
 .filters {
     display: grid;
     place-items: center;
-    grid-template-columns: repeat(3, auto);
-    max-width: max-content;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     margin-inline: auto;
     gap: 1rem;
     font-size: var(--font-subtitles);
     transition: all 350ms ease;
+    border-bottom: 1px solid var(--subtle-border-color);
+    padding-bottom: 1rem;
 }
 
 
@@ -16,7 +17,7 @@
     --clr-hover: rgba(var(--primary-number), .2);
     color: var(--primary);
     position: relative;
-    min-width: 15rem;
+    width: 100%;
 }
 
 .filter__btn {
@@ -96,15 +97,4 @@
     color: var(--primary);
 }
 
-@media (width <= 800px) {
-    .filter {
-        min-width: 100%;
-    }
-
-    .filters {
-        max-width: none;
-        gap: .25rem;
-        grid-template-columns: 1fr;
-    }
-}
 

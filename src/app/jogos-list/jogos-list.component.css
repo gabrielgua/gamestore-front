@@ -31,7 +31,7 @@
 }
 
 .jogos {
-    margin-top: 5rem;
+    margin-top: 2rem;
     gap: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
@@ -70,8 +70,7 @@
 
 .jogo__preco {
     color: var(--primary);
-    margin-top: 1rem;
-
+    margin-top: .5rem;
 }
 
 .jogo__actions {
@@ -87,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .75rem;
+    padding: .5rem;
 
     gap: .5rem;
     background-color: rgba(var(--primary-number), .3);
@@ -111,6 +110,63 @@
         font-variation-settings: 'FILL' 1;
     }
 }
+
+.page-actions {
+    margin-top: 2rem;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-arrow {
+    display: grid;
+    place-items: center;
+    border: none;
+    color: rgba(var(--primary-number), .5);
+    background-color: transparent;
+}
+
+.btn-arrow:hover {
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.btn-arrow--disabled {
+    color: rgba(var(--primary-number), .2);
+}
+
+.btn-arrow--disabled:hover {
+    cursor: default;
+    color: rgba(var(--primary-number), .2);
+}
+
+.pages {
+    display: flex;
+    gap: .25rem;
+}
+
+.btn-page {
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--accent);
+    padding: .25rem .5rem;
+    border: none;
+    background-color: transparent;
+    transition: all 150ms ease;
+    border-radius: .25rem;
+}
+
+.btn-page:hover {
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.btn-page--current {
+    color: var(--primary);
+    background-color: rgba(var(--primary-number), .2);
+}
+
 
 
 

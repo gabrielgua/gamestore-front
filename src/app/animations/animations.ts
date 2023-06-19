@@ -17,13 +17,13 @@ export const FadeFromTop = [
 export const FadeFromBottom = [
   trigger('fadeIn', [ 
     transition(':enter', [
-      style({ opacity: 0, transform: 'translateY(10%)' }),
-      animate('150ms ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+      style({ opacity: 0, transform: 'translateX(10%)' }),
+      animate('150ms ease', style({ opacity: 1, transform: 'translateX(0)' })),
     ]),
 
     transition(':leave', [
-      style({ opacity: 1, transform: 'translateY(0%)' }),
-      animate('150ms ease-out', style({ opacity: 0, transform: 'translateY(10%)' })),
+      style({ opacity: 1, transform: 'translateX(0%)' }),
+      animate('0ms', style({ opacity: 0, })),
     ]),
   ]),
 ]
