@@ -6,13 +6,9 @@ import { Plataforma } from 'src/app/models/plataforma';
 import { CategoriasListService } from 'src/app/service/categorias/categorias-list.service';
 import { ModosListService } from 'src/app/service/modos/modos-list.service';
 import { PlataformasListService } from 'src/app/service/plataformas/plataformas-list.service';
+import { FilterItem } from '../jogos-list.component';
 
 
-export interface FilterItem {
-  nome: string,
-  show: boolean,
-  options: any[]
-}
 
 @Component({
   selector: 'app-filter',
@@ -31,11 +27,7 @@ export class FilterComponent implements OnChanges, OnInit {
   ) {}
   
   filters: FilterItem[] = [
-    {nome: 'Categorias', show: false, options: []},
-    {nome: 'Plataformas', show: false, options: []},
-    {nome: 'Modos de jogo', show: false, options: []},
-    {nome: 'Preço', show: false, options: [{id: 1, nome: 'Gratuito'}, {id: 2, nome: 'Crescente'}, {id: 3, nome: 'Decrescente'}]},
-    {nome: 'Avaliações', show: false, options: [{id: 1, nome: 'Decrescente'}, {id: 2, nome: 'Crescente'}]},
+   
   ]; 
 
   categorias: Categoria[] = [];

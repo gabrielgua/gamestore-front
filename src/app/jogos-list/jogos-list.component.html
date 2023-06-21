@@ -1,4 +1,4 @@
-<div class="container" (click)="handleOutsideClick($event)">
+<div class="container">
     <section class="header">
         <p class="header__title">Buscar Jogos 🔍</p>
         <form method="get" (submit)="handleSearch()">
@@ -6,10 +6,23 @@
         </form>
     </section>
 
-    <app-filter [closeAll]="closeFilters"></app-filter>
-    <section class="active-filters" *ngIf="activeFilters.length">
+    <section class="filters">
+        <div  class="filter" id="filter" *ngFor="let filter of filters; index as i">
+            <button class="filter__btn" (click)="handleFilterClick(i)" [ngClass]="{'filter__btn--opened': filter.show}">
+                <p class="filter__title">{{filter.nome}}</p>
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
+            </button>
+            <div class="filter__dropdown" *ngIf="filter.show" @fadeIn>
+                <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItemClick(option, filter.tipo)">
+                    {{option.nome}}
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="active-filters" *ngIf="filterTags.length">
         <p>Filtros: </p>
-        <div class="active-filter" *ngFor="let aFilter of activeFilters; index as i">
+        <div class="active-filter" *ngFor="let aFilter of filterTags; index as i">
             <p>{{aFilter.nome}}</p> 
             <button class="filter-remove-btn" (click)="removeFilter(i)">
                 <span class="material-symbols-rounded icon--bolder">close</span>
