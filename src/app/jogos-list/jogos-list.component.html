@@ -1,13 +1,24 @@
 <div class="container" (click)="handleOutsideClick($event)">
     <section class="header">
         <p class="header__title">Buscar Jogos 🔍</p>
-        <input class="header__search-input box-shadow-primary border-subtle" type="text" placeholder="Busque por algo..." [(ngModel)]="search">
+        <form method="get" (submit)="handleSearch()">
+            <input class="header__search-input box-shadow-primary border-subtle" type="text" placeholder="Busque por algo..." [formControl]="search">
+        </form>
     </section>
 
     <app-filter [closeAll]="closeFilters"></app-filter>
-
+    <section class="active-filters" *ngIf="activeFilters.length">
+        <p>Filtros: </p>
+        <div class="active-filter" *ngFor="let aFilter of activeFilters; index as i">
+            <p>{{aFilter.nome}}</p> 
+            <button class="filter-remove-btn" (click)="removeFilter(i)">
+                <span class="material-symbols-rounded icon--bolder">close</span>
+            </button>
+        </div>
+    </section>
+    <p class="total-resultados"><span>Resultados:</span> {{getTotalElements()}}</p>
     <section class="jogos" *ngIf="pageableJogos">
-        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos | filter: search; index as i" @fadeIn>
+        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fadeIn>
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
             </a>

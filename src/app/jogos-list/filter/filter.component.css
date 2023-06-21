@@ -11,8 +11,6 @@
 }
 
 
-
-
 .filter {
     --clr-hover: rgba(var(--primary-number), .2);
     color: var(--primary);

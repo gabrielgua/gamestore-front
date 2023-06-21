@@ -17,6 +17,10 @@
     font-weight: bold;
 }
 
+.header form {
+    width: 100%;
+}
+
 .header__search-input {
     width: 100%;
     font-family: var(--font-family);
@@ -30,11 +34,64 @@
     outline: 3px solid var(--primary);
 }
 
+.active-filters {
+    gap: .5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;    
+    font-size: var(--font-normal);
+
+    > p:first-child {
+        margin-right: .5rem;
+        color: rgba(var(--primary-number), 1);
+    }
+}
+
+
+.active-filter {
+    gap: .25rem;
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto 1fr;
+    padding: .25rem;
+    background-color: rgba(var(--primary-number), .2);
+    border-radius: .25rem;
+    
+}
+
+.filter-remove-btn {
+    border: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: .34rem .25rem;
+    border-radius: 50%;
+    background-color: rgba(var(--primary-number), .1);
+    color: var(--primary);
+    display: grid;
+    place-items: center;
+
+    > span {
+        font-size: inherit;
+    }
+}
+
+.filter-remove-btn:hover {
+    background-color: rgba(var(--primary-number), .2);
+    cursor: pointer;
+}
+
 .jogos {
-    margin-top: 2rem;
     gap: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+
+.total-resultados {
+    color: rgba(var(--primary-number), .7);
+
+    > span {
+        color: var(--primary);
+    }
 }
 
 .jogo {

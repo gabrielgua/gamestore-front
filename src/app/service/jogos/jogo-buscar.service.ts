@@ -14,7 +14,7 @@ export class JogoBuscarService {
   constructor(private http: HttpClient) { }
 
   public fetchJogoData(uriNome: string): void {
-    this.http.get<Jogo>(`${environment.API_URL}/jogos?nome=${uriNome}`)
+    this.http.get<Jogo>(`${environment.API_URL}/jogos?uriNome=${uriNome}`)
     .subscribe((jogo) => {
       this.jogo$.next(jogo);
     });
