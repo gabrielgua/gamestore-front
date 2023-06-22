@@ -8,12 +8,12 @@
 
     <section class="filters">
         <div  class="filter" id="filter" *ngFor="let filter of filters; index as i">
-            <button class="filter__btn" (click)="handleFilterClick(i)" [ngClass]="{'filter__btn--opened': filter.show}">
+            <button class="filter__btn" (click)="openFilterDropdown(i)" [ngClass]="{'filter__btn--opened': filter.show}">
                 <p class="filter__title">{{filter.nome}}</p>
                 <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
             </button>
-            <div class="filter__dropdown" *ngIf="filter.show" @fadeIn>
-                <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItemClick(option, filter.tipo)">
+            <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
+                <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
                     {{option.nome}}
                 </button>
             </div>
@@ -27,11 +27,14 @@
             <button class="filter-remove-btn" (click)="removeFilter(i)">
                 <span class="material-symbols-rounded icon--bolder">close</span>
             </button>
+
         </div>
+        <p *ngIf="filterTags.length >= 2"><button class="bnt-dismiss-filters" (click)="clearAllFiltros()">Limpar filtros</button></p>
     </section>
-    <p class="total-resultados"><span>Resultados:</span> {{getTotalElements()}}</p>
-    <section class="jogos" *ngIf="pageableJogos">
-        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fadeIn>
+    <p class="total-resultados"><span>{{getTotalElements()}}</span> {{getTotalElements() === 1 ? 'Resultado' : 'Resultados'}}.</p>
+    <section class="jogos">
+        <div *ngIf="getTotalElements() === 0"><p>Nada por aqui. 😢</p></div>
+        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fromLeftToLeft>
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
             </a>
@@ -57,7 +60,7 @@
     </section>
     
 
-    <section class="page-actions" >
+    <section class="page-actions">
 
         <button class="btn-arrow prev" 
             (click)="prevPage()"

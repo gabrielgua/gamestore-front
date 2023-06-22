@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JogosListService } from '../service/jogos/jogos-list.service';
-import { FadeFromBottom } from '../animations/animations';
+import { Fade } from '../animations/animations';
 import { Jogo } from '../models/jogo';
 import { PageableModel } from '../models/pageable.model';
 import { JogoPageableRequest } from '../models/jogo.pageable';
@@ -17,24 +17,30 @@ export interface FilterItem {
   tipo: FilterTipo,
   nome: string,
   show: boolean,
-  options: any[]
+  options: FilterOption[]
 }
 
-export interface FilterTag {
-  id?: number,
-  tipo?: FilterTipo,
-  nome?: string,
+export interface FilterOption {
+  id: number,
+  nome: string,
+  tipo: FilterTipo
+  orderBy?: SortTipo
 }
 
 export enum FilterTipo {
-  CATEGORIA, PLATAFORMA, MODO, PRECO, AVALIACAO, BUSCA
+  CATEGORIA, PLATAFORMA, MODO, BUSCA, PRECO, AVALIACAO
 }
+
+export enum SortTipo {
+  DESCENDENTE, CRESCENTE, ZERO
+}
+
 
 @Component({
   selector: 'app-jogos-list',
   templateUrl: './jogos-list.component.html',
   styleUrls: ['./jogos-list.component.css'],
-  animations: [ FadeFromBottom ]
+  animations: [ Fade ]
 })
 export class JogosListComponent implements OnInit {
 
@@ -45,15 +51,17 @@ export class JogosListComponent implements OnInit {
     private modoService: ModosListService 
   ) {}
   
+  PAGEABLE_DEFAULT_SIZE = 10;
   
   
   jogos: Jogo[] = [];
-  pageableJogos: PageableModel<Jogo> = new PageableModel();
-  closeFilters: boolean = false;
+  modos: Modo[] = [];
+  categorias: Categoria[] = [];
+  plataformas: Plataforma[] = [];
   loading: boolean = false;
 
-  PAGEABLE_DEFAULT_SIZE = 10;
-
+  pageableJogos: PageableModel<Jogo> = new PageableModel();
+  
   search = new FormControl('');
 
   pageable: JogoPageableRequest = {
@@ -70,30 +78,28 @@ export class JogosListComponent implements OnInit {
   }
 
   filters: FilterItem[] = [
-    {tipo: FilterTipo.CATEGORIA,  nome: 'Categorias',    show: false, options: []},
+    {tipo: FilterTipo.CATEGORIA, nome: 'Categorias',    show: false, options: []},
     {tipo: FilterTipo.PLATAFORMA, nome: 'Plataformas',   show: false, options: []},
-    {tipo: FilterTipo.MODO,       nome: 'Modos de jogo', show: false, options: []},
-    {tipo: FilterTipo.PRECO,      nome: 'Preço',         show: false, options: [{id: 1, nome: 'Gratuito'}, {id: 2, nome: 'Crescente'}, {id: 3, nome: 'Decrescente'}]},
-    {tipo: FilterTipo.AVALIACAO,  nome: 'Avaliações',    show: false, options: [{id: 1, nome: 'Decrescente'}, {id: 2, nome: 'Crescente'}]},
+    {tipo: FilterTipo.MODO, nome: 'Modos de jogo', show: false, options: []},
   ];
 
-  modos: Modo[] = [];
-  categorias: Categoria[] = [];
-  plataformas: Plataforma[] = [];
-
-  filterTags: FilterTag[] = [];
+  filterTags: FilterOption[] = [];
 
   ngOnInit(): void {
-    this.jogos = [];
     this.pageableJogos = new PageableModel();
-    this.service.init(this.pageable, this.filter);
-    this.fetchJogos();
+    this.init();
+    this.getJogos();
     this.getModos();
     this.getCategorias();
     this.getPlataformas();
   }
 
-  fetchJogos(): void {
+  init(): void {
+    this.service.init(this.pageable, this.filter);
+  }
+
+
+  getJogos(): void {
     this.service.getPageableJogos().subscribe((pageableJogos) => {
       this.pageableJogos = pageableJogos;
       this.jogos = pageableJogos.content;
@@ -101,66 +107,37 @@ export class JogosListComponent implements OnInit {
     })
   }
 
-  handleSearch() {
-    let indexFiltro = this.filterTags.findIndex(aFilter => aFilter.tipo === FilterTipo.BUSCA);
-    
-    if (!this.search.value && this.search.value != '') {
-      this.removeFilter(indexFiltro);
-    }
-
-    let busca = '"' + this.search.value  + '"';
-
-    indexFiltro != -1
-      ? this.filterTags[indexFiltro].nome = busca
-      : this.filterTags.push({tipo: FilterTipo.BUSCA, nome: busca});
-    
-    if (this.search.value && this.search.value != '') {
-      this.filter.nome = this.search.value;
-    }
-    
-    this.service.init(this.pageable, this.filter);
+  getModos(): void {
+    this.modoService.getModo().subscribe((modos) => {
+      this.modos = modos;
+      this.populateFilter(FilterTipo.MODO, this.modos);
+    })
   }
 
-  removeFilter(index: number) {
-    let filtro = this.filterTags[index];
-
-    switch(filtro.tipo) {
-      case FilterTipo.BUSCA: {
-        this.filter.nome = '';
-        this.search = new FormControl('');
-        break;
-      };
-      case FilterTipo.CATEGORIA: {
-        let categoria = this.filterTags[index];
-        this.removeFromApiFilters(categoria.id!, this.filter.categoriasIds!);
-        
-        break;
-      }
-      case FilterTipo.PLATAFORMA: {
-        let plataforma = this.filterTags[index];
-        this.removeFromApiFilters(plataforma.id!, this.filter.plataformasIds!);
-        
-        break;
-      }
-      case FilterTipo.MODO: {
-        let modo = this.filterTags[index];
-        this.removeFromApiFilters(modo.id!, this.filter.modosIds!);
-        
-        break;
-      }
-    }
-
-    this.filterTags.splice(index, 1);
-    this.service.init(this.pageable, this.filter);
+  getCategorias(): void {
+    this.categoriaService.getCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+      this.populateFilter(FilterTipo.CATEGORIA, this.categorias);
+    });
   }
 
- 
-
-  
-
-  clearJogos(): void {
-    this.jogos = [];
+  getPlataformas(): void {
+    this.plataformaService.getPlataformas().subscribe((plataformas) => {
+      this.plataformas = plataformas;
+      this.populateFilter(FilterTipo.PLATAFORMA, this.plataformas);
+    });
   }
+
+  private populateFilter(tipo: FilterTipo, options: any[]): void {
+    this.filters.forEach((filter) => {
+      if (filter.tipo === tipo) {
+        filter.options = options;
+        filter.options.forEach(option => option.tipo = filter.tipo)
+      }
+    })
+  }
+
+
 
   getTotalElements(): number {
     return this.pageableJogos.pageInfo?.count;
@@ -192,7 +169,6 @@ export class JogosListComponent implements OnInit {
     this.pageable.page = this.hasPrevPage() ? this.pageableJogos.pageInfo.page - 1 : this.pageable.page;
     this.service.init(this.pageable, this.filter);
     this.loading = true;
-
   }
 
 
@@ -204,107 +180,137 @@ export class JogosListComponent implements OnInit {
     return this.pageableJogos.pageInfo?.prev != null;
   }
 
-  getModos(): void {
-    this.modoService.getModo().subscribe((modos) => {
-      this.modos = modos;
-      this.populateFilter('Modos de jogo', this.modos);
+  openFilterDropdown(index: number): void {
+    this.filters.forEach((filter, filterIndex) => {
+      filterIndex === index ? filter.show = !filter.show : filter.show = false;
     })
   }
 
-  getCategorias(): void {
-    this.categoriaService.getCategorias().subscribe((categorias) => {
-      this.categorias = categorias;
-      this.populateFilter('Categorias', this.categorias);
-    });
-  }
+  handleSearch(): void {
+    let filterIndex = this.filterTags.findIndex(f => f.tipo === FilterTipo.BUSCA);
+    let busca = '"' + this.search.value + '"';
 
-  getPlataformas(): void {
-    this.plataformaService.getPlataformas().subscribe((plataformas) => {
-      this.plataformas = plataformas;
-      this.populateFilter('Plataformas', this.plataformas);
-    });
-  }
+    if (filterIndex != -1) {
+      if (!this.search.value) {
+        this.addNomeToFilter('');
+        this.removeFromFilterTags(filterIndex);
+        this.init();
 
-  populateFilter(nome: string, options: any[]): void {
-    this.filters.forEach((filter) => {
-      if (filter.nome === nome) {
-        filter.options = options;
+        return;
       }
-    })
+
+      let filter = this.filterTags[filterIndex];
+      filter.nome = busca;
+      this.addNomeToFilter(this.search.value);
+      this.init();
+    }
+
+    if (filterIndex === -1 && this.search.value) {
+      this.filterTags.push({id: 1, nome: busca, tipo: FilterTipo.BUSCA});
+      this.addNomeToFilter(this.search.value);
+      this.init();
+    }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['closeAll'].previousValue != undefined) {
-      this.closeAllFilters(); 
+  handleFilterItem(filterOption: FilterOption): void {
+    switch(filterOption.tipo) {
+      case FilterTipo.MODO: this.addToFilters(this.filter.modosIds!, filterOption); break;
+      case FilterTipo.CATEGORIA: this.addToFilters(this.filter.categoriasIds!, filterOption); break;
+      case FilterTipo.PLATAFORMA: this.addToFilters(this.filter.plataformasIds!, filterOption); break;
     }
+
+
+    this.init();
+  }
+
+  removeFilter(index: number): void {
+    let filter = this.filterTags[index];
+    this.resetPageable();
+
+    switch(filter.tipo) {
+      case FilterTipo.BUSCA: {
+        this.removeNomeFromFilter();
+        this.clearSearch();
+        this.removeFromFilterTags(index);
+
+        break;
+      }
+      case FilterTipo.CATEGORIA: this.removeFromFilters(this.filter.categoriasIds!, filter); break;
+      case FilterTipo.PLATAFORMA: this.removeFromFilters(this.filter.plataformasIds!, filter); break;
+      case FilterTipo.MODO: this.removeFromFilters(this.filter.modosIds!, filter); break;
+    }
+
+    this.init();
+  }
+
+
+  private addToFilters(filterIdsList: number[], filterOption: FilterOption) {
+    let index = filterIdsList.findIndex(i => i === filterOption.id);
+
+    if (index != -1) {
+      this.closeAllFilters();
+      return;
+    }
+
+    this.closeAllFilters()
+    this.filterTags.push(filterOption);
+    filterIdsList.push(filterOption.id); 
+  }
+
+  private removeFromFilters(filterIdsList: number[], filterOption: FilterOption) {
+    let filterIndex = filterIdsList.findIndex(i => i === filterOption.id);
+    let tagsIndex = this.filterTags.findIndex(i => i === filterOption);
+
+    if (filterIndex != -1 && tagsIndex != -1) {
+      this.removeFromFilterTags(tagsIndex); 
+      this.removeFromFilter(filterIdsList, filterIndex);
+    }    
+  }
+
+  private removeFromFilter(filterIdsList: number[], index: number) {
+    filterIdsList.splice(index, 1);
+  }
+
+  private removeFromFilterTags(index: number): void {
+    this.filterTags.splice(index, 1);
+  }
+
+  private addNomeToFilter(nome: string): void {
+    this.filter.nome = nome;
+  }
+  
+  private removeNomeFromFilter(): void {
+    this.filter.nome = '';
   }
 
   
-
-  handleFilterClick(id: number) {
-    this.filters.forEach((filter, index) => {
-      if (id === index) {
-        filter.show = !filter.show;
-      } else {
-        filter.show = false;
-      }
-    })
+  clearAllFiltros(): void {
+    this.resetFilter();
+    this.resetFilterTags();
+    this.init();
   }
+  
 
-  handleFilterItemClick(option: any, tipoFiltro: FilterTipo): void {
-
-    switch(tipoFiltro) {
-      case FilterTipo.CATEGORIA: {
-        this.pushToApiFilters(option.id, this.filter.categoriasIds!);
-        break;
-      }
-      case FilterTipo.PLATAFORMA: {
-        this.pushToApiFilters(option.id, this.filter.plataformasIds!);
-        break;
-      }
-      case FilterTipo.MODO: {
-        this.pushToApiFilters(option.id, this.filter.modosIds!);
-        break;
-      }
-
-    }
-    
-    this.closeAllFilters();
-    this.pushToActiveFilters(option.id, tipoFiltro, option.nome);
-    this.resetPageable();
-    this.service.init(this.pageable, this.filter);
-  }
-
-  private pushToApiFilters(filterId: number, filterList: number[]): void {
-    let index = filterList.findIndex(i => i === filterId);
-    console.log(this.filter);
-    
-
-    index != -1
-      ? this.closeAllFilters()
-      : filterList.push(filterId);
-  }
-
-  private removeFromApiFilters(filterId: number, filterList: number[]): void {
-    let index = filterList.findIndex(i => i === filterId);
-    
-    index != -1 
-      ? filterList.splice(index, 1)
-      : null;   
-  }
-
-  private pushToActiveFilters(id: number, tipo: FilterTipo, nome: string): void {
-    let index = this.filterTags.findIndex(aFilter => aFilter.nome === nome);
-
-    index != -1 
-      ? this.closeAllFilters()
-      : this.filterTags.push({id: id, tipo: tipo, nome: nome});
-  }
 
   private resetPageable(): void {
     this.pageable.page = 0;
     this.pageable.size = this.PAGEABLE_DEFAULT_SIZE;
     this.pageable.sort = '';
+  }
+
+  private resetFilterTags(): void {
+    this.filterTags = [];
+  }
+
+  private resetFilter(): void {
+    this.filter.nome = '';
+    this.filter.modosIds = [];
+    this.filter.categoriasIds = [];
+    this.filter.plataformasIds = [];
+  }
+
+  private clearSearch(): void {
+    this.search = new FormControl('');
   }
 
   private closeAllFilters(): void {

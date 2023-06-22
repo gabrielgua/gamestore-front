@@ -1,11 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { FadeFromTop } from '../animations/animations';
+import { Fade } from '../animations/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  animations: [FadeFromTop]
+  animations: [Fade]
 })
 export class HeaderComponent implements AfterViewInit {
 

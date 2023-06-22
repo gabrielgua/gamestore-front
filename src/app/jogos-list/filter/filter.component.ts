@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FadeFromTop } from 'src/app/animations/animations';
+import { Fade } from 'src/app/animations/animations';
 import { Categoria } from 'src/app/models/categoria';
 import { Modo } from 'src/app/models/modo';
 import { Plataforma } from 'src/app/models/plataforma';
@@ -14,7 +14,7 @@ import { FilterItem } from '../jogos-list.component';
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css'],
-  animations: [FadeFromTop]
+  animations: [Fade]
 })
 export class FilterComponent implements OnChanges, OnInit {
 

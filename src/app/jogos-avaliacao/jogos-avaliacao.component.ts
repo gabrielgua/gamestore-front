@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogo } from '../models/jogo';
 import { PageableModel } from '../models/pageable.model';
-import { FadeFromTop } from '../animations/animations';
+import { Fade } from '../animations/animations';
 import { JogosAvaliacaoService } from '../service/jogos/jogos-avaliacao.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { JogosAvaliacaoService } from '../service/jogos/jogos-avaliacao.service'
   templateUrl: './jogos-avaliacao.component.html',
   styleUrls: ['./jogos-avaliacao.component.css'],
   animations: [
-    FadeFromTop
+    Fade
   ]
 })
 export class JogosAvaliacaoComponent implements OnInit {

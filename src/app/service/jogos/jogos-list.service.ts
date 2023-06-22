@@ -16,11 +16,38 @@ export class JogosListService {
   constructor(private http: HttpClient) { }
   
   public init(pageable: JogoPageableRequest, filter: JogoFilter): void {
-    this.http.get<PageableModel<Jogo>>(`${environment.API_URL}/jogos?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort}&nome=${filter.nome}&modosIds=${filter.modosIds}&categoriasIds=${filter.categoriasIds}&plataformasIds=${filter.plataformasIds}`)
+
+    let params = this.getParamsFromFilter(pageable, filter);
+
+    this.http.get<PageableModel<Jogo>>(`${environment.API_URL}/jogos?${params.join('&')}`)
       .subscribe((pageable) => this.pageableJogos$.next(pageable));
   }
 
   public getPageableJogos(): Observable<PageableModel<Jogo>> {
     return this.pageableJogos$.asObservable();
+  }
+
+  
+  private getParamsFromFilter(pageable: JogoPageableRequest, filter: JogoFilter): string[] {
+    let filterMap = new Map<string, string>();
+
+    filterMap.set('page=', pageable.page?.toString() ?? '');
+    filterMap.set('size=', pageable.size?.toString() ?? '');
+    filterMap.set('sort=', pageable.sort ?? '');
+    filterMap.set('nome=', filter.nome ?? '');
+    filterMap.set('modosIds=', filter.modosIds?.toString() ?? '');
+    filterMap.set('categoriasIds=', filter.categoriasIds?.toString() ?? '');
+    filterMap.set('plataformasIds=', filter.plataformasIds?.toString() ?? '');
+    filterMap.set('gratuito=', filter.gratuito?.toString() ?? '')
+
+    let params: string[] = [];
+    
+    filterMap.forEach((value, name) => {
+      if (value.length) {
+        params.push(name + value);
+      }
+    });
+
+    return params;
   }
 }
