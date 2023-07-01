@@ -28,12 +28,12 @@ export const Fade = [
   trigger('fromRightToRight', [ 
     transition(':enter', [
       style({ opacity: 0, transform: 'translateX(10%)' }),
-      animate('150ms ease', style({ opacity: 1, transform: 'translateX(0)' })),
+      animate('150ms 100ms ease', style({ opacity: 1, transform: 'translateX(0)' })),
     ]),
 
     transition(':leave', [
       style({ opacity: 1, transform: 'translateX(0%)' }),
-      animate('150ms ease', style({ opacity: 0, transform: 'translateX(10%)' })),
+      animate('100ms ease', style({ opacity: 0, transform: 'translateX(10%)' })),
     ]),
   ]),
 

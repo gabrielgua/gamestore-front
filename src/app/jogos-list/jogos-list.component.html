@@ -57,7 +57,7 @@
         
     <section class="jogos">
         <div *ngIf="getTotalElements() === 0"><p>Nada por aqui. 😿</p></div>
-        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fromLeftToLeft>
+        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fromRightToRight>
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
             </a>
@@ -84,7 +84,6 @@
     
 
     <section class="page-actions">
-
         <button class="btn-arrow prev" 
             (click)="prevPage()"
             [disabled]="!hasPrevPage()"

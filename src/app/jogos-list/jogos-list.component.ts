@@ -229,6 +229,7 @@ export class JogosListComponent implements OnInit {
       if (!this.search.value) {
         this.addNomeToFilter('');
         this.removeFromFilterTags(filterIndex);
+        this.pageable.page = 0;
         this.init();
 
         return;
@@ -237,12 +238,14 @@ export class JogosListComponent implements OnInit {
       let filter = this.filterTags[filterIndex];
       filter.nome = busca;
       this.addNomeToFilter(this.search.value);
+      this.pageable.page = 0;
       this.init();
     }
 
     if (filterIndex === -1 && this.search.value) {
       this.filterTags.push({id: 1, nome: busca, tipo: FilterTipo.BUSCA});
       this.addNomeToFilter(this.search.value);
+      this.pageable.page = 0;
       this.init();
     }
   }
