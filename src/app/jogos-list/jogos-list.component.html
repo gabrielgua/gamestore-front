@@ -20,6 +20,8 @@
         </div>
     </section>
 
+
+
     <section class="active-filters" *ngIf="filterTags.length">
         <p>Filtros: </p>
         <div class="active-filter" *ngFor="let aFilter of filterTags; index as i">
@@ -30,10 +32,31 @@
 
         </div>
         <p *ngIf="filterTags.length >= 2"><button class="bnt-dismiss-filters" (click)="clearAllFiltros()">Limpar filtros</button></p>
+
+
+        
     </section>
-    <p class="total-resultados"><span>{{getTotalElements()}}</span> {{getTotalElements() === 1 ? 'Resultado' : 'Resultados'}}.</p>
+
+    <div class="results-sort-filter">
+        <p class="total-resultados"><span>{{getTotalElements()}}</span> {{getTotalElements() === 1 ? 'resultado' : 'resultados'}}.</p>
+        <div class="filter--sort">
+            <button class="filter__btn filter__btn--sort" (click)="openSortFilterDropdown()" [ngClass]="{'filter__btn--sort--opened': sortFilter.show}">
+                <p class="filter__title">{{sortFilter.nome}}</p>
+                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': sortFilter.show}">expand_more</span>
+            </button>
+            <div class="filter__dropdown filter__dropdown--sort" *ngIf="sortFilter.show" @fromTopToTop>
+                <button id="filter__option" class="filter__option" *ngFor="let option of sortFilter.options" (click)="handleSortFilter(option)">
+                    {{option.nome}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+        
+        
+        
     <section class="jogos">
-        <div *ngIf="getTotalElements() === 0"><p>Nada por aqui. 😢</p></div>
+        <div *ngIf="getTotalElements() === 0"><p>Nada por aqui. 😿</p></div>
         <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fromLeftToLeft>
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">

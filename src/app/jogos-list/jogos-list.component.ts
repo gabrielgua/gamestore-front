@@ -24,15 +24,22 @@ export interface FilterOption {
   id: number,
   nome: string,
   tipo: FilterTipo
-  orderBy?: SortTipo
+  value?: string,
 }
 
 export enum FilterTipo {
-  CATEGORIA, PLATAFORMA, MODO, BUSCA, PRECO, AVALIACAO
+  CATEGORIA, PLATAFORMA, MODO, BUSCA
 }
 
-export enum SortTipo {
-  DESCENDENTE, CRESCENTE, ZERO
+export interface SortFilter {
+  nome: string,
+  show: boolean,
+  options: SortOption[]
+}
+
+export interface SortOption {
+  nome: string;
+  value: string;
 }
 
 
@@ -43,6 +50,7 @@ export enum SortTipo {
   animations: [ Fade ]
 })
 export class JogosListComponent implements OnInit {
+
 
   constructor(
     private service: JogosListService,
@@ -74,7 +82,8 @@ export class JogosListComponent implements OnInit {
     nome: '',
     modosIds: [],
     categoriasIds: [],
-    plataformasIds: []
+    plataformasIds: [],
+    gratuito: false,
   }
 
   filters: FilterItem[] = [
@@ -82,6 +91,22 @@ export class JogosListComponent implements OnInit {
     {tipo: FilterTipo.PLATAFORMA, nome: 'Plataformas',   show: false, options: []},
     {tipo: FilterTipo.MODO, nome: 'Modos de jogo', show: false, options: []},
   ];
+
+  
+  sortOptions: SortOption[] = [
+    {nome: 'Padrão', value: 'padrao'},
+    {nome: 'Gratuitos', value: 'gratuito'},
+    {nome: 'Preço crescente', value: 'preco,asc'},
+    {nome: 'Preço decrescente', value: 'preco,desc'},
+    {nome: 'Avaliações crescente', value: 'nota,asc'},
+    {nome: 'Avaliações decrescente', value: 'nota,desc'},
+  ]
+
+  sortFilter: SortFilter = {
+    nome: 'Ordenar por',
+    show: false,
+    options: this.sortOptions
+  }
 
   filterTags: FilterOption[] = [];
 
@@ -137,8 +162,6 @@ export class JogosListComponent implements OnInit {
     })
   }
 
-
-
   getTotalElements(): number {
     return this.pageableJogos.pageInfo?.count;
   }
@@ -184,6 +207,18 @@ export class JogosListComponent implements OnInit {
     this.filters.forEach((filter, filterIndex) => {
       filterIndex === index ? filter.show = !filter.show : filter.show = false;
     })
+
+    this.sortFilter.show = false;
+  }
+
+  openSortFilterDropdown() {
+    this.closeAllFilters();
+    this.sortFilter.show = !this.sortFilter.show;
+  }
+
+  openSortFilterOptionsDropdown() {
+    this.closeAllFilters();
+    this.sortFilter.show = false;
   }
 
   handleSearch(): void {
@@ -218,11 +253,39 @@ export class JogosListComponent implements OnInit {
       case FilterTipo.CATEGORIA: this.addToFilters(this.filter.categoriasIds!, filterOption); break;
       case FilterTipo.PLATAFORMA: this.addToFilters(this.filter.plataformasIds!, filterOption); break;
     }
-
-
     this.init();
   }
 
+
+  handleSortFilter(option: SortOption) {
+    this.resetPageable();
+    this.filter.gratuito = false;
+    this.sortFilter.show = false;
+    
+    if (option.nome === this.sortFilter.nome) {
+      return;
+    }
+
+    if (option.value === 'padrao') {
+      if (this.sortFilter.nome != 'Ordenar por') {
+        this.resetSortFilter();
+        this.init();
+      }
+      return;
+    }
+
+    this.sortFilter.nome = option.nome;
+    if (option.value === 'gratuito') {
+      this.filter.gratuito = true;
+      this.init();
+      return;
+    }
+
+    this.pageable.sort = option.value;
+    this.init();
+  }
+
+ 
   removeFilter(index: number): void {
     let filter = this.filterTags[index];
     this.resetPageable();
@@ -286,6 +349,7 @@ export class JogosListComponent implements OnInit {
   
   clearAllFiltros(): void {
     this.resetFilter();
+    this.clearSearch();
     this.resetFilterTags();
     this.init();
   }
@@ -296,6 +360,11 @@ export class JogosListComponent implements OnInit {
     this.pageable.page = 0;
     this.pageable.size = this.PAGEABLE_DEFAULT_SIZE;
     this.pageable.sort = '';
+  }
+
+  private resetSortFilter(): void {
+    this.sortFilter.nome = 'Ordenar por';
+    this.sortFilter.show = false;
   }
 
   private resetFilterTags(): void {

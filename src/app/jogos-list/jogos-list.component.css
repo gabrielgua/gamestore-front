@@ -132,7 +132,35 @@
     color: var(--primary);
 }
 
+.results-sort-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 
+
+
+.filter--sort {
+    position: relative;
+}
+
+.filter__btn--sort {
+    border: 1px solid var(--subtle-border-color);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--primary);
+    background-color: transparent;
+    min-width: 14.2rem;
+}
+
+.filter__btn--sort--opened {
+    border-radius: .5rem .5rem 0 0;
+}
 
 
 .active-filters {
@@ -180,6 +208,8 @@
     background-color: rgba(var(--primary-number), .2);
     cursor: pointer;
 }
+
+
 
 .jogos {
     gap: 1rem;
@@ -324,6 +354,16 @@
     background-color: rgba(var(--primary-number), .2);
 }
 
+
+@media (width <= 465px) {
+    .results-sort-filter {
+        flex-direction: column;
+    }
+
+    .jogos {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    }
+}
 
 
 
