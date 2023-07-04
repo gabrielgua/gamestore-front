@@ -33,6 +33,10 @@
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
     <ul class="links">
+        <form class="input-wrapper" (submit)="handleSearch()">
+            <span class="material-symbols-rounded">search</span>
+            <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
+        </form>
         <li><a routerLink="jogos">Jogos</a></li>
         <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
         <li><a routerLink="promocoes">Promoções</a></li>

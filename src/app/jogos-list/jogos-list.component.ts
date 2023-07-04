@@ -112,8 +112,6 @@ export class JogosListComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageableJogos = new PageableModel();
-    this.clearAllFiltros();
-
     this.handleUrlParamSearch();
     this.init();
     this.getJogos();

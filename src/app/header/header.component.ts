@@ -35,6 +35,8 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   handleSearch(): void {
+    this.showMobileMenu = false;
+
     if (this.search.value) {
       localStorage.setItem('search', this.search.value);
       this.search = new FormControl('');
@@ -42,9 +44,7 @@ export class HeaderComponent implements AfterViewInit {
       .then(() => {
         this.router.navigate(['/jogos']);
       });
-      return;
     } 
 
-    this.router.navigate(['/jogos']);
   }
 }
