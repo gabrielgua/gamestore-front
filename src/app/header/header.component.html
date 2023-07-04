@@ -7,11 +7,14 @@
                 joystick
             </span>
         </a>
-        <nav class="desktop" *ngIf="!mobile">
+        <nav *ngIf="!mobile">
             <ul class="links">
                 <li><a routerLink="jogos">Jogos</a></li>
                 <li><a routerLink="">Desenvolvedoras</a></li>
-                <li><a routerLink="">Promoções</a></li>
+                <form class="input-wrapper" (submit)="handleSearch()">
+                    <span class="material-symbols-rounded">search</span>
+                    <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
+                </form>
                 
             </ul>
             <ul class="account-actions">

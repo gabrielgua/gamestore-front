@@ -112,11 +112,15 @@ export class JogosListComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageableJogos = new PageableModel();
+    this.clearAllFiltros();
+
+    this.handleUrlParamSearch();
     this.init();
     this.getJogos();
     this.getModos();
     this.getCategorias();
     this.getPlataformas();
+
   }
 
   init(): void {
@@ -219,6 +223,19 @@ export class JogosListComponent implements OnInit {
   openSortFilterOptionsDropdown() {
     this.closeAllFilters();
     this.sortFilter.show = false;
+  }
+
+  handleUrlParamSearch(): void {
+    let term = localStorage.getItem('search');
+    if (term) {
+      this.search = new FormControl(term);
+      console.log(term);
+
+      
+      localStorage.removeItem('search');
+      this.handleSearch();
+
+    }
   }
 
   handleSearch(): void {
@@ -351,6 +368,7 @@ export class JogosListComponent implements OnInit {
 
   
   clearAllFiltros(): void {
+    this.resetSortFilter();
     this.resetFilter();
     this.clearSearch();
     this.resetFilterTags();

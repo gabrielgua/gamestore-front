@@ -27,9 +27,9 @@ header {
 }
 
 nav {
-    display: flex;
+    display: grid;
     align-items: center;
-    justify-content: center;
+    grid-template-columns: 1fr auto;
     gap: 1rem;
 }
 
@@ -41,12 +41,12 @@ nav ul {
     list-style: none;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .links {
     margin-right: auto;
     list-style: none;
-    align-items: center;
 }
 
 .link-entrar {
@@ -74,6 +74,40 @@ a {
 a:hover {
     cursor: pointer;
     color: var(--primary);
+}
+
+.input-wrapper {
+    border: 1px solid var(--subtle-border-color);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow-primary);
+    width: 100%;
+    padding-inline-start: .5rem;
+    transition: outline 50ms ease;
+
+    > span {
+        color: var(--primary);
+    }
+
+    &:focus-within {
+        outline: 3px solid var(--primary);
+    }
+
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    padding: .5rem;
+
+    &:focus {
+        outline: none;
+    }
+
 }
 
 

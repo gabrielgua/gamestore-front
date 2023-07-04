@@ -1,5 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { Fade } from '../animations/animations';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,9 @@ export class HeaderComponent implements AfterViewInit {
 
   @ViewChild('header') header!: ElementRef;
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(private changeDetector: ChangeDetectorRef, private router: Router) {}
+
+  search = new FormControl('');
   
 
   breakToMobileWidth = 800;
@@ -30,5 +34,17 @@ export class HeaderComponent implements AfterViewInit {
     this.showMobileMenu = this.showMobileMenu && !isMobile ? false : this.showMobileMenu;
   }
 
+  handleSearch(): void {
+    if (this.search.value) {
+      localStorage.setItem('search', this.search.value);
+      this.search = new FormControl('');
+      this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => {
+        this.router.navigate(['/jogos']);
+      });
+      return;
+    } 
 
+    this.router.navigate(['/jogos']);
+  }
 }
