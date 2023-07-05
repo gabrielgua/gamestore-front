@@ -1,5 +1,5 @@
 
-<header #header (window:resize)="manageScreenSize(header.offsetWidth)">
+<header #header (window:resize)="manageScreenSize(header.offsetWidth)" >
     <div class="wrapper">
         <a class="logo" routerLink="/">
             gamestore 
@@ -17,8 +17,8 @@
                         <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search" (keyup)="handleChangeSearch()"/>
                     </form>
     
-                    <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop>
-                        <!-- <a class="jogo" href="/jogos/dark-souls-remastered">
+                    <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop id="search-dropdown">
+                        <!-- <a class="jogo" routerLink="/jogos/dark-souls-remastered">
                             <div class="img-wrapper">
                                 <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570940/capsule_616x353.jpg"/>
                             </div>
@@ -57,13 +57,12 @@
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
     <ul class="links">
-        <form class="input-wrapper" (submit)="handleSubmitSearch()">
+        <form (submit)="handleSubmitSearch()">
             <span class="material-symbols-rounded">search</span>
             <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
         </form>
         <li><a routerLink="jogos">Jogos</a></li>
         <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
-        <li><a routerLink="promocoes">Promoções</a></li>
         <li><a>Cadastrar</a></li>
         <li><a>Entrar</a></li>
     </ul>

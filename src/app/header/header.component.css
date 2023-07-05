@@ -86,7 +86,7 @@ a:hover {
     position: relative;
 }
 
-.search-wrapper form {
+form {
     border: 1px solid var(--subtle-border-color);
     background-color: black;
     display: flex;

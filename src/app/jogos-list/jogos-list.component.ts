@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JogosListService } from '../service/jogos/jogos-list.service';
 import { Fade } from '../animations/animations';
 import { Jogo } from '../models/jogo';
@@ -64,6 +64,7 @@ export class JogosListComponent implements OnInit {
   
   jogos: Jogo[] = [];
   modos: Modo[] = [];
+  filterIds: string[] = ['filter', 'filter--sort', 'filter-title', 'filter-span-arrow'];
   categorias: Categoria[] = [];
   plataformas: Plataforma[] = [];
   loading: boolean = false;
@@ -368,6 +369,14 @@ export class JogosListComponent implements OnInit {
     this.resetFilterTags();
     this.init();
   }
+
+  @HostListener('document: click', ['$event'])
+  private handleDocumentClick(event: any): void {
+    if(!this.filterIds.includes(event.target.id)) {
+      this.closeAllFilters();
+      this.closeSortFilter();
+    }
+  }
   
 
 
@@ -379,6 +388,10 @@ export class JogosListComponent implements OnInit {
 
   private resetSortFilter(): void {
     this.sortFilter.nome = 'Ordenar por';
+    this.closeSortFilter();
+  }
+
+  private closeSortFilter(): void {
     this.sortFilter.show = false;
   }
 

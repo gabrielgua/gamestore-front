@@ -7,10 +7,10 @@
     </section>
 
     <section class="filters">
-        <div  class="filter" id="filter" *ngFor="let filter of filters; index as i">
-            <button class="filter__btn" (click)="openFilterDropdown(i)" [ngClass]="{'filter__btn--opened': filter.show}">
-                <p class="filter__title">{{filter.nome}}</p>
-                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
+        <div  class="filter" *ngFor="let filter of filters; index as i">
+            <button id="filter" class="filter__btn" (click)="openFilterDropdown(i)" [ngClass]="{'filter__btn--opened': filter.show}">
+                <p id="filter-title" class="filter__title">{{filter.nome}}</p>
+                <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
             </button>
             <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
                 <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
@@ -39,10 +39,10 @@
 
     <div class="results-sort-filter">
         <p class="total-resultados"><span>{{getTotalElements()}}</span> {{getTotalElements() === 1 ? 'resultado' : 'resultados'}}.</p>
-        <div class="filter--sort">
-            <button class="filter__btn filter__btn--sort" (click)="openSortFilterDropdown()" [ngClass]="{'filter__btn--sort--opened': sortFilter.show}">
-                <p class="filter__title">{{sortFilter.nome}}</p>
-                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': sortFilter.show}">expand_more</span>
+        <div class="filter--sort" >
+            <button id="filter--sort" class="filter__btn filter__btn--sort" (click)="openSortFilterDropdown()" [ngClass]="{'filter__btn--sort--opened': sortFilter.show}">
+                <p id="filter-title" class="filter__title">{{sortFilter.nome}}</p>
+                <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': sortFilter.show}">expand_more</span>
             </button>
             <div class="filter__dropdown filter__dropdown--sort" *ngIf="sortFilter.show" @fromTopToTop>
                 <button id="filter__option" class="filter__option" *ngFor="let option of sortFilter.options" (click)="handleSortFilter(option)">

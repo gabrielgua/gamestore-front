@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Fade } from '../animations/animations';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +32,6 @@ export class HeaderComponent implements AfterViewInit {
 
 
   size: number = 4;
-
   jogos: JogoResumo[] = [];
   
 
@@ -41,6 +40,8 @@ export class HeaderComponent implements AfterViewInit {
   showMobileMenu: boolean = false;
 
   ngAfterViewInit(): void {
+    this.resetDropDown();
+    this.resetSearch();
     this.manageScreenSize(this.header.nativeElement.offsetWidth);
     this.changeDetector.detectChanges();
   }
@@ -52,11 +53,18 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   handleChangeSearch(): void {
-    this.jogos = [];
+    this.resetDropDown();
     if (this.search.value && this.search.value.length > 4) {
       this.jogoService.init(this.size, this.search.value);
       this.getJogos();
     }
+  }
+
+  @HostListener('document: click', ['$event'])
+  handleDocumentClick(event: any) {
+     if(event.target?.id != 'search-dropdown') {
+        this.resetDropDown();
+     }    
   }
 
 
@@ -66,12 +74,20 @@ export class HeaderComponent implements AfterViewInit {
     })
   }
 
+  resetDropDown(): void {
+    this.jogos = [];
+  }
+  
+  resetSearch(): void {
+    this.search = new FormControl('');
+  }
+
   handleSubmitSearch(): void {
     this.showMobileMenu = false;
 
     if (this.search.value) {
       localStorage.setItem('search', this.search.value);
-      this.search = new FormControl('');
+      this.resetSearch();
       this.router.navigateByUrl('/', {skipLocationChange: true})
       .then(() => {
         this.router.navigate(['/jogos']);
