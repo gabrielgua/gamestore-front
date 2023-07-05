@@ -71,7 +71,7 @@
                     <h4>Requisitos</h4>
                     <p *ngIf="jogo.requisitos && !jogo.requisitos.length">Não há nada por aqui.</p>
                     <div class="requisito" *ngFor="let requisito of jogo.requisitos">
-                        <h5>{{ requisito.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'}}</h5>
+                        <h5>{{ getRequisitoNome(requisito) }}</h5>
                         <p *ngIf="requisito.observacoes"><span>Observações: </span>{{requisito.observacoes}}</p>
                         <p><span>OS: </span>{{requisito.sistema}}</p>
                         <p><span>Processador: </span>{{requisito.processador}}</p>

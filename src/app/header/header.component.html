@@ -11,10 +11,34 @@
             <ul class="links">
                 <li><a routerLink="jogos">Jogos</a></li>
                 <li><a routerLink="">Desenvolvedoras</a></li>
-                <form class="input-wrapper" (submit)="handleSearch()">
-                    <span class="material-symbols-rounded">search</span>
-                    <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
-                </form>
+                <div class="search-wrapper">
+                    <form (submit)="handleSubmitSearch()">
+                        <span class="material-symbols-rounded">search</span>
+                        <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search" (keyup)="handleChangeSearch()"/>
+                    </form>
+    
+                    <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop>
+                        <!-- <a class="jogo" href="/jogos/dark-souls-remastered">
+                            <div class="img-wrapper">
+                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570940/capsule_616x353.jpg"/>
+                            </div>
+                            <div class="jogo__info">
+                                <p>Dark Souls Remastered</p>
+                                <p>R$ 259,99</p>
+                            </div>
+                        </a> -->
+                        <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{jogo.uriNome}}" >
+                            <div class="img-wrapper">
+                                <img src="{{jogo.urlImagem}}"/>
+                            </div>
+                            <div class="jogo__info">
+                                <p>{{jogo.nome}}</p>
+                                <p>{{jogo.preco | currency: 'BRL'}}</p>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
                 
             </ul>
             <ul class="account-actions">
@@ -33,7 +57,7 @@
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
     <ul class="links">
-        <form class="input-wrapper" (submit)="handleSearch()">
+        <form class="input-wrapper" (submit)="handleSubmitSearch()">
             <span class="material-symbols-rounded">search</span>
             <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
         </form>

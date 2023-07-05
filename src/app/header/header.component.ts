@@ -2,6 +2,14 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } fr
 import { Fade } from '../animations/animations';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Jogo } from '../models/jogo';
+import { JogoResumo } from '../models/jogo.resumo';
+import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
+import { JogosListService } from '../service/jogos/jogos-list.service';
+import { PageableModel } from '../models/pageable.model';
+import { JogoFilter } from '../models/jogo.filter';
+import { JogoPageableRequest } from '../models/jogo.pageable';
+import { JogosHeaderSearchListService } from '../service/jogos/jogos-header-search-list.service';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +21,19 @@ export class HeaderComponent implements AfterViewInit {
 
   @ViewChild('header') header!: ElementRef;
 
-  constructor(private changeDetector: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private changeDetector: ChangeDetectorRef, 
+    private router: Router, 
+    private jogoService: JogosHeaderSearchListService) {}
+
+
 
   search = new FormControl('');
+
+
+  size: number = 4;
+
+  jogos: JogoResumo[] = [];
   
 
   breakToMobileWidth = 800;
@@ -29,12 +47,26 @@ export class HeaderComponent implements AfterViewInit {
 
   manageScreenSize(width: number): void {
     const isMobile = width <= this.breakToMobileWidth;
-    this.mobile = isMobile ? true : false;   
-
+    this.mobile = isMobile;   
     this.showMobileMenu = this.showMobileMenu && !isMobile ? false : this.showMobileMenu;
   }
 
-  handleSearch(): void {
+  handleChangeSearch(): void {
+    this.jogos = [];
+    if (this.search.value && this.search.value.length > 4) {
+      this.jogoService.init(this.size, this.search.value);
+      this.getJogos();
+    }
+  }
+
+
+  private getJogos(): void {
+    this.jogoService.getJogos().subscribe((jogos) => {
+      this.jogos = jogos.content;      
+    })
+  }
+
+  handleSubmitSearch(): void {
     this.showMobileMenu = false;
 
     if (this.search.value) {

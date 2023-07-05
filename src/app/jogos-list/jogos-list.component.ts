@@ -130,7 +130,6 @@ export class JogosListComponent implements OnInit {
     this.service.getPageableJogos().subscribe((pageableJogos) => {
       this.pageableJogos = pageableJogos;
       this.jogos = pageableJogos.content;
-      this.loading = false;
     })
   }
 
@@ -227,12 +226,9 @@ export class JogosListComponent implements OnInit {
     let term = localStorage.getItem('search');
     if (term) {
       this.search = new FormControl(term);
-      console.log(term);
-
       
       localStorage.removeItem('search');
       this.handleSearch();
-
     }
   }
 

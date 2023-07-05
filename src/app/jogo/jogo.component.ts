@@ -3,6 +3,7 @@ import { Jogo } from '../models/jogo';
 import { ActivatedRoute } from '@angular/router';
 import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
 import { TipoRequisito } from '../models/tipoRequisito';
+import { Requisito } from '../models/requisito';
 
 @Component({
   selector: 'app-jogo',
@@ -49,6 +50,10 @@ export class JogoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getRequisitoNome(requisito: Requisito): string {
+    return requisito?.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'
+  }
+
   isFilled(index: number, nota: number): boolean {
     return index <= nota;
   }
@@ -66,9 +71,12 @@ export class JogoComponent implements OnInit, AfterViewInit {
   }
 
   arangeRequisitos(jogo: Jogo): void {
-
-    if (jogo.requisitos && jogo.requisitos[0].tipo != TipoRequisito.MINIMOS) {
-      jogo.requisitos.push(jogo.requisitos.shift()!);
+    if (jogo.requisitos) {
+      let first = jogo.requisitos[0];
+     
+      if (first && first.tipo != TipoRequisito.MINIMOS) {
+        jogo.requisitos.push(jogo.requisitos.shift()!);
+      }
     }
   }
 }
