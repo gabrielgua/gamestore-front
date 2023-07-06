@@ -62,9 +62,6 @@
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
             </a>
             <div class="jogo__detalhes">
-                <div class="jogo__categorias">
-                    <p class="categoria" *ngFor="let categoria of jogo.categorias">{{categoria.nome}},</p>
-                </div>
                 <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
                 <p class="jogo__preco">
                     {{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}

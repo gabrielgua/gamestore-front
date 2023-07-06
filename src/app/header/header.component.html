@@ -23,20 +23,21 @@
                                 <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570940/capsule_616x353.jpg"/>
                             </div>
                             <div class="jogo__info">
-                                <p>Dark Souls Remastered</p>
-                                <p>R$ 259,99</p>
+                                <p class="singleline-truncate jogo__nome">Dark Souls: Remastered</p>
+                                <p class="jogo__desenvolvedora">FromSoftware, Inc</p>
+                                <p class="jogo__preco">R$ 259,99</p>
                             </div>
                         </a> -->
-                        <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{jogo.uriNome}}" >
+                        <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{jogo.uriNome}}">
                             <div class="img-wrapper">
                                 <img src="{{jogo.urlImagem}}"/>
                             </div>
                             <div class="jogo__info">
-                                <p>{{jogo.nome}}</p>
-                                <p>{{jogo.preco | currency: 'BRL'}}</p>
+                                <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
+                                <p class="jogo__desenvolvedora">{{jogo.desenvolvedora?.nome}}</p>
+                                <p class="jogo__preco">{{jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL'}}</p>
                             </div>
                         </a>
-                        
                     </div>
                 </div>
                 
