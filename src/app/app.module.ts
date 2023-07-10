@@ -26,6 +26,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FooterComponent } from './footer/footer.component';
 import { JogosListComponent } from './jogos-list/jogos-list.component';
 import { FilterComponent } from './jogos-list/filter/filter.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 
 registerLocaleData(localePt);
 
@@ -43,6 +45,8 @@ registerLocaleData(localePt);
     FooterComponent,
     JogosListComponent,
     FilterComponent,
+    NotFoundComponent,
+    AccessDeniedComponent,
   ],
   imports: [
   

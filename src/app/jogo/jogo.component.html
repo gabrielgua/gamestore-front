@@ -6,7 +6,7 @@
         <h1 class="jogo__nome">{{jogo.nome}}</h1>
         <app-slider-jogo *ngIf="mobile"></app-slider-jogo>
         <div class="jogo__principal">
-            <iframe *ngIf="!mobile" class="jogo__video border-subtle box-shadow-primary hidden-mobile" [src]="jogo.urlVideo | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
+            <iframe *ngIf="!mobile" class="jogo__video border-subtle box-shadow-primary hidden-mobile" [src]="getUrlVideo(jogo.urlVideo) | safe" frameborder="0" allowfullscreen title="{{jogo.nome}} - trailer"></iframe>
 
             <div class="jogo__card border-subtle box-shadow-primary">
                 <img *ngIf="!mobile" class="jogo__img box-shadow-primary hidden-mobile" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - img">

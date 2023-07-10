@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
 import { TipoRequisito } from '../models/tipoRequisito';
 import { Requisito } from '../models/requisito';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-jogo',
@@ -44,14 +45,22 @@ export class JogoComponent implements OnInit, AfterViewInit {
 
   getJogo(uriNome: string): void {
     this.service.fetchJogoData(uriNome);
-    this.service.getJogo().subscribe((jogo) => {
-      this.jogo = jogo;
-      this.arangeRequisitos(this.jogo);
+    this.service.getJogo().subscribe({
+      next: jogo => this.handleSuccess(jogo),
     });
+  }
+
+  private handleSuccess(jogo: Jogo) {
+    this.jogo = jogo;
+    this.arangeRequisitos(this.jogo);  
   }
 
   getRequisitoNome(requisito: Requisito): string {
     return requisito?.tipo === 'MINIMOS' ? 'Mínimos' : 'Recomendados'
+  }
+
+  getUrlVideo(url: string): string {
+    return url ? url : '';
   }
 
   isFilled(index: number, nota: number): boolean {

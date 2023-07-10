@@ -38,6 +38,7 @@
     --font-subtitles: 1.1rem;
     --font-titles: 2rem;
     --font-family: 'Saira', sans-serif;
+    --font-status-error: 10rem;
 
     --container-max-size: 75rem;
 }

@@ -1,0 +1,32 @@
+.container {
+    display: grid;
+    place-items: center;
+    margin-top: 10rem;
+}
+
+.status-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.status-wrapper span {
+    font-size: 10rem;
+    color: rgba(var(--error), .5);
+}
+
+.status {
+    font-size: var(--font-status-error);
+    font-weight: 800;
+    color: rgba(var(--error));
+}
+
+
+.link,
+.detail {
+    color: var(--secondary-text-dark);
+}
+
+.link a {
+    color: var(--primary);
+    text-decoration: underline;
+}
