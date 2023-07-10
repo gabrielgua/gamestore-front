@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { JogoComponent } from './jogo/jogo.component';
-import { JogosListComponent } from './jogos-list/jogos-list.component';
+import { HomeComponent } from './components/home/home.component';
+import { JogoComponent } from './components/jogo/jogo.component';
+import { JogosListComponent } from './components/jogos-list/jogos-list.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 

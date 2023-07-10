@@ -1,10 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Jogo } from '../models/jogo';
+import { Jogo } from '../../models/jogo';
 import { ActivatedRoute } from '@angular/router';
-import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
-import { TipoRequisito } from '../models/tipoRequisito';
-import { Requisito } from '../models/requisito';
-import { HttpErrorResponse } from '@angular/common/http';
+import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
+import { TipoRequisito } from '../../models/tipoRequisito';
+import { Requisito } from '../../models/requisito';
 
 @Component({
   selector: 'app-jogo',

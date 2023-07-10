@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { JogosListService } from '../service/jogos/jogos-list.service';
-import { Fade } from '../animations/animations';
-import { Jogo } from '../models/jogo';
-import { PageableModel } from '../models/pageable.model';
-import { JogoPageableRequest } from '../models/jogo.pageable';
-import { JogoFilter } from '../models/jogo.filter';
+import { JogosListService } from '../../service/jogos/jogos-list.service';
+import { Fade } from '../../animations/animations';
+import { Jogo } from '../../models/jogo';
+import { PageableModel } from '../../models/pageable.model';
+import { JogoPageableRequest } from '../../models/jogo.pageable';
+import { JogoFilter } from '../../models/jogo.filter';
 import { FormControl } from '@angular/forms';
-import { Categoria } from '../models/categoria';
-import { Modo } from '../models/modo';
-import { Plataforma } from '../models/plataforma';
-import { CategoriasListService } from '../service/categorias/categorias-list.service';
-import { ModosListService } from '../service/modos/modos-list.service';
-import { PlataformasListService } from '../service/plataformas/plataformas-list.service';
+import { Categoria } from '../../models/categoria';
+import { Modo } from '../../models/modo';
+import { Plataforma } from '../../models/plataforma';
+import { CategoriasListService } from '../../service/categorias/categorias-list.service';
+import { ModosListService } from '../../service/modos/modos-list.service';
+import { PlataformasListService } from '../../service/plataformas/plataformas-list.service';
 
 export interface FilterItem {
   tipo: FilterTipo,

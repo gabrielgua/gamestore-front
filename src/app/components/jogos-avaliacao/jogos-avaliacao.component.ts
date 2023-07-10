@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Jogo } from '../models/jogo';
-import { PageableModel } from '../models/pageable.model';
-import { Fade } from '../animations/animations';
-import { JogosAvaliacaoService } from '../service/jogos/jogos-avaliacao.service';
+import { Jogo } from '../../models/jogo';
+import { PageableModel } from '../../models/pageable.model';
+import { Fade } from '../../animations/animations';
+import { JogosAvaliacaoService } from '../../service/jogos/jogos-avaliacao.service';
 
 @Component({
   selector: 'app-jogos-avaliacao',

@@ -1,15 +1,15 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Fade } from '../animations/animations';
+import { Fade } from '../../animations/animations';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Jogo } from '../models/jogo';
-import { JogoResumo } from '../models/jogo.resumo';
-import { JogoBuscarService } from '../service/jogos/jogo-buscar.service';
-import { JogosListService } from '../service/jogos/jogos-list.service';
-import { PageableModel } from '../models/pageable.model';
-import { JogoFilter } from '../models/jogo.filter';
-import { JogoPageableRequest } from '../models/jogo.pageable';
-import { JogosHeaderSearchListService } from '../service/jogos/jogos-header-search-list.service';
+import { Jogo } from '../../models/jogo';
+import { JogoResumo } from '../../models/jogo.resumo';
+import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
+import { JogosListService } from '../../service/jogos/jogos-list.service';
+import { PageableModel } from '../../models/pageable.model';
+import { JogoFilter } from '../../models/jogo.filter';
+import { JogoPageableRequest } from '../../models/jogo.pageable';
+import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-search-list.service';
 
 @Component({
   selector: 'app-header',

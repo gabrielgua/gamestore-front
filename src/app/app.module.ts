@@ -10,22 +10,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { JogoComponent } from './jogo/jogo.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { JogoComponent } from './components/jogo/jogo.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import { SliderDesktopComponent } from './slider-desktop/slider-desktop.component';
+import { SliderDesktopComponent } from './components/slider-desktop/slider-desktop.component';
 import { SafePipe } from './safe.pipe';
-import { SliderMobileComponent } from './slider-mobile/slider-mobile.component';
-import { JogosAvaliacaoComponent } from './jogos-avaliacao/jogos-avaliacao.component';
-import { SliderJogoComponent } from './slider-jogo/slider-jogo.component';
+import { SliderMobileComponent } from './components/slider-mobile/slider-mobile.component';
+import { JogosAvaliacaoComponent } from './components/jogos-avaliacao/jogos-avaliacao.component';
+import { SliderJogoComponent } from './components/slider-jogo/slider-jogo.component';
 
 import localePt from '@angular/common/locales/pt';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FooterComponent } from './footer/footer.component';
-import { JogosListComponent } from './jogos-list/jogos-list.component';
-import { FilterComponent } from './jogos-list/filter/filter.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { JogosListComponent } from './components/jogos-list/jogos-list.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 
@@ -44,7 +43,6 @@ registerLocaleData(localePt);
     SliderJogoComponent,
     FooterComponent,
     JogosListComponent,
-    FilterComponent,
     NotFoundComponent,
     AccessDeniedComponent,
   ],
