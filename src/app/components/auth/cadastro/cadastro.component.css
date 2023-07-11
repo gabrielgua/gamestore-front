@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    min-height: 30rem;
+    justify-content: space-between;
+    margin-top: 10rem;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: 50%;
+    position: relative;
+    
+
+}
+
+.line {
+    height: 100%;
+    border-right: 1px solid var(--subtle-border-color);
+    position: absolute;
+    z-index: 1;
+
+    max-width: max-content;
+
+}
+
+.logo {
+    z-index: 2;
+    padding: .5rem;
+    background-color: var(--background-primary);
+}
+
+

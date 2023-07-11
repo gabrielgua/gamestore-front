@@ -1,0 +1,16 @@
+.wrapper {
+    height: 100%;
+    display: flex;
+}
+
+.logo {
+    display: flex;
+    font-size: 2em;
+    font-family: 'Saira Stencil One', cursive;
+    align-items: center;
+    color: var(--primary);
+}
+
+.logo span {
+    font-size: 2rem;
+}

@@ -25,8 +25,10 @@ import localePt from '@angular/common/locales/pt';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FooterComponent } from './components/footer/footer.component';
 import { JogosListComponent } from './components/jogos-list/jogos-list.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { NotFoundComponent } from './components/errors/not-found/not-found.component';
+import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
+import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
+import { LogoComponent } from './components/shared/logo/logo.component';
 
 registerLocaleData(localePt);
 
@@ -45,6 +47,8 @@ registerLocaleData(localePt);
     JogosListComponent,
     NotFoundComponent,
     AccessDeniedComponent,
+    CadastroComponent,
+    LogoComponent,
   ],
   imports: [
   
