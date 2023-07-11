@@ -22,7 +22,6 @@ export class AppComponent  {
 
   setCurrentRoute(url: string): void {
     this.currentRoute = url;
-    console.log(this.currentRoute);
     
   }
 

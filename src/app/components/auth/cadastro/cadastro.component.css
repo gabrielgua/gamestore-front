@@ -9,7 +9,6 @@
     position: relative;
     place-items: center;
     padding: 3rem;
-    margin-bottom: 1rem;
 }
 
 
@@ -100,6 +99,25 @@ form {
     &:active {
         background-color: rgba(var(--primary-number), .8);
     }
+}
+
+.btn-submit--disabled {
+    background-color: rgba(var(--primary-number), .3);
+    &:hover {
+        cursor: default;
+        border-radius: .25rem;
+    }
+    &:active {
+        background-color: rgba(var(--primary-number), .3);
+    }
+}
+
+.error {
+    color: rgb(var(--error));
+}
+
+.input--invalid {
+    outline: 1px solid rgba(var(--error), 1) !important;
 }
 
 

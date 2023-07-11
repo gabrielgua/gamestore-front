@@ -6,27 +6,44 @@
         </div>
     </div>
 
-    <form>
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
         <div class="title-wrapper">
             <p class="title">Cadastro</p>
             <p class="subtitle">Já tem uma conta? Faça o <a routerLink="/sing-in">login</a>.</p>
         </div>
         <div class="input-wrapper">
-            <label for="username">Nome de usuário</label>
-            <input type="text">
+            <label>Nome de usuário</label>
+            <input type="text" formControlName="username" [ngClass]="{'input--invalid': isControlInvalid('username')}">
+            <div class="errors" *ngIf="isControlInvalid('username')">
+                <p class="error" *ngIf="isError('username', 'taken')">Usuário já cadastrado.</p>
+                <p class="error" *ngIf="isError('username', 'required')">Username é requerido.</p>
+            </div>
         </div>
         <div class="input-wrapper">
-            <label for="username">E-mail</label>
-            <input type="text">
+            <label>E-mail</label>
+            <input type="text" formControlName="email" [ngClass]="{'input--invalid': isControlInvalid('email')}">
+            <div class="errors" *ngIf="isControlInvalid('email')">
+                <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
+                <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
+                <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
+            </div>
         </div>
         <div class="input-wrapper">
-            <label for="username">Senha</label>
-            <input type="password">
+            <label>Senha</label>
+            <input type="password" formControlName="senha" [ngClass]="{'input--invalid': isControlInvalid('senha')}">
+            <div class="errors" *ngIf="isControlInvalid('senha')">
+                <p class="error" *ngIf="isError('senha', 'required')">Senha é requerida.</p>
+                <p class="error" *ngIf="isError('senha', 'minlength')">Senha precisa ter no mínimo 5 caractéres.</p>
+            </div>
         </div>
         <div class="input-wrapper">
-            <label for="username">Confirmar senha</label>
-            <input type="password">
+            <label>Confirmar senha</label>
+            <input type="password" formControlName="confirmarSenha" [ngClass]="{'input--invalid': isControlInvalid('confirmarSenha')}">
+            <div class="errors" *ngIf="isControlInvalid('confirmarSenha')">
+                <p class="error" *ngIf="isError('confirmarSenha', 'required')">Senha é requerida.</p>
+                <p class="error" *ngIf="isError('confirmarSenha', 'matching')">Senhas não coincidem.</p>
+            </div>
         </div>
-        <button class="btn-submit" type="submit">Cadastrar</button>
+        <button class="btn-submit" [disabled]="isFormInvalid()" [ngClass]="{'btn-submit--disabled': isFormInvalid()}" type="submit">Cadastrar</button>
     </form>
 </div>
