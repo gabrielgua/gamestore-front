@@ -29,6 +29,7 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
 import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { LogoComponent } from './components/shared/logo/logo.component';
+import { AuthFormComponent } from './components/auth/shared/auth-form/auth-form.component';
 
 registerLocaleData(localePt);
 
@@ -49,6 +50,7 @@ registerLocaleData(localePt);
     AccessDeniedComponent,
     CadastroComponent,
     LogoComponent,
+    AuthFormComponent,
   ],
   imports: [
   

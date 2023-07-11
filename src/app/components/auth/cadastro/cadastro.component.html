@@ -1,11 +1,32 @@
 <div class="container">
-    <div class="vertical">
+    <div class="header">
         <div class="line"><p></p></div>
         <div class="logo">
             <app-logo></app-logo>
-
         </div>
     </div>
 
-    todo add registration form
+    <form>
+        <div class="title-wrapper">
+            <p class="title">Cadastro</p>
+            <p class="subtitle">Já tem uma conta? Faça o <a routerLink="/sing-in">login</a>.</p>
+        </div>
+        <div class="input-wrapper">
+            <label for="username">Nome de usuário</label>
+            <input type="text">
+        </div>
+        <div class="input-wrapper">
+            <label for="username">E-mail</label>
+            <input type="text">
+        </div>
+        <div class="input-wrapper">
+            <label for="username">Senha</label>
+            <input type="password">
+        </div>
+        <div class="input-wrapper">
+            <label for="username">Confirmar senha</label>
+            <input type="password">
+        </div>
+        <button class="btn-submit" type="submit">Cadastrar</button>
+    </form>
 </div>
