@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'jogos/:uriNome', component: JogoComponent},
 
 
-  {path: 'auth/register', component: CadastroComponent},
+  {path: 'sing-up', component: CadastroComponent},
 
 
   {path: 'error/not-found', component: NotFoundComponent},

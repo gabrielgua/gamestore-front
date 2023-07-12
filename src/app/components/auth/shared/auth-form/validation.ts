@@ -1,8 +1,8 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { Observable, debounceTime, delay, map, of, switchMap } from "rxjs";
 import { AuthService } from "src/app/service/auth/auth.service";
 
 export default class Validation {
-    constructor(private auth: AuthService) {}
 
     static match(controlName: string, checkControleName: string): ValidatorFn {
         return (controls: AbstractControl) => {
@@ -23,17 +23,20 @@ export default class Validation {
     }
 
 
-    static taken(controlName: string): ValidatorFn {
-        return (controls: AbstractControl) => {
-            const control = controls.get(controlName);
+    static taken(service: AuthService): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            const username = control.value.toLowerCase();
 
-            if (control?.errors && !control?.errors['taken']) {
-                return null;
-            }
-
-            //todo check if control is already taken from api;
-
-            return null;
+            return of(username).pipe(
+                delay(500),
+                switchMap((username) => service.checkUsername(username).pipe(
+                    map( result => result ? {taken: true} : null )
+                ))
+            );
         }
     }
 }
+
+
+
+

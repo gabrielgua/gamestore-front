@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Validation from '../shared/auth-form/validation';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ export class CadastroComponent implements OnInit {
 
   // submitted: boolean = this.form.touched;
   
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
   
   ngOnInit(): void {
     this.buildForm();
@@ -36,34 +37,48 @@ export class CadastroComponent implements OnInit {
     
   }
 
-  get f(): { [key: string]: AbstractControl} {
-    return this.form.controls;
-  }
+
 
   
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(5)]],
-      confirmarSenha: ['', [Validators.required]],
+      username: [null, [Validators.required], [Validation.taken(this.authService)]],
+      email: [null, [Validators.required, Validators.email]],
+      senha: [null, [Validators.required, Validators.minLength(5)]],
+      confirmarSenha: [null, [Validators.required]],
 
     },
     { validators: [Validation.match('senha', 'confirmarSenha')]})
   }
 
-  isFormInvalid(): boolean {
-    return this.form.invalid;
+  get username() {
+    return this.form.get('username')
   }
 
-  isControlInvalid(controlName: string) {
-    return this.f[controlName].touched && this.f[controlName].errors;
+  get email() {
+    return this.form.get('email')
+  }
+
+  get senha() {
+    return this.form.get('senha')
+  }
+
+  get confirmarSenha() {
+    return this.form.get('confirmarSenha')
+  }
+
+ 
+
+  isInvalid(control: AbstractControl) {
+    return control?.dirty && control?.errors;
   }
 
   isError(controlName: string, error: string): boolean {
-    return this.f[controlName].getError(error);
+    return this.form.controls[controlName].getError(error);
   }
-  
+
+ 
+
 
 }

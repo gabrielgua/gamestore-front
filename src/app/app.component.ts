@@ -12,7 +12,7 @@ export class AppComponent  {
   title = 'gamestore';
   currentRoute: string = '';
 
-  noHeaderUrls: string[] = ['/auth/register']
+  noHeaderUrls: string[] = ['/sing-up']
 
   constructor(private router: Router) {
     this.router.events.pipe(

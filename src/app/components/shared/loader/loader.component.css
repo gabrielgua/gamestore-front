@@ -1,0 +1,35 @@
+.loader {
+    display: flex;
+    gap: .25rem;
+}
+
+.loader span {
+    width: .5rem;
+    height: .5rem;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+.one {
+    animation: fade 1s infinite 100ms;
+}
+
+.two {
+    animation: fade 1s infinite 200ms;
+}
+
+.three {
+    animation: fade 1s infinite 300ms;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    } 
+}

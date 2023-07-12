@@ -30,6 +30,7 @@ import { AccessDeniedComponent } from './components/errors/access-denied/access-
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { LogoComponent } from './components/shared/logo/logo.component';
 import { AuthFormComponent } from './components/auth/shared/auth-form/auth-form.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
 
 registerLocaleData(localePt);
 
@@ -51,6 +52,7 @@ registerLocaleData(localePt);
     CadastroComponent,
     LogoComponent,
     AuthFormComponent,
+    LoaderComponent,
   ],
   imports: [
   

@@ -11,39 +11,68 @@
             <p class="title">Cadastro</p>
             <p class="subtitle">Já tem uma conta? Faça o <a routerLink="/sing-in">login</a>.</p>
         </div>
-        <div class="input-wrapper">
+        <div class="form-group">
             <label>Nome de usuário</label>
-            <input type="text" formControlName="username" [ngClass]="{'input--invalid': isControlInvalid('username')}">
-            <div class="errors" *ngIf="isControlInvalid('username')">
-                <p class="error" *ngIf="isError('username', 'taken')">Usuário já cadastrado.</p>
-                <p class="error" *ngIf="isError('username', 'required')">Username é requerido.</p>
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(username!), 'input--valid': username?.valid }">
+                <input type="text" formControlName="username">
+                <p *ngIf="username?.valid" class="success">disponível</p>
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
+                    {{ isInvalid(username!) ? 'close' : ''}}
+                    {{ username?.valid ? 'check' : ''}}
+                    <div style="margin-right: .25rem;" *ngIf="username?.pending">
+                        <app-loader ></app-loader>
+                    </div>
+                </span>
+            </div>
+            
+            <div class="errors" *ngIf="isInvalid(username!)">
+                <p class="error" *ngIf="isError('username', 'taken')">Nome de usuário indisponível.</p>
+                <p class="error" *ngIf="isError('username', 'required')">Nome de usuário é requerido.</p>
             </div>
         </div>
-        <div class="input-wrapper">
+        <div class="form-group">
             <label>E-mail</label>
-            <input type="text" formControlName="email" [ngClass]="{'input--invalid': isControlInvalid('email')}">
-            <div class="errors" *ngIf="isControlInvalid('email')">
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(email!), 'input--valid': email?.valid }">
+                <input type="text" formControlName="email">
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': email?.valid }">
+                    {{ isInvalid(email!) ? 'close' : ''}}
+                    {{ email?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            <div class="errors" *ngIf="isInvalid(email!)">
                 <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
                 <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
                 <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
             </div>
         </div>
-        <div class="input-wrapper">
+        <div class="form-group">
             <label>Senha</label>
-            <input type="password" formControlName="senha" [ngClass]="{'input--invalid': isControlInvalid('senha')}">
-            <div class="errors" *ngIf="isControlInvalid('senha')">
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(senha!), 'input--valid': senha?.valid }">
+                <input type="password" formControlName="senha">
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(senha!), 'success': senha?.valid }">
+                    {{ isInvalid(senha!) ? 'close' : ''}}
+                    {{ senha?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            <div class="errors" *ngIf="isInvalid(senha!)">
                 <p class="error" *ngIf="isError('senha', 'required')">Senha é requerida.</p>
                 <p class="error" *ngIf="isError('senha', 'minlength')">Senha precisa ter no mínimo 5 caractéres.</p>
             </div>
         </div>
-        <div class="input-wrapper">
+        <div class="form-group">
             <label>Confirmar senha</label>
-            <input type="password" formControlName="confirmarSenha" [ngClass]="{'input--invalid': isControlInvalid('confirmarSenha')}">
-            <div class="errors" *ngIf="isControlInvalid('confirmarSenha')">
-                <p class="error" *ngIf="isError('confirmarSenha', 'required')">Senha é requerida.</p>
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(confirmarSenha!), 'input--valid': confirmarSenha?.valid }">
+                <input type="password" formControlName="confirmarSenha">
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(confirmarSenha!), 'success': confirmarSenha?.valid }">
+                    {{ isInvalid(confirmarSenha!) ? 'close' : ''}}
+                    {{ confirmarSenha?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            <div class="errors" *ngIf="isInvalid(confirmarSenha!)">
+                <p class="error" *ngIf="isError('confirmarSenha', 'required')">Confirmação da senha é requerida.</p>
                 <p class="error" *ngIf="isError('confirmarSenha', 'matching')">Senhas não coincidem.</p>
             </div>
         </div>
-        <button class="btn-submit" [disabled]="isFormInvalid()" [ngClass]="{'btn-submit--disabled': isFormInvalid()}" type="submit">Cadastrar</button>
+        <button class="btn-submit" [disabled]="form.invalid && !username?.pending" [ngClass]="{'btn-submit--disabled': form.invalid || username?.pending }" type="submit">Cadastrar</button>
     </form>
 </div>
