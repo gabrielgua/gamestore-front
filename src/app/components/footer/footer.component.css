@@ -1,29 +1,42 @@
 .container {
-    background-color: black;
+    gap: .5rem;
     padding: 2rem;
     display: flex;
-    gap: .25rem;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    background-color: black;
+    text-align: center;
 }
 
 p {
-    display: flex;
-    align-items: center;
     color: var(--secondary-text-dark);
-    gap: .25rem;
+    display: inline-block;
 }
 
-span {
-    color: white;
-    font-size: 1.25rem;
+.favorite {
+    color: whitesmoke;
+    font-size: 1.1rem;
+    position: relative;
+    top: .25rem;
 }
+
+
 
 a {
     color: var(--primary);
     text-decoration: none;
 }
 
-.divider {
-    color: rgba(255, 255, 255, .3);
+.ball {
+    width: .25rem;
+    height: .25rem;
+    background-color: whitesmoke;
+    border-radius: 50%;
+}
 
+@media (width <= 400px) {
+    .container {
+        flex-direction: column;
+    }
 }

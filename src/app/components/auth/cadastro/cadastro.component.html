@@ -15,7 +15,6 @@
             <label>Nome de usuário</label>
             <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(username!), 'input--valid': username?.valid }">
                 <input type="text" formControlName="username">
-                <p *ngIf="username?.valid" class="success">disponível</p>
                 <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
                     {{ isInvalid(username!) ? 'close' : ''}}
                     {{ username?.valid ? 'check' : ''}}
