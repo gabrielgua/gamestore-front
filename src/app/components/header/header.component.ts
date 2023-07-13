@@ -10,6 +10,9 @@ import { PageableModel } from '../../models/pageable.model';
 import { JogoFilter } from '../../models/jogo.filter';
 import { JogoPageableRequest } from '../../models/jogo.pageable';
 import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-search-list.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -20,16 +23,16 @@ import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-s
 export class HeaderComponent implements AfterViewInit {
 
   @ViewChild('header') header!: ElementRef;
+  usuario = new Usuario();
 
   constructor(
     private changeDetector: ChangeDetectorRef, 
     private router: Router, 
-    private jogoService: JogosHeaderSearchListService) {}
-
-
+    private jogoService: JogosHeaderSearchListService,
+    private usuarioService: UsuarioService, 
+    private authService: AuthService) {}
 
   search = new FormControl('');
-
 
   size: number = 4;
   jogos: JogoResumo[] = [];
@@ -38,12 +41,25 @@ export class HeaderComponent implements AfterViewInit {
   breakToMobileWidth = 800;
   mobile: boolean = false;
   showMobileMenu: boolean = false;
+  showUsuarioMenu: boolean = false;
 
   ngAfterViewInit(): void {
     this.resetDropDown();
     this.resetSearch();
     this.manageScreenSize(this.header.nativeElement.offsetWidth);
     this.changeDetector.detectChanges();
+    this.getUsuario();
+  }
+
+  private getUsuario(): void {
+    
+    this.usuarioService.init();
+    this.usuarioService.getUsuario().subscribe(usuario => {
+      if (usuario.id != 0) {
+        this.usuario = usuario;
+        console.log(this.usuario);
+      }
+    });
   }
 
   manageScreenSize(width: number): void {
@@ -62,8 +78,11 @@ export class HeaderComponent implements AfterViewInit {
 
   @HostListener('document: click', ['$event'])
   handleDocumentClick(event: any) {
-     if(event.target?.id != 'search-dropdown') {
+    let ids = ['search-dropdown', 'profile-avatar', 'profile-btn']
+
+     if(!ids.includes(event.target?.id)) {
         this.resetDropDown();
+        this.showUsuarioMenu = false;
      }    
   }
 
@@ -94,5 +113,18 @@ export class HeaderComponent implements AfterViewInit {
       });
     } 
 
+  }
+
+  handleProfileClick(): void {
+    this.showUsuarioMenu = !this.showUsuarioMenu;
+  }
+
+  handleLogoutClick(): void {
+    this.authService.logout();
+    this.resetUsuario();
+  }
+
+  private resetUsuario(): void {
+    this.usuario = new Usuario();
   }
 }

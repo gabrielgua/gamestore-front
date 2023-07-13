@@ -1,20 +1,93 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject, Observable, firstValueFrom, tap } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  
+  private token_payload: any;
+  private usuarioId$ = new BehaviorSubject<number>(0);
+
+
+  constructor(
+    private http: HttpClient, 
+    private jwtHelper: JwtHelperService
+
+    ) { 
+      if (this.isLoggedIn()) {
+        this.armazenarAccessToken(this.token!);
+      }
+    }
+
+
+
+  public get token() {
+    return localStorage.getItem('token');
+  }
+
+  public getUsuarioId() {
+    return this.usuarioId$.asObservable();
+  }
+
+  public init(): void {
+    console.log('init');
+    
+  }
+
+
+  public isLoggedIn(): boolean {
+    return this.token != null && !this.jwtHelper.isTokenExpired(this.token);
+  }
+
+  
 
   public checkUsername(username: string): Observable<boolean> {
-
-    const request = { username: username }
-    console.log(request);
-    
+    const request = { username: username }    
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
   }
+
+  public register(usuario: UsuarioRequest): Promise<any> {
+    return firstValueFrom(this.http.post<any>(`${environment.API_URL}/auth/register`, usuario).pipe(
+      tap(response => {
+        this.armazenarAccessToken(response['access_token']);
+        this.armazenarRefreshToken(response['refresh_token']);        
+      })
+    ));
+  }
+
+  public armazenarAccessToken(token: string) {
+    this.token_payload = this.jwtHelper.decodeToken(token);    
+    this.usuarioId$.next(this.token_payload.userId);
+    localStorage.setItem('token', token);
+  }
+
+  public armazenarRefreshToken(token: string) {
+    localStorage.setItem('refreshToken', token);
+  }
+
+  public logout(): void {
+    this.resetJwtPayload();
+    this.limparLocalStorage();
+  }
+
+  private limparLocalStorage(): void {
+    localStorage.clear();
+  }
+
+  
+
+  private resetJwtPayload(): void {
+    this.token_payload = null;
+  }
+
+
 }

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Validation from '../shared/auth-form/validation';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioRequest } from 'src/app/models/usuarioRequest';
+import { map, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -17,24 +21,36 @@ export class CadastroComponent implements OnInit {
     confirmarSenha: new FormControl('')
   })
 
-  // submitted: boolean = this.form.touched;
+  submitting: boolean = false;
+  error: string = '';
+
   
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private route: Router) {}
   
   ngOnInit(): void {
     this.buildForm();
   }
 
   handleSubmit(): void {
-
-    if (this.form.invalid) {
-      return; //disable button
+    this.submitting = true;
+    if (this.form.invalid || this.senha?.value !== this.confirmarSenha?.value) {
+      return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
-    
-    
-    
+    const usuario: UsuarioRequest = {
+      email: this.email?.value,
+      senha: this.senha?.value,
+      username: this.username?.value
+    };
+
+    this.authService.register(usuario)
+      .then(() => this.route.navigate(['']))
+      .catch(error => {
+        this.error = error.error.detail
+      })
   }
 
 

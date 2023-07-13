@@ -2,6 +2,8 @@
 <div class="container" #container (window:resize)="manageScreenSize(container.offsetWidth)">
     <app-slider-mobile *ngIf="mobile" class="slider-mobile"></app-slider-mobile>
     <app-slider-desktop *ngIf="!mobile" class="slider-desktop"></app-slider-desktop>
+
+
 </div>
 
 

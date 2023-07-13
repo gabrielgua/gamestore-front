@@ -2,6 +2,7 @@
 <header #header (window:resize)="manageScreenSize(header.offsetWidth)" >
     <div class="wrapper">
         <app-logo></app-logo>
+
         <nav *ngIf="!mobile">
             <ul class="links">
                 <li><a routerLink="jogos">Jogos</a></li>
@@ -13,16 +14,7 @@
                     </form>
     
                     <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop id="search-dropdown">
-                        <!-- <a class="jogo" routerLink="/jogos/dark-souls-remastered">
-                            <div class="img-wrapper">
-                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570940/capsule_616x353.jpg"/>
-                            </div>
-                            <div class="jogo__info">
-                                <p class="singleline-truncate jogo__nome">Dark Souls: Remastered</p>
-                                <p class="jogo__desenvolvedora">FromSoftware, Inc</p>
-                                <p class="jogo__preco">R$ 259,99</p>
-                            </div>
-                        </a> -->
+                        
                         <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{jogo.uriNome}}">
                             <div class="img-wrapper">
                                 <img src="{{jogo.urlImagem}}"/>
@@ -37,10 +29,29 @@
                 </div>
                 
             </ul>
-            <ul class="account-actions">
+            <ul class="account-actions" *ngIf="usuario.id === 0">
                 <li><a routerLink="sing-up">Cadastrar</a></li>
                 <li class="link-entrar"><a>Entrar</a></li>
             </ul>
+            <ul class="account-actions" *ngIf="usuario.id != 0">
+                <div class="usuario-wrapper">
+                    <button id="profile-button" class="btn-avatar" (click)="handleProfileClick()">
+                        <img id="profile-avatar" class="avatar" src="https://api.dicebear.com/6.x/bottts/svg?seed={{usuario.username}}" alt="avatar" />
+                    </button>
+    
+                    <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>
+                        <p class="profile-nome">{{usuario.nome ? usuario.nome : usuario.email}}</p>
+                        <section class="profile-actions">
+
+                            <button class="profile-button"><span class="material-symbols-rounded">person</span> <p>Perfil</p></button>    
+                            <button class="profile-button"><span class="material-symbols-rounded">shopping_bag</span> <p>Pedidos</p></button>    
+                            <button class="profile-button" (click)="handleLogoutClick()"><span class="material-symbols-rounded">logout</span> <p>Sair</p></button>    
+    
+                        </section>
+                    </div>
+                </div>
+            </ul>
+            
         </nav>
         <nav class="mobile" *ngIf="mobile" >
             <button class="mobile-menu-btn" (click)="showMobileMenu = !showMobileMenu" [ngClass]="{'mobile--opened': showMobileMenu}">

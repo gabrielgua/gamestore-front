@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,12 @@ import { CadastroComponent } from './components/auth/cadastro/cadastro.component
 import { LogoComponent } from './components/shared/logo/logo.component';
 import { AuthFormComponent } from './components/auth/shared/auth-form/auth-form.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
+import { environment } from 'src/environments/environment';
+import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
+
+export function tokenGetter(): string {
+  return localStorage.getItem('token')!;
+}
 
 registerLocaleData(localePt);
 
@@ -55,18 +62,31 @@ registerLocaleData(localePt);
     LoaderComponent,
   ],
   imports: [
-  
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+      }
+    }),
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }    
+    JwtHelperService,
+    { provide: LOCALE_ID, useValue: 'pt-BR', },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }   
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+

@@ -31,15 +31,15 @@
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(email!), 'input--valid': email?.valid }">
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(email!) || error.length, 'input--valid': email?.valid && !error.length }">
                 <input type="text" formControlName="email">
-                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': email?.valid }">
-                    {{ isInvalid(email!) ? 'close' : ''}}
-                    {{ email?.valid ? 'check' : ''}}
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!) || error.length, 'success': email?.valid }">
+                    {{ isInvalid(email!) || error.length ? 'close' : ''}}
+                    {{ email?.valid && !error.length ? 'check' : ''}}
                 </span>
             </div>
+            <p class="error" *ngIf="error?.length">E-mail já cadastrado.</p>
             <div class="errors" *ngIf="isInvalid(email!)">
-                <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
                 <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
                 <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
             </div>
@@ -72,6 +72,6 @@
                 <p class="error" *ngIf="isError('confirmarSenha', 'matching')">Senhas não coincidem.</p>
             </div>
         </div>
-        <button class="btn-submit" [disabled]="form.invalid && !username?.pending" [ngClass]="{'btn-submit--disabled': form.invalid || username?.pending }" type="submit">Cadastrar</button>
+        <button class="btn-submit" [disabled]="form.invalid || username?.pending || error.length" [ngClass]="{'btn-submit--disabled': form.invalid || username?.pending || error.length }" type="submit">Cadastrar</button>
     </form>
 </div>
