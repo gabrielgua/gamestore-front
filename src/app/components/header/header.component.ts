@@ -13,6 +13,7 @@ import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-s
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
+import { debounceTime, delay, distinctUntilChanged, map, merge, mergeMap, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -70,8 +71,8 @@ export class HeaderComponent implements AfterViewInit {
 
   handleChangeSearch(): void {
     this.resetDropDown();
-    if (this.search.value && this.search.value.length > 4) {
-      this.jogoService.init(this.size, this.search.value);
+    if (this.search.value) {    
+      this.jogoService.search(this.search.value);
       this.getJogos();
     }
   }
@@ -88,7 +89,7 @@ export class HeaderComponent implements AfterViewInit {
 
 
   private getJogos(): void {
-    this.jogoService.getJogos().subscribe((jogos) => {
+    this.jogoService.getJogos().subscribe((jogos: any) => {
       this.jogos = jogos.content;      
     })
   }

@@ -24,12 +24,15 @@ export class UsuarioService {
   
   public init(): void { 
     
-    this.authService.getUsuarioId().subscribe((usuarioId: number) => {
-      this.usuarioId = usuarioId;
-    })
-    
-    this.http.get<Usuario>(`${environment.API_URL}/usuarios/${this.usuarioId}`)  
-      .subscribe(usuario => this.usuario$.next(usuario))
+    if (this.authService.isLoggedIn()) {
+      this.authService.getUsuarioId().subscribe((usuarioId: number) => {
+        this.usuarioId = usuarioId;
+      })
+      
+      this.http.get<Usuario>(`${environment.API_URL}/usuarios/${this.usuarioId}`)  
+        .subscribe(usuario => this.usuario$.next(usuario))
+    }
+  
   }
 
   private resetUsuarioState(): void {

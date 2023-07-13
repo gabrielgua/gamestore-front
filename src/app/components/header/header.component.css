@@ -116,6 +116,8 @@ form {
     position: absolute;
     margin-top: 3rem;
     display: grid;
+    border-radius: .25rem;
+    overflow: hidden;
 
     width: 100%;
     min-width: max-content;
