@@ -55,14 +55,10 @@ export class HeaderComponent implements AfterViewInit {
     this.resetDropDown();
     this.resetSearch();
     this.manageScreenSize(this.header.nativeElement.offsetWidth);
-    this.changeDetector.detectChanges();
     this.getUsuario();
     this.handleSearch();
-
-    
+    this.changeDetector.detectChanges();
   }
-
-  
 
   get search() {
     return this.form.get('search');
@@ -89,9 +85,8 @@ export class HeaderComponent implements AfterViewInit {
     
     this.usuarioService.init();
     this.usuarioService.getUsuario().subscribe(usuario => {
-      if (usuario.id != 0) {
+      if (this.isLoggedIn()) {
         this.usuario = usuario;
-        console.log(this.usuario);
       }
     });
   }
@@ -112,6 +107,10 @@ export class HeaderComponent implements AfterViewInit {
         this.showUsuarioMenu = false;
      }    
   }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  } 
 
 
   private getJogos(): void {

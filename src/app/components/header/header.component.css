@@ -206,7 +206,7 @@ form {
 }
 
 .profile-dropdown {
-    min-width: max-content;
+    min-width: 10rem;
     right: 0;
     top: 4rem;
     position: absolute;

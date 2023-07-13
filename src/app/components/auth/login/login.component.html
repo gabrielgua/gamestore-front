@@ -1,0 +1,45 @@
+<div class="container">
+    <app-auth-header></app-auth-header>
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <div class="title-wrapper">
+            <p class="title">Entrar</p>
+            <p class="subtitle">Ainda não tem uma conta? Faça seu <a routerLink="/sing-up">cadastro</a>.</p>
+        </div>
+        <div class="form-group">
+            <label>Nome de usuário</label>
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(username!), 'input--valid': username?.valid }">
+                <input type="text" formControlName="username">
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
+                    {{ isInvalid(username!) ? 'close' : ''}}
+                    {{ username?.valid ? 'check' : ''}}
+                    <div style="margin-right: .25rem;" *ngIf="username?.pending">
+                        <app-loader ></app-loader>
+                    </div>
+                </span>
+            </div>
+            
+            <div class="errors" *ngIf="isInvalid(username!)">
+                <p class="error" *ngIf="isError('username', 'taken')">Nome de usuário indisponível.</p>
+                <p class="error" *ngIf="isError('username', 'required')">Nome de usuário é requerido.</p>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Senha</label>
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(senha!), 'input--valid': senha?.valid }">
+                <input type="password" formControlName="senha">
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(senha!), 'success': senha?.valid }">
+                    {{ isInvalid(senha!) ? 'close' : ''}}
+                    {{ senha?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            <div class="errors" *ngIf="isInvalid(senha!)">
+                <p class="error" *ngIf="isError('senha', 'required')">Senha é requerida.</p>
+                <p class="error" *ngIf="isError('senha', 'minlength')">Senha precisa ter no mínimo 5 caractéres.</p>
+            </div>
+        </div>
+       
+        <button class="btn-submit" [disabled]="form.invalid || error.length" [ngClass]="{'btn-submit--disabled': form.invalid || error.length }" type="submit">Entrar</button>
+    </form>
+</div>

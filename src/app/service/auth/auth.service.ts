@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, firstValueFrom, tap } from 'rxjs';
+import { AuthRequest } from 'src/app/models/auth.request';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { environment } from 'src/environments/environment';
@@ -55,6 +56,16 @@ export class AuthService {
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
   }
 
+  public authenticate(request: AuthRequest): Promise<any> {
+    this.limparLocalStorage();
+    return firstValueFrom(this.http.post<any>(`${environment.API_URL}/auth/authenticate`, request).pipe(
+      tap(response => {
+        this.armazenarAccessToken(response['access_token']);
+        this.armazenarRefreshToken(response['refresh_token']);
+      })
+    ))
+  }
+
   public register(usuario: UsuarioRequest): Promise<any> {
     return firstValueFrom(this.http.post<any>(`${environment.API_URL}/auth/register`, usuario).pipe(
       tap(response => {
@@ -82,8 +93,6 @@ export class AuthService {
   private limparLocalStorage(): void {
     localStorage.clear();
   }
-
-  
 
   private resetJwtPayload(): void {
     this.token_payload = null;

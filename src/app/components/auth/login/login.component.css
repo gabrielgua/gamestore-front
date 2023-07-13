@@ -122,6 +122,3 @@ form {
 .input--valid {
     outline: 1px solid rgba(var(--success), 1) !important;
 }
-
-
-

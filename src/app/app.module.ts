@@ -30,10 +30,11 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
 import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { LogoComponent } from './components/shared/logo/logo.component';
-import { AuthFormComponent } from './components/auth/shared/auth-form/auth-form.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { environment } from 'src/environments/environment';
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
+import { LoginComponent } from './components/auth/login/login.component';
+import { AuthHeaderComponent } from './components/auth/shared/auth-header/auth-header.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -58,8 +59,9 @@ registerLocaleData(localePt);
     AccessDeniedComponent,
     CadastroComponent,
     LogoComponent,
-    AuthFormComponent,
     LoaderComponent,
+    LoginComponent,
+    AuthHeaderComponent,
   ],
   imports: [
     BrowserModule,

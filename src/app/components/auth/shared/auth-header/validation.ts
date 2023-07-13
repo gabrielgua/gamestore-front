@@ -1,5 +1,5 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { Observable, debounceTime, delay, map, of, switchMap } from "rxjs";
+import { Observable, delay, map, of, switchMap } from "rxjs";
 import { AuthService } from "src/app/service/auth/auth.service";
 
 export default class Validation {
@@ -36,7 +36,3 @@ export default class Validation {
         }
     }
 }
-
-
-
-

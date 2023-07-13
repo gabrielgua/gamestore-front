@@ -1,10 +1,5 @@
 <div class="container">
-    <div class="header">
-        <div class="line"><p></p></div>
-        <div class="logo">
-            <app-logo></app-logo>
-        </div>
-    </div>
+    <app-auth-header></app-auth-header>
 
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
         <div class="title-wrapper">

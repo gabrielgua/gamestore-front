@@ -29,14 +29,14 @@
                 </div>
                 
             </ul>
-            <ul class="account-actions" *ngIf="usuario.id === 0">
+            <ul class="account-actions" *ngIf="!isLoggedIn()">
                 <li><a routerLink="sing-up">Cadastrar</a></li>
-                <li class="link-entrar"><a>Entrar</a></li>
+                <li class="link-entrar" routerLink="sing-in"><a>Entrar</a></li>
             </ul>
-            <ul class="account-actions" *ngIf="usuario.id != 0">
+            <ul class="account-actions" *ngIf="isLoggedIn()">
                 <div class="usuario-wrapper">
                     <button id="profile-button" class="btn-avatar" (click)="handleProfileClick()">
-                        <img id="profile-avatar" class="avatar" src="https://api.dicebear.com/6.x/bottts/svg?seed={{usuario.username}}" alt="avatar" />
+                        <img id="profile-avatar" class="avatar" src="{{usuario.avatarUrl}}" alt="avatar" />
                     </button>
     
                     <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>

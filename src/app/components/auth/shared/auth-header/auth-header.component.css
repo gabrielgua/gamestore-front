@@ -1,0 +1,23 @@
+.header {
+    display: grid;
+    position: relative;
+    place-items: center;
+    padding: 3rem;
+}
+
+
+.line {
+    z-index: 1;
+    min-width: 100%;
+    position: absolute;
+    max-width: max-content;
+    border-top: 1px solid var(--subtle-border-color);
+
+}
+
+.logo {
+    z-index: 2;      
+    display: grid;
+    padding: .5rem 2rem;  
+    background-color: var(--background-primary);
+}

@@ -6,6 +6,7 @@ import { JogosListComponent } from './components/jogos-list/jogos-list.component
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 const routes: Routes = [
 
@@ -17,6 +18,7 @@ const routes: Routes = [
 
 
   {path: 'sing-up', component: CadastroComponent},
+  {path: 'sing-in', component: LoginComponent},
 
 
   {path: 'error/not-found', component: NotFoundComponent},

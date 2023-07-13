@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Validation from '../shared/auth-form/validation';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { map, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
+import Validation from '../shared/auth-header/validation';
 
 @Component({
   selector: 'app-cadastro',
@@ -50,6 +50,8 @@ export class CadastroComponent implements OnInit {
       .then(() => this.route.navigate(['']))
       .catch(error => {
         this.error = error.error.detail
+        console.log(this.error);
+        
       })
   }
 
