@@ -6,71 +6,86 @@
         </form>
     </section>
 
-    <section class="filters">
-        <div  class="filter" *ngFor="let filter of filters; index as i">
-            <button id="filter" class="filter__btn" (click)="openFilterDropdown(i)" [ngClass]="{'filter__btn--opened': filter.show}">
-                <p id="filter-title" class="filter__title">{{filter.nome}}</p>
-                <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
-            </button>
-            <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
-                <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
-                    {{option.nome}}
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
     <section class="active-filters" *ngIf="filterTags.length">
-        <p>Filtros: </p>
         <div class="active-filter" *ngFor="let aFilter of filterTags; index as i">
             <p>{{aFilter.nome}}</p> 
-            <button class="filter-remove-btn" (click)="removeFilter(i)">
+            <button class="btn-remove-filter" (click)="removeFilter(i)">
                 <span class="material-symbols-rounded icon--bolder">close</span>
             </button>
 
         </div>
-        <p *ngIf="filterTags.length >= 2"><button class="bnt-dismiss-filters" (click)="clearAllFiltros()">Limpar filtros</button></p>
-
-
-        
+        <button *ngIf="filterTags.length >= 2" class="btn-dismiss-filters" (click)="clearAllFiltros()">
+            <span class="material-symbols-rounded icon--filled">cancel</span>
+            <p>Limpar filtros</p>
+        </button>
     </section>
 
-    <div class="results-sort-filter">
+    <div class="results-filters">
         <p class="total-resultados"><span>{{getTotalElements()}}</span> {{getTotalElements() === 1 ? 'resultado' : 'resultados'}}.</p>
-        <div class="filter--sort" >
-            <button id="filter--sort" class="filter__btn filter__btn--sort" (click)="openSortFilterDropdown()" [ngClass]="{'filter__btn--sort--opened': sortFilter.show}">
-                <p id="filter-title" class="filter__title">{{sortFilter.nome}}</p>
-                <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': sortFilter.show}">expand_more</span>
-            </button>
-            <div class="filter__dropdown filter__dropdown--sort" *ngIf="sortFilter.show" @fromTopToTop>
-                <button id="filter__option" class="filter__option" *ngFor="let option of sortFilter.options" (click)="handleSortFilter(option)">
-                    {{option.nome}}
+        <section class="filters">
+            <div  class="filter" *ngFor="let filter of filters; index as i">
+                <button id="filter" class="filter__btn" (click)="openFilterDropdown(i)" [ngClass]="{'filter__btn--opened': filter.show}">
+                    <p id="filter-title" class="filter__title">{{filter.nome}}</p>
+                    <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': filter.show}">expand_more</span>
                 </button>
+                <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
+                    <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
+                        {{option.nome}}
+                    </button>
+                </div>
             </div>
-        </div>
+            <div class="filter filter--sort">
+                <button id="filter--sort" class="filter__btn filter__btn--sort" (click)="openSortFilterDropdown()" [ngClass]="{'filter__btn--sort--opened': sortFilter.show}">
+                    <p id="filter-title" class="filter__title">{{sortFilter.nome}}</p>
+                    <span id="filter-span-arrow" class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': sortFilter.show}">expand_more</span>
+                </button>
+                <div class="filter__dropdown filter__dropdown--sort" *ngIf="sortFilter.show" @fromTopToTop>
+                    <button id="filter__option" class="filter__option" *ngFor="let option of sortFilter.options" (click)="handleSortFilter(option)">
+                        {{option.nome}}
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        
+
     </div>
 
+    
+
+    
+
+
+
+    
+
+    
+
+    
         
         
-        
+    <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
     <section class="jogos">
-        <div *ngIf="getTotalElements() === 0"><p>Nada por aqui. 😿</p></div>
-        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" @fromRightToRight>
+        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
                 <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
             </a>
             <div class="jogo__detalhes">
                 <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
-                <p class="jogo__preco">
-                    {{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}
-                </p>
+                <div class="jogo__preco-nota">
+                    <p class="jogo__preco">
+                        {{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}
+                    </p>
+                    <div class="jogo__nota">
+                        <span class="material-symbols-rounded icon--filled">star</span>
+                        <p class="{{jogo.nota >= 7 ? 'success' : 'error'}}">{{ jogo.nota | number: '1.1': 'en-us' }}</p>
+                    </div>
+                </div>
                 <div class="jogo__actions">
-                    <button class="btn btn-desejo">
+                    <button class="jogo__btn btn-desejo">
                         <span class="material-symbols-rounded">favorite</span>
                     </button>
-                    <button class="btn btn-carrinho">
+                    <button class="jogo__btn btn-carrinho">
                         <span class="material-symbols-rounded">shopping_cart</span>
                         Carrinho
                     </button>
@@ -80,7 +95,7 @@
     </section>
     
 
-    <section class="page-actions">
+    <section class="page-actions" *ngIf="getTotalElements() != 0">
         <button class="btn-arrow prev" 
             (click)="prevPage()"
             [disabled]="!hasPrevPage()"

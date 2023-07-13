@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Jogo } from '../../models/jogo';
 import { JogosDestaque } from '../../service/jogos/jogos-destaque.service';
+import { JogoResumo } from 'src/app/models/jogo.resumo';
 
 @Component({
   selector: 'app-slider-mobile',
@@ -14,7 +14,7 @@ export class SliderMobileComponent implements OnInit {
 
   @ViewChild('carousel') carousel!: ElementRef;
 
-  jogos: Jogo[] = [];
+  jogos: JogoResumo[] = [];
   autoSlideInterval: any;
   lastOffset: number = 0;
   currentIndex: number = 0;

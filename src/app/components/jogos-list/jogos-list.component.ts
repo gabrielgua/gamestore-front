@@ -126,6 +126,11 @@ export class JogosListComponent implements OnInit {
     this.service.init(this.pageable, this.filter);
   }
 
+  animEnd(event: any) {
+    console.log(event);
+    
+  }
+
 
   getJogos(): void {
     this.service.getPageableJogos().subscribe((pageableJogos) => {
@@ -297,6 +302,7 @@ export class JogosListComponent implements OnInit {
     }
 
     this.pageable.sort = option.value;
+    this.pageable.page = 0;
     this.init();
   }
 
@@ -318,6 +324,7 @@ export class JogosListComponent implements OnInit {
       case FilterTipo.MODO: this.removeFromFilters(this.filter.modosIds!, filter); break;
     }
 
+    this.pageable.page = 0;
     this.init();
   }
 
@@ -364,6 +371,7 @@ export class JogosListComponent implements OnInit {
   
   clearAllFiltros(): void {
     this.resetSortFilter();
+    this.resetPageable();
     this.resetFilter();
     this.clearSearch();
     this.resetFilterTags();

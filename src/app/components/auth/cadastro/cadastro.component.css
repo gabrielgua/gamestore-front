@@ -106,13 +106,7 @@ form {
     }
 }
 
-.error {
-    color: rgb(var(--error));
-}
 
-.success {
-    color: rgb(var(--success));
-}
 
 
 .input--invalid {

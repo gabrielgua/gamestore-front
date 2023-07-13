@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Jogo } from '../../models/jogo';
 import { Fade } from '../../animations/animations';
 import { JogosDestaque } from '../../service/jogos/jogos-destaque.service';
+import { JogoResumo } from 'src/app/models/jogo.resumo';
 
 @Component({
   selector: 'app-slider-desktop',
@@ -15,7 +16,7 @@ export class SliderDesktopComponent implements OnInit {
 
   constructor(private service: JogosDestaque) {}  
   
-  jogosGroup: Jogo[][] = [];
+  jogosGroup: JogoResumo[][] = [];
 
   
   interval: any;

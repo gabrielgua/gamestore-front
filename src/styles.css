@@ -34,7 +34,8 @@
     --border-carousel: 2px solid var(--roxo);
 
     --font-small: .8rem;
-    --font-normal: .9rem;
+    --font-smaller: .9rem;
+    --font-normal: 1rem;
     --font-subtitles: 1.1rem;
     --font-titles: 2rem;
     --font-family: 'Saira', sans-serif;
@@ -108,6 +109,14 @@ a {
 
 .divider-horizontal {
     height: .1rem;
+}
+
+.error {
+    color: rgb(var(--error));
+}
+
+.success {
+    color: rgb(var(--success));
 }
 
 

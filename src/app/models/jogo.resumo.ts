@@ -8,5 +8,6 @@ export class JogoResumo {
     urlImagem!: string;
     descricao!: string;
     preco!: number;
+    nota!: number;
     desenvolvedora?: DesenvolvedoraResumo
 }
