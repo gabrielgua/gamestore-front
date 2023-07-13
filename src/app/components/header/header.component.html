@@ -8,9 +8,9 @@
                 <li><a routerLink="jogos">Jogos</a></li>
                 <li><a routerLink="">Desenvolvedoras</a></li>
                 <div class="search-wrapper">
-                    <form (submit)="handleSubmitSearch()">
+                    <form [formGroup]="form" (submit)="handleSubmitSearch()">
                         <span class="material-symbols-rounded">search</span>
-                        <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search" (keyup)="handleChangeSearch()"/>
+                        <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" (keyup)="checkSearch()"/>
                     </form>
     
                     <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop id="search-dropdown">
@@ -64,9 +64,9 @@
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
     <ul class="links">
-        <form (submit)="handleSubmitSearch()">
+        <form [formGroup]="form" (submit)="handleSubmitSearch()">
             <span class="material-symbols-rounded">search</span>
-            <input class="search-input" type="text" placeholder="Pesquisar..." [formControl]="search"/>
+            <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search"/>
         </form>
         <li><a routerLink="jogos">Jogos</a></li>
         <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>

@@ -12,25 +12,17 @@ export class JogosHeaderSearchListService {
 
   constructor(private http: HttpClient) { }
 
-  jogos$ = new Observable<PageableModel<JogoResumo>>;
-  term = new BehaviorSubject<string>('');
+  jogos$ = new BehaviorSubject<PageableModel<JogoResumo>>(new PageableModel());
   private DEFAULT_SIZE: number = 3;
 
 
-  public init(term: string) {
+  public init(term: string) {   
     return this.http.get<PageableModel<JogoResumo>>(`${environment.API_URL}/jogos?nome=${term}&size=${this.DEFAULT_SIZE}`)
+      .pipe(tap(jogos => this.jogos$.next(jogos)))
   }
 
 
   public getJogos() {
-    return this.jogos$
-  }
-
-  public search(term: string) {
-    this.term.next(term.trim());
-    this.jogos$ = this.term
-      .pipe(
-        debounceTime(500), 
-        mergeMap(term => this.init(term)));
+    return this.jogos$.asObservable();
   }
 }

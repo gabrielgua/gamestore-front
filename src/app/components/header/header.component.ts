@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Fade } from '../../animations/animations';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Jogo } from '../../models/jogo';
 import { JogoResumo } from '../../models/jogo.resumo';
@@ -13,7 +13,7 @@ import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-s
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
-import { debounceTime, delay, distinctUntilChanged, map, merge, mergeMap, of, switchMap } from 'rxjs';
+import { Subscription, debounceTime, delay, distinctUntilChanged, filter, map, merge, mergeMap, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -31,12 +31,19 @@ export class HeaderComponent implements AfterViewInit {
     private router: Router, 
     private jogoService: JogosHeaderSearchListService,
     private usuarioService: UsuarioService, 
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private formBuilder: FormBuilder) {}
+ 
 
-  search = new FormControl('');
 
   size: number = 4;
   jogos: JogoResumo[] = [];
+
+  form = this.formBuilder.group({
+    search: new FormControl(null)
+  })
+
+
   
 
   breakToMobileWidth = 800;
@@ -50,6 +57,32 @@ export class HeaderComponent implements AfterViewInit {
     this.manageScreenSize(this.header.nativeElement.offsetWidth);
     this.changeDetector.detectChanges();
     this.getUsuario();
+    this.handleSearch();
+
+    
+  }
+
+  
+
+  get search() {
+    return this.form.get('search');
+  }
+
+  private handleSearch(): void {
+    this.search?.valueChanges.pipe(
+      debounceTime(500),
+      filter(term => !!term),
+      switchMap(term => { 
+        this.resetDropDown();
+        return this.jogoService.init(term!)
+      })
+    ).subscribe(() => this.getJogos())
+  }
+
+  public checkSearch(): void {
+    if (!this.search?.value) {
+      this.resetDropDown();
+    }
   }
 
   private getUsuario(): void {
@@ -69,13 +102,6 @@ export class HeaderComponent implements AfterViewInit {
     this.showMobileMenu = this.showMobileMenu && !isMobile ? false : this.showMobileMenu;
   }
 
-  handleChangeSearch(): void {
-    this.resetDropDown();
-    if (this.search.value) {    
-      this.jogoService.search(this.search.value);
-      this.getJogos();
-    }
-  }
 
   @HostListener('document: click', ['$event'])
   handleDocumentClick(event: any) {
@@ -89,7 +115,7 @@ export class HeaderComponent implements AfterViewInit {
 
 
   private getJogos(): void {
-    this.jogoService.getJogos().subscribe((jogos: any) => {
+    this.jogoService.getJogos().subscribe((jogos: any) => {      
       this.jogos = jogos.content;      
     })
   }
@@ -99,13 +125,13 @@ export class HeaderComponent implements AfterViewInit {
   }
   
   resetSearch(): void {
-    this.search = new FormControl('');
+    this.search?.reset();
   }
 
   handleSubmitSearch(): void {
     this.showMobileMenu = false;
 
-    if (this.search.value) {
+    if (this.search?.value) {
       localStorage.setItem('search', this.search.value);
       this.resetSearch();
       this.router.navigateByUrl('/', {skipLocationChange: true})
