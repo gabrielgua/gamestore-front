@@ -18,13 +18,20 @@ export class AuthInterceptor implements HttpInterceptor {
     
     if (this.authService.isLoggedIn()) {
       
+      
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.authService.token}`
         }
       })
 
-      return next.handle(request);
+    } else if (this.authService.isRefreshTokenValid()) {
+      console.log('Access token expirado, gerando novo com Refresh Token...');
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.authService.refreshToken}`
+        }
+      })
     }
 
     request = request.clone({

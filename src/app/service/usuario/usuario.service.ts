@@ -31,6 +31,13 @@ export class UsuarioService {
       
       this.http.get<Usuario>(`${environment.API_URL}/usuarios/${this.usuarioId}`)  
         .subscribe(usuario => this.usuario$.next(usuario))
+    } else if (this.authService.isRefreshTokenValid()) {
+      
+      this.authService.authenticateViaRefreshToken();
+
+      this.authService.getUsuarioId().subscribe((usuarioId: number) => {
+        this.usuarioId = usuarioId;
+      })
     }
   
   }

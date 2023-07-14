@@ -3,7 +3,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, firstValueFrom, tap } from 'rxjs';
 import { AuthRequest } from 'src/app/models/auth.request';
-import { Usuario } from 'src/app/models/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { environment } from 'src/environments/environment';
 
@@ -26,7 +25,7 @@ export class AuthService {
     ) { 
       if (this.isLoggedIn()) {
         this.armazenarAccessToken(this.token!);
-      }
+      } 
     }
 
 
@@ -35,25 +34,35 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  public get refreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
   public getUsuarioId() {
     return this.usuarioId$.asObservable();
   }
 
-  public init(): void {
-    console.log('init');
-    
-  }
-
-
+ 
   public isLoggedIn(): boolean {
     return this.token != null && !this.jwtHelper.isTokenExpired(this.token);
   }
 
-  
+  public isRefreshTokenValid(): boolean {
+    return this.refreshToken != null && !this.jwtHelper.isTokenExpired(this.refreshToken);
+  }
 
   public checkUsername(username: string): Observable<boolean> {
     const request = { username: username }    
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
+  }
+
+  public authenticateViaRefreshToken() {
+    this.http.post<any>(`${environment.API_URL}/auth/refresh-token`, {}).pipe(
+      tap(response => {
+        this.armazenarAccessToken(response['access_token']);
+        this.armazenarRefreshToken(response['refresh_token']);
+      })
+    );
   }
 
   public authenticate(request: AuthRequest): Promise<any> {
