@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Router } from '@angular/router';
 import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import Validation from '../shared/auth-header/validation';
 import { AuthRequest } from 'src/app/models/auth.request';
 
 @Component({

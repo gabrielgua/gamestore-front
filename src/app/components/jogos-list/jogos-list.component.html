@@ -31,7 +31,7 @@
                 <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
                     <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
                         {{option.nome}}
-                    </button>
+                </button>
                 </div>
             </div>
             <div class="filter filter--sort">
@@ -50,52 +50,42 @@
         
 
     </div>
-
     
-
-    
-
-
-
-    
-
-    
-
-    
-        
-        
     <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
     <section class="jogos">
+
         <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
+            
             <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
-                <img class="jogo__img " src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
-            </a>
+                <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
+               
+                <button class="btn-desejo">
+                    <span class="material-symbols-rounded">favorite</span>
+                </button>
+            </a>    
             <div class="jogo__detalhes">
-                <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
                 <div class="jogo__preco-nota">
-                    <p class="jogo__preco">
-                        {{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}
-                    </p>
+                    
+                    <button class="jogo__btn btn-carrinho">
+                        <div class="jogo__btn--hover">
+                            <span class="material-symbols-rounded">add_shopping_cart</span>
+                            <p>Carrinho</p>
+                        </div>
+
+                        <p class="jogo__preco">{{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}</p>
+                        
+                    </button>
                     <div class="jogo__nota">
                         <span class="material-symbols-rounded icon--filled">star</span>
                         <p class="{{jogo.nota >= 7 ? 'success' : 'error'}}">{{ jogo.nota | number: '1.1': 'en-us' }}</p>
                     </div>
-                </div>
-                <div class="jogo__actions">
-                    <button class="jogo__btn btn-desejo">
-                        <span class="material-symbols-rounded">favorite</span>
-                    </button>
-                    <button class="jogo__btn btn-carrinho">
-                        <span class="material-symbols-rounded">shopping_cart</span>
-                        Carrinho
-                    </button>
-                </div>
+                </div>  
             </div>
         </div>
     </section>
     
 
-    <section class="page-actions" *ngIf="getTotalElements() != 0">
+    <section class="page-actions" >
         <button class="btn-arrow prev" 
             (click)="prevPage()"
             [disabled]="!hasPrevPage()"

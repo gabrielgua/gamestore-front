@@ -1,337 +1,293 @@
 header {
-    top: 0;
-    z-index: 999;
-    height: 5rem;
-    display: flex;
-    position: sticky;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--box-shadow-header-dark);
-    background-color: black;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+  top: 0;
+  z-index: 999;
+  height: 5rem;
+  display: flex;
+  position: sticky;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow-header-dark);
+  background-color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .wrapper {
-    gap: 1rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    width: min(100% - 3rem, var(--container-max-size));
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: min(100% - 3rem, var(--container-max-size));
 }
-
 
 nav {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
 }
 
-
-
 nav ul {
-    gap: 1.5rem;
-    display: flex;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  gap: 1.5rem;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .links {
-    margin-right: auto;
-    list-style: none;
+  margin-right: auto;
+  list-style: none;
 }
 
 .link-entrar {
-    padding: .75rem;
-    border: 1px solid var(--primary);
+  padding: 0.75rem;
+  border: 1px solid var(--primary);
 }
 
 .link-entrar:hover {
-    cursor: pointer;
-    color: var(--green);
+  cursor: pointer;
+  color: var(--green);
 }
 
-.link-entrar:active, .link-entrar:active > a {
-    color: white;
-    text-decoration: none;
-    background-color: var(--green);
+.link-entrar:active,
+.link-entrar:active > a {
+  color: white;
+  text-decoration: none;
+  background-color: var(--green);
 }
 
 a {
-    user-select: none;
-    color: var(--accent);
-    transition: color 75ms ease;
+  user-select: none;
+  color: var(--accent);
+  transition: color 75ms ease;
 }
 
 a:hover {
-    cursor: pointer;
-    color: var(--primary);
+  cursor: pointer;
+  color: var(--primary);
 }
 
 .search-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
 }
 
 form {
-    border: 1px solid var(--subtle-border-color);
-    background-color: black;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    box-shadow: var(--box-shadow-primary);
-    padding-inline-start: .5rem;
-    transition: outline 50ms ease;
+  border: 1px solid var(--subtle-border-color);
+  background-color: black;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  box-shadow: var(--box-shadow-primary);
+  padding-inline-start: 0.5rem;
+  transition: outline 50ms ease;
 
-    > span {
-        color: var(--primary);
-    }
+  > span {
+    color: var(--primary);
+  }
 
-    &:focus-within {
-        outline: 3px solid var(--primary);
-    }
+  &:focus-within {
+    outline: 3px solid var(--primary);
+  }
 }
 
 .search-input {
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    font-size: inherit;
-    font-family: inherit;
-    padding: .5rem;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.5rem;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 
 .search-dropdown {
-    place-self: end;
-    position: absolute;
-    margin-top: 3rem;
-    display: grid;
-    border-radius: .25rem;
-    overflow: hidden;
+  place-self: start;
+  position: absolute;
+  margin-top: 3rem;
+  display: grid;
+  border-radius: 0.25rem;
+  overflow: hidden;
 
-    width: 100%;
-    min-width: max-content;
-    background-color: black;
-    border: 1px solid var(--subtle-border-color);
-    box-shadow: var(--box-shadow-primary);
+  min-width: max-content;
+  background-color: black;
+  border: 1px solid var(--subtle-border-color);
+  box-shadow: var(--box-shadow-primary);
 }
 
-
 .jogo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: .5rem;
-    padding-inline-end: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  padding-inline-end: 1rem;
 
-    transition: background-color 150ms ease;
+  transition: background-color 150ms ease;
 }
 
 .jogo:focus,
 .jogo:hover {
-    outline: none;
-    background-color: rgba(var(--primary-number), .2);
+  outline: none;
+  background-color: rgba(var(--primary-number), 0.4);
 }
 
 .img-wrapper {
-    max-height: 5rem;
-    overflow: hidden;
-    border-radius: .5rem;
+  max-height: 5rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
 }
 
 .img-wrapper > img {
-    max-width: 10rem;
-    display: block;
-    object-fit: cover;
-    object-position: center;
+  max-width: 10rem;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .jogo__nome {
-    font-size: var(--font-subtitles);
-    color: var(--accent);
+  font-size: var(--font-normal);
+  color: var(--accent);
 }
 
 .jogo__desenvolvedora {
-    color: rgba(var(--primary-number), .6);
-    font-size: var(--font-normal);
-    max-width: max-content;
+  color: rgba(var(--primary-number), 0.6);
+  font-size: var(--font-smaller);
+  max-width: max-content;
 }
 
 .jogo__preco {
-    color: var(--primary);
+  color: var(--primary);
+  font-size: var(--font-smaller);
 }
 
 .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    font-size: inherit;
-    font-family: inherit;
-    transition: color 75ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 150ms ease;
+  background-color: transparent;
+  border: none;
 
-    > span {
-        color: var(--primary);
-        transition: transform 150ms ease;
-    }
+  > span {
+    color: var(--primary);
+  }
 }
 
 .mobile {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .usuario-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
-    transition: scale 75ms ease;
+  width: 100%;
+  height: 100%;
+  transition: scale 75ms ease;
 }
 
 .profile-dropdown {
-    min-width: 10rem;
-    right: 0;
-    top: 4rem;
-    position: absolute;
-    background-color: black;
-    border-radius: .25rem;
-    border: 1px solid var(--subtle-border-color);
+  min-width: 10rem;
+  right: 0;
+  top: 4rem;
+  position: absolute;
+  background-color: black;
+  border-radius: 0.25rem;
+  border: 1px solid var(--subtle-border-color);
 }
 
 .profile-dropdown .profile-nome {
-    padding: .5rem .75rem;
-    border-bottom: 1px solid var(--subtle-border-color);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--subtle-border-color);
 }
 
 .profile-actions {
-    display: grid;
-    padding: .5rem;
+  display: grid;
+  padding: 0.5rem;
 }
 
 .profile-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
 
-    border: none;
-    background-color: transparent;
-    font-size: inherit;
-    font-family: inherit;
-    padding: .25rem;
-    border-radius: .25rem;
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
 
-    &:hover {
-        background-color: rgba(var(--primary-number), .2);
-        color: var(--primary);
-        cursor: pointer;
-    }
-
+  &:hover {
+    background-color: rgba(var(--primary-number), 0.2);
+    color: var(--primary);
+    cursor: pointer;
+  }
 }
 
 .profile-button:last-child {
-    margin-top: 1rem;
-    color: rgb(var(--error));
+  margin-top: 1rem;
+  color: rgb(var(--error));
 
-    &:hover {
-        background-color: rgba(var(--error), .2);
-        
-    }
+  &:hover {
+    background-color: rgba(var(--error), 0.2);
+  }
 }
 
 .btn-avatar {
-    width: 3.5rem;
-    height: 3.5rem;
-    outline-offset: 3px;
-    border-radius: 50%;
-    border: none;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    background-color: rgba(var(--primary-number), .2);
-    
+  width: 3.5rem;
+  height: 3.5rem;
+  outline-offset: 3px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  background-color: rgba(var(--primary-number), 0.2);
 
-    &:hover {
-        cursor: pointer;
-        background-color: rgba(var(--primary-number), .2);
-    }
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-number), 0.2);
+  }
 
-    &:hover > .avatar {
-        scale: 1.05
-    }
+  &:hover > .avatar {
+    scale: 1.05;
+  }
 }
 
 .btn-usuario span {
-    color: var(--primary);
-}
-
-
-.mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-inline: .75rem;
-    border-radius: .5rem;
-    transition: background-color 150ms ease;
-    background-color: rgba(var(--primary-number), .1);
-
-}
-
-.mobile--opened {
-    background-color: rgba(var(--primary-number), .2);
-}
-
-.icon-opened {
-    transform: rotate(180deg);
-}
-
-.mobile-menu-btn:hover {
-    cursor: pointer;
-    color: var(--primary);
-    background-color: rgba(var(--primary-number), .2);
+  color: var(--primary);
 }
 
 .mobile-menu {
-    position: sticky;
-    background-color: black;
-    z-index: 99;
-    padding: .5rem;
-    position: relative;    
+  position: sticky;
+  background-color: black;
+  z-index: 99;
+  padding: 0.5rem;
+  position: relative;
 }
-
-
 
 .mobile-menu ul {
-    padding-inline: 1rem;
-    display: grid;
-    gap: .5rem;
+  padding-inline: 1rem;
+  display: grid;
+  gap: 0.5rem;
 }
 
-
-
-
-
-
-
-
-
-
-
+@media (width <= 1000px) {
+  .search-dropdown {
+    place-self: end;
+  }
+}

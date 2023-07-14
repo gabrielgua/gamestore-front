@@ -17,7 +17,7 @@ import { JogoComponent } from './components/jogo/jogo.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { SliderDesktopComponent } from './components/slider-desktop/slider-desktop.component';
-import { SafePipe } from './safe.pipe';
+import { SafePipe } from './pipes/safe.pipe';
 import { SliderMobileComponent } from './components/slider-mobile/slider-mobile.component';
 import { JogosAvaliacaoComponent } from './components/jogos-avaliacao/jogos-avaliacao.component';
 import { SliderJogoComponent } from './components/slider-jogo/slider-jogo.component';
@@ -31,7 +31,6 @@ import { AccessDeniedComponent } from './components/errors/access-denied/access-
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { LogoComponent } from './components/shared/logo/logo.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
-import { environment } from 'src/environments/environment';
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthHeaderComponent } from './components/auth/shared/auth-header/auth-header.component';

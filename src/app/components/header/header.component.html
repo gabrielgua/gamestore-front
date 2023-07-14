@@ -1,76 +1,130 @@
+<header #header (window:resize)="manageScreenSize(header.offsetWidth)">
+  <div class="wrapper">
+    <app-logo></app-logo>
 
-<header #header (window:resize)="manageScreenSize(header.offsetWidth)" >
-    <div class="wrapper">
-        <app-logo></app-logo>
+    <nav *ngIf="!mobile">
+      <ul class="links">
+        <li><a routerLink="jogos">Jogos</a></li>
+        <li><a routerLink="">Desenvolvedoras</a></li>
+        <div class="search-wrapper">
+          <form [formGroup]="form" (submit)="handleSubmitSearch()">
+            <span class="material-symbols-rounded">search</span>
+            <input
+              class="search-input"
+              type="text"
+              placeholder="Pesquisar..."
+              formControlName="search"
+              (keyup)="checkSearch()"
+            />
+          </form>
 
-        <nav *ngIf="!mobile">
-            <ul class="links">
-                <li><a routerLink="jogos">Jogos</a></li>
-                <li><a routerLink="">Desenvolvedoras</a></li>
-                <div class="search-wrapper">
-                    <form [formGroup]="form" (submit)="handleSubmitSearch()">
-                        <span class="material-symbols-rounded">search</span>
-                        <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" (keyup)="checkSearch()"/>
-                    </form>
-    
-                    <div class="search-dropdown" *ngIf="jogos.length" @fromTopToTop id="search-dropdown">
-                        
-                        <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{jogo.uriNome}}">
+          <div
+            class="search-dropdown"
+            *ngIf="jogos.length"
+            @fromTopToTop
+            id="search-dropdown"
+          >
+            <!-- <a class="jogo" href="/jogos/red-dead-redemption-2">
                             <div class="img-wrapper">
-                                <img src="{{jogo.urlImagem}}"/>
+                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/883710/capsule_616x353.jpg"/>
                             </div>
                             <div class="jogo__info">
-                                <p class="singleline-truncate jogo__nome">{{jogo.nome}}</p>
-                                <p class="jogo__desenvolvedora">{{jogo.desenvolvedora?.nome}}</p>
-                                <p class="jogo__preco">{{jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL'}}</p>
+                                <p class="singleline-truncate jogo__nome">Red Dead Redemption 2</p>
+                                <p class="jogo__desenvolvedora">Rockstar Games</p>
+                                <p class="jogo__preco">R$ 257,90</p>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                
-            </ul>
-            <ul class="account-actions" *ngIf="!isLoggedIn()">
-                <li><a routerLink="sing-up">Cadastrar</a></li>
-                <li class="link-entrar" routerLink="sing-in"><a>Entrar</a></li>
-            </ul>
-            <ul class="account-actions" *ngIf="isLoggedIn()">
-                <div class="usuario-wrapper">
-                    <button id="profile-button" class="btn-avatar" (click)="handleProfileClick()">
-                        <img id="profile-avatar" class="avatar" src="{{usuario.avatarUrl}}" alt="avatar" />
-                    </button>
-    
-                    <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>
-                        <p class="profile-nome">{{usuario.nome ? usuario.nome : usuario.email}}</p>
-                        <section class="profile-actions">
+                        </a> -->
 
-                            <button class="profile-button"><span class="material-symbols-rounded">person</span> <p>Perfil</p></button>    
-                            <button class="profile-button"><span class="material-symbols-rounded">shopping_bag</span> <p>Pedidos</p></button>    
-                            <button class="profile-button" (click)="handleLogoutClick()"><span class="material-symbols-rounded">logout</span> <p>Sair</p></button>    
+            <a
+              class="jogo"
+              *ngFor="let jogo of jogos"
+              href="/jogos/{{ jogo.uriNome }}"
+            >
+              <div class="img-wrapper">
+                <img src="{{ jogo.urlImagem }}" />
+              </div>
+              <div class="jogo__info">
+                <p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
+                <p class="jogo__desenvolvedora">
+                  {{ jogo.desenvolvedora?.nome }}
+                </p>
+                <p class="jogo__preco">
+                  {{
+                    jogo.preco === 0
+                      ? "Gratuito"
+                      : (jogo.preco | currency : "BRL")
+                  }}
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </ul>
+      <ul class="account-actions" *ngIf="!isLoggedIn()">
+        <li><a routerLink="sing-up">Cadastrar</a></li>
+        <li class="link-entrar" routerLink="sing-in"><a>Entrar</a></li>
+      </ul>
+      <ul class="account-actions" *ngIf="isLoggedIn()">
+        <div class="usuario-wrapper">
+          <button
+            id="profile-button"
+            class="btn-avatar"
+            (click)="handleProfileClick()"
+          >
+            <img
+              id="profile-avatar"
+              class="avatar"
+              src="{{ usuario.avatarUrl }}"
+              alt="avatar"
+            />
+          </button>
 
-                        </section>
-                    </div>
-                </div>
-            </ul>
-            
-        </nav>
-        <nav class="mobile" *ngIf="mobile" >
-            <button class="mobile-menu-btn" (click)="showMobileMenu = !showMobileMenu" [ngClass]="{'mobile--opened': showMobileMenu}">
-                Menu 
-                <span class="material-symbols-rounded icon--bolder" [ngClass]="{'icon-opened': showMobileMenu}">expand_more</span>
-            </button>
-        </nav>
-    </div>
-    
+          <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>
+            <p class="profile-nome">
+              {{ usuario.nome ? usuario.nome : usuario.email }}
+            </p>
+            <section class="profile-actions">
+              <button class="profile-button">
+                <span class="material-symbols-rounded">person</span>
+                <p>Perfil</p>
+              </button>
+              <button class="profile-button">
+                <span class="material-symbols-rounded">shopping_bag</span>
+                <p>Pedidos</p>
+              </button>
+              <button class="profile-button" (click)="handleLogoutClick()">
+                <span class="material-symbols-rounded">logout</span>
+                <p>Sair</p>
+              </button>
+            </section>
+          </div>
+        </div>
+      </ul>
+    </nav>
+    <nav class="mobile" *ngIf="mobile">
+      <button
+        class="mobile-menu-btn"
+        (click)="showMobileMenu = !showMobileMenu"
+        [ngClass]="{ 'mobile--opened': showMobileMenu }">
+        <span class="material-symbols-rounded icon--bolder">menu</span>
+      </button>
+    </nav>
+  </div>
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
-    <ul class="links">
-        <form [formGroup]="form" (submit)="handleSubmitSearch()">
-            <span class="material-symbols-rounded">search</span>
-            <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search"/>
-        </form>
-        <li><a routerLink="jogos">Jogos</a></li>
-        <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
-        <li><a>Cadastrar</a></li>
-        <li><a>Entrar</a></li>
-    </ul>
+  <ul class="links">
+    <form [formGroup]="form" (submit)="handleSubmitSearch()">
+      <span class="material-symbols-rounded">search</span>
+      <input
+        class="search-input"
+        type="text"
+        placeholder="Pesquisar..."
+        formControlName="search"
+      />
+    </form>
+    <li><a routerLink="jogos">Jogos</a></li>
+    <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
+    <li><a>Cadastrar</a></li>
+    <li><a>Entrar</a></li>
+  </ul>
 </div>

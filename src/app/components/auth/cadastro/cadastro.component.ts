@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarioRequest';
 import { map, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
-import Validation from '../shared/auth-header/validation';
+import Validation from '../shared/validation';
 
 @Component({
   selector: 'app-cadastro',
