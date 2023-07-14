@@ -52,7 +52,8 @@
     </div>
     
     <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
-    <section class="jogos">
+    <div *ngIf="isLoading()" style="display: flex; justify-content: center;"><app-loader></app-loader></div>
+    <section class="jogos" *ngIf="!isLoading()">
 
         <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
             

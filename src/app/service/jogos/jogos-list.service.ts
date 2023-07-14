@@ -12,15 +12,19 @@ import { environment } from 'src/environments/environment';
 })
 export class JogosListService {
 
+  loading: boolean = false;
   pageableJogos$ = new BehaviorSubject<PageableModel<Jogo>>(new PageableModel());
   constructor(private http: HttpClient) { }
   
   public init(pageable: JogoPageableRequest, filter: JogoFilter): void {
-
+    this.loading = true;
     let params = this.getParamsFromFilter(pageable, filter);
 
     this.http.get<PageableModel<Jogo>>(`${environment.API_URL}/jogos?${params.join('&')}`)
-      .subscribe((pageable) => this.pageableJogos$.next(pageable));
+      .subscribe((pageable) => {
+        this.pageableJogos$.next(pageable);
+        this.loading = false;
+      });
   }
 
   public getPageableJogos(): Observable<PageableModel<Jogo>> {

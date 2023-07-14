@@ -67,7 +67,6 @@ export class JogosListComponent implements OnInit {
   filterIds: string[] = ['filter', 'filter--sort', 'filter-title', 'filter-span-arrow'];
   categorias: Categoria[] = [];
   plataformas: Plataforma[] = [];
-  loading: boolean = false;
 
   pageableJogos: PageableModel<Jogo> = new PageableModel();
   
@@ -111,6 +110,7 @@ export class JogosListComponent implements OnInit {
 
   filterTags: FilterOption[] = [];
 
+
   ngOnInit(): void {
     this.pageableJogos = new PageableModel();
     this.handleUrlParamSearch();
@@ -126,11 +126,9 @@ export class JogosListComponent implements OnInit {
     this.service.init(this.pageable, this.filter);
   }
 
-  animEnd(event: any) {
-    console.log(event);
-    
+  isLoading(): boolean {
+    return this.service.loading;
   }
-
 
   getJogos(): void {
     this.service.getPageableJogos().subscribe((pageableJogos) => {
@@ -184,21 +182,18 @@ export class JogosListComponent implements OnInit {
   goToPage(index: number) {
     this.pageable.page = index;
     this.service.init(this.pageable, this.filter);
-    this.loading = true;
 
   }
 
   nextPage(): void {
     this.pageable.page = this.hasNextPage() ? this.pageableJogos.pageInfo.page + 1 : this.pageable.page;
     this.service.init(this.pageable, this.filter);
-    this.loading = true;
 
   } 
 
   prevPage(): void {
     this.pageable.page = this.hasPrevPage() ? this.pageableJogos.pageInfo.page - 1 : this.pageable.page;
     this.service.init(this.pageable, this.filter);
-    this.loading = true;
   }
 
 
