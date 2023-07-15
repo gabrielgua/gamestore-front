@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   })
 
   submitting: boolean = false;
-  error: string = '';
+  error: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   handleSubmit(): void {
     this.submitting = true;
+    this.error = false;
     if (this.form.invalid) {
       return;
     }
@@ -43,19 +44,16 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(request)
       .then(() => this.route.navigate(['']))
       .catch(error => {
-        this.error = error.error.detail
-        console.log(this.error);
+        this.error = !!error
+        this.submitting = false;        
       })
   }
 
 
-
-  
-
   private buildForm(): void {
     this.form = this.formBuilder.group({
       username: [null, [Validators.required]],
-      senha: [null, [Validators.required, Validators.minLength(5)]],
+      senha: [null, [Validators.required]],
     })
   }
 

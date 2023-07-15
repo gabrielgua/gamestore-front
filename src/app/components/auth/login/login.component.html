@@ -6,6 +6,10 @@
             <p class="title">Entrar</p>
             <p class="subtitle">Ainda não tem uma conta? Faça seu <a routerLink="/sing-up">cadastro</a>.</p>
         </div>
+        <div class="error-wrapper error" *ngIf="error">
+            <span class="material-symbols-rounded">error</span>
+            <p>Nome de usuário ou senha incorretos.</p>
+        </div>
         <div class="form-group">
             <label>Nome de usuário</label>
             <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(username!), 'input--valid': username?.valid }">
@@ -13,14 +17,10 @@
                 <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
                     {{ isInvalid(username!) ? 'close' : ''}}
                     {{ username?.valid ? 'check' : ''}}
-                    <div style="margin-right: .25rem;" *ngIf="username?.pending">
-                        <app-loader ></app-loader>
-                    </div>
                 </span>
             </div>
             
             <div class="errors" *ngIf="isInvalid(username!)">
-                <p class="error" *ngIf="isError('username', 'taken')">Nome de usuário indisponível.</p>
                 <p class="error" *ngIf="isError('username', 'required')">Nome de usuário é requerido.</p>
             </div>
         </div>
@@ -36,10 +36,12 @@
             </div>
             <div class="errors" *ngIf="isInvalid(senha!)">
                 <p class="error" *ngIf="isError('senha', 'required')">Senha é requerida.</p>
-                <p class="error" *ngIf="isError('senha', 'minlength')">Senha precisa ter no mínimo 5 caractéres.</p>
             </div>
         </div>
        
-        <button class="btn-submit" [disabled]="form.invalid || error.length" [ngClass]="{'btn-submit--disabled': form.invalid || error.length }" type="submit">Entrar</button>
+        <button class="btn-submit" [disabled]="form.invalid || submitting" [ngClass]="{'btn-submit--disabled': form.invalid || submitting }" type="submit">
+            <app-loader *ngIf="submitting"></app-loader>
+            <p *ngIf="!submitting">Entrar</p>
+        </button>
     </form>
 </div>

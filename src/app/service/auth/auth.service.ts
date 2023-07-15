@@ -56,6 +56,11 @@ export class AuthService {
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
   }
 
+  public checkEmail(email: string): Observable<boolean> {
+    const request = { email: email }
+    return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-email`, request);
+  }
+
   public authenticateViaRefreshToken() {
     this.http.post<any>(`${environment.API_URL}/auth/refresh-token`, {}).pipe(
       tap(response => {

@@ -23,7 +23,8 @@ export default class Validation {
     }
 
 
-    static taken(service: AuthService): AsyncValidatorFn {
+    //usernameTaken
+    static usernameTaken(service: AuthService): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
             const username = control.value.toLowerCase();
 
@@ -35,4 +36,19 @@ export default class Validation {
             );
         }
     }
+
+    static emailTaken(service: AuthService): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            const email = control.value.toLowerCase();
+
+            return of(email).pipe(
+                delay(500),
+                switchMap((email) => service.checkEmail(email).pipe(
+                    map( result => result ? {taken: true} : null )
+                ))
+            );
+        }
+    }
+
+
 }

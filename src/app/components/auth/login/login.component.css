@@ -15,9 +15,6 @@ form {
     font-size: var(--font-normal);    
 }
 
-.title-wrapper {
-    margin-bottom: 1rem;
-}
 
 .title-wrapper .title {
     color: white;
@@ -76,13 +73,15 @@ form {
 
 .btn-submit {
     border: none;
-    background-color: rgba(var(--primary-number), .9);
-    border-radius: .25rem;
-    padding: .5rem;
-    font-size: var(--font-normal);
-    font-family: inherit;
+    display: grid;
+    height: 2.5rem;
     margin-top: 1rem;
+    place-items: center;
+    font-family: inherit;
+    border-radius: .25rem;
+    font-size: var(--font-normal);
     transition: border-radius 75ms ease;
+    background-color: rgba(var(--primary-number), .9);
 
     &:hover {
         cursor: pointer;
@@ -120,4 +119,15 @@ form {
 
 .input--valid {
     outline: 1px solid rgba(var(--success), 1) !important;
+}
+
+.error-wrapper {
+    background-color: rgba(var(--error), .2);
+
+    gap: .25rem;
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    padding: .75rem;
+
 }

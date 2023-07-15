@@ -6,7 +6,12 @@
             <p class="title">Cadastro</p>
             <p class="subtitle">Já tem uma conta? Faça o <a routerLink="/sing-in">login</a>.</p>
         </div>
+        <div class="error-wrapper error" *ngIf="error">
+            <span class="material-symbols-rounded">error</span>
+            <p>Algo de errado ocorreu.</p>
+        </div>
         <div class="form-group">
+            
             <label>Nome de usuário</label>
             <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(username!), 'input--valid': username?.valid }">
                 <input type="text" formControlName="username">
@@ -14,7 +19,7 @@
                     {{ isInvalid(username!) ? 'close' : ''}}
                     {{ username?.valid ? 'check' : ''}}
                     <div style="margin-right: .25rem;" *ngIf="username?.pending">
-                        <app-loader ></app-loader>
+                        <app-loader></app-loader>
                     </div>
                 </span>
             </div>
@@ -26,15 +31,18 @@
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(email!) || error.length, 'input--valid': email?.valid && !error.length }">
+            <div class="input-wrapper" [ngClass]="{ 'input--invalid': isInvalid(email!), 'input--valid': email?.valid }">
                 <input type="text" formControlName="email">
-                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!) || error.length, 'success': email?.valid }">
-                    {{ isInvalid(email!) || error.length ? 'close' : ''}}
-                    {{ email?.valid && !error.length ? 'check' : ''}}
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': email?.valid }">
+                    {{ isInvalid(email!) ? 'close' : ''}}
+                    {{ email?.valid  ? 'check' : ''}}
+                    <div style="margin-right: .25rem;" *ngIf="email?.pending">
+                        <app-loader ></app-loader>
+                    </div>
                 </span>
             </div>
-            <p class="error" *ngIf="error?.length">E-mail já cadastrado.</p>
             <div class="errors" *ngIf="isInvalid(email!)">
+                <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
                 <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
                 <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
             </div>
@@ -67,6 +75,9 @@
                 <p class="error" *ngIf="isError('confirmarSenha', 'matching')">Senhas não coincidem.</p>
             </div>
         </div>
-        <button class="btn-submit" [disabled]="form.invalid || username?.pending || error.length" [ngClass]="{'btn-submit--disabled': form.invalid || username?.pending || error.length }" type="submit">Cadastrar</button>
+        <button class="btn-submit" [disabled]="form.invalid || username?.pending || email?.pending || submitting" [ngClass]="{'btn-submit--disabled': form.invalid || username?.pending || email?.pending || submitting }" type="submit">
+            <app-loader *ngIf="submitting"></app-loader>
+            <p *ngIf="!submitting">Cadastrar</p>
+        </button>
     </form>
 </div>

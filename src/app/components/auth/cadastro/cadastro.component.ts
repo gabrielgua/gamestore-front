@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/service/auth/auth.service';
-import { Usuario } from 'src/app/models/usuario';
-import { UsuarioRequest } from 'src/app/models/usuarioRequest';
-import { map, switchMap } from 'rxjs';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioRequest } from 'src/app/models/usuarioRequest';
+import { AuthService } from 'src/app/service/auth/auth.service';
 import Validation from '../shared/validation';
 
 @Component({
@@ -22,9 +20,8 @@ export class CadastroComponent implements OnInit {
   })
 
   submitting: boolean = false;
-  error: string = '';
+  error: boolean = false;
 
-  
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthService,
@@ -35,6 +32,7 @@ export class CadastroComponent implements OnInit {
   }
 
   handleSubmit(): void {
+    this.error = false;
     this.submitting = true;
     if (this.form.invalid || this.senha?.value !== this.confirmarSenha?.value) {
       return;
@@ -49,20 +47,15 @@ export class CadastroComponent implements OnInit {
     this.authService.register(usuario)
       .then(() => this.route.navigate(['']))
       .catch(error => {
-        this.error = error.error.detail
-        console.log(this.error);
-        
+        this.error = !!error;
+        this.submitting = false;   
       })
   }
 
-
-
-  
-
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      username: [null, [Validators.required], [Validation.taken(this.authService)]],
-      email: [null, [Validators.required, Validators.email]],
+      username: [null, [Validators.required], [Validation.usernameTaken(this.authService)]],
+      email: [null, [Validators.required, Validators.email], [Validation.emailTaken(this.authService)]],
       senha: [null, [Validators.required, Validators.minLength(5)]],
       confirmarSenha: [null, [Validators.required]],
 

@@ -130,9 +130,9 @@
         formControlName="search"
       />
     </form>
-    <li><a routerLink="jogos">Jogos</a></li>
-    <li><a routerLink="desenvolvedoras">Desenvolvedoras</a></li>
-    <li><a>Cadastrar</a></li>
-    <li><a>Entrar</a></li>
+    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="jogos">Jogos</a></li>
+    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="desenvolvedoras" >Desenvolvedoras</a></li>
+    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-up" >Cadastrar</a></li>
+    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-in" >Entrar</a></li>
   </ul>
 </div>

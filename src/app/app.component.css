@@ -1,5 +1,5 @@
 .app-wrapper {
-    height: min(100vh - 5rem); 
+    height: var(--height); 
     display: flex; 
     flex-direction: column; 
 }
