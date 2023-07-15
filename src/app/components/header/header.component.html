@@ -81,7 +81,7 @@
 
           <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>
             <p class="profile-nome">
-              {{ usuario.nome ? usuario.nome : usuario.email }}
+              {{ usuario.nome ? usuario.nome : usuario.email }} {{ isAdmin() ? '- (Admin)' : ''}}
             </p>
             <section class="profile-actions">
               <button class="profile-button">
@@ -91,6 +91,14 @@
               <button class="profile-button">
                 <span class="material-symbols-rounded">shopping_bag</span>
                 <p>Pedidos</p>
+              </button>
+              <button class="profile-button">
+                <span class="material-symbols-rounded">gamepad</span>
+                <p>Jogos</p>
+              </button>
+              <button class="profile-button">
+                <span class="material-symbols-rounded">favorite</span>
+                <p>Desejos</p>
               </button>
               <button class="profile-button" (click)="handleLogoutClick()">
                 <span class="material-symbols-rounded">logout</span>

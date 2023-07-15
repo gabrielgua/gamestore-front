@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 import { Subscription, debounceTime, delay, distinctUntilChanged, filter, map, merge, mergeMap, of, switchMap } from 'rxjs';
+import { TipoUsuario } from 'src/app/models/tipo.usuario';
 
 @Component({
   selector: 'app-header',
@@ -89,6 +90,10 @@ export class HeaderComponent implements AfterViewInit {
         this.usuario = usuario;
       }
     });
+  }
+
+  isAdmin(): boolean {
+    return this.usuario?.tipo === TipoUsuario.ADMIN;
   }
 
   manageScreenSize(width: number): void {

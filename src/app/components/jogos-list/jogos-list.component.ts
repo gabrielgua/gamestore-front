@@ -381,8 +381,6 @@ export class JogosListComponent implements OnInit {
     }
   }
   
-
-
   private resetPageable(): void {
     this.pageable.page = 0;
     this.pageable.size = this.PAGEABLE_DEFAULT_SIZE;
@@ -419,5 +417,10 @@ export class JogosListComponent implements OnInit {
         filter.show = false;
       }
     })
+  }
+
+  favorite(nome: string) {
+    console.log(nome);
+    
   }
 }

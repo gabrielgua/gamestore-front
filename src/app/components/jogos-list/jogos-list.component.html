@@ -31,7 +31,7 @@
                 <div class="filter__dropdown" *ngIf="filter.show" @fromTopToTop>
                     <button id="filter__option" class="filter__option" *ngFor="let option of filter.options; index as i" (click)="handleFilterItem(option)">
                         {{option.nome}}
-                </button>
+                    </button>
                 </div>
             </div>
             <div class="filter filter--sort">
@@ -56,14 +56,14 @@
     <section class="jogos" *ngIf="!isLoading()">
 
         <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
-            
-            <a class="jogo__link" routerLink="/jogos/{{jogo.uriNome}}">
-                <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
-               
-                <button class="btn-desejo">
+            <div class="jogo__link">
+                <a routerLink="/jogos/{{jogo.uriNome}}">
+                    <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
+                </a>
+                <button class="btn-desejo" (click)="favorite(jogo.uriNome)">
                     <span class="material-symbols-rounded">favorite</span>
                 </button>
-            </a>    
+            </div>    
             <div class="jogo__detalhes">
                 <div class="jogo__preco-nota">
                     
@@ -72,9 +72,7 @@
                             <span class="material-symbols-rounded">add_shopping_cart</span>
                             <p>Carrinho</p>
                         </div>
-
                         <p class="jogo__preco">{{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}</p>
-                        
                     </button>
                     <div class="jogo__nota">
                         <span class="material-symbols-rounded icon--filled">star</span>
