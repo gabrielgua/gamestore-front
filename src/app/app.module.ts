@@ -34,6 +34,7 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthHeaderComponent } from './components/auth/shared/auth-header/auth-header.component';
+import { PedidosListComponent } from './components/usuario/logado/pedidos-list/pedidos-list.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -61,6 +62,7 @@ registerLocaleData(localePt);
     LoaderComponent,
     LoginComponent,
     AuthHeaderComponent,
+    PedidosListComponent,
   ],
   imports: [
     BrowserModule,

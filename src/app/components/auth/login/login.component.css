@@ -12,8 +12,7 @@ form {
     padding: 1rem;
     place-self: center;
     color: var(--secondary-text-dark);
-    font-size: var(--font-normal);
-    
+    font-size: var(--font-normal);    
 }
 
 .title-wrapper {

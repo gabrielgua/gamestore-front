@@ -7,22 +7,32 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
 import { AccessDeniedComponent } from './components/errors/access-denied/access-denied.component';
 import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { PedidosListComponent } from './components/usuario/logado/pedidos-list/pedidos-list.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
 
 const routes: Routes = [
 
   
-
+  // public
   {path: '', component: HomeComponent},
   {path: 'jogos', component: JogosListComponent},
   {path: 'jogos/:uriNome', component: JogoComponent},
 
+  // auth
+  {path: 'sing-up', component: CadastroComponent, canActivate: [LoggedInGuard]},
+  {path: 'sing-in', component: LoginComponent, canActivate: [LoggedInGuard]},
 
-  {path: 'sing-up', component: CadastroComponent},
-  {path: 'sing-in', component: LoginComponent},
+  //private
+  {path: 'pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
 
+  
 
+  // errors
   {path: 'error/not-found', component: NotFoundComponent},
   {path: 'error/access-denied', component: AccessDeniedComponent},
+
+  //utils
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
