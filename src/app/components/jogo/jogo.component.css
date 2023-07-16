@@ -14,6 +14,7 @@
     overflow: hidden;
     max-height: 35rem;
     position: absolute;
+    user-select: none;
 }
 
 .hero::after {
