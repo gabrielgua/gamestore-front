@@ -3,7 +3,8 @@
         <span class="material-symbols-rounded icon--filled">local_mall</span>
         <p>Meus pedidos</p>
     </div>
-    <div class="pedidos">
+    <app-pedidos-list-skeleton *ngIf="isLoading$ | async"></app-pedidos-list-skeleton>
+    <div class="pedidos" *ngIf="pedidos.length">
         <div class="pedido" *ngFor="let pedido of pedidos">
             <section class="pedido__header">
                 <p class="pedido__codigo">{{pedido.codigo}}</p>
@@ -75,5 +76,8 @@
                 </div>
             </section>
         </div>
+        
+
     </div>
+    
 </div>

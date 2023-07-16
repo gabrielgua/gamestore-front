@@ -1,0 +1,101 @@
+.pedidos {
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+}
+
+.pedido {
+    background-color: black;
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.animation {
+    opacity: 0;
+    animation: pulse 1000ms ease infinite forwards alternate;
+}
+
+.animation-delay-middle {
+    opacity: 0;
+    animation: pulse 1000ms ease 200ms infinite forwards alternate;
+}
+
+.animation-delay {
+    opacity: 0;
+    animation: pulse 1000ms ease 400ms infinite forwards alternate;
+}
+
+.pedido__jogo,
+.pedido__detalhes,
+.pedido__codigo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+
+.skeleton {
+    border-radius: .25rem;
+    box-shadow: var(--box-shadow-primary);
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.skeleton--text {
+    padding: .8rem;
+}
+
+.codigo {
+    width: 20rem; 
+}
+
+.actions {
+    width: 10rem;
+}
+
+.pedido__jogo {
+    border-block: 1px solid var(--subtle-border-color);
+}
+
+.img {
+    height: 3rem;
+    width: 5.5rem;
+}
+
+.nome {
+    height: 1.5rem;
+    width: 20rem;
+    margin-right: auto;
+}
+
+.preco {
+    height: 1.5rem;
+    width: 5rem;
+}
+
+.datas {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.data {
+    width: 20rem;
+}
+
+.total {
+    width: 10rem;
+}
+
+
+@keyframes pulse {
+    0% {
+        opacity: .2;
+    } 
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,28 +1,47 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService {
+export class PedidoService implements OnDestroy {
 
   private pedidos$ = new BehaviorSubject<Pedido[]>({} as Pedido[]);
+  private isLoadingPedidos$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) { }
+  isLoadingPedidos = this.isLoadingPedidos$.asObservable();
+  pedidosSub = new Subscription();
 
+
+  constructor(private http: HttpClient) { 
+  }
+  
+  ngOnDestroy(): void {
+    this.pedidosSub.unsubscribe();
+  }
+  
   fetchUsuarioLogadoPedidos() {
-    this.http.get<Pedido[]>(`${environment.API_URL}/usuarios/meus-pedidos`)
-      .subscribe(pedidos => this.pedidos$.next(pedidos));
+    this.pedidos$.next([]);
+    this.isLoadingPedidos$.next(true);
+    this.pedidosSub = this.http.get<Pedido[]>(`${environment.API_URL}/usuarios/meus-pedidos`)
+      .subscribe(pedidos => {
+        this.pedidos$.next(pedidos);
+        this.isLoadingPedidos$.next(false);
+      });
   }
 
   fetchAllPedidos() {
-    this.http.get<Pedido[]>(`${environment.API_URL}/pedidos`)
-      .subscribe(pedidos => this.pedidos$.next(pedidos));
+    this.pedidos$.next([]);
+    this.isLoadingPedidos$.next(true);
+    this.pedidosSub = this.http.get<Pedido[]>(`${environment.API_URL}/pedidos`)
+      .subscribe(pedidos => {
+        this.pedidos$.next(pedidos);
+        this.isLoadingPedidos$.next(false);
+      });
   }
-
 
   public getPedidos() {
     return this.pedidos$.asObservable();

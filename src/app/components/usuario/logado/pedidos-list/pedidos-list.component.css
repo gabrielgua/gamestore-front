@@ -109,6 +109,8 @@ span {
     font-size: var(--font-smaller);
 }
 
+
+
 .pedido__forma-pagamento-total,
 .pedido__fluxo-status,
 .pedido__actions {

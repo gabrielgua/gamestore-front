@@ -35,6 +35,8 @@ import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthHeaderComponent } from './components/auth/shared/auth-header/auth-header.component';
 import { PedidosListComponent } from './components/usuario/logado/pedidos-list/pedidos-list.component';
+import { LoadingPipe } from './pipes/loading/loading.pipe';
+import { PedidosListSkeletonComponent } from './components/usuario/logado/pedidos-list/pedidos-list-skeleton/pedidos-list-skeleton.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -63,6 +65,8 @@ registerLocaleData(localePt);
     LoginComponent,
     AuthHeaderComponent,
     PedidosListComponent,
+    LoadingPipe,
+    PedidosListSkeletonComponent,
   ],
   imports: [
     BrowserModule,
