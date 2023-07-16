@@ -8,6 +8,14 @@
 .title {
     font-size: var(--font-titles);
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    > span {
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
 }
 
 .pedidos {
@@ -50,12 +58,8 @@ span {
     color: var(--primary);
 }
 
-.pedido__total {
-    margin-left: auto;
-}
-
-.pedido__status {
-    margin-right: auto;
+.jogo__preco {
+    font-size: var(--font-smaller);
 }
 
 .pedido__jogos {
@@ -81,17 +85,20 @@ span {
     margin-right: auto;
 }
 
+.pedido__status {
+    margin-right: auto;
+}
+
 .pedido__detalhes {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: .5rem 1rem;
+    padding: 1rem 1rem;
     gap: 1rem;
 }
 
 .pedido__data,
-.pedido__datas-extras,
 .pedido__forma-pagamento {
     display: flex;
     flex-wrap: wrap;
@@ -136,11 +143,13 @@ span {
 
 .btn-success {
     --btn-color: var(--success);
+    background-color: rgba(var(--btn-color), .3);
+    
 }
 
 .btn-pedido-action:hover {
     cursor: pointer;
-    background-color: rgba(var(--btn-color), .3);
+    background-color: rgba(var(--btn-color), .4);
 }
 
 .btn-pedido-action:active {

@@ -236,6 +236,12 @@ form {
     color: var(--primary);
     cursor: pointer;
   }
+
+  > span {
+    font-size: 1.3rem;
+    font-family: 800;
+    color: var(--primary);
+  }
 }
 
 .profile-button:last-child {
@@ -243,7 +249,11 @@ form {
   color: rgb(var(--error));
 
   &:hover {
-    background-color: rgba(var(--error), 0.2);
+    background-color: rgba(var(--error), .3);
+  }
+
+  > span {
+    color: rgb(var(--error));
   }
 }
 

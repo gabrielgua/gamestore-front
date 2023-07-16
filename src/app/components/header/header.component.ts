@@ -152,6 +152,7 @@ export class HeaderComponent implements AfterViewInit {
 
   handleLogoutClick(): void {
     this.authService.logout();
+    this.router.navigate(['sing-in']);
     this.resetUsuario();
   }
 
