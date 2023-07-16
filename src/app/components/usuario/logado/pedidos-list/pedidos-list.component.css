@@ -1,0 +1,153 @@
+.container {
+    margin: 2rem auto;
+    width: min(100% - 3rem, var(--container-max-size));
+    display: grid;
+    gap: 1rem;
+}
+
+.title {
+    font-size: var(--font-titles);
+    font-weight: 800;
+}
+
+.pedidos {
+    width: 100%;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+}
+
+.pedido {
+    width: 100%;
+    display: grid;
+    background-color: black;
+    border-radius: .5rem;
+    font-size: var(--font-normal);
+    overflow: hidden;
+    color: rgba(var(--accent-number), .9);
+    border: 1px solid var(--subtle-border-color);
+}
+
+.pedido__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+span {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: rgba(var(--primary-number), .3);
+}
+
+.jogo__preco,
+.pedido__total,
+.pedido__codigo {
+    color: var(--primary);
+}
+
+.pedido__total {
+    margin-left: auto;
+}
+
+.pedido__status {
+    margin-right: auto;
+}
+
+.pedido__jogos {
+    display: grid;
+    padding: 1rem;
+    gap: 1rem;
+    border-block: 1px solid var(--subtle-border-color);
+}
+
+.pedido__jogo {
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.jogo__img {
+    max-height: 3rem;
+    border-radius: .125rem;
+}
+
+.jogo__nome {
+    margin-right: auto;
+}
+
+.pedido__detalhes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: .5rem 1rem;
+    gap: 1rem;
+}
+
+.pedido__data,
+.pedido__datas-extras,
+.pedido__forma-pagamento {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+
+    color: var(--secondary-text-dark);
+    font-size: var(--font-smaller);
+}
+
+.pedido__forma-pagamento-total,
+.pedido__fluxo-status,
+.pedido__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-pedido-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem .75rem;
+    border: none;
+    gap: .5rem;
+    font-family: inherit;
+    font-size: var(--font-small);
+    background-color: transparent;
+    color: rgb(var(--btn-color));
+    border-radius: .25rem;
+    transition: background-color 50ms ease;
+
+    > span  {
+        color: rgb(var(--btn-color));
+    }
+}
+
+.btn-danger {
+    --btn-color: var(--error);
+}
+
+.btn-success {
+    --btn-color: var(--success);
+}
+
+.btn-pedido-action:hover {
+    cursor: pointer;
+    background-color: rgba(var(--btn-color), .3);
+}
+
+.btn-pedido-action:active {
+    background-color: rgba(var(--btn-color), .25);
+}
+
+
+
+
+

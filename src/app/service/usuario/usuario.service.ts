@@ -39,7 +39,6 @@ export class UsuarioService {
         this.usuarioId = usuarioId;
       })
     }
-  
   }
 
   private resetUsuarioState(): void {
