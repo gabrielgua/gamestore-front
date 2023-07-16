@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Jogo } from '../../models/jogo';
+import { Jogo } from '../../models/jogos/jogo';
 import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
 import { ActivatedRoute } from '@angular/router';
 

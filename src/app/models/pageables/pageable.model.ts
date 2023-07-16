@@ -1,6 +1,6 @@
 import { PageInfo } from "./page.info";
 
-export class PageableModel<Jogo> {
+export class PageableModel<T> {
     pageInfo!: PageInfo;
-    content: Jogo[] = [];
+    content: T[] = [];
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { JogosDestaque } from '../../service/jogos/jogos-destaque.service';
-import { JogoResumo } from 'src/app/models/jogo.resumo';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 
 @Component({
   selector: 'app-slider-mobile',

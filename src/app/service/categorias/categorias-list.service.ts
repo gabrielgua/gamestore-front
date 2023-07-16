@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Categoria } from 'src/app/models/categoria';
+import { Categoria } from 'src/app/models/categorias/categoria';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

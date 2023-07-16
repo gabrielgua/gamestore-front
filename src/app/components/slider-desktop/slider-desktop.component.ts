@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Jogo } from '../../models/jogo';
+import { Jogo } from '../../models/jogos/jogo';
 import { Fade } from '../../animations/animations';
 import { JogosDestaque } from '../../service/jogos/jogos-destaque.service';
-import { JogoResumo } from 'src/app/models/jogo.resumo';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 
 @Component({
   selector: 'app-slider-desktop',

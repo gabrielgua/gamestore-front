@@ -1,8 +1,8 @@
-import { Categoria } from "./categoria";
-import { DesenvolvedoraResumo } from "./desenvolvedora";
-import { Modo } from "./modo";
-import { Plataforma } from "./plataforma";
-import { Requisito } from "./requisito";
+import { Categoria } from "../categorias/categoria";
+import { DesenvolvedoraResumo } from "../desenvolvedoras/desenvolvedora";
+import { Modo } from "../modos/modo";
+import { Plataforma } from "../plataformas/plataforma";
+import { Requisito } from "../requisitos/requisito";
 
 export class Jogo {
     id!: number;

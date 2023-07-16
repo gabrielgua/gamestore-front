@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, debounceTime, delay, distinctUntilChanged, map, mergeMap, switchMap, tap } from 'rxjs';
-import { JogoResumo } from 'src/app/models/jogo.resumo';
-import { PageableModel } from 'src/app/models/pageable.model';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
+import { PageableModel } from 'src/app/models/pageables/pageable.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

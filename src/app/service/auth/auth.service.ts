@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, firstValueFrom, tap } from 'rxjs';
-import { AuthRequest } from 'src/app/models/auth.request';
-import { UsuarioRequest } from 'src/app/models/usuarioRequest';
+import { AuthRequest } from 'src/app/models/auth/auth.request';
+import { UsuarioRequest } from 'src/app/models/usuarios/usuarioRequest';
 import { environment } from 'src/environments/environment';
 
 

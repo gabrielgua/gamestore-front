@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { Jogo } from '../../models/jogo';
+import { Jogo } from '../../models/jogos/jogo';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 

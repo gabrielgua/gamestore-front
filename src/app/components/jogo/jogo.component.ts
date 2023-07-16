@@ -1,9 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Jogo } from '../../models/jogo';
+import { Jogo } from '../../models/jogos/jogo';
 import { ActivatedRoute } from '@angular/router';
 import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
-import { TipoRequisito } from '../../models/tipoRequisito';
-import { Requisito } from '../../models/requisito';
+import { TipoRequisito } from '../../models/requisitos/tipoRequisito';
+import { Requisito } from '../../models/requisitos/requisito';
 
 @Component({
   selector: 'app-jogo',

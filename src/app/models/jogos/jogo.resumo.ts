@@ -1,4 +1,4 @@
-import { DesenvolvedoraResumo } from "./desenvolvedora";
+import { DesenvolvedoraResumo } from "../desenvolvedoras/desenvolvedora";
 
 export class JogoResumo {
     id!: number;

@@ -2,19 +2,19 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, 
 import { Fade } from '../../animations/animations';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Jogo } from '../../models/jogo';
-import { JogoResumo } from '../../models/jogo.resumo';
+import { Jogo } from '../../models/jogos/jogo';
+import { JogoResumo } from '../../models/jogos/jogo.resumo';
 import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
 import { JogosListService } from '../../service/jogos/jogos-list.service';
-import { PageableModel } from '../../models/pageable.model';
-import { JogoFilter } from '../../models/jogo.filter';
-import { JogoPageableRequest } from '../../models/jogo.pageable';
+import { PageableModel } from '../../models/pageables/pageable.model';
+import { JogoFilter } from '../../models/jogos/jogo.filter';
+import { JogoPageableRequest } from '../../models/jogos/jogo.pageable';
 import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-search-list.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/usuarios/usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 import { Subscription, debounceTime, delay, distinctUntilChanged, filter, map, merge, mergeMap, of, switchMap } from 'rxjs';
-import { TipoUsuario } from 'src/app/models/tipo.usuario';
+import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
 
 @Component({
   selector: 'app-header',

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Jogo } from 'src/app/models/jogo';
-import { JogoPageableRequest } from 'src/app/models/jogo.pageable';
-import { PageableModel } from 'src/app/models/pageable.model';
+import { Jogo } from 'src/app/models/jogos/jogo';
+import { JogoPageableRequest } from 'src/app/models/jogos/jogo.pageable';
+import { PageableModel } from 'src/app/models/pageables/pageable.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
