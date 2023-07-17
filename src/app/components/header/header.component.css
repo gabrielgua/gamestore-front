@@ -266,6 +266,7 @@ form {
   background-color: transparent;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: rgba(var(--primary-number), 0.2);
 
   &:hover {

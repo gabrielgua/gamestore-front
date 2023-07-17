@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, map, tap } from 'rxjs';
+import { Observable, Subscription, map, switchMap, tap } from 'rxjs';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { StatusPedido } from 'src/app/models/pedidos/status.pedido';
 import { PedidoService } from 'src/app/service/pedidos/pedido.service';
@@ -37,6 +37,7 @@ export class PedidosListComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.pedidoService.isLoadingPedidos;
   }
 
+ 
   public isPositive(status: StatusPedido): boolean {
     return status === StatusPedido.CONFIRMADO || status === StatusPedido.CRIADO;
   }
@@ -57,16 +58,16 @@ export class PedidosListComponent implements OnInit, OnDestroy {
     return status === StatusPedido.CANCELADO || status === StatusPedido.REEMBOLSADO;
   }
 
-  public confirmarPedido(codigo: string): void {
-    this.pedidoService.confirmarPedido(codigo);
+  public confirmarPedido(pedido: Pedido): void {
+    this.pedidoService.confirmarPedido(pedido);
   }
 
-  public cancelarPedido(codigo: string): void {
-    this.pedidoService.cancelarPedido(codigo);
+  public cancelarPedido(pedido: Pedido): void {
+    this.pedidoService.cancelarPedido(pedido);
   }
 
-  public reembolsarPedido(codigo: string): void {
-    this.pedidoService.reembolsarPedido(codigo);
+  public reembolsarPedido(pedido: Pedido): void {
+    this.pedidoService.reembolsarPedido(pedido);
   }
  
 

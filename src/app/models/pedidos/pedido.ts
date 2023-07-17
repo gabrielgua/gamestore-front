@@ -15,4 +15,5 @@ export interface Pedido {
     status: StatusPedido;
     usuario: UsuarioPedido;
     jogos: JogoPedido[];
+    isLoadingActions?: boolean;
 }

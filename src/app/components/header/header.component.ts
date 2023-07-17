@@ -35,17 +35,12 @@ export class HeaderComponent implements AfterViewInit {
     private authService: AuthService,
     private formBuilder: FormBuilder) {}
  
-
-
   size: number = 4;
   jogos: JogoResumo[] = [];
 
   form = this.formBuilder.group({
     search: new FormControl(null)
   })
-
-
-  
 
   breakToMobileWidth = 800;
   mobile: boolean = false;

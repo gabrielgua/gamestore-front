@@ -66,17 +66,8 @@
       </ul>
       <ul class="account-actions" *ngIf="isLoggedIn()">
         <div class="usuario-wrapper">
-          <button
-            id="profile-button"
-            class="btn-avatar"
-            (click)="handleProfileClick()"
-          >
-            <img
-              id="profile-avatar"
-              class="avatar"
-              src="{{ usuario.avatarUrl }}"
-              alt="avatar"
-            />
+          <button id="profile-button" class="btn-avatar" (click)="handleProfileClick()">
+            <img *ngIf="usuario" id="profile-avatar" class="avatar" src="{{ usuario.avatarUrl }}" />
           </button>
 
           <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>

@@ -9,23 +9,26 @@
             <section class="pedido__header">
                 <p class="pedido__codigo">{{pedido.codigo}}</p>
                 <p class="pedido__status" class="{{ !isCanceladoOuReembolsado(pedido.status) ? 'success' : 'error'}}">{{pedido.status}}</p> 
-                <div class="pedido__actions" *ngIf="isCriado(pedido.status)">
-
-                    <button class="btn-pedido-action btn-danger" (click)="cancelarPedido(pedido.codigo)" title="Cancelar Pedido">
-                        <span class="material-symbols-rounded icon--filled" >cancel</span>
-                        <p>Cancelar</p>
-                    </button>
-                    <button class="btn-pedido-action btn-success" (click)="confirmarPedido(pedido.codigo)" title="Confirmar Pedido">
-                        <span class="material-symbols-rounded icon--filled" >check_circle</span>
-                        <p>Confirmar</p>
-                    </button>
+                <app-loader *ngIf="pedido.isLoadingActions"></app-loader>
+                <div class="actions-wrapper" *ngIf="!pedido.isLoadingActions">
+                    <div class="pedido__actions" *ngIf="isCriado(pedido.status)">
+                        <button class="btn-pedido-action btn-danger" (click)="cancelarPedido(pedido)" title="Cancelar Pedido">
+                            <span class="material-symbols-rounded icon--filled" >cancel</span>
+                            <p>Cancelar</p>
+                        </button>
+                        <button class="btn-pedido-action btn-success" (click)="confirmarPedido(pedido)" title="Confirmar Pedido">
+                            <span class="material-symbols-rounded icon--filled" >check_circle</span>
+                            <p>Confirmar</p>
+                        </button>
+                    </div>
+                    <div class="pedido__actions" *ngIf="isConfirmado(pedido.status)">
+                        <button class="btn-pedido-action btn-danger" (click)="reembolsarPedido(pedido)" title="Reembolsar Pedido">
+                            <span class="material-symbols-rounded icon--filled">cancel</span>
+                            <p>Reembolsar</p>
+                        </button>
+                    </div>      
                 </div>
-                <div class="pedido__actions" *ngIf="isConfirmado(pedido.status)">
-                    <button class="btn-pedido-action btn-danger" (click)="reembolsarPedido(pedido.codigo)" title="Reembolsar Pedido">
-                        <span class="material-symbols-rounded icon--filled">cancel</span>
-                        <p>Reembolsar</p>
-                    </button>
-                </div>                
+                          
             </section>
             <section class="pedido__jogos">
                 <div class="pedido__jogo" *ngFor="let jogo of pedido.jogos">
