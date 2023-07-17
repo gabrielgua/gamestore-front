@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Fade } from '../../animations/animations';
+import { Animations } from '../../animations/animations';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Jogo } from '../../models/jogos/jogo';
@@ -20,7 +20,7 @@ import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  animations: [Fade]
+  animations: [Animations]
 })
 export class HeaderComponent implements AfterViewInit {
 

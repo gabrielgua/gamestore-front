@@ -89,6 +89,20 @@ export class AuthService {
     ));
   }
 
+  public temPermissao(permissao: string): boolean {
+    return this.token_payload && this.token_payload.authorities.includes(permissao);
+  }
+
+  public temQualquerPermissao(permissoes: string[]): boolean {
+    for (const permissao of permissoes) {
+      if (this.temPermissao(permissao)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public armazenarAccessToken(token: string) {
     this.token_payload = this.jwtHelper.decodeToken(token);    
     this.usuarioId$.next(this.token_payload.userId);

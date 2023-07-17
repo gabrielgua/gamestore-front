@@ -15,6 +15,14 @@ export class AuthGuard {
       return false;
     }
 
+    // guard to check if is loggedIn and is admin
+    // not needed in this service will implement on another one later
+
+    // if (this.authService.isLoggedIn() && !this.authService.temPermissao('ADMIN')) {
+    //   this.router.navigate(['error/access-denied']);
+    //   return false;
+    // }
+
     // this.router.navigate(['pedidos']);
     return true;
   }

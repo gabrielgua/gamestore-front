@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Jogo } from '../../models/jogos/jogo';
-import { Fade } from '../../animations/animations';
+import { Animations } from '../../animations/animations';
 import { JogosDestaque } from '../../service/jogos/jogos-destaque.service';
 import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 
@@ -9,7 +9,7 @@ import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
   templateUrl: './slider-desktop.component.html',
   styleUrls: ['./slider-desktop.component.css'],
   animations: [
-    Fade
+    Animations
   ]
 })
 export class SliderDesktopComponent implements OnInit {

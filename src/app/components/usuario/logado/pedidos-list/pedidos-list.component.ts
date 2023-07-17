@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, map, switchMap, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscription, catchError, map, switchMap, tap } from 'rxjs';
+import { Animations } from 'src/app/animations/animations';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { StatusPedido } from 'src/app/models/pedidos/status.pedido';
 import { PedidoService } from 'src/app/service/pedidos/pedido.service';
@@ -7,25 +9,27 @@ import { PedidoService } from 'src/app/service/pedidos/pedido.service';
 @Component({
   selector: 'app-pedidos-list',
   templateUrl: './pedidos-list.component.html',
-  styleUrls: ['./pedidos-list.component.css']
+  styleUrls: ['./pedidos-list.component.css'],
+  animations: [Animations]
 })
 export class PedidosListComponent implements OnInit, OnDestroy {
 
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private toastr: ToastrService) {}
   
   pedidos: Pedido[] = [];
   isLoading$ = new Observable<boolean>;
   pedidosSub = new Subscription();
+  error: boolean = false;
  
   ngOnInit(): void {
-    this.pedidoService.fetchUsuarioLogadoPedidos();
+    this.pedidoService.resetPedidos();
+    this.pedidoService.fetchAllPedidos();
     this.getPedidos();
-    this.getIsLoading();
   }
 
   ngOnDestroy(): void {
-    this.pedidosSub.unsubscribe();
+    this.pedidosSub.unsubscribe();    
   }
 
   private getPedidos() {
@@ -33,10 +37,13 @@ export class PedidosListComponent implements OnInit, OnDestroy {
       .subscribe(pedidos => this.pedidos = pedidos);
   }
 
-  private getIsLoading(): void {
-    this.isLoading$ = this.pedidoService.isLoadingPedidos;
+  public getIsLoading(): Observable<boolean> {
+    return this.pedidoService.isLoadingPedidos;
   }
 
+  public getIsError(): Observable<boolean> {
+    return this.pedidoService.error;
+  }
  
   public isPositive(status: StatusPedido): boolean {
     return status === StatusPedido.CONFIRMADO || status === StatusPedido.CRIADO;

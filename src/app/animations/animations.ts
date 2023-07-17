@@ -1,6 +1,6 @@
 import { trigger, style, transition, animate, stagger, query } from "@angular/animations";
 
-export const Fade = [
+export const Animations = [
   trigger('fromTopToTop', [ 
     transition(':enter', [
       style({ opacity: 0, transform: 'translateY(-10%)' }),
@@ -47,5 +47,12 @@ export const Fade = [
       style({ opacity: 1, transform: 'translateX(0%)' }),
       animate('100ms ease', style({ opacity: 0, transform: 'translateX(-10%)'})),
     ]),
+  ]),
+
+  trigger('fadeIn', [ 
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('500ms ease', style({ opacity: 1 })),
+    ])
   ]),
 ]

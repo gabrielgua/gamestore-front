@@ -3,8 +3,9 @@
         <span class="material-symbols-rounded icon--filled">local_mall</span>
         <p>Meus pedidos</p>
     </div>
-    <app-pedidos-list-skeleton *ngIf="isLoading$ | async"></app-pedidos-list-skeleton>
-    <div class="pedidos" *ngIf="pedidos.length">
+    <app-pedidos-list-skeleton *ngIf="getIsLoading() | async"></app-pedidos-list-skeleton>
+    <div class="error" *ngIf="getIsError() | async"><p>Ops! Não conseguimos buscar seus pedidos, tente novamente mais tarde.</p></div>
+    <div class="pedidos" *ngIf="pedidos.length" @fadeIn>
         <div class="pedido" *ngFor="let pedido of pedidos">
             <section class="pedido__header">
                 <p class="pedido__codigo">{{pedido.codigo}}</p>

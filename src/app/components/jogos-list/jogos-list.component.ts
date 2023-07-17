@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JogosListService } from '../../service/jogos/jogos-list.service';
-import { Fade } from '../../animations/animations';
+import { Animations } from '../../animations/animations';
 import { Jogo } from '../../models/jogos/jogo';
 import { PageableModel } from '../../models/pageables/pageable.model';
 import { JogoPageableRequest } from '../../models/jogos/jogo.pageable';
@@ -47,7 +47,7 @@ export interface SortOption {
   selector: 'app-jogos-list',
   templateUrl: './jogos-list.component.html',
   styleUrls: ['./jogos-list.component.css'],
-  animations: [ Fade ]
+  animations: [ Animations ]
 })
 export class JogosListComponent implements OnInit {
 
