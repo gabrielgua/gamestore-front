@@ -7,8 +7,10 @@ import { filter } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent {
   
+
+
   title = 'gamestore';
   currentRoute: string = '';
 
@@ -19,6 +21,7 @@ export class AppComponent  {
       filter(event => event instanceof NavigationEnd))
         .subscribe((event: any) => this.setCurrentRoute(event.url));
   }
+
 
   setCurrentRoute(url: string): void {
     this.currentRoute = url;

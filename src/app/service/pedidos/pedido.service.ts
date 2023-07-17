@@ -91,7 +91,11 @@ export class PedidoService implements OnDestroy {
         },
         error: (error) => {
           pedido.isLoadingActions = false;
-          this.handleActionError('Erro ao cancelar pedido.', error.error.title);
+          if (error.error.status === 400) {
+            this.handleActionError('Pedido não pode ser cancelado.', error.error.title);
+          } else {
+            this.handleActionError('Erro ao cancelar pedido', error.error.title);
+          }
         }
       });
   }
@@ -106,7 +110,11 @@ export class PedidoService implements OnDestroy {
       },
       error: (error) => {
         pedido.isLoadingActions = false;
-        this.handleActionError('Erro ao confirmar pedido.', error.error.title);
+        if (error.error.status === 400) {
+          this.handleActionError('Pedido não pode ser confirmado.', error.error.title);
+        } else {
+          this.handleActionError('Erro ao confirmar pedido', error.error.title);
+        }
       }
     });
   }
@@ -121,7 +129,11 @@ export class PedidoService implements OnDestroy {
       },
       error: (error) => {
         pedido.isLoadingActions = false;
-        this.handleActionError('Erro ao reembolsar pedido.', error.error.title);
+        if (error.error.status === 400) {
+          this.handleActionError('Pedido não pode ser reembolsado.', error.error.title);
+        } else {
+          this.handleActionError('Erro ao reembolsar pedido', error.error.title);
+        }
       }
     });
   }

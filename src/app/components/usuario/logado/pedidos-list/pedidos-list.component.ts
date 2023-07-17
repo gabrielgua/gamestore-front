@@ -24,7 +24,7 @@ export class PedidosListComponent implements OnInit, OnDestroy {
  
   ngOnInit(): void {
     this.pedidoService.resetPedidos();
-    this.pedidoService.fetchAllPedidos();
+    this.pedidoService.fetchUsuarioLogadoPedidos();
     this.getPedidos();
   }
 

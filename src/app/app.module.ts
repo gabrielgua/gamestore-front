@@ -80,7 +80,7 @@ registerLocaleData(localePt);
     ToastrModule.forRoot({
       closeButton: true,
       easing: 'ease',
-      
+      // positionClass: 'inline'
     }),
     JwtModule.forRoot({
       config: {
