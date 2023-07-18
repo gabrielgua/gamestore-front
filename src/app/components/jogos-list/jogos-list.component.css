@@ -276,7 +276,7 @@
     background-color: black;
     border-radius: .25rem 0 0 0;
     border: none;
-    z-index: 999;
+    z-index: 9;
     color: rgb(var(--error));
 
     &:hover {

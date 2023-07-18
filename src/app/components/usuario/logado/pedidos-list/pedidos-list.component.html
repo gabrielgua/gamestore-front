@@ -3,85 +3,98 @@
         <span class="material-symbols-rounded icon--filled">local_mall</span>
         <p>Meus pedidos</p>
     </div>
-    <app-pedidos-list-skeleton *ngIf="getIsLoading() | async"></app-pedidos-list-skeleton>
-    <div class="error" *ngIf="getIsError() | async"><p>Ops! Não conseguimos buscar seus pedidos, tente novamente mais tarde.</p></div>
-    <div class="pedidos" *ngIf="pedidos.length" @fadeIn>
-        <div class="pedido" *ngFor="let pedido of pedidos">
-            <section class="pedido__header">
-                <p class="pedido__codigo">{{pedido.codigo}}</p>
-                <p class="pedido__status" class="{{ !isCanceladoOuReembolsado(pedido.status) ? 'success' : 'error'}}">{{pedido.status}}</p> 
-                <app-loader *ngIf="pedido.isLoadingActions"></app-loader>
-                <div class="actions-wrapper" *ngIf="!pedido.isLoadingActions">
-                    <div class="pedido__actions" *ngIf="!isCriado(pedido.status)">
-                        <button class="btn-pedido-action btn-danger" (click)="cancelarPedido(pedido)" title="Cancelar Pedido">
-                            <span class="material-symbols-rounded icon--filled" >cancel</span>
-                            <p>Cancelar</p>
-                        </button>
-                        <button class="btn-pedido-action btn-success" (click)="confirmarPedido(pedido)" title="Confirmar Pedido">
-                            <span class="material-symbols-rounded icon--filled" >check_circle</span>
-                            <p>Confirmar</p>
-                        </button>
-                    </div>
-                    <div class="pedido__actions" *ngIf="isConfirmado(pedido.status)">
-                        <button class="btn-pedido-action btn-danger" (click)="reembolsarPedido(pedido)" title="Reembolsar Pedido">
-                            <span class="material-symbols-rounded icon--filled">cancel</span>
-                            <p>Reembolsar</p>
-                        </button>
-                    </div>      
-                </div>
-                          
-            </section>
-            <section class="pedido__jogos">
-                <div class="pedido__jogo" *ngFor="let jogo of pedido.jogos">
-                    <img class="jogo__img" src="{{jogo.urlImagem}}" alt="imagem">
-                    <p class="jogo__nome">{{jogo.nome}}</p>
-                    <p class="jogo__preco">{{jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL'}}</p>
-                </div>
-            </section>
-            <section class="pedido__detalhes">
-                <div class="pedido__fluxo-status">
-                    <div class="pedido__data"> 
-                        <span class="material-symbols-rounded icon--filled">check_circle</span>
-                        <p>criado em {{pedido.dataCriacao | date: 'shortDate'}} às {{pedido.dataCriacao | date: 'shortTime'}}</p>
-                    </div>
-                    
-    
-                    <p class="pedido__data" *ngIf="pedido.dataConfirmacao">
-                        <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
-                        <span class="material-symbols-rounded icon--filled">check_circle</span>
+    <ng-container *ngIf="{pedidos: pedidos$ | async, error: pedidosError$ | async} as data">
 
-                        confirmado em {{pedido.dataConfirmacao | date: 'shortDate'}}
-                        às 
-                        {{pedido.dataConfirmacao | date: 'shortTime'}}
-                    </p>               
-                    <p class="pedido__data" *ngIf="pedido.dataCancelamento">
-                        <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
-                        <span class="material-symbols-rounded icon--filled">cancel</span>
-                        cancelado em {{pedido.dataCancelamento | date: 'shortDate'}}
-                        às 
-                        {{pedido.dataCancelamento | date: 'shortTime'}}
-                    </p>               
-                    <p class="pedido__data" *ngIf="pedido.dataReembolso">
-                        <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
-                        <span class="material-symbols-rounded icon--filled">error</span>
-                        reembolsado em {{pedido.dataReembolso | date: 'shortDate'}}
-                        às 
-                        {{pedido.dataReembolso | date: 'shortTime'}}
-                    </p>               
-                </div>
+        <ng-template #loadingPedidos>
+            <app-pedidos-list-skeleton *ngIf="!data.error"></app-pedidos-list-skeleton>
+        </ng-template>
 
-                <div class="pedido__forma-pagamento-total">
-                    <div class="pedido__forma-pagamento">
-                        <span class="material-symbols-rounded icon--filled">credit_card</span>
-                        <p>{{pedido.formaPagamento.nome}}</p>
-                        <p class="pedido__total">{{pedido.valorTotal | currency: 'BRL'}}</p>
+        <div class="error" *ngIf="data.error as error"><p>Ops! Não conseguimos buscar seus pedidos, tente novamente mais tarde.</p></div>
 
+
+        <div class="pedidos" *ngIf="data.pedidos as pedidos; else loadingPedidos" @fadeIn>
+            <div class="pedido" *ngFor="let pedido of pedidos">
+                <section class="pedido__header">
+                    <p class="pedido__codigo">{{pedido.codigo}}</p>
+                    <p class="pedido__status" class="{{ !isCanceladoOuReembolsado(pedido.status) ? 'success' : 'error'}}">{{pedido.status}}</p> 
+
+                    <ng-template #loadingActions>
+                        <app-loader></app-loader>
+                    </ng-template>
+
+                    <div class="actions-wrapper" *ngIf="!pedido.isLoadingActions; else loadingActions">
+                        <div class="pedido__actions" *ngIf="!isCriado(pedido.status)">
+                            <button class="btn-pedido-action btn-danger" (click)="cancelarPedido(pedido)" title="Cancelar Pedido">
+                                <span class="material-symbols-rounded icon--filled" >cancel</span>
+                                <p>Cancelar</p>
+                            </button>
+                            <button class="btn-pedido-action btn-success" (click)="confirmarPedido(pedido)" title="Confirmar Pedido">
+                                <span class="material-symbols-rounded icon--filled" >check_circle</span>
+                                <p>Confirmar</p>
+                            </button>
+                        </div>
+                        <div class="pedido__actions" *ngIf="isConfirmado(pedido.status)">
+                            <button class="btn-pedido-action btn-danger" (click)="reembolsarPedido(pedido)" title="Reembolsar Pedido">
+                                <span class="material-symbols-rounded icon--filled">cancel</span>
+                                <p>Reembolsar</p>
+                            </button>
+                        </div>      
                     </div>
-                </div>
-            </section>
-        </div>
+                              
+                </section>
+                <section class="pedido__jogos">
+                    <div class="pedido__jogo" *ngFor="let jogo of pedido.jogos">
+                        <img class="jogo__img" src="{{jogo.urlImagem}}" alt="imagem">
+                        <p class="jogo__nome">{{jogo.nome}}</p>
+                        <p class="jogo__preco">{{jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL'}}</p>
+                    </div>
+                </section>
+                <section class="pedido__detalhes">
+                    <div class="pedido__fluxo-status">
+                        <div class="pedido__data"> 
+                            <span class="material-symbols-rounded icon--filled">check_circle</span>
+                            <p>criado em {{pedido.dataCriacao | date: 'shortDate'}} às {{pedido.dataCriacao | date: 'shortTime'}}</p>
+                        </div>
+                        
         
-
-    </div>
+                        <p class="pedido__data" *ngIf="pedido.dataConfirmacao">
+                            <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
+                            <span class="material-symbols-rounded icon--filled">check_circle</span>
+    
+                            confirmado em {{pedido.dataConfirmacao | date: 'shortDate'}}
+                            às 
+                            {{pedido.dataConfirmacao | date: 'shortTime'}}
+                        </p>               
+                        <p class="pedido__data" *ngIf="pedido.dataCancelamento">
+                            <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
+                            <span class="material-symbols-rounded icon--filled">cancel</span>
+                            cancelado em {{pedido.dataCancelamento | date: 'shortDate'}}
+                            às 
+                            {{pedido.dataCancelamento | date: 'shortTime'}}
+                        </p>               
+                        <p class="pedido__data" *ngIf="pedido.dataReembolso">
+                            <span class="material-symbols-rounded icon--filled">arrow_forward_ios</span>
+                            <span class="material-symbols-rounded icon--filled">error</span>
+                            reembolsado em {{pedido.dataReembolso | date: 'shortDate'}}
+                            às 
+                            {{pedido.dataReembolso | date: 'shortTime'}}
+                        </p>               
+                    </div>
+    
+                    <div class="pedido__forma-pagamento-total">
+                        <div class="pedido__forma-pagamento">
+                            <span class="material-symbols-rounded icon--filled">credit_card</span>
+                            <p>{{pedido.formaPagamento.nome}}</p>
+                            <p class="pedido__total">{{pedido.valorTotal | currency: 'BRL'}}</p>
+    
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+    
+        </div>
+    </ng-container>
+    
     
 </div>
