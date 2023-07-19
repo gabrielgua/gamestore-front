@@ -1,20 +1,16 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Animations } from '../../animations/animations';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Jogo } from '../../models/jogos/jogo';
-import { JogoResumo } from '../../models/jogos/jogo.resumo';
-import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
-import { JogosListService } from '../../service/jogos/jogos-list.service';
-import { PageableModel } from '../../models/pageables/pageable.model';
-import { JogoFilter } from '../../models/jogos/jogo.filter';
-import { JogoPageableRequest } from '../../models/jogos/jogo.pageable';
-import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-search-list.service';
-import { AuthService } from 'src/app/service/auth/auth.service';
-import { Usuario } from 'src/app/models/usuarios/usuario';
-import { UsuarioService } from 'src/app/service/usuario/usuario.service';
-import { Subscription, debounceTime, delay, distinctUntilChanged, filter, map, merge, mergeMap, of, switchMap } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs';
 import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
+import { Usuario } from 'src/app/models/usuarios/usuario';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { UsuarioService } from 'src/app/service/usuario/usuario.service';
+import { Animations } from '../../animations/animations';
+import { JogosHeaderSearchListService } from '../../service/jogos/jogos-header-search-list.service';
+import { Jogo } from 'src/app/models/jogos/jogo';
+import { PageableModel } from 'src/app/models/pageables/pageable.model';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 
 @Component({
   selector: 'app-header',
@@ -35,17 +31,17 @@ export class HeaderComponent implements AfterViewInit {
     private authService: AuthService,
     private formBuilder: FormBuilder) {}
  
-  size: number = 4;
-  jogos: JogoResumo[] = [];
+  jogos$ = new Observable<JogoResumo[]>;
 
   form = this.formBuilder.group({
-    search: new FormControl(null)
+    search: new FormControl('')
   })
 
   breakToMobileWidth = 800;
   mobile: boolean = false;
   showMobileMenu: boolean = false;
   showUsuarioMenu: boolean = false;
+  showSearchDropdown: boolean = false;
 
   ngAfterViewInit(): void {
     this.resetDropDown();
@@ -61,24 +57,24 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   private handleSearch(): void {
-    this.search?.valueChanges.pipe(
-      debounceTime(500),
-      filter(term => !!term),
-      switchMap(term => { 
-        this.resetDropDown();
-        return this.jogoService.init(term!)
-      })
-    ).subscribe(() => this.getJogos())
-  }
-
-  public checkSearch(): void {
-    if (!this.search?.value) {
-      this.resetDropDown();
-    }
+    this.jogos$ = this.search?.valueChanges
+      .pipe(
+        map(term => term!.trim()),
+        debounceTime(500),
+        filter(term => {
+			this.showSearchDropdown = false;
+			return term !== '';
+		}),
+        switchMap(term => this.jogoService.search(term)
+          .pipe(map(res => {
+			this.showSearchDropdown = true;
+			return res.content;
+		  }))
+    ))!;
+    
   }
 
   private getUsuario(): void {
-    
     this.usuarioService.init();
     this.usuarioService.getUsuario().subscribe(usuario => {
       if (this.isLoggedIn()) {
@@ -111,16 +107,9 @@ export class HeaderComponent implements AfterViewInit {
   public isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   } 
-
-
-  private getJogos(): void {
-    this.jogoService.getJogos().subscribe((jogos: any) => {      
-      this.jogos = jogos.content;      
-    })
-  }
-
+  
   resetDropDown(): void {
-    this.jogos = [];
+    this.showSearchDropdown = false;
   }
   
   resetSearch(): void {

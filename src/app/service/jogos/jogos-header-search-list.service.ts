@@ -9,20 +9,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class JogosHeaderSearchListService {
-
+  
+  private DEFAULT_SIZE: number = 3;
   constructor(private http: HttpClient) { }
 
-  jogos$ = new BehaviorSubject<PageableModel<JogoResumo>>(new PageableModel());
-  private DEFAULT_SIZE: number = 3;
-
-
-  public init(term: string) {   
-    return this.http.get<PageableModel<JogoResumo>>(`${environment.API_URL}/jogos?nome=${term}&size=${this.DEFAULT_SIZE}`)
-      .pipe(tap(jogos => this.jogos$.next(jogos)))
+  public search(term: string) {       
+    return this.http.get<PageableModel<JogoResumo>>(`${environment.API_URL}/jogos?nome=${term}&size=${this.DEFAULT_SIZE}`);
   }
 
 
-  public getJogos() {
-    return this.jogos$.asObservable();
-  }
+  
 }

@@ -9,55 +9,28 @@
         <div class="search-wrapper">
           <form [formGroup]="form" (submit)="handleSubmitSearch()">
             <span class="material-symbols-rounded">search</span>
-            <input
-              class="search-input"
-              type="text"
-              placeholder="Pesquisar..."
-              formControlName="search"
-              (keyup)="checkSearch()"
-            />
+            <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" />
           </form>
 
-          <div
-            class="search-dropdown"
-            *ngIf="jogos.length"
-            @fromTopToTop
-            id="search-dropdown"
-          >
-            <!-- <a class="jogo" href="/jogos/red-dead-redemption-2">
-                            <div class="img-wrapper">
-                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/883710/capsule_616x353.jpg"/>
-                            </div>
-                            <div class="jogo__info">
-                                <p class="singleline-truncate jogo__nome">Red Dead Redemption 2</p>
-                                <p class="jogo__desenvolvedora">Rockstar Games</p>
-                                <p class="jogo__preco">R$ 257,90</p>
-                            </div>
-                        </a> -->
-
-            <a
-              class="jogo"
-              *ngFor="let jogo of jogos"
-              href="/jogos/{{ jogo.uriNome }}"
-            >
-              <div class="img-wrapper">
-                <img src="{{ jogo.urlImagem }}" />
-              </div>
-              <div class="jogo__info">
-                <p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
-                <p class="jogo__desenvolvedora">
-                  {{ jogo.desenvolvedora?.nome }}
-                </p>
-                <p class="jogo__preco">
-                  {{
-                    jogo.preco === 0
-                      ? "Gratuito"
-                      : (jogo.preco | currency : "BRL")
-                  }}
-                </p>
-              </div>
-            </a>
-          </div>
+          <ng-container *ngIf="jogos$ | async as jogos">
+            <div id="search-dropdown" class="search-dropdown" *ngIf="showSearchDropdown" @fromTopToTop>
+              <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{ jogo.uriNome }}">
+                <div class="img-wrapper">
+                  <img src="{{ jogo.urlImagem }}" />
+                </div>
+                <div class="jogo__info">
+                  <p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
+                  <p class="jogo__desenvolvedora">
+                    {{ jogo.desenvolvedora?.nome }}
+                  </p>
+                  <p class="jogo__preco">
+                    {{ jogo.preco === 0 ? "Gratuito" : (jogo.preco | currency : "BRL") }}
+                  </p>
+                </div>
+              </a>
+            </div>
+            
+          </ng-container>
         </div>
       </ul>
       <ul class="account-actions" *ngIf="!isLoggedIn()">
