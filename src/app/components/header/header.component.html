@@ -1,102 +1,69 @@
 <header #header (window:resize)="manageScreenSize(header.offsetWidth)">
-  <div class="wrapper">
-    <app-logo></app-logo>
+	<div class="wrapper">
+		<app-logo></app-logo>
+		<nav *ngIf="!mobile">
+			<ul class="links">
+				<li><a routerLink="jogos">Jogos</a></li>
+				<li><a routerLink="">Desenvolvedoras</a></li>
+				
+				<!-- TODO separate into search component -->
+				<div class="search-wrapper">
+					<form [formGroup]="form" (submit)="handleSubmitSearch()">
+						<span class="material-symbols-rounded">search</span>
+						<input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" />
+					</form>
 
-    <nav *ngIf="!mobile">
-      <ul class="links">
-        <li><a routerLink="jogos">Jogos</a></li>
-        <li><a routerLink="">Desenvolvedoras</a></li>
-        <div class="search-wrapper">
-          <form [formGroup]="form" (submit)="handleSubmitSearch()">
-            <span class="material-symbols-rounded">search</span>
-            <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" />
-          </form>
+					<ng-container *ngIf="jogos$ | async as jogos">
+						<div id="search-dropdown" class="search-dropdown" *ngIf="showSearchDropdown && search?.value" @fromTopToTop>
+							<a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{ jogo.uriNome }}">
+								<div class="img-wrapper">
+									<img src="{{ jogo.urlImagem }}" />
+								</div>
+								<div class="jogo__info">
+									<p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
+									<p class="jogo__desenvolvedora">
+										{{ jogo.desenvolvedora?.nome }}
+									</p>
+									<p class="jogo__preco">
+										{{ jogo.preco === 0 ? "Gratuito" : (jogo.preco | currency : "BRL") }}
+									</p>
+								</div>
+							</a>
+						</div>
 
-          <ng-container *ngIf="jogos$ | async as jogos">
-            <div id="search-dropdown" class="search-dropdown" *ngIf="showSearchDropdown" @fromTopToTop>
-              <a class="jogo" *ngFor="let jogo of jogos" href="/jogos/{{ jogo.uriNome }}">
-                <div class="img-wrapper">
-                  <img src="{{ jogo.urlImagem }}" />
-                </div>
-                <div class="jogo__info">
-                  <p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
-                  <p class="jogo__desenvolvedora">
-                    {{ jogo.desenvolvedora?.nome }}
-                  </p>
-                  <p class="jogo__preco">
-                    {{ jogo.preco === 0 ? "Gratuito" : (jogo.preco | currency : "BRL") }}
-                  </p>
-                </div>
-              </a>
-            </div>
-            
-          </ng-container>
-        </div>
-      </ul>
-      <ul class="account-actions" *ngIf="!isLoggedIn()">
-        <li><a routerLink="sing-up">Cadastrar</a></li>
-        <li class="link-entrar" routerLink="sing-in"><a>Entrar</a></li>
-      </ul>
-      <ul class="account-actions" *ngIf="isLoggedIn()">
-        <div class="usuario-wrapper">
-          <button id="profile-button" class="btn-avatar" (click)="handleProfileClick()">
-            <img *ngIf="usuario" id="profile-avatar" class="avatar" src="{{ usuario.avatarUrl }}" />
-          </button>
+					</ng-container>
+				</div>
+			</ul>
+		
+			<ul class="account-actions">
+				<app-usuario-avatar></app-usuario-avatar>
+			</ul>
 
-          <div class="profile-dropdown" *ngIf="showUsuarioMenu" @fromTopToTop>
-            <p class="profile-nome">
-              {{ usuario.nome ? usuario.nome : usuario.email }} {{ isAdmin() ? '- (Admin)' : ''}}
-            </p>
-            <section class="profile-actions">
-              <button class="profile-button">
-                <span class="material-symbols-rounded icon--filled">person</span>
-                <p>Perfil</p>
-              </button>
-              <button class="profile-button" routerLink="pedidos">
-                <span class="material-symbols-rounded icon--filled">local_mall</span>
-                <p>Pedidos</p>
-              </button>
-              <button class="profile-button">
-                <span class="material-symbols-rounded icon--filled">gamepad</span>
-                <p>Jogos</p>
-              </button>
-              <button class="profile-button">
-                <span class="material-symbols-rounded icon--filled">favorite</span>
-                <p>Desejos</p>
-              </button>
-              <button class="profile-button" (click)="handleLogoutClick()">
-                <span class="material-symbols-rounded icon--filled">logout</span>
-                <p>Sair</p>
-              </button>
-            </section>
-          </div>
-        </div>
-      </ul>
-    </nav>
-    <nav class="mobile" *ngIf="mobile">
-      <button
-        class="mobile-menu-btn"
-        (click)="showMobileMenu = !showMobileMenu"
-        [ngClass]="{ 'mobile--opened': showMobileMenu }">
-        <span class="material-symbols-rounded icon--bolder">menu</span>
-      </button>
-    </nav>
-  </div>
+		</nav>
+		<nav class="mobile" *ngIf="mobile">
+			<button
+				class="mobile-menu-btn"
+				(click)="showMobileMenu = !showMobileMenu"
+				[ngClass]="{ 'mobile--opened': showMobileMenu }">
+				<span class="material-symbols-rounded icon--bolder">menu</span>
+			</button>
+		</nav>
+	</div>
 </header>
 <div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
-  <ul class="links">
-    <form [formGroup]="form" (submit)="handleSubmitSearch()">
-      <span class="material-symbols-rounded">search</span>
-      <input
-        class="search-input"
-        type="text"
-        placeholder="Pesquisar..."
-        formControlName="search"
-      />
-    </form>
-    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="jogos">Jogos</a></li>
-    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="desenvolvedoras" >Desenvolvedoras</a></li>
-    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-up" >Cadastrar</a></li>
-    <li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-in" >Entrar</a></li>
-  </ul>
+	<ul class="links">
+		<form [formGroup]="form" (submit)="handleSubmitSearch()">
+			<span class="material-symbols-rounded">search</span>
+			<input
+				class="search-input"
+				type="text"
+				placeholder="Pesquisar..."
+				formControlName="search"
+			/>
+		</form>
+		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="jogos">Jogos</a></li>
+		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="desenvolvedoras" >Desenvolvedoras</a></li>
+		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-up" >Cadastrar</a></li>
+		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-in" >Entrar</a></li>
+	</ul>
 </div>

@@ -1,0 +1,47 @@
+
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>
+<ng-container *ngIf="usuario$ | async as usuario; else loading">
+    
+    <div class="links" *ngIf="!isLoggedIn()">
+        <a routerLink="sing-up">Cadastrar</a>
+        <a routerLink="sing-in">Entrar</a>
+    </div>
+
+    <div class="profile-wrapper" *ngIf="isLoggedIn()">
+        <button id="profile-button" class="btn-avatar" (click)="this.showMenu = !this.showMenu">
+            <img *ngIf="usuario.avatarUrl.length" id="profile-avatar" class="profile-avatar" src="{{ usuario.avatarUrl }}" />
+            <app-loader *ngIf="!usuario.avatarUrl.length" class="material-symbols-rounded icon--filled"></app-loader>
+        </button>
+    
+        <div class="profile-dropdown" *ngIf="showMenu" @fromTopToTop>
+            <p class="profile-nome">
+                {{ usuario.nome ? usuario.nome : usuario.email }} {{ isAdmin() ? '- (Admin)' : ''}}
+            </p>
+            <section class="profile-actions">
+                <button class="btn-actions">
+                    <span class="material-symbols-rounded icon--filled">person</span>
+                    <p>Perfil</p>
+                </button>
+                <button class="btn-actions" routerLink="pedidos">
+                    <span class="material-symbols-rounded icon--filled">local_mall</span>
+                    <p>Pedidos</p>
+                </button>
+                <button class="btn-actions">
+                    <span class="material-symbols-rounded icon--filled">gamepad</span>
+                    <p>Jogos</p>
+                </button>
+                <button class="btn-actions">
+                    <span class="material-symbols-rounded icon--filled">favorite</span>
+                    <p>Desejos</p>
+                </button>
+                <button class="btn-actions" (click)="handleLogoutClick()">
+                    <span class="material-symbols-rounded icon--filled">logout</span>
+                    <p>Sair</p>
+                </button>
+            </section>
+        </div>
+    </div>
+</ng-container>
+

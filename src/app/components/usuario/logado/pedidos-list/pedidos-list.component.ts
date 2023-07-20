@@ -77,8 +77,7 @@ export class PedidosListComponent implements OnInit, OnDestroy {
     this.stopPedidoLoading(pedido);
     this.toastrError(`Pedido não pode ser ${action}.`, title);
   }
-
-
+  
   private startPedidoLoading(pedido: Pedido) {
     pedido.isLoadingActions = true;
   }

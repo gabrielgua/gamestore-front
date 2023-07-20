@@ -1,0 +1,124 @@
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+.links > a {
+  color: var(--accent);
+  transition: all 150ms ease;
+  
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.links a:last-child {
+  color: var(--primary);
+  background-color: rgba(var(--primary-number), .2);
+  border-radius: .25rem;
+  padding: .75rem;
+
+  &:hover {
+    background-color: rgba(var(--primary-number), .3);
+
+  }
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  transition: scale 75ms ease;
+}
+
+.btn-avatar {
+  width: 3.125rem;
+  height: 3.125rem;
+  outline-offset: 3px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--primary-number), 0.2);
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-number), 0.2);
+  }
+
+  &:hover > .profile-avatar {
+    scale: 1.05;
+  }
+}
+
+.profile-dropdown {
+  min-width: 10rem;
+  right: 0;
+  top: 4rem;
+  position: absolute;
+  background-color: black;
+  border-radius: 0.25rem;
+  border: 1px solid var(--subtle-border-color);
+}
+
+.profile-dropdown .profile-nome {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.profile-actions {
+  display: grid;
+  padding: 0.5rem;
+}
+
+.btn-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  border: 1px solid white;
+
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background-color: rgba(var(--primary-number), 0.3);
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  > span {
+    font-size: 1.3rem;
+    font-family: 800;
+    color: var(--primary);
+  }
+}
+
+.btn-actions:last-child {
+  margin-top: 1rem;
+  color: rgb(var(--error));
+
+  &:hover {
+    background-color: rgba(var(--error), .3);
+  }
+
+  > span {
+    color: rgb(var(--error));
+  }
+}
+
+
