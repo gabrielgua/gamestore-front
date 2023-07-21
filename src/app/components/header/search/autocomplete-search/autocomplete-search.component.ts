@@ -77,4 +77,9 @@ export class AutocompleteSearchComponent implements OnInit {
   private close(): void {
     this.submitted.emit();
   }
+
+  handleResise(size: number): void {
+    console.log(size);
+    
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { Animations } from 'src/app/animations/animations';
 
 @Component({
@@ -7,17 +7,21 @@ import { Animations } from 'src/app/animations/animations';
   styleUrls: ['./search-modal.component.css'],
   animations: [Animations]
 })
-export class SearchModalComponent {
+export class SearchModalComponent implements OnDestroy {
 
   @Output() closeEvent = new EventEmitter();
 
   constructor(private elementRef: ElementRef) {}
-
+  
   @HostListener('document: keydown', ['$event'])
   handleSearchShortcut(event: KeyboardEvent) {  
     if (event.key.toLocaleLowerCase() === 'escape') {
       this.close();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.close();
   }
 
   close(): void {
