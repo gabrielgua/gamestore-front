@@ -39,6 +39,10 @@ import { PedidosListComponent } from './components/usuario/logado/pedidos-list/p
 import { LoadingPipe } from './pipes/loading/loading.pipe';
 import { PedidosListSkeletonComponent } from './components/usuario/logado/pedidos-list/pedidos-list-skeleton/pedidos-list-skeleton.component';
 import { UsuarioAvatarComponent } from './components/header/usuario-avatar/usuario-avatar.component';
+import { AutocompleteSearchComponent } from './components/header/search/autocomplete-search/autocomplete-search.component';
+import { SearchComponent } from './components/header/search/search.component';
+import { ModalComponent } from './components/shared/modal/modal.component';
+import { SearchModalComponent } from './components/header/search/search-modal/search-modal.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -70,6 +74,10 @@ registerLocaleData(localePt);
     LoadingPipe,
     PedidosListSkeletonComponent,
     UsuarioAvatarComponent,
+    AutocompleteSearchComponent,
+    SearchComponent,
+    ModalComponent,
+    SearchModalComponent,
   ],
   imports: [
     BrowserModule,

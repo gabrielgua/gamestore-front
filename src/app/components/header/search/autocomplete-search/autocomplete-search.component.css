@@ -1,0 +1,100 @@
+
+form {
+  border: 1px solid var(--subtle-border-color);
+  background-color: black;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  box-shadow: var(--box-shadow-primary);
+  border-radius: 2rem;
+  padding-inline-start: 1rem;
+  transition: outline 50ms ease;
+
+  > span {
+    color: var(--primary);
+  }
+
+  &:focus-within {
+    outline: 3px solid var(--primary);
+  }
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.search-dropdown {
+  min-width: max-content;
+  width: 100%;
+  margin-top: 1rem;
+  place-self: start;
+  position: absolute;
+  display: grid;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  min-width: max-content;
+  background-color: black;
+  /* border: 1px solid var(--subtle-border-color); */
+  box-shadow: var(--box-shadow-primary);
+}
+
+.jogo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  padding-inline-end: 1rem;
+
+  transition: background-color 150ms ease;
+}
+
+.jogo:focus,
+.jogo:hover {
+  outline: none;
+  background-color: rgba(var(--primary-number), 0.4);
+}
+
+.img-wrapper {
+  max-height: 5rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.img-wrapper > img {
+  max-width: 10rem;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.jogo__nome {
+  font-size: var(--font-normal);
+  color: var(--accent);
+}
+
+.jogo__desenvolvedora {
+  color: rgba(var(--primary-number), 0.6);
+  font-size: var(--font-smaller);
+  max-width: max-content;
+}
+
+.jogo__preco {
+  color: var(--primary);
+  font-size: var(--font-smaller);
+}
+
+@media (width <= 1000px) {
+  .search-dropdown {
+    place-self: end;
+  }
+}

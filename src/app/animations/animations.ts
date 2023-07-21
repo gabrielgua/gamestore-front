@@ -17,24 +17,14 @@ export const Animations = [
     transition(':enter', [
       style({ opacity: 0, transform: 'translateY(10%)' }),
       animate('150ms ease', style({ opacity: 1, transform: 'translateY(0)' })),
-    ]),
-
-    transition(':leave', [
-      style({ opacity: 1, transform: 'translateY(0%)' }),
-      animate('0ms ease', style({ opacity: 0, transform: 'translateY(10%)' })),
-    ]),
+    ])
   ]),
 
   trigger('fromRightToRight', [ 
     transition(':enter', [
       style({ opacity: 0, transform: 'translateX(10%)',  }),
       animate('400ms ease', style({ opacity: 1, transform: 'translateX(0)'  })),
-    ]),
-
-    transition(':leave', [
-      style({ opacity: 1, transform: 'translateX(0%)' }),
-      animate('0ms ease', style({ opacity: 0, })),
-    ]),
+    ])
   ]),
 
   trigger('fromLeftToLeft', [ 
@@ -54,5 +44,13 @@ export const Animations = [
       style({ opacity: 0 }),
       animate('500ms ease', style({ opacity: 1 })),
     ])
+  ]),
+
+  trigger('fadeInFromTop', [ 
+    transition(':enter', [
+      style({ opacity: 0, transform: 'translateY(-20%)'}),
+      animate('200ms ease', style({ opacity: 1, transform: 'translateY(0%)'})),
+    ]),
+
   ]),
 ]

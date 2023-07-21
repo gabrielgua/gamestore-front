@@ -29,6 +29,8 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${this.authService.refreshToken}`
         }
       })
+
+      
     }
 
     request = request.clone({

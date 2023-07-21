@@ -16,12 +16,13 @@ header {
   display: grid;
   grid-template-columns: auto 1fr;
   width: min(100% - 3rem, var(--container-max-size));
+  position: relative;
 }
 
 nav {
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: 1fr auto;
+  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -31,11 +32,9 @@ nav ul {
   list-style: none;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .links {
-  margin-right: auto;
   list-style: none;
 }
 
@@ -67,106 +66,7 @@ a:hover {
   color: var(--primary);
 }
 
-.search-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
-}
 
-form {
-  border: 1px solid var(--subtle-border-color);
-  background-color: black;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  box-shadow: var(--box-shadow-primary);
-  padding-inline-start: 0.5rem;
-  transition: outline 50ms ease;
-
-  > span {
-    color: var(--primary);
-  }
-
-  &:focus-within {
-    outline: 3px solid var(--primary);
-  }
-}
-
-.search-input {
-  width: 100%;
-  border: none;
-  background-color: transparent;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0.5rem;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.search-dropdown {
-  place-self: start;
-  position: absolute;
-  margin-top: 3rem;
-  display: grid;
-  border-radius: 0.25rem;
-  overflow: hidden;
-
-  min-width: max-content;
-  background-color: black;
-  border: 1px solid var(--subtle-border-color);
-  box-shadow: var(--box-shadow-primary);
-}
-
-.jogo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
-  padding-inline-end: 1rem;
-
-  transition: background-color 150ms ease;
-}
-
-.jogo:focus,
-.jogo:hover {
-  outline: none;
-  background-color: rgba(var(--primary-number), 0.4);
-}
-
-.img-wrapper {
-  max-height: 5rem;
-  overflow: hidden;
-  border-radius: 0.25rem;
-}
-
-.img-wrapper > img {
-  max-width: 10rem;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-.jogo__nome {
-  font-size: var(--font-normal);
-  color: var(--accent);
-}
-
-.jogo__desenvolvedora {
-  color: rgba(var(--primary-number), 0.6);
-  font-size: var(--font-smaller);
-  max-width: max-content;
-}
-
-.jogo__preco {
-  color: var(--primary);
-  font-size: var(--font-smaller);
-}
 
 .mobile-menu-btn {
   display: flex;
@@ -185,8 +85,6 @@ form {
   margin-left: auto;
 }
 
-
-
 .mobile-menu {
   position: sticky;
   background-color: black;
@@ -201,8 +99,4 @@ form {
   gap: 0.5rem;
 }
 
-@media (width <= 1000px) {
-  .search-dropdown {
-    place-self: end;
-  }
-}
+

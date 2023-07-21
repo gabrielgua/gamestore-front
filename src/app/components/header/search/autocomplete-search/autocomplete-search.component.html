@@ -1,0 +1,30 @@
+<section class="search-modal">
+    <form [formGroup]="form" (submit)="handleSubmitSearch()" @fadeInFromTop>
+        <span class="material-symbols-rounded ">search</span>
+        <input id="input" class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" />
+    </form>
+
+    <ng-container *ngIf="jogos$ | async as jogos">
+        <div id="search-dropdown" class="search-dropdown" *ngIf="showSearchDropdown && search?.value" @fromTopToTop>
+            <a class="jogo" *ngFor="let jogo of jogos" href="jogos/{{ jogo.uriNome }}">
+                <div class="img-wrapper">
+                    <img src="{{ jogo.urlImagem }}" />
+                </div>
+                <div class="jogo__info">
+                    <p class="singleline-truncate jogo__nome">{{ jogo.nome }}</p>
+                    <p class="jogo__desenvolvedora">
+                        {{ jogo.desenvolvedora?.nome }}
+                    </p>
+                    <p class="jogo__preco">
+                        {{ jogo.preco === 0 ? "Gratuito" : (jogo.preco | currency : "BRL") }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+    </ng-container>
+
+    <ng-template #loading>
+        <app-loader />
+    </ng-template>
+</section>

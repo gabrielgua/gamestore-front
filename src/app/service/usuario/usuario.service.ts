@@ -24,12 +24,11 @@ export class UsuarioService {
   
 
   public init(): void { 
-    
-    if (!this.authService.isLoggedIn() || !this.authService.isRefreshTokenValid()) {
+    if (!this.authService.isLoggedIn() && !this.authService.isRefreshTokenValid()) {
       return;
     } 
     
-    if (this.authService.isRefreshTokenValid() && !this.authService.isLoggedIn()) {
+    if (this.authService.isRefreshTokenValid() && !this.authService.isLoggedIn()) {      
       this.authService.authenticateViaRefreshToken();      
     }
 
