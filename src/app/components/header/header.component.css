@@ -15,8 +15,8 @@ header {
   gap: 1rem;
   display: grid;
   grid-template-columns: auto 1fr;
-  width: min(100% - 3rem, var(--container-max-size));
-  position: relative;
+  width: min(100% - 2rem, var(--container-max-size));
+  /* position: relative; */
 }
 
 nav {
@@ -81,22 +81,8 @@ a:hover {
   }
 }
 
-.mobile {
-  margin-left: auto;
-}
 
-.mobile-menu {
-  position: sticky;
-  background-color: black;
-  z-index: 99;
-  padding: 0.5rem;
-  position: relative;
-}
 
-.mobile-menu ul {
-  padding-inline: 1rem;
-  display: grid;
-  gap: 0.5rem;
-}
+
 
 

@@ -15,19 +15,13 @@
 		</nav>
 		<nav class="mobile" *ngIf="mobile">
 			<button
+				id="btn-mobile-menu"
 				class="mobile-menu-btn"
 				(click)="showMobileMenu = !showMobileMenu"
 				[ngClass]="{ 'mobile--opened': showMobileMenu }">
-				<span class="material-symbols-rounded icon--bolder">menu</span>
+				<span id="icon-mobile-menu" class="material-symbols-rounded icon--bolder">menu</span>
 			</button>
 		</nav>
 	</div>
 </header>
-<div class="mobile-menu" *ngIf="showMobileMenu" @fromTopToTop>
-	<ul class="links">
-		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="jogos">Jogos</a></li>
-		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="desenvolvedoras" >Desenvolvedoras</a></li>
-		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-up" >Cadastrar</a></li>
-		<li ><a (click)="showMobileMenu = !showMobileMenu" routerLink="sing-in" >Entrar</a></li>
-	</ul>
-</div>
+<app-header-mobile />

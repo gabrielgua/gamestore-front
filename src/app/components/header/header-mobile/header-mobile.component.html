@@ -1,0 +1,73 @@
+<div class="container">
+    <aside @fromLeftToLeft *ngIf="show">
+        <section class="logo">
+            <app-logo />
+            <button class="btn-action" (click)="closeMenu()">
+                <span class="material-symbols-rounded icon--bolder">close</span>
+            </button>
+        </section>
+
+        <section class="search">
+            <form>
+                <span class="material-symbols-rounded ">search</span>
+                <input id="search-input" class="search-input" type="text" placeholder="Pesquisar..." />
+            </form>
+        </section>
+        <ng-container *ngIf="usuario$ | async as usuario">
+            <section class="profile-wrapper" *ngIf="isLogado()">
+                <div class="profile">
+                    <div class="profile__img">
+                        <img *ngIf="usuario.avatarUrl.length" src="{{usuario.avatarUrl}}" alt="avatar" />    
+                        <app-loader *ngIf="!usuario.avatarUrl.length"/>            
+                    </div>
+                    <div class="profile__nome">
+                        <p>{{usuario.nome ? usuario.nome : usuario.username}}</p>
+                        <span class="material-symbols-rounded icon--filled" title="Admin" *ngIf="isAdmin()">verified_user</span>
+                    </div>
+                </div>
+                <div class="profile__actions">
+                    <button class="btn-action">
+                        <span class="material-symbols-rounded icon--filled">person</span>
+                        <p>Perfil</p>
+                    </button>
+                    <button class="btn-action" routerLink="pedidos">
+                        <span class="material-symbols-rounded icon--filled">local_mall</span>
+                        <p>Pedidos</p>
+                    </button>
+                    <button class="btn-action ">
+                        <span class="material-symbols-rounded icon--filled">gamepad</span>
+                        <p>Jogos</p>
+                    </button>
+                    <button class="btn-action">
+                        <span class="material-symbols-rounded icon--filled">favorite</span>
+                        <p>Desejos</p>
+                    </button>
+                    <button class="btn-action btn-action--danger" (click)="logout()">
+                        <span class="material-symbols-rounded icon--filled">logout</span>
+                        <p>Sair</p>
+                    </button>
+                </div>
+            </section>
+        </ng-container>
+        
+        <section class="links">
+            <a routerLink="jogos" class="btn-action">
+                <span class="material-symbols-rounded icon--filled">stadia_controller</span>
+                <p>Jogos</p>
+            </a>
+            <span *ngIf="!isLogado()">
+                <a routerLink="sing-up" class="btn-action">
+                    <span class="material-symbols-rounded icon--filled">person_add</span>
+                    <p>Cadastrar</p>
+                </a> 
+                <a routerLink="sing-in" class="btn-action">
+                    <span class="material-symbols-rounded icon--filled">login</span>
+                    <p>Entrar</p>
+                </a>            
+            </span>
+        </section>
+
+    </aside>
+    <div *ngIf="show" class="backdrop" (click)="closeMenu()"></div>
+</div>
+

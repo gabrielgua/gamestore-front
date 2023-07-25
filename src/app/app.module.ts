@@ -43,6 +43,7 @@ import { AutocompleteSearchComponent } from './components/header/search/autocomp
 import { SearchComponent } from './components/header/search/search.component';
 import { ModalComponent } from './components/shared/modal/modal.component';
 import { SearchModalComponent } from './components/header/search/search-modal/search-modal.component';
+import { HeaderMobileComponent } from './components/header/header-mobile/header-mobile.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -78,6 +79,7 @@ registerLocaleData(localePt);
     SearchComponent,
     ModalComponent,
     SearchModalComponent,
+    HeaderMobileComponent,
   ],
   imports: [
     BrowserModule,
