@@ -27,24 +27,24 @@
                 </div>
                 <div class="profile__actions">
                     <button class="btn-action" id="btn-action">
-                        <span class="material-symbols-rounded icon--filled">person</span>
-                        <p>Perfil</p>
+                        <span id="btn-action" class="material-symbols-rounded icon--filled">person</span>
+                        <p id="btn-action">Perfil</p>
                     </button>
                     <button id="btn-action" class="btn-action" routerLink="pedidos">
                         <span class="material-symbols-rounded icon--filled">local_mall</span>
                         <p>Pedidos</p>
                     </button>
                     <button id="btn-action" class="btn-action ">
-                        <span class="material-symbols-rounded icon--filled">gamepad</span>
-                        <p>Jogos</p>
+                        <span id="btn-action" class="material-symbols-rounded icon--filled">gamepad</span>
+                        <p id="btn-action">Jogos</p>
                     </button>
                     <button id="btn-action" class="btn-action" >
-                        <span class="material-symbols-rounded icon--filled">favorite</span>
-                        <p>Desejos</p>
+                        <span id="btn-action" class="material-symbols-rounded icon--filled">favorite</span>
+                        <p id="btn-action">Desejos</p>
                     </button>
                     <button id="btn-action" class="btn-action btn-action--danger" (click)="logout()">
-                        <span class="material-symbols-rounded icon--filled">logout</span>
-                        <p>Sair</p>
+                        <span id="btn-action" class="material-symbols-rounded icon--filled">logout</span>
+                        <p id="btn-action">Sair</p>
                     </button>
                 </div>
             </section>
@@ -52,21 +52,21 @@
         
         <section class="links">
             <a id="btn-action" routerLink="/" class="btn-action">
-                <span class="material-symbols-rounded icon--filled">home</span>
-                <p>Home</p>
+                <span id="btn-action" class="material-symbols-rounded icon--filled">home</span>
+                <p id="btn-action">Home</p>
             </a>
             <a id="btn-action" routerLink="jogos" class="btn-action">
-                <span class="material-symbols-rounded icon--filled">stadia_controller</span>
-                <p>Jogos</p>
+                <span id="btn-action" class="material-symbols-rounded icon--filled">stadia_controller</span>
+                <p id="btn-action">Jogos</p>
             </a>
             <span *ngIf="!isLogado()">
                 <a id="btn-action" routerLink="sing-up" class="btn-action">
-                    <span class="material-symbols-rounded icon--filled">person_add</span>
-                    <p>Cadastrar</p>
+                    <span id="btn-action" class="material-symbols-rounded icon--filled">person_add</span>
+                    <p id="btn-action">Cadastrar</p>
                 </a> 
                 <a id="btn-action" routerLink="sing-in" class="btn-action">
-                    <span class="material-symbols-rounded icon--filled">login</span>
-                    <p>Entrar</p>
+                    <span id="btn-action" class="material-symbols-rounded icon--filled">login</span>
+                    <p id="btn-action">Entrar</p>
                 </a>            
             </span>
         </section>
