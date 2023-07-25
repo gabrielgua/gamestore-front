@@ -7,8 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 <body>
     <app-header *ngIf="mostrarHeader()"></app-header>
-    <div class="app-wrapper" [style]="mostrarHeader() ? '--height: min(100vh - 5rem)' : '--height: 100vh'">
-        <router-outlet ></router-outlet>
-        <app-footer style="margin-top: auto;"></app-footer>
-    </div>    
+    <div class="wrapper-wrapper">
+        <div class="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer *ngIf="mostrarHeader()" style="margin-top: auto;"></app-footer>
+    </div>
 </body>

@@ -1,5 +1,12 @@
-.app-wrapper {
-    height: var(--height); 
-    display: flex; 
-    flex-direction: column; 
+.wrapper-wrapper {
+    min-height: min(100vh - 5rem);
+    display: flex;
+    flex-direction: column;
 }
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+

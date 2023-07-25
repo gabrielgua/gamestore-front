@@ -54,6 +54,7 @@ body {
     color-scheme: dark;
     font-family: var(--font-family);
     background-color: var(--background-primary);
+    
 }
 
 .disable-scroll {
@@ -87,6 +88,12 @@ p, h1, h2, h3, h4, h5 {
 
 .icon--bolder {
     font-variation-settings: 'wght' 800;
+}
+
+.icon--filled-bolder {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 800;
 }
 
 .multiline-truncate {

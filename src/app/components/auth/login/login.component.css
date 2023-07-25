@@ -3,17 +3,18 @@
     margin-inline: auto;
 }
 
+
 form {
     gap: 1rem;
-    width: 100%;
+    width: min(100% - 4rem, 25rem);
     display: grid;
-    max-width: 27rem;
     margin-bottom: 3rem;
     padding: 1rem;
     place-self: center;
     color: var(--secondary-text-dark);
     font-size: var(--font-normal);    
 }
+
 
 
 .title-wrapper .title {
