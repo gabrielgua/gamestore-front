@@ -1,5 +1,14 @@
+
 <header #header (window:resize)="manageScreenSize(header.offsetWidth)">
+	
 	<div class="wrapper">
+		<button *ngIf="mobile"
+			id="btn-mobile-menu"
+			class="mobile-menu-btn"
+			(click)="openMobileMenu()"
+			[ngClass]="{ 'mobile--opened': showMobileMenu}">
+			<span id="icon-mobile-menu" class="material-symbols-rounded icon--bolder">menu</span>
+		</button>
 		<app-logo />
 		<nav *ngIf="!mobile">
 			<ul class="links">
@@ -13,15 +22,10 @@
 			</ul>
 
 		</nav>
-		<nav class="mobile" *ngIf="mobile">
-			<button
-				id="btn-mobile-menu"
-				class="mobile-menu-btn"
-				(click)="showMobileMenu = !showMobileMenu"
-				[ngClass]="{ 'mobile--opened': showMobileMenu }">
-				<span id="icon-mobile-menu" class="material-symbols-rounded icon--bolder">menu</span>
-			</button>
-		</nav>
+
+		
 	</div>
 </header>
-<app-header-mobile />
+<app-header-mobile *ngIf="showMobileMenu" (close)="closeMobileMenu()" />
+
+

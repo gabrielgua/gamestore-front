@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
@@ -14,11 +14,12 @@ import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 })
 export class HeaderMobileComponent implements OnInit {
 
-  show: boolean = false;
+  @Output() close = new EventEmitter<boolean>;
+
   usuario$ = new Observable<Usuario>;
 
   constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) {}
-
+  
   ngOnInit(): void {
     this.getUsuario();
   }
@@ -44,7 +45,6 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   closeMenu(): void {
-    this.show = false;
-    // this.close.emit();
+    this.close.emit();
   }
 }

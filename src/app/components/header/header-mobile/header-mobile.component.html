@@ -1,12 +1,12 @@
-<div class="container">
-    <aside @fromLeftToLeft *ngIf="show">
+
+<div class="container" >
+    <aside @fromLeftToLeft>
         <section class="logo">
             <app-logo />
             <button class="btn-action" (click)="closeMenu()">
                 <span class="material-symbols-rounded icon--bolder">close</span>
             </button>
         </section>
-
         <section class="search">
             <form>
                 <span class="material-symbols-rounded ">search</span>
@@ -66,8 +66,7 @@
                 </a>            
             </span>
         </section>
-
     </aside>
-    <div *ngIf="show" class="backdrop" (click)="closeMenu()"></div>
+    <div @fromRightToRight class="backdrop"  (click)="closeMenu()"></div>
 </div>
 

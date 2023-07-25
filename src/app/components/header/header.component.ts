@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Animations } from '../../animations/animations';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
 selector: 'app-header',
@@ -11,8 +12,7 @@ export class HeaderComponent implements AfterViewInit {
 
 	@ViewChild('header') header!: ElementRef;
 
-	constructor( private changeDetector: ChangeDetectorRef ) {}
-
+	constructor( private changeDetector: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document) {}
 
 	breakToMobileWidth = 800;
 	mobile: boolean = false;
@@ -23,22 +23,25 @@ export class HeaderComponent implements AfterViewInit {
 		this.changeDetector.detectChanges();
 	}
 
-	
-
-	
-
 	manageScreenSize(width: number): void {
 		const isMobile = width <= this.breakToMobileWidth;
 		this.mobile = isMobile;   
-		this.showMobileMenu = this.showMobileMenu && !isMobile ? false : this.showMobileMenu;
+		if (!isMobile) {
+			this.closeMobileMenu();
+		}
 	}
 
+	openMobileMenu(): void {
+		this.showMobileMenu = true;		
+		window.scroll({
+			top: 0,
+			left: 0
+		})
+		this.document.body.classList.add('disable-scroll');
+	}
 
-	
-
-	
-
-	
-
-
+	closeMobileMenu(): void {
+		this.showMobileMenu = false;
+		this.document.body.classList.remove('disable-scroll');
+	}
 }
