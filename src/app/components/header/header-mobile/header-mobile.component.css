@@ -6,7 +6,6 @@
     grid-template-columns: 3fr 1fr;
     position: absolute;
     z-index: 99999;
-
 }
 
 aside {
@@ -14,6 +13,7 @@ aside {
     border: 1px solid var(--subtle-border-color);
     border-inline-start: none;
     border-radius: 0 .5rem .5rem 0;
+    z-index: 99999;
 }
 
 aside section {
@@ -197,6 +197,9 @@ form {
 
 .backdrop {
     width: 100%;
-    background-color: rgba(0, 0, 0, .8);
+    height: 100%;
+    position: absolute;
+    z-index: 99998;
+    background-color: rgba(0, 0, 0, .5);
 }
 

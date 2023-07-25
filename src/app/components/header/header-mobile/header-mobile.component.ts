@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
@@ -17,14 +18,42 @@ export class HeaderMobileComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>;
 
   usuario$ = new Observable<Usuario>;
+  form = this.formBuilder.group({
+    search: new FormControl('')
+	});
 
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private usuarioService: UsuarioService, 
+    private authService: AuthService, 
+    private router: Router,
+    private formBuilder: FormBuilder) {}
   
   ngOnInit(): void {
     this.getUsuario();
   }
 
+  get search() {
+    return this.form.get('search');
+  }
+
+  handleContainerClick(event: any): void {
+    const closeIds = ['btn-action', 'app-logo'];    
+    if (!closeIds.includes(event.target.id)) {
+      return;
+    }
+    
+    this.closeMenu();
+  }
+
   handleSearch(): void {
+    if (this.search?.value) {
+      localStorage.setItem('search', this.search?.value);
+      this.router.navigateByUrl('/', {skipLocationChange: true})
+        .then(() => {
+          this.router.navigate(['jogos']);
+          this.closeMenu();
+        })
+    } 
 
   }
 
@@ -41,6 +70,7 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   logout(): void {
+    this.router.navigate(['sing-in'])
     this.authService.logout();
   }
 

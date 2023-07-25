@@ -65,13 +65,13 @@ export class AutocompleteSearchComponent implements OnInit {
 	handleSubmitSearch(): void {
     
 		if (this.search?.value) {
-			localStorage.setItem('search', this.search.value);
-			this.resetForm();
-			this.router.navigate(['jogos'])
+      localStorage.setItem('search', this.search?.value);
+      this.router.navigateByUrl('/', {skipLocationChange: true})
         .then(() => {
+          this.router.navigate(['jogos']);
           this.close();
         })
-		} 
+    }  
 	}
 
   private close(): void {
