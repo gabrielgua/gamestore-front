@@ -13,6 +13,8 @@
 
 
         <div class="pedidos" *ngIf="data.pedidos as pedidos; else loadingPedidos" @fadeIn>
+            <div *ngIf="!pedidos.length"><p>Voçê ainda não possui nenhum pedido.</p></div>
+
             <div class="pedido" *ngFor="let pedido of pedidos">
                 <section class="pedido__header">
                     <p class="pedido__codigo">{{pedido.codigo}}</p>
