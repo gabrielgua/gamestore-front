@@ -1,0 +1,6 @@
+<a class="carrinho" routerLink="carrinho">
+    <span class="material-symbols-rounded icon--filled">shopping_cart</span>
+    <ng-container *ngIf="count$ | async as count">
+        <p class="counter" *ngIf="count != 0">{{count}}</p>
+    </ng-container>
+</a> 

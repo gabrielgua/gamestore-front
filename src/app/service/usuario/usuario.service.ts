@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, concatMap, map, startWith, switchMap, tap } from 'rxjs';
 import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
+import { CarrinhoService } from '../carrinho/carrinho.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsuarioService {
 
   private usuario$ = new BehaviorSubject<Usuario>(new Usuario());
 
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(private authService: AuthService, private http: HttpClient, ) {
     this.init();
   }
 

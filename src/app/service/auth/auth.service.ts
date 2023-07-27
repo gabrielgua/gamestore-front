@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, firstValueFrom, of, tap } from 'rxjs';
 import { AuthRequest } from 'src/app/models/auth/auth.request';
 import { UsuarioRequest } from 'src/app/models/usuarios/usuarioRequest';
 import { environment } from 'src/environments/environment';
+import { CarrinhoService } from '../carrinho/carrinho.service';
 
 
 
@@ -20,8 +21,9 @@ export class AuthService {
 
   constructor(
     private http: HttpClient, 
-    private jwtHelper: JwtHelperService
-
+    private jwtHelper: JwtHelperService,
+    private carrinhoService: CarrinhoService
+    
     ) { 
       if (this.isLoggedIn()) {
         this.armazenarAccessToken(this.token!);
@@ -114,6 +116,7 @@ export class AuthService {
   }
 
   public logout(): void {
+    this.carrinhoService.clearCarrinho();
     this.resetJwtPayload();
     this.limparLocalStorage();
   }

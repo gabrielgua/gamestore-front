@@ -1,9 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Jogo } from '../../models/jogos/jogo';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
 import { TipoRequisito } from '../../models/requisitos/tipoRequisito';
 import { Requisito } from '../../models/requisitos/requisito';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
+import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 
 @Component({
   selector: 'app-jogo',
@@ -16,6 +18,8 @@ export class JogoComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private carrinhoService: CarrinhoService,
     private service: JogoBuscarService,
     private changeDetector: ChangeDetectorRef
   ) {}
@@ -86,5 +90,22 @@ export class JogoComponent implements OnInit, AfterViewInit {
         jogo.requisitos.push(jogo.requisitos.shift()!);
       }
     }
+  }
+
+  addToCart(jogo: Jogo): void {
+    const jogoResumo = new JogoResumo();
+    jogoResumo.descricao = jogo.descricao;
+    jogoResumo.id = jogo.id;
+    jogoResumo.desenvolvedora = jogo.desenvolvedora;
+    jogoResumo.nome = jogo.nome;
+    jogoResumo.uriNome = jogo.uriNome;
+    jogoResumo.nota = jogo.nota;
+    jogoResumo.urlImagem = jogo.urlImagem;
+    jogoResumo.urlVideo = jogo.urlVideo;
+
+    this.router.navigate(['carrinho'])
+      .then(() => {
+        this.carrinhoService.addJogo(jogoResumo);
+      });
   }
 }

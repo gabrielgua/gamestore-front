@@ -1,6 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Animations } from '../../animations/animations';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
 selector: 'app-header',
@@ -12,7 +12,10 @@ export class HeaderComponent implements AfterViewInit {
 
 	@ViewChild('header') header!: ElementRef;
 
-	constructor( private changeDetector: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document) {}
+	constructor( 
+		private changeDetector: ChangeDetectorRef, 
+		@Inject(DOCUMENT) private document: Document 
+	) {}
 
 	breakToMobileWidth = 800;
 	mobile: boolean = false;

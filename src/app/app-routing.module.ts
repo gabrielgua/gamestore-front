@@ -10,6 +10,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { PedidosListComponent } from './components/usuario/logado/pedidos-list/pedidos-list.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
+import { PedidoCreateComponent } from './components/usuario/logado/pedido-create/pedido-create.component';
 
 const routes: Routes = [
 
@@ -25,8 +26,8 @@ const routes: Routes = [
 
   //private
   {path: 'pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
+  {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
 
-  
 
   // errors
   {path: 'error/not-found', component: NotFoundComponent},
