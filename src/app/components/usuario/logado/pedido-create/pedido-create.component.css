@@ -1,0 +1,115 @@
+.container {
+    margin: 2rem auto;
+    width: min(100% - 3rem, var(--container-max-size));
+    display: grid;
+    gap: 1rem;
+}
+
+.title {
+    font-size: var(--font-titles);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    > span {
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+}
+
+.content-title {
+    padding: .5rem 1rem;
+    font-size: var(--font-subtitles);
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.actions,
+.formas-pagamento-wrapper,
+.jogos {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    border-radius: .5rem;
+}
+
+.jogo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+
+    &:hover .btn-jogo-remover {
+        transform: translateX(0%);
+    }
+}
+
+.jogo:not(:last-child) {
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.jogo__info {
+    margin-right: auto;
+}
+
+.jogo__nome {
+    font-size: var(--font-subtitles);
+}
+
+.jogo__preco {
+    color: var(--primary);
+}
+
+.jogo__img-wrapper {
+    max-width: 8rem;
+}
+
+.jogo__img-wrapper img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--subtle-border-color);
+    box-shadow: var(--box-shadow-primary);
+    border-radius: .25rem;
+}
+
+.jogo__actions {
+    position: relative;
+    display: grid;
+    min-width: 7rem;
+    min-height: 3rem;
+    overflow: hidden;
+}
+
+.btn-jogo-remover {
+    position: absolute;
+    display: flex;
+    place-self: center;
+    transform: translateX(100%);
+    align-items: center;
+    gap: .25rem;
+    border: none;
+    background-color: transparent;
+    color: rgb(var(--error));
+    padding: .5rem;
+    border-radius: .25rem;
+    transition: transform 150ms ease;
+
+    &:hover {
+        background-color: rgba(var(--error), .3);
+        cursor: pointer;
+        
+    }
+}
+
+.actions,
+.formas-pagamento {
+    padding: 1rem;
+}
+

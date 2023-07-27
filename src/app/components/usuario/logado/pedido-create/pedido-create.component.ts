@@ -16,4 +16,9 @@ export class PedidoCreateComponent implements OnInit {
   ngOnInit(): void {
     this.carrinho$ = this.carrinhoService.getCarrinho();
   }
+
+
+  handleRemove(jogoId: number): void {
+    this.carrinhoService.removeJogo(jogoId);
+  }
 }

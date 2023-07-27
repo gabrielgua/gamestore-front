@@ -42,7 +42,7 @@ export class CarrinhoService {
 
   removeJogo(jogoId: number): void {
     this.carrinho$.next({
-      ...this.carrinho$.value, ...this.carrinho$.getValue().items.filter(jogo => jogo.id !== jogoId)
+      ...this.carrinho$.value, items: [...this.carrinho$.getValue().items.filter(jogo => jogo.id !== jogoId)]
     });
     this.saveCarrinho()
   }

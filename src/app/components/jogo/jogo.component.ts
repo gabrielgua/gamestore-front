@@ -102,6 +102,7 @@ export class JogoComponent implements OnInit, AfterViewInit {
     jogoResumo.nota = jogo.nota;
     jogoResumo.urlImagem = jogo.urlImagem;
     jogoResumo.urlVideo = jogo.urlVideo;
+    jogoResumo.preco = jogo.preco;
 
     this.router.navigate(['carrinho'])
       .then(() => {
