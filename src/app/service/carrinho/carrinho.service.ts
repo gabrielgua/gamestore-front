@@ -57,4 +57,6 @@ export class CarrinhoService {
   clearCarrinho(): void {
     this.carrinho$.next(this.defaultCarrinho);
   }
+
+  
 }
