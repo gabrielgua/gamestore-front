@@ -12,6 +12,9 @@ import { Plataforma } from '../../models/plataformas/plataforma';
 import { CategoriasListService } from '../../service/categorias/categorias-list.service';
 import { ModosListService } from '../../service/modos/modos-list.service';
 import { PlataformasListService } from '../../service/plataformas/plataformas-list.service';
+import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
+import { Router } from '@angular/router';
+import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 
 export interface FilterItem {
   tipo: FilterTipo,
@@ -56,19 +59,21 @@ export class JogosListComponent implements OnInit {
     private service: JogosListService,
     private categoriaService: CategoriasListService,
     private plataformaService: PlataformasListService ,
-    private modoService: ModosListService 
+    private modoService: ModosListService,
+    private router: Router,
+    private carrinhoService: CarrinhoService,
   ) {}
   
   PAGEABLE_DEFAULT_SIZE = 10;
   
   
-  jogos: Jogo[] = [];
+  jogos: JogoResumo[] = [];
   modos: Modo[] = [];
   filterIds: string[] = ['filter', 'filter--sort', 'filter-title', 'filter-span-arrow'];
   categorias: Categoria[] = [];
   plataformas: Plataforma[] = [];
 
-  pageableJogos: PageableModel<Jogo> = new PageableModel();
+  pageableJogos: PageableModel<JogoResumo> = new PageableModel();
   
   search = new FormControl('');
 
@@ -422,5 +427,12 @@ export class JogosListComponent implements OnInit {
   favorite(nome: string) {
     console.log(nome);
     
+  }
+
+  addToCart(jogoResumo: JogoResumo): void {    
+    this.router.navigate(['carrinho'])
+      .then(() => {
+        this.carrinhoService.addJogo(jogoResumo);
+      });
   }
 }

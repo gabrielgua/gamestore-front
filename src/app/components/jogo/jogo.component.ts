@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JogoBuscarService } from '../../service/jogos/jogo-buscar.service';
 import { TipoRequisito } from '../../models/requisitos/tipoRequisito';
 import { Requisito } from '../../models/requisitos/requisito';
-import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
+import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 
 @Component({
@@ -93,17 +93,8 @@ export class JogoComponent implements OnInit, AfterViewInit {
   }
 
   addToCart(jogo: Jogo): void {
-    const jogoResumo = new JogoResumo();
-    jogoResumo.descricao = jogo.descricao;
-    jogoResumo.id = jogo.id;
-    jogoResumo.desenvolvedora = jogo.desenvolvedora;
-    jogoResumo.nome = jogo.nome;
-    jogoResumo.uriNome = jogo.uriNome;
-    jogoResumo.nota = jogo.nota;
-    jogoResumo.urlImagem = jogo.urlImagem;
-    jogoResumo.urlVideo = jogo.urlVideo;
-    jogoResumo.preco = jogo.preco;
-
+    const jogoResumo = toJogoResumo(jogo);
+    
     this.router.navigate(['carrinho'])
       .then(() => {
         this.carrinhoService.addJogo(jogoResumo);
