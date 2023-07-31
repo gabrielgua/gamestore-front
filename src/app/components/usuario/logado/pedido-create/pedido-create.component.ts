@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription, filter, map, tap } from 'rxjs';
+import { Animations } from 'src/app/animations/animations';
 import { FormaPagamento } from 'src/app/models/formas-pagamento/forma.pagamento';
 import { Jogo } from 'src/app/models/jogos/jogo';
 import { JogoId } from 'src/app/models/jogos/jogo.id';
@@ -15,7 +16,8 @@ import { PedidoService } from 'src/app/service/pedidos/pedido.service';
 @Component({
   selector: 'app-pedido-create',
   templateUrl: './pedido-create.component.html',
-  styleUrls: ['./pedido-create.component.css']
+  styleUrls: ['./pedido-create.component.css'],
+  animations: [Animations]
 })
 export class PedidoCreateComponent implements OnInit, OnDestroy {
 

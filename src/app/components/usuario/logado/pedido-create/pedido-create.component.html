@@ -38,22 +38,27 @@
                     <ng-container *ngIf="formasPagamento$ | async as formasPagamento">
                         <div *ngFor="let formaPagamento of formasPagamento">
                             <div class="form-group" [ngClass]="{'form-group--selected': isSelected(formaPagamento.id)}">
-                                <input type="radio" [id]="formaPagamento.id" [value]="formaPagamento.id" formControlName="formaPagamentoOptions">
+                                <input type="radio" 
+                                    [id]="formaPagamento.id" 
+                                    [value]="formaPagamento.id" 
+                                    formControlName="formaPagamentoOptions"
+                                    [disabled]="true">
                                 <label [for]="formaPagamento.id">{{formaPagamento.nome}}</label>
                             </div>
                         </div>
                     </ng-container>
                     
-                    <ng-container *ngIf="!isLoadingCreate">
+                    <ng-container>
                         <button class="btn-submit" type="submit" [disabled]="form.invalid" [ngClass]="{'btn-submit--disabled': form.invalid}">
                             <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
                             <p>Fazer pedido</p> 
                         </button>
                     </ng-container>
-                    <span class="loader" *ngIf="isLoadingCreate">
-                        <app-loader />
-                    </span>
+                    
                 </form>
+                <span class="loader" *ngIf="isLoadingCreate" @fadeIn>
+                    <app-loader />
+                </span>
                     
             </div>
             

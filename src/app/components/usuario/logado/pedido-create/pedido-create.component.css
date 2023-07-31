@@ -129,6 +129,8 @@
 
 .formas-pagamento-wrapper {
     max-height: min-content;
+    position: relative;
+    display: grid;
 }
 
 .formas-pagamento {
@@ -144,7 +146,6 @@
     gap: .5rem;
     padding: .5rem;
     border-radius: .5rem;
-
 }
 
 .form-group input {
@@ -207,10 +208,13 @@
 }
 
 .loader {
+    position: absolute;
     display: grid;
     place-items: center;
-    padding: 1rem;
-    margin-top: 1rem;
+    width: 100%;
+    height: 100%;
+    border-radius: .5rem;
+    background-color: rgba(0, 0, 0, .9);
 }
 
 @media (width <= 768px) {
