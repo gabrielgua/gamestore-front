@@ -14,7 +14,7 @@
                         <img src="{{jogo.urlImagem}}" alt="banner">
                     </div>
                     <div class="jogo__info">
-                        <p class="jogo__nome">{{jogo.nome}}</p>
+                        <p class="jogo__nome">{{jogo.id}} - {{jogo.nome}}</p>
                         <p class="jogo__preco">{{jogo.preco | currency: 'BRL'}}</p>
                     </div>
                     
@@ -44,10 +44,15 @@
                         </div>
                     </ng-container>
                     
-                    <button class="btn-submit" type="submit" [disabled]="form.invalid" [ngClass]="{'btn-submit--disabled': form.invalid}">
-                        <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
-                        <p>Fazer pedido</p>
-                    </button>
+                    <ng-container *ngIf="!isLoadingCreate">
+                        <button class="btn-submit" type="submit" [disabled]="form.invalid" [ngClass]="{'btn-submit--disabled': form.invalid}">
+                            <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
+                            <p>Fazer pedido</p> 
+                        </button>
+                    </ng-container>
+                    <span class="loader" *ngIf="isLoadingCreate">
+                        <app-loader />
+                    </span>
                 </form>
                     
             </div>

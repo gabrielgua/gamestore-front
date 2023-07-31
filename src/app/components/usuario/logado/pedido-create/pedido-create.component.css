@@ -154,6 +154,9 @@
 .form-group label {
     user-select: none;
 
+    &:hover {
+        cursor: pointer;
+    }
 
 }
 
@@ -201,6 +204,13 @@
         cursor: default;
         background-color: rgba(var(--primary-number), .1);
     }
+}
+
+.loader {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
 }
 
 @media (width <= 768px) {

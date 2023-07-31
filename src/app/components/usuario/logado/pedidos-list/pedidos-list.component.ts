@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscriber, Subscription, catchError, ignoreElements, of, tap } from 'rxjs';
+import { Observable, Subscriber, Subscription, catchError, ignoreElements, map, of, tap } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { StatusPedido } from 'src/app/models/pedidos/status.pedido';
