@@ -154,6 +154,17 @@
     margin-bottom: .5rem;
 }
 
+.actions-title-possui {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    color: rgb(var(--success)) !important; 
+
+    & span {
+        font-size: var(--font-normal);
+    }
+}
+
 .jogo__actions > .actions-preco {
     color: var(--primary);
     font-size: var(--font-subtitles);

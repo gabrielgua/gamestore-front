@@ -11,6 +11,7 @@ import { Pedido } from 'src/app/models/pedidos/pedido';
 import { PedidoCreate } from 'src/app/models/pedidos/pedido.create';
 import { Carrinho, CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { FormasPagamentoListService } from 'src/app/service/formas-pagamento/formas-pagamento-list.service';
+import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 import { PedidoService } from 'src/app/service/pedidos/pedido.service';
 
 @Component({

@@ -20,7 +20,6 @@ import { registerLocaleData } from '@angular/common';
 import { SliderDesktopComponent } from './components/slider-desktop/slider-desktop.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { SliderMobileComponent } from './components/slider-mobile/slider-mobile.component';
-import { JogosAvaliacaoComponent } from './components/jogos-avaliacao/jogos-avaliacao.component';
 import { SliderJogoComponent } from './components/slider-jogo/slider-jogo.component';
 
 import localePt from '@angular/common/locales/pt';
@@ -62,7 +61,6 @@ registerLocaleData(localePt);
     SliderDesktopComponent,
     SafePipe,
     SliderMobileComponent,
-    JogosAvaliacaoComponent,
     SliderJogoComponent,
     FooterComponent,
     JogosListComponent,

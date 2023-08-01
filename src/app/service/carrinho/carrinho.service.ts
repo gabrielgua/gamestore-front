@@ -40,6 +40,10 @@ export class CarrinhoService {
   }
 
   addJogo(jogo: JogoResumo): void {
+    if (this.isPresent(jogo.id)) {
+      return;
+    }
+    
     this.carrinho$.next({ ...this.carrinho$.value, items: [...this.carrinho$.value.items, jogo] });    
     this.saveCarrinho()
   }
@@ -74,6 +78,12 @@ export class CarrinhoService {
       formaPagamento: {id: this.carrinho$.getValue().formaPagamentoId!.id}, 
       jogos: this.getJogosIdObject()
     }
+  }
+
+  public isPresent(jogoId: number): boolean {
+    return this.carrinho$.getValue().items
+      .map(item => item.id)
+      .includes(jogoId);
   }
 
   private getJogosIdObject(): JogoId[] {

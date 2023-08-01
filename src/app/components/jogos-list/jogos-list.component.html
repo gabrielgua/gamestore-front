@@ -52,36 +52,51 @@
     </div>
     
     <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
-    <div *ngIf="isLoading()" style="display: flex; justify-content: center;"><app-loader></app-loader></div>
-    <section class="jogos" *ngIf="!isLoading()">
-
-        <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
-            <div class="jogo__link">
-                <a routerLink="/jogos/{{jogo.uriNome}}">
-                    <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
-                </a>
-                <button class="btn-desejo" (click)="favorite(jogo.uriNome)">
-                    <span class="material-symbols-rounded">favorite</span>
-                </button>
-            </div>    
-            <div class="jogo__detalhes">
-                <div class="jogo__preco-nota">
-                    
-                    <button class="jogo__btn btn-carrinho" (click)="addToCart(jogo)">
-                        <div class="jogo__btn--hover">
-                            <span class="material-symbols-rounded">add_shopping_cart</span>
-                            <p>Carrinho</p>
-                        </div>
-                        <p class="jogo__preco">{{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}</p>
+    <ng-template #loadingJogos>
+        <div style="display: flex; justify-content: center;"><app-loader></app-loader></div>
+    </ng-template>
+    <ng-container *ngIf="jogos$ | async as jogos; else loadingJogos">
+        <section class="jogos">
+            <div  class="jogo box-shadow-primary" *ngFor="let jogo of jogos; index as i" [@fromRightToRight] >
+                <div class="jogo__link">
+                    <a routerLink="/jogos/{{jogo.uriNome}}">
+                        <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
+                    </a>
+                    <button class="btn-desejo" (click)="favorite(jogo.uriNome)">
+                        <span class="material-symbols-rounded">favorite</span>
                     </button>
-                    <div class="jogo__nota">
-                        <span class="material-symbols-rounded icon--filled">star</span>
-                        <p class="{{jogo.nota >= 7 ? 'success' : 'error'}}">{{ jogo.nota | number: '1.1': 'en-us' }}</p>
-                    </div>
-                </div>  
+                </div>    
+                <div class="jogo__detalhes">
+                    <div class="jogo__preco-nota">
+                        
+                        <button class="jogo__btn btn-carrinho" (click)="addToCart(jogo)" *ngIf="!jaPossuiJogo(jogo.id)">
+                            <ng-container *ngIf="!noCarrinho(jogo.id)">
+                                <p class="jogo__preco">{{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}</p>
+                                <div class="jogo__btn--hover">
+                                    <span class="material-symbols-rounded">add_shopping_cart</span>
+                                    <p>Carrinho</p>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="noCarrinho(jogo.id)">
+                                <span class="material-symbols-rounded">shopping_cart</span>
+                                <p>No carrinho</p>
+                            </ng-container>
+                            
+                        </button>
+                        <button class="jogo__btn btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)">
+                            <span class="material-symbols-rounded">bookmark</span>
+                            <p>Na biblioteca</p>
+                        </button>
+                        
+                        <div class="jogo__nota">
+                            <span class="material-symbols-rounded icon--filled">star</span>
+                            <p class="{{jogo.nota >= 7 ? 'success' : 'error'}}">{{ jogo.nota | number: '1.1': 'en-us' }}</p>
+                        </div>
+                    </div>  
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </ng-container>
     
 
     <section class="page-actions" >

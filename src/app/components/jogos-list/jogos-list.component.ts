@@ -15,6 +15,9 @@ import { PlataformasListService } from '../../service/plataformas/plataformas-li
 import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
+import { Observable, map, startWith } from 'rxjs';
+import { PageInfo } from 'src/app/models/pageables/page.info';
+import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
 export interface FilterItem {
   tipo: FilterTipo,
@@ -58,7 +61,8 @@ export class JogosListComponent implements OnInit {
   constructor(
     private service: JogosListService,
     private categoriaService: CategoriasListService,
-    private plataformaService: PlataformasListService ,
+    private plataformaService: PlataformasListService,
+    private jogosUsuarioService: JogosUsuarioLogadoService,
     private modoService: ModosListService,
     private router: Router,
     private carrinhoService: CarrinhoService,
@@ -67,13 +71,13 @@ export class JogosListComponent implements OnInit {
   PAGEABLE_DEFAULT_SIZE = 10;
   
   
-  jogos: JogoResumo[] = [];
+  jogos$ = new Observable<JogoResumo[]>
   modos: Modo[] = [];
   filterIds: string[] = ['filter', 'filter--sort', 'filter-title', 'filter-span-arrow'];
   categorias: Categoria[] = [];
   plataformas: Plataforma[] = [];
 
-  pageableJogos: PageableModel<JogoResumo> = new PageableModel();
+  pageableJogos: PageableModel<JogoResumo> = {content: [], pageInfo: {} as PageInfo}
   
   search = new FormControl('');
 
@@ -117,9 +121,7 @@ export class JogosListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.pageableJogos = new PageableModel();
     this.handleUrlParamSearch();
-    this.init();
     this.getJogos();
     this.getModos();
     this.getCategorias();
@@ -131,15 +133,9 @@ export class JogosListComponent implements OnInit {
     this.service.init(this.pageable, this.filter);
   }
 
-  isLoading(): boolean {
-    return this.service.loading;
-  }
-
   getJogos(): void {
-    this.service.getPageableJogos().subscribe((pageableJogos) => {
-      this.pageableJogos = pageableJogos;
-      this.jogos = pageableJogos.content;
-    })
+    this.init();
+    this.jogos$ = this.service.getPageableJogos().pipe(map(pageable => pageable.content));
   }
 
   getModos(): void {
@@ -430,9 +426,21 @@ export class JogosListComponent implements OnInit {
   }
 
   addToCart(jogoResumo: JogoResumo): void {    
+    if (this.jaPossuiJogo(jogoResumo.id)) {
+      return;
+    }
+
     this.router.navigate(['carrinho'])
       .then(() => {
         this.carrinhoService.addJogo(jogoResumo);
       });
+  }
+
+  jaPossuiJogo(jogoId: number): boolean {
+    return this.jogosUsuarioService.isPresent(jogoId);
+  }
+
+  noCarrinho(jogoId: number): boolean {
+    return this.carrinhoService.isPresent(jogoId);
   }
 }

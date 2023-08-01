@@ -1,6 +1,6 @@
 import { PageInfo } from "./page.info";
 
-export class PageableModel<T> {
-    pageInfo!: PageInfo;
-    content: T[] = [];
+export interface PageableModel<T> {
+    pageInfo: PageInfo,
+    content: T[],
 }

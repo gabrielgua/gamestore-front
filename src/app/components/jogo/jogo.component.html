@@ -37,7 +37,8 @@
 
             
                 <div class="jogo__actions">
-                    <p class="actions-title singleline-truncate" title="Comprar {{jogo.nome}}">Comprar {{jogo.nome}}</p>
+                    <p class="actions-title singleline-truncate" *ngIf="!jaPossuiJogo(jogo.id)" title="Comprar {{jogo.nome}}">Comprar {{jogo.nome}}</p>
+                    <p class="actions-title actions-title-possui" *ngIf="jaPossuiJogo(jogo.id)">Já possui <span class="material-symbols-rounded icon--filled-bolder">check_circle</span></p>
                     <p class="actions-preco">
                         <span *ngIf="jogo.preco === 0">Gratuito</span>
                         <span *ngIf="jogo.preco != 0">{{jogo.preco | currency: 'BRL'}}</span>
@@ -47,9 +48,13 @@
                             <span class="material-symbols-rounded">favorite</span>
                             DESEJO
                         </button>
-                        <button class="btn btn-carrinho" (click)="addToCart(jogo)">
+                        <button class="btn btn-carrinho" (click)="addToCart(jogo)" *ngIf="!jaPossuiJogo(jogo.id)">
                             <span class="material-symbols-rounded">shopping_cart</span>
-                            COMPRAR
+                            <p>{{noCarrinho(jogo.id) ? 'NO CARRINHO': 'COMPRAR'}}</p>
+                        </button>
+                        <button class="btn btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)">
+                            <span class="material-symbols-rounded">bookmark</span>
+                            NA BIBLIOTECA
                         </button>
                     </div>
                 </div>

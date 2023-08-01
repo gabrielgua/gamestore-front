@@ -1,12 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { Observable, startWith } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
 import { Usuario } from 'src/app/models/usuarios/usuario';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Observable, concatMap, map, startWith, switchMap, tap } from 'rxjs';
-import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
-import { CarrinhoService } from '../carrinho/carrinho.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

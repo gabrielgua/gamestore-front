@@ -13,7 +13,7 @@ export class JogosAvaliacaoService {
 
   constructor(private http: HttpClient) {}
 
-  public jogosPageable$ = new BehaviorSubject<PageableModel<Jogo>>(new PageableModel());
+  public jogosPageable$ = new BehaviorSubject<PageableModel<Jogo>>({} as PageableModel<Jogo>);
   
 
   public init(pageable: JogoPageableRequest): void {

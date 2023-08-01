@@ -6,6 +6,7 @@ import { TipoRequisito } from '../../models/requisitos/tipoRequisito';
 import { Requisito } from '../../models/requisitos/requisito';
 import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
+import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
 @Component({
   selector: 'app-jogo',
@@ -20,6 +21,7 @@ export class JogoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private carrinhoService: CarrinhoService,
+    private jogosUsuarioService: JogosUsuarioLogadoService,
     private service: JogoBuscarService,
     private changeDetector: ChangeDetectorRef
   ) {}
@@ -93,11 +95,22 @@ export class JogoComponent implements OnInit, AfterViewInit {
   }
 
   addToCart(jogo: Jogo): void {
+    if (this.jaPossuiJogo(jogo.id)) {
+      return;
+    }
+
     const jogoResumo = toJogoResumo(jogo);
-    
     this.router.navigate(['carrinho'])
       .then(() => {
         this.carrinhoService.addJogo(jogoResumo);
       });
+  }
+
+  jaPossuiJogo(jogoId: number): boolean {
+    return this.jogosUsuarioService.isPresent(jogoId);
+  }
+
+  noCarrinho(jogoId: number): boolean {
+    return this.carrinhoService.isPresent(jogoId);
   }
 }

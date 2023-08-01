@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Jogo } from 'src/app/models/jogos/jogo';
 import { JogoFilter } from 'src/app/models/jogos/jogo.filter';
 import { JogoPageableRequest } from 'src/app/models/jogos/jogo.pageable';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { PageableModel } from 'src/app/models/pageables/pageable.model';
 import { environment } from 'src/environments/environment';
 
@@ -12,22 +13,16 @@ import { environment } from 'src/environments/environment';
 })
 export class JogosListService {
 
-  loading: boolean = false;
-  pageableJogos$ = new BehaviorSubject<PageableModel<Jogo>>(new PageableModel());
+  pageableJogos$ = new BehaviorSubject<PageableModel<JogoResumo>>({} as PageableModel<JogoResumo>);
   constructor(private http: HttpClient) { }
   
   public init(pageable: JogoPageableRequest, filter: JogoFilter): void {
-    this.loading = true;
     let params = this.getParamsFromFilter(pageable, filter);
-
-    this.http.get<PageableModel<Jogo>>(`${environment.API_URL}/jogos?${params.join('&')}`)
-      .subscribe((pageable) => {
-        this.pageableJogos$.next(pageable);
-        this.loading = false;
-      });
+    this.http.get<PageableModel<JogoResumo>>(`${environment.API_URL}/jogos?${params.join('&')}`)
+      .subscribe((pageable) => this.pageableJogos$.next(pageable));
   }
 
-  public getPageableJogos(): Observable<PageableModel<Jogo>> {
+  public getPageableJogos(): Observable<PageableModel<JogoResumo>> {
     return this.pageableJogos$.asObservable();
   }
 
