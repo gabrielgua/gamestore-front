@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, startWith } from 'rxjs';
 import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { environment } from 'src/environments/environment';
 
@@ -15,8 +15,9 @@ export class JogosUsuarioLogadoService {
     this.fetchJogos();
   }
 
-  private fetchJogos(): void {
+  fetchJogos(): void {
     this.http.get<JogoResumo[]>(`${environment.API_URL}/usuarios/meus-jogos`)
+      .pipe(startWith([]))
       .subscribe(jogos => this.jogos$.next(jogos));
   }
 

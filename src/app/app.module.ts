@@ -45,6 +45,7 @@ import { SearchModalComponent } from './components/header/search/search-modal/se
 import { HeaderMobileComponent } from './components/header/header-mobile/header-mobile.component';
 import { PedidoCreateComponent } from './components/usuario/logado/pedido-create/pedido-create.component';
 import { CarrinhoButtonComponent } from './components/header/carrinho-button/carrinho-button.component';
+import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -82,6 +83,7 @@ registerLocaleData(localePt);
     HeaderMobileComponent,
     PedidoCreateComponent,
     CarrinhoButtonComponent,
+    UsuarioJogosComponent,
   ],
   imports: [
     BrowserModule,

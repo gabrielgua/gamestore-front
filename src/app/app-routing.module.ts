@@ -11,6 +11,7 @@ import { PedidosListComponent } from './components/usuario/logado/pedidos-list/p
 import { AuthGuard } from './guards/auth/auth.guard';
 import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
 import { PedidoCreateComponent } from './components/usuario/logado/pedido-create/pedido-create.component';
+import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 
 const routes: Routes = [
 
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'sing-in', component: LoginComponent, canActivate: [LoggedInGuard]},
 
   //private
-  {path: 'pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
+  {path: 'meus-pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
+  {path: 'meus-jogos', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
   {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
 
 

@@ -1,0 +1,28 @@
+<ng-container *ngIf="jogos$ | async as jogos">
+    <div class="container">
+        <div class="title">
+            <span class="material-symbols-rounded icon--filled">gamepad</span>
+            <p>Meus jogos</p>
+        </div>
+        <section class="jogos" *ngIf="jogos.length; else loading">
+            <div class="jogo" *ngFor="let jogo of jogos">
+                <div class="jogo__wrapper">
+                    <img class="jogo__img" src="{{jogo.capsuleImg}}" alt="capsule">
+                </div>
+                <div class="key">
+                    <p *ngIf="showKey">SJ212-AsnbW-0Uihj</p>
+                    <p *ngIf="!showKey">Chave de ativação</p>
+
+                    <button class="btn-show-key" (click)="showKey = !showKey">
+                        <span class="material-symbols-rounded icon--filled">{{showKey ? 'visibility_off' : 'visibility'}}</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <ng-template #loading>
+            <app-loader></app-loader>
+        </ng-template>
+    </div>
+</ng-container>
+
+
