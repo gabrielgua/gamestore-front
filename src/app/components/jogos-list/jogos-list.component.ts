@@ -315,7 +315,7 @@ export class JogosListComponent implements OnInit, OnDestroy {
  
   removeFilter(index: number): void {
     let filter = this.filterTags[index];
-    this.resetPageable();
+    this.pageable.page = 0;
 
     switch(filter.tipo) {
       case FilterTipo.BUSCA: {
@@ -330,7 +330,6 @@ export class JogosListComponent implements OnInit, OnDestroy {
       case FilterTipo.MODO: this.removeFromFilters(this.filter.modosIds!, filter); break;
     }
 
-    this.pageable.page = 0;
     this.init();
   }
 
