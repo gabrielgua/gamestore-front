@@ -274,6 +274,7 @@ export class JogosListComponent implements OnInit, OnDestroy {
   }
 
   handleFilterItem(filterOption: FilterOption): void {
+    this.pageable.page = 0;
     switch(filterOption.tipo) {
       case FilterTipo.MODO: this.addToFilters(this.filter.modosIds!, filterOption); break;
       case FilterTipo.CATEGORIA: this.addToFilters(this.filter.categoriasIds!, filterOption); break;

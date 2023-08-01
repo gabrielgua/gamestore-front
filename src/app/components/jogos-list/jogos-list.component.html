@@ -46,11 +46,11 @@
                 </div>
             </div>
         </section>
-        <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
     </div>
+    <div *ngIf="getTotalElements() === 0" class="none-games"><p>Nada por aqui. 😿</p></div>
 
     <ng-template #loadingJogos>
-        <div style="display: flex; justify-content: center;"><app-loader></app-loader></div>
+        <div style="display: flex; justify-content: center;" *ngIf="getTotalElements() != 0"><app-loader></app-loader></div>
     </ng-template>
 
     <section class="jogos" *ngIf="jogos.length; else loadingJogos">
