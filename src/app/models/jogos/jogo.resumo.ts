@@ -7,6 +7,7 @@ export class JogoResumo {
     uriNome!: string;
     urlVideo?: string;
     urlImagem!: string;
+    capsuleImg!: string;
     descricao!: string;
     preco!: number;
     nota!: number;
@@ -22,6 +23,7 @@ export function toJogoResumo(jogo: Jogo): JogoResumo {
         preco: jogo.nota,
         uriNome: jogo.uriNome,
         urlImagem: jogo.urlImagem,
+        capsuleImg: jogo.capsuleImg,
         desenvolvedora: jogo.desenvolvedora,
         urlVideo: jogo.urlVideo
     }

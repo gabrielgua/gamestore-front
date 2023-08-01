@@ -11,6 +11,7 @@ export class Jogo {
     urlVideo!: string;
     urlImgHero!: string;
     urlImagem!: string;
+    capsuleImg!: string;
     dataLancamento!: string;
     descricao!: string;
     preco!: number;

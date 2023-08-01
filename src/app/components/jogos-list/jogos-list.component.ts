@@ -15,7 +15,7 @@ import { PlataformasListService } from '../../service/plataformas/plataformas-li
 import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, Subscription, map, startWith } from 'rxjs';
 import { PageInfo } from 'src/app/models/pageables/page.info';
 import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
@@ -55,7 +55,7 @@ export interface SortOption {
   styleUrls: ['./jogos-list.component.css'],
   animations: [ Animations ]
 })
-export class JogosListComponent implements OnInit {
+export class JogosListComponent implements OnInit, OnDestroy {
 
 
   constructor(
@@ -68,16 +68,19 @@ export class JogosListComponent implements OnInit {
     private carrinhoService: CarrinhoService,
   ) {}
   
+  
   PAGEABLE_DEFAULT_SIZE = 10;
   
   
-  jogos$ = new Observable<JogoResumo[]>
+  jogos: JogoResumo[] = [];
+  pageableSub = new Subscription();
+
   modos: Modo[] = [];
   filterIds: string[] = ['filter', 'filter--sort', 'filter-title', 'filter-span-arrow'];
   categorias: Categoria[] = [];
   plataformas: Plataforma[] = [];
 
-  pageableJogos: PageableModel<JogoResumo> = {content: [], pageInfo: {} as PageInfo}
+  pageableJogos: PageableModel<JogoResumo> = {content: [], pageInfo: {} as PageInfo};
   
   search = new FormControl('');
 
@@ -122,21 +125,28 @@ export class JogosListComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleUrlParamSearch();
-    this.getJogos();
+    this.init();
+    this.pageableSub = this.service.getPageableJogos()
+      .subscribe(pageable => {
+        this.pageableJogos = pageable;
+        this.jogos = pageable.content;
+      });
+
     this.getModos();
     this.getCategorias();
     this.getPlataformas();
 
   }
 
+  ngOnDestroy(): void {
+    this.pageableSub.unsubscribe();
+  }
+
   init(): void {
     this.service.init(this.pageable, this.filter);
   }
 
-  getJogos(): void {
-    this.init();
-    this.jogos$ = this.service.getPageableJogos().pipe(map(pageable => pageable.content));
-  }
+  
 
   getModos(): void {
     this.modoService.getModo().subscribe((modos) => {
@@ -422,7 +432,6 @@ export class JogosListComponent implements OnInit {
 
   favorite(nome: string) {
     console.log(nome);
-    
   }
 
   addToCart(jogoResumo: JogoResumo): void {    

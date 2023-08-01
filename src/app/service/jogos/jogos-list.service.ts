@@ -5,6 +5,7 @@ import { Jogo } from 'src/app/models/jogos/jogo';
 import { JogoFilter } from 'src/app/models/jogos/jogo.filter';
 import { JogoPageableRequest } from 'src/app/models/jogos/jogo.pageable';
 import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
+import { PageInfo } from 'src/app/models/pageables/page.info';
 import { PageableModel } from 'src/app/models/pageables/pageable.model';
 import { environment } from 'src/environments/environment';
 
@@ -13,10 +14,17 @@ import { environment } from 'src/environments/environment';
 })
 export class JogosListService {
 
-  pageableJogos$ = new BehaviorSubject<PageableModel<JogoResumo>>({} as PageableModel<JogoResumo>);
+  private defaultPageable: PageableModel<JogoResumo> = {
+    content: [],
+    pageInfo: {} as PageInfo
+  }
+
+  private pageableJogos$ = new BehaviorSubject<PageableModel<JogoResumo>>(this.defaultPageable);
+
   constructor(private http: HttpClient) { }
   
   public init(pageable: JogoPageableRequest, filter: JogoFilter): void {
+    this.resetPageableJogos();
     let params = this.getParamsFromFilter(pageable, filter);
     this.http.get<PageableModel<JogoResumo>>(`${environment.API_URL}/jogos?${params.join('&')}`)
       .subscribe((pageable) => this.pageableJogos$.next(pageable));
@@ -48,5 +56,13 @@ export class JogosListService {
     });
 
     return params;
+  }
+
+  private resetPageableJogos(): void {
+    this.pageableJogos$.next(this.defaultPageable);
+  }
+
+  private resetPageableContent(): void {
+    this.pageableJogos$.next({ ...this.pageableJogos$.value, content: [] });
   }
 }
