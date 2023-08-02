@@ -20,7 +20,7 @@ export function toJogoResumo(jogo: Jogo): JogoResumo {
         descricao: jogo.descricao,
         nome: jogo.nome,
         nota: jogo.nota,
-        preco: jogo.nota,
+        preco: jogo.preco,
         uriNome: jogo.uriNome,
         urlImagem: jogo.urlImagem,
         capsuleImg: jogo.capsuleImg,

@@ -28,6 +28,10 @@ aside section {
 }
 
 .search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     padding: 1rem;
 }
 

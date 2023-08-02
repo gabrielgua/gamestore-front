@@ -12,6 +12,7 @@
                 <span class="material-symbols-rounded ">search</span>
                 <input class="search-input" type="text" placeholder="Pesquisar..." formControlName="search" />
             </form>
+            <app-carrinho-button />
         </section>
         <ng-container *ngIf="usuario$ | async as usuario">
             <section class="profile-wrapper" *ngIf="isLogado()">
@@ -26,13 +27,14 @@
                     </div>
                 </div>
                 <div class="profile__actions">
+
                     <button class="btn-action" id="btn-action">
                         <span id="btn-action" class="material-symbols-rounded icon--filled">person</span>
                         <p id="btn-action">Perfil</p>
                     </button>
                     <button id="btn-action" class="btn-action" routerLink="conta/pedidos">
-                        <span class="material-symbols-rounded icon--filled">local_mall</span>
-                        <p>Pedidos</p>
+                        <span id="btn-action" class="material-symbols-rounded icon--filled">local_mall</span>
+                        <p id="btn-action">Pedidos</p>
                     </button>
                     <button id="btn-action" class="btn-action " routerLink="conta/biblioteca">
                         <span id="btn-action" class="material-symbols-rounded icon--filled">book</span>

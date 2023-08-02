@@ -37,7 +37,7 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   handleContainerClick(event: any): void {
-    const closeIds = ['btn-action', 'app-logo'];    
+    const closeIds = ['btn-action', 'app-logo', 'btn-carrinho'];    
     if (!closeIds.includes(event.target.id)) {
       return;
     }
