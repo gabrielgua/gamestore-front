@@ -17,7 +17,6 @@ export class SearchComponent {
   handleSearchShortcut(event: KeyboardEvent) {  
     if (event.ctrlKey && event.key.toLocaleLowerCase() === 'b' && !this.modalOpened) {
       this.openModal(this.template!)
-      this.modalOpened = true;
     }
   }
 
