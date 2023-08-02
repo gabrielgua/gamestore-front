@@ -2,10 +2,10 @@
     position: relative;
     top: .175rem;
     color: var(--primary);
-  
-    &:hover {
-      color: rgba(var(--primary-number), .8);
-    }
+}
+
+.carrinho:hover {
+  color: rgba(var(--primary-number), .9);
 }
   
 .counter {

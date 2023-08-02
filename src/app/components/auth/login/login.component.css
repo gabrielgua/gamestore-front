@@ -50,9 +50,11 @@ form {
     border-radius: .25rem;
     outline: 1px solid rgba(255, 255, 255, .2);
 
-    &:focus-within {
-        outline: 2px solid var(--primary);
-    }
+}
+
+
+.input-wrapper:focus-within {
+    outline: 2px solid var(--primary);
 }
 
 .input-wrapper input {
@@ -65,9 +67,11 @@ form {
     border: none;
     background-color: transparent;
 
-    &:focus {
-        outline: none;
-    }
+    
+}
+
+.input-wrapper input:focus {
+    outline: none;
 }
 
 

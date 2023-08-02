@@ -9,14 +9,14 @@ form {
   border-radius: 2rem;
   padding-inline-start: 1rem;
   transition: outline 50ms ease;
+}
 
-  > span {
-    color: var(--primary);
-  }
+form > span {
+  color: var(--primary);
+}
 
-  &:focus-within {
-    outline: 3px solid var(--primary);
-  }
+form:focus-within {
+  outline: 3px solid var(--primary);
 }
 
 .search-input {
@@ -26,10 +26,10 @@ form {
   font-size: inherit;
   font-family: inherit;
   padding: 1rem;
+}
 
-  &:focus {
-    outline: none;
-  }
+.search-input:focus {
+  outline: none;
 }
 
 .search-dropdown {
@@ -44,7 +44,6 @@ form {
 
   min-width: max-content;
   background-color: black;
-  /* border: 1px solid var(--subtle-border-color); */
   box-shadow: var(--box-shadow-primary);
 }
 

@@ -15,10 +15,10 @@
 .links > a {
   color: var(--accent);
   transition: all 150ms ease;
-  
-  &:hover {
-    color: var(--primary);
-  }
+}
+
+.links > a:hover {
+  color: var(--primary);
 }
 
 .links a:last-child {
@@ -31,6 +31,10 @@
     background-color: rgba(var(--primary-number), .3);
 
   }
+}
+
+.links a:last-child:hover {
+  background-color: rgba(var(--primary-number), .3);
 }
 
 .profile-avatar {
@@ -49,16 +53,19 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(var(--primary-number), 0.2);
-
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(var(--primary-number), 0.2);
-  }
-
-  &:hover > .profile-avatar {
-    scale: 1.05;
-  }
 }
+
+.btn-avatar:hover {
+  cursor: pointer;
+  background-color: rgba(var(--primary-number), 0.25);
+}
+
+.btn-avatar:hover .profile-avatar {
+  scale: 1.05;
+
+}
+
+
 
 .profile-dropdown {
   min-width: 10rem;
@@ -71,8 +78,16 @@
 }
 
 .profile-dropdown .profile-nome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.profile-nome > span {
+  font-size: var(--font-subtitles);
+  color: rgba(var(--primary-number), .5);
 }
 
 .profile-actions {
@@ -94,30 +109,32 @@
   padding: 0.25rem;
   border-radius: 0.25rem;
 
-  &:hover {
-    background-color: rgba(var(--primary-number), 0.3);
-    color: var(--primary);
-    cursor: pointer;
-  }
+}
 
-  > span {
-    font-size: 1.3rem;
-    font-family: 800;
-    color: var(--primary);
-  }
+.btn-actions:hover {
+  background-color: rgba(var(--primary-number), 0.3);
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.btn-actions > span {
+  font-size: 1.3rem;
+  font-family: 800;
+  color: var(--primary);
 }
 
 .btn-actions:last-child {
   margin-top: 1rem;
   color: rgb(var(--error));
+}
 
-  &:hover {
-    background-color: rgba(var(--error), .3);
-  }
+.btn-actions:last-child:hover {
+  background-color: rgba(var(--error), .3);
+}
 
-  > span {
-    color: rgb(var(--error));
-  }
+.btn-actions:last-child > span {
+  color: rgb(var(--error));
+
 }
 
 

@@ -38,7 +38,6 @@
 .results-filters {
     display: flex;
     align-items: center;
-    /* flex-wrap: wrap; */
     gap: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--subtle-border-color);
@@ -48,9 +47,10 @@
     color: rgba(var(--primary-number), .7);
     min-width: max-content;
 
-    > span {
-        color: var(--primary);
-    }
+}
+
+.total-resultados > span {
+    color: var(--primary);
 }
 
 .filters {
@@ -155,14 +155,13 @@
 }
 
 
-
 .filter__btn--sort {
     border: 1px solid var(--subtle-border-color);
     background-color: transparent;
+}
 
-    &:hover {
-        background-color: transparent;
-    }
+.filter__btn--sort:hover{
+    background-color: transparent;
 }
 
 .filter__btn--sort--opened {
@@ -176,10 +175,11 @@
     align-items: center;
     flex-wrap: wrap;    
 
-    > p:first-child {
-        margin-right: .5rem;
-        color: rgba(var(--primary-number), 1);
-    }
+}
+
+.active-filters > p:first-child {
+    margin-right: .5rem;
+    color: rgba(var(--primary-number), 1);
 }
 
 
@@ -205,11 +205,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    > span {
-        font-size: var(--font-smaller);
-        border-radius: 50%;
-    }
+.btn-remove-filter > span {
+    font-size: var(--font-smaller);
+    border-radius: 50%;
 }
 
 .btn-remove-filter:hover {
@@ -226,15 +226,16 @@
     font-size: var(--font-small);
     color: rgb(var(--error));
     background-color: transparent;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &:hover p {
-        text-decoration: underline;
-    }
 }
+
+.btn-dismiss-filters:hover {
+    cursor: pointer;
+}
+
+.btn-dismiss-filters:hover p {
+    text-decoration: underline;
+}
+
 
 .btn-dismiss-filters span {
     font-size: var(--font-subtitles);
@@ -279,20 +280,21 @@
     z-index: 9;
     color: rgb(var(--error));
 
-    &:hover {
-        cursor: pointer;;
-        background-color: black !important;
-    }
-
-    > span {
-        font-size: 1.2rem;
-    }
-
-    &:hover > span {
-        font-variation-settings: 'FILL' 1;
-    }
 } 
 
+.btn-desejo:hover {
+    cursor: pointer;
+    background-color: black !important;
+}
+
+.btn-desejo > span {
+    font-size: 1.2rem;
+}
+
+.btn-desejo:hover > span {
+    font-variation-settings: 'FILL' 1;
+
+}
 
 .jogo__img {
     width: 100%;
@@ -343,6 +345,12 @@
     }
 }
 
+.jogo__nota > span {
+    font-size: var(--font-normal);
+    position: relative;
+    top: -1px;
+}
+
 .jogo__btn {
     border-radius: .25rem;
     overflow: hidden;
@@ -355,14 +363,13 @@
     font-size: var(--font-small);
     font-family: inherit;
     position: relative;
-    
 
     gap: .5rem;
     background-color: rgba(var(--primary-number), .2);
+}
 
-    > span {
-        font-size: 1.2rem;
-    }
+.jogo__btn > span {
+    font-size: 1.2rem;
 }
 
 
@@ -378,10 +385,10 @@
     transform: translateY(150%);
     position: absolute;
     transition: transform 200ms ease;
+}
 
-    > span {
-        font-size: 1.2rem;
-    }
+.jogo__btn--hover > span {
+    font-size: 1.2rem;
 }
 
 .jogo__preco {
@@ -390,19 +397,14 @@
     transform: translateY(0%);
 }
 
-.btn-carrinho:active,
-.btn-carrinho:hover {
+.btn-carrinho:hover > .jogo__preco,
+.btn-carrinho:active > .jogo__preco {
+    transform: translateY(-110%);
+}
 
-    > .jogo__preco {
-        transform: translateY(-110%);
-    }   
-
-    > .jogo__btn--hover {
-        transform: translateY(0%);
-    }
-
-
-
+.btn-carrinho:active > .jogo__btn--hover,
+.btn-carrinho:hover > .jogo__btn--hover {
+    transform: translateY(0%);
 }
 
 .jogo__btn:hover {

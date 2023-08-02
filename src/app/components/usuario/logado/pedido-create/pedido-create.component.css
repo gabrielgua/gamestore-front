@@ -11,11 +11,11 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
 
-    > span {
-        font-size: 1.5rem;
-        color: var(--primary);
-    }
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
 }
 
 .wrapper {
@@ -62,14 +62,14 @@
     padding: 1rem;
     gap: 1rem;
 
-    &:hover .btn-jogo-remover {
-        transform: translateX(0%);
-    }
 }
 
+.jogo:hover .btn-jogo-remover {
+    transform: translateX(0%);
 
+}
 
-.jogo:not(:last-child) {
+.jogo {
     border-bottom: 1px solid var(--subtle-border-color);
 }
 
@@ -118,13 +118,12 @@
     color: rgb(var(--error));
     padding: .5rem;
     border-radius: .25rem;
-    transition: transform 150ms ease;
+    transition: transform 150ms ease;    
+}
 
-    &:hover {
-        background-color: rgba(var(--error), .3);
-        cursor: pointer;
-        
-    }
+.btn-jogo-remover:hover {
+    background-color: rgba(var(--error), .3);
+    cursor: pointer;
 }
 
 .formas-pagamento-wrapper {
@@ -154,11 +153,10 @@
 
 .form-group label {
     user-select: none;
+}
 
-    &:hover {
-        cursor: pointer;
-    }
-
+.form-group label:hover {
+    cursor: pointer;
 }
 
 .form-group--selected {
@@ -178,33 +176,35 @@
     border: none;
     border-radius: .5rem;
     background-color: rgba(var(--primary-number), .4);
-    > span {
-        color: rgba(var(--primary-number), 1);
-        font-size: var(--font-subtitles);
-        transition: color 75ms ease;
-    }
+}
 
-    &:hover {
-        background-color: rgba(var(--primary-number), .5);
-        cursor: pointer;
-    }
+.btn-submit > span {
+    color: rgba(var(--primary-number), 1);
+    font-size: var(--font-subtitles);
+    transition: color 75ms ease;
+}
 
-    &:active {
-        background-color: rgba(var(--primary-number), .4);
-    }
+.btn-submit:hover {
+    background-color: rgba(var(--primary-number), .5);
+    cursor: pointer;
+}
+
+.btn-submit:active {
+    background-color: rgba(var(--primary-number), .4);
+
 }
 
 .btn-submit--disabled {
     background-color: rgba(var(--primary-number), .1);
+}
 
-    > span {
-        color: rgba(var(--primary-number), .1);
-    }
+.btn-submit--disabled > span {
+    color: rgba(var(--primary-number), .1);
+}
 
-    &:hover {
-        cursor: default;
-        background-color: rgba(var(--primary-number), .1);
-    }
+.btn-submit--disabled:hover {
+    cursor: default;
+    background-color: rgba(var(--primary-number), .1);
 }
 
 .loader {

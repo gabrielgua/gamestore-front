@@ -85,13 +85,17 @@
     background-color: black;
 }
 
-.jogo__info__btn-fav > span {
+.fav-icon {
     cursor: pointer;
     color: var(--primary);
     font-size: 1.5em;
+    font-variation-settings:
+    'FILL' 0; 
 }
 
-.jogo__info__btn-fav:hover > span {
+
+
+.jogo__info__btn-fav:hover .fav-icon {
     font-variation-settings:
     'FILL' 1; 
 }

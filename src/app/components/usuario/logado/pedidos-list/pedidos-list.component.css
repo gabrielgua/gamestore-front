@@ -11,11 +11,11 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
 
-    > span {
-        font-size: 1.5rem;
-        color: var(--primary);
-    }
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
 }
 
 .pedidos {
@@ -133,10 +133,11 @@ span {
     color: rgb(var(--btn-color));
     border-radius: .25rem;
     transition: background-color 50ms ease;
+}
 
-    > span  {
-        color: rgb(var(--btn-color));
-    }
+.btn-pedido-action > span {
+    color: rgb(var(--btn-color));
+
 }
 
 .btn-danger {

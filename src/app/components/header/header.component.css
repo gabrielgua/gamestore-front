@@ -16,7 +16,6 @@ header {
   display: grid;
   grid-template-columns: auto 1fr;
   width: min(100% - 2rem, var(--container-max-size));
-  /* position: relative; */
 }
 
 nav {
@@ -74,9 +73,10 @@ a:hover {
   background-color: transparent;
   border: none;
 
-  > span {
-    color: var(--primary);
-  }
+}
+
+.mobile-menu-btn > span {
+  color: var(--primary);
 }
 
 

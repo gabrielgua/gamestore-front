@@ -41,14 +41,14 @@ form {
     border-radius: 2rem;
     padding-inline-start: .75rem;
     transition: outline 50ms ease;
+}
 
-    > span {
-        color: var(--primary);
-    }
+form > span {
+    color: var(--primary);
+}
 
-    &:focus-within {
-        outline: 3px solid var(--primary);
-    }
+form:focus-within {
+    outline: 3px solid var(--primary);
 }
 
 .search-input {
@@ -58,12 +58,11 @@ form {
     font-size: inherit;
     font-family: inherit;
     padding: .5rem;
-  
-    &:focus {
-      outline: none;
-    }
-  }
+}
 
+.search-input:focus {
+    outline: none;
+}
 
 
 .profile {
@@ -96,13 +95,7 @@ form {
     height: 100%;
 }
 
-.profile--open {
-    background-color: rgba(var(--primary-number), 0.2);
 
-    > .btn-expand > span {
-        transform: rotate(180deg);
-    }
-}
 
 .profile__nome {
     display: flex;
@@ -110,25 +103,12 @@ form {
     gap: .25rem;
     color: rgb(var(--primary-number));
 
-    > span {
-        font-size: var(--font-subtitles);
-        position: relative;
-        top: .125rem;
-        color: rgba(var(--primary-number), .5);
-    }
 }
 
-.btn-expand {
-    margin-left: auto;
-    background-color: transparent;
-    border: none;
-
-    > span {
-        color: rgb(var(--primary-number));
-        transition: transform 150ms ease;
-    }
+.profile__nome > span {
+    font-size: var(--font-subtitles);
+    color: rgba(var(--primary-number), .5);
 }
-
 
 .profile__actions {
     padding: 1rem;
@@ -152,30 +132,30 @@ form {
     padding: .5rem;
     border-radius: 0.25rem;
 
-    &:hover {
-        background-color: rgba(var(--primary-number), 0.3);
-        color: var(--primary);
-        cursor: pointer;
-    }
+}
 
-    > span {
-        font-size: 1.3rem;
-        font-family: 800;
-        color: var(--primary);
-    }
+.btn-action:hover {
+    background-color: rgba(var(--primary-number), 0.3);
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.btn-action > span {
+    font-size: 1.3rem;
+    color: var(--primary);
 }
 
 .btn-action--danger {
     color: rgb(var(--error));
+}
 
-    &:hover {
-        background-color: rgba(var(--error), .3);
-        color: rgb(var(--error));
-    }
+.btn-action--danger > span {
+    color: rgb(var(--error));
+}
 
-    > span {
-        color: rgb(var(--error));
-    }
+.btn-action--danger:hover {
+    background-color: rgba(var(--error), .3);
+    color: rgb(var(--error));
 }
 
 .links {
@@ -190,9 +170,10 @@ form {
     text-decoration: none;
     color: var(--accent);
 
-    &:hover {
-        color: var(--primary);
-    }
+}
+
+.links a:hover {
+    color: var(--primary);
 }
 
 .backdrop {

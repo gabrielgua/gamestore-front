@@ -68,36 +68,26 @@
 .jogo__img {
     width: 100%;
     display: block;
-    /* border-bottom: 1px solid var(--subtle-border-color); */
 }
 
 .jogo__descricao {
     font-size: var(--font-normal);
-
-    > p {
-        color: var(--accent);
-    }
-
-    > a {
-        color: var(--primary);
-    }
-    
-    > a:hover {
-        text-decoration: underline;
-    }
 }
+
+.jogo__descricao > p {
+    color: var(--accent);
+}
+
 
 .jogo__nota-desenvolvedora {
     display: grid;
     padding: var(--section-gap);
     padding-top: 0;
-    /* border: 1px solid white; */
     grid-template-columns: 1fr 1fr;
 }
 
 .jogo__nota,
 .jogo__desenvolvedora {
-    /* --color: ; <- conditional */
     display: flex;
     padding-bottom: .5rem;
     padding-block-start: .5rem;
@@ -108,9 +98,11 @@
     font-size: var(--font-normal);
     border-bottom: 1px solid var(--subtle-border-color);
 
-    > h5 {
-        font-size: var(--font-subtitles);
-    }
+}
+
+.jogo__nota > h5,
+.jogo__desenvolvedora > h5 {
+    font-size: var(--font-subtitles);
 }
 
 
@@ -128,7 +120,6 @@
 }
 
 .jogo__nota > p {
-    /* margin-left: .5rem; */
     background-color: rgba(var(--color), .2);
     color: rgb(var(--color));
     padding-inline: .25rem;
@@ -144,7 +135,6 @@
     display: grid;
     padding: var(--section-gap);
     padding-top: 0;
-    /* border: 1px solid white; */
     align-items: center;
 }
 
@@ -160,9 +150,10 @@
     gap: .25rem;
     color: rgb(var(--success)) !important; 
 
-    & span {
-        font-size: var(--font-normal);
-    }
+}
+
+.actions-title-possui > span {
+    font-size: var(--font-normal);
 }
 
 .jogo__actions > .actions-preco {
@@ -216,12 +207,15 @@
     background-color: rgba(var(--bg-color), .3);
 }
 
-.btn-desejo:hover, .btn-carrinho:hover  {
+.btn-desejo:hover, 
+.btn-carrinho:hover  {
     cursor: pointer;
+}
 
-    > span{ 
-        font-variation-settings: 'FILL' 1;
-    }
+.btn-desejo:hover > span, 
+.btn-carrinho:hover > span {
+    font-variation-settings: 'FILL' 1;
+
 }
 
 .btn-desejo:active > span,
@@ -275,11 +269,11 @@
 
 .requisito > p {
     color: rgba(var(--accent-number), .8);
+}
 
-    > span {
-        color: rgba(var(--accent-number));
-        font-weight: bold;
-    }
+.requisito > p > span {
+    color: rgba(var(--accent-number));
+    font-weight: bold;
 }
 
 .requisito > h5 {
@@ -344,10 +338,11 @@
     background-color: rgba(var(--primary-number), .1);
     color: var(--accent);
 
-    > h5 {
-        font-size: var(--font-normal);
-        color: var(--primary);
-    }
+}
+
+.jogo__lancamento > h5{
+    font-size: var(--font-normal);
+    color: var(--primary);
 }
 
 .hidden-desktop {
