@@ -28,6 +28,8 @@ export class PedidoCreateComponent implements OnInit, OnDestroy {
   isLoadingCreate: boolean = false;
   pedidoSub = new Subscription();
 
+  success: boolean = false;
+
   form = this.formBuilder.group({
     formaPagamentoOptions: [null, [Validators.required]]
   })
@@ -90,11 +92,8 @@ export class PedidoCreateComponent implements OnInit, OnDestroy {
 
   private handleCreatePedidoSuccess(pedido: Pedido) {
     this.isLoadingCreate = false;
-    this.router.navigate(['pedidos'])
-      .then(() => {
-        this.toastr.success('Pedido criado com sucesso.');
-        this.carrinhoService.clearCarrinho();
-      })
+    this.success = true;
+    this.carrinhoService.clearCarrinho();
   }
 
   private handleCreatePedidoError(err: any) {

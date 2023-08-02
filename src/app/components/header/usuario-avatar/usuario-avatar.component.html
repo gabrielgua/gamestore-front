@@ -10,7 +10,7 @@
     </div>
 
     <div class="profile-wrapper" *ngIf="isLoggedIn()">
-        <button id="profile-button" class="btn-avatar" (click)="this.showMenu = !this.showMenu">
+        <button id="profile-button" class="btn-avatar" (click)="handleAvatarClick()" [ngClass]="{'btn-avatar--active': showMenu}">
             <img *ngIf="usuario.avatarUrl.length" id="profile-avatar" class="profile-avatar" src="{{ usuario.avatarUrl }}" />
             <app-loader *ngIf="!usuario.avatarUrl.length" class="material-symbols-rounded icon--filled" />
         </button>
@@ -25,11 +25,11 @@
                     <span class="material-symbols-rounded icon--filled">person</span>
                     <p>Perfil</p>
                 </button>
-                <button class="btn-actions" routerLink="meus-pedidos">
+                <button class="btn-actions" routerLink="conta/pedidos">
                     <span class="material-symbols-rounded icon--filled">local_mall</span>
                     <p>Pedidos</p>
                 </button>
-                <button class="btn-actions" routerLink="meus-jogos">
+                <button class="btn-actions" routerLink="conta/biblioteca">
                     <span class="material-symbols-rounded icon--filled">gamepad</span>
                     <p>Jogos</p>
                 </button>

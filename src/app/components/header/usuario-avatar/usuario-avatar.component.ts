@@ -37,6 +37,10 @@ export class UsuarioAvatarComponent implements OnInit{
     return this.authService.isLoggedIn();
   }
 
+  handleAvatarClick(): void {
+    this.showMenu = !this.showMenu
+  }
+
   handleLogoutClick(): void {
 		this.authService.logout();
 		this.router.navigate(['sing-in']);

@@ -22,6 +22,8 @@ export class SearchComponent {
   }
 
   openModal(template: TemplateRef<any>) {
+    this.modalOpened = true;
+    
     this.modalService
       .open(template, this.viewContainerRef )
       .subscribe(() => {            

@@ -78,8 +78,4 @@ export class AutocompleteSearchComponent implements OnInit {
     this.submitted.emit();
   }
 
-  handleResise(size: number): void {
-    console.log(size);
-    
-  }
 }

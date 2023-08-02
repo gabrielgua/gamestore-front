@@ -26,8 +26,8 @@ const routes: Routes = [
   {path: 'sing-in', component: LoginComponent, canActivate: [LoggedInGuard]},
 
   //private
-  {path: 'meus-pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
-  {path: 'meus-jogos', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
+  {path: 'conta/pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
+  {path: 'conta/biblioteca', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
   {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
 
 

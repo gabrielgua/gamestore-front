@@ -1,71 +1,74 @@
 <div class="container">
-    <div class="title">
-        <span class="material-symbols-rounded icon--filled">shopping_cart</span>
-        <p>Meu Carrinho</p>
-    </div>
-    
     <ng-container *ngIf="carrinho$ | async as carrinho">
-        <p *ngIf="!carrinho.items.length">Seu carrinho está vazio.</p>
-        <div class="wrapper" *ngIf="carrinho.items.length">
-            <div class="jogos">
-                <p class="content-title">Produtos</p>
-                <div class="jogo" *ngFor="let jogo of carrinho.items">
-                    <div class="jogo__img-wrapper">
-                        <img src="{{jogo.urlImagem}}" alt="banner">
-                    </div>
-                    <div class="jogo__info">
-                        <p class="jogo__nome">{{jogo.id}} - {{jogo.nome}}</p>
-                        <p class="jogo__preco">{{jogo.preco | currency: 'BRL'}}</p>
-                    </div>
-                    
-                    <div class="jogo__actions">
-                        <button class="btn-jogo-remover" (click)="handleRemove(jogo.id)">
-                            <span class="material-symbols-rounded icon--filled">delete</span>
-                            Remover
-                        </button>
-                    </div>
-                </div>
-                <div class="pedido-total">
-                    <ng-container *ngIf="total$ | async as total">
-                        <p class="total-title">Total</p>
-                        <p class="total">{{total | currency: 'BRL'}}</p>
-                    </ng-container>
-                </div>
-            </div>
-            <div class="formas-pagamento-wrapper" >
-                <p class="content-title">Forma de pagamento</p>
-                <form class="formas-pagamento" [formGroup]="form" (ngSubmit)="handleSubmit()">
-                    <ng-container *ngIf="formasPagamento$ | async as formasPagamento">
-                        <div *ngFor="let formaPagamento of formasPagamento">
-                            <div class="form-group" [ngClass]="{'form-group--selected': isSelected(formaPagamento.id)}">
-                                <input type="radio" 
-                                    [id]="formaPagamento.id" 
-                                    [value]="formaPagamento.id" 
-                                    formControlName="formaPagamentoOptions"
-                                    [disabled]="true">
-                                <label [for]="formaPagamento.id">{{formaPagamento.nome}}</label>
-                            </div>
-                        </div>
-                    </ng-container>
-                    
-                    <ng-container>
-                        <button class="btn-submit" type="submit" [disabled]="form.invalid" [ngClass]="{'btn-submit--disabled': form.invalid}">
-                            <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
-                            <p>Fazer pedido</p> 
-                        </button>
-                    </ng-container>
-                    
-                </form>
-                <span class="loader" *ngIf="isLoadingCreate" @fadeIn>
-                    <app-loader />
-                </span>
-                    
+        <ng-container *ngIf="!success; else pedidoSuccess">
+            <div class="title">
+                <span class="material-symbols-rounded icon--filled">shopping_cart</span>
+                <p>Meu Carrinho</p>
             </div>
             
-        </div>
-
+            <p *ngIf="!carrinho.items.length">Seu carrinho está vazio.</p>
+            <div class="wrapper" *ngIf="carrinho.items.length">
+                <div class="jogos">
+                    <p class="content-title">Produtos</p>
+                    <div class="jogo" *ngFor="let jogo of carrinho.items">
+                        <div class="jogo__img-wrapper">
+                            <img src="{{jogo.urlImagem}}" alt="banner">
+                        </div>
+                        <div class="jogo__info">
+                            <p class="jogo__nome">{{jogo.id}} - {{jogo.nome}}</p>
+                            <p class="jogo__preco">{{jogo.preco | currency: 'BRL'}}</p>
+                        </div>
+                        
+                        <div class="jogo__actions">
+                            <button class="btn-jogo-remover" (click)="handleRemove(jogo.id)">
+                                <span class="material-symbols-rounded icon--filled">delete</span>
+                                Remover
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pedido-total">
+                        <ng-container *ngIf="total$ | async as total">
+                            <p class="total-title">Total</p>
+                            <p class="total">{{total | currency: 'BRL'}}</p>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="formas-pagamento-wrapper" >
+                    <p class="content-title">Forma de pagamento</p>
+                    <form class="formas-pagamento" [formGroup]="form" (ngSubmit)="handleSubmit()">
+                        <ng-container *ngIf="formasPagamento$ | async as formasPagamento">
+                            <div *ngFor="let formaPagamento of formasPagamento">
+                                <div class="form-group" [ngClass]="{'form-group--selected': isSelected(formaPagamento.id)}">
+                                    <input type="radio" 
+                                        [id]="formaPagamento.id" 
+                                        [value]="formaPagamento.id" 
+                                        formControlName="formaPagamentoOptions"
+                                        [disabled]="true">
+                                    <label [for]="formaPagamento.id">{{formaPagamento.nome}}</label>
+                                </div>
+                            </div>
+                        </ng-container>
+                        
+                        <ng-container>
+                            <button class="btn-submit" type="submit" [disabled]="form.invalid" [ngClass]="{'btn-submit--disabled': form.invalid}">
+                                <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
+                                <p>Fazer pedido</p> 
+                            </button>
+                        </ng-container>
+                        
+                    </form>
+                    <span class="loader" *ngIf="isLoadingCreate" @fadeIn>
+                        <app-loader />
+                    </span>
+                        
+                </div>
+                
+            </div>
+        </ng-container>
+        <ng-template #pedidoSuccess>
+            <app-pedido-success ></app-pedido-success>
+        </ng-template>
     </ng-container>
-    
 </div>
 
 

@@ -27,10 +27,6 @@
   border-radius: .25rem;
   padding: .75rem;
 
-  &:hover {
-    background-color: rgba(var(--primary-number), .3);
-
-  }
 }
 
 .links a:last-child:hover {
@@ -44,15 +40,23 @@
 }
 
 .btn-avatar {
-  width: 3.125rem;
-  height: 3.125rem;
-  outline-offset: 3px;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(var(--primary-number), 0.2);
+}
+
+.btn-actions:active {
+  background-color: rgba(var(--primary-number), 0.2);
+}
+
+
+.btn-avatar--active {
+  outline: 3px solid rgba(var(--primary-number), .15);
 }
 
 .btn-avatar:hover {
@@ -62,7 +66,6 @@
 
 .btn-avatar:hover .profile-avatar {
   scale: 1.05;
-
 }
 
 

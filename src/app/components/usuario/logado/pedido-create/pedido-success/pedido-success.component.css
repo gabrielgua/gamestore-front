@@ -1,0 +1,27 @@
+.wrapper {
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+    color: whitesmoke;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgb(var(--success));
+    font-size: var(--font-titles);
+}
+
+.title span {
+    font-size: 3rem;
+} 
+
+.subtitle {
+    font-size: var(--font-subtitles);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: underline;
+}
