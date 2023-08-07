@@ -391,6 +391,20 @@
     font-size: 1.2rem;
 }
 
+.jogo__btn--biblioteca {
+    background-color: transparent;
+    justify-content: flex-start;
+    padding-inline: 0;
+}
+
+.jogo__btn--biblioteca:hover {
+    background-color: transparent !important;
+}
+
+.jogo__btn--biblioteca:hover > p {
+    text-decoration: underline;
+}
+
 .jogo__preco {
     color: var(--primary);
     transition: transform 200ms ease;

@@ -66,22 +66,21 @@
             <div class="jogo__detalhes">
                 <div class="jogo__preco-nota">
                     
-                    <button class="jogo__btn btn-carrinho" (click)="addToCart(jogo)" *ngIf="!jaPossuiJogo(jogo.id)">
-                        <ng-container *ngIf="!noCarrinho(jogo.id)">
+                    <button class="jogo__btn btn-carrinho" (click)="addToCart(jogo)" *ngIf="!jaPossuiJogo(jogo.id) && !noCarrinho(jogo.id)">
+                        <ng-container>
                             <p class="jogo__preco">{{ jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL' }}</p>
                             <div class="jogo__btn--hover">
                                 <span class="material-symbols-rounded">add_shopping_cart</span>
                                 <p>Carrinho</p>
                             </div>
                         </ng-container>
-                        <ng-container *ngIf="noCarrinho(jogo.id)">
-                            <span class="material-symbols-rounded">shopping_cart</span>
-                            <p>No carrinho</p>
-                        </ng-container>
-                        
                     </button>
-                    <button class="jogo__btn btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)">
-                        <span class="material-symbols-rounded">bookmark</span>
+                    <button class="jogo__btn jogo__btn--biblioteca btn-carrinho" *ngIf="noCarrinho(jogo.id)" routerLink="/carrinho">
+                        <span class="material-symbols-rounded">shopping_cart</span>
+                            <p>No carrinho</p>
+                    </button>
+                    <button class="jogo__btn jogo__btn--biblioteca btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)" routerLink="/conta/biblioteca">
+                        <span class="material-symbols-rounded">list</span>
                         <p>Na biblioteca</p>
                     </button>
                     
