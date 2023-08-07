@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscription, filter, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, filter, map, tap } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { FormaPagamento } from 'src/app/models/formas-pagamento/forma.pagamento';
 import { Jogo } from 'src/app/models/jogos/jogo';
@@ -78,8 +78,12 @@ export class PedidoCreateComponent implements OnInit, OnDestroy {
       filter(carrinho => carrinho.items.length != 0),
       map(carrinho => carrinho.items
         .map(items => items.preco)
-          .reduce((total, preco) => total + preco))
+          .reduce((total, preco) => total + preco, 0))
     );
+
+    
+    
+    
   }
 
   private fazerPedido(pedidoCreate: PedidoCreate): void {

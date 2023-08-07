@@ -27,10 +27,13 @@
                         </div>
                     </div>
                     <div class="pedido-total">
-                        <ng-container *ngIf="total$ | async as total">
+                        <ng-container *ngIf="total$ | async as total; else gratuito">
                             <p class="total-title">Total</p>
                             <p class="total">{{total | currency: 'BRL'}}</p>
                         </ng-container>
+                        <ng-template #gratuito>
+                            <p class="total-title">Seu pedido será <span class="total">Gratuito</span>.</p>
+                        </ng-template>
                     </div>
                 </div>
                 <div class="formas-pagamento-wrapper" >
