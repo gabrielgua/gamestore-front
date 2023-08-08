@@ -8,15 +8,14 @@
             <div class="jogo" *ngFor="let jogo of jogos">
                 <div class="jogo__wrapper">
                     <img class="jogo__img" src="{{jogo.capsuleImg}}" alt="capsule">
+                    <div class="info-wrapper">
+                        <button class="btn-show-key" (click)="showKey = !showKey">
+                            <span class="material-symbols-rounded icon--filled-bolder">info</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="key">
-                    <p *ngIf="showKey">SJ212-AsnbW-0Uihj</p>
-                    <p *ngIf="!showKey">Chave de ativação</p>
-
-                    <button class="btn-show-key" (click)="showKey = !showKey">
-                        <span class="material-symbols-rounded icon--filled">{{showKey ? 'visibility_off' : 'visibility'}}</span>
-                    </button>
-                </div>
+                
+               
             </div>
         </section>
         <ng-template #loading>
