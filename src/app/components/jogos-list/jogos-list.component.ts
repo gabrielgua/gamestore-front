@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { Observable, Subscription, map, startWith } from 'rxjs';
 import { PageInfo } from 'src/app/models/pageables/page.info';
-import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
 export interface FilterItem {
   tipo: FilterTipo,
@@ -62,7 +62,7 @@ export class JogosListComponent implements OnInit, OnDestroy {
     private service: JogosListService,
     private categoriaService: CategoriasListService,
     private plataformaService: PlataformasListService,
-    private jogosUsuarioService: JogosUsuarioLogadoService,
+    private jogosUsuarioService: ComprasUsuarioService,
     private modoService: ModosListService,
     private router: Router,
     private carrinhoService: CarrinhoService,

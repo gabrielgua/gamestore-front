@@ -6,7 +6,7 @@ import { TipoRequisito } from '../../models/requisitos/tipoRequisito';
 import { Requisito } from '../../models/requisitos/requisito';
 import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
-import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
 @Component({
   selector: 'app-jogo',
@@ -21,7 +21,7 @@ export class JogoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private carrinhoService: CarrinhoService,
-    private jogosUsuarioService: JogosUsuarioLogadoService,
+    private jogosUsuarioService: ComprasUsuarioService,
     private service: JogoBuscarService,
     private changeDetector: ChangeDetectorRef
   ) {}

@@ -28,6 +28,8 @@
     display: grid;
     background-color: black;
     border-radius: .5rem;
+    border-top: 1px solid var(--subtle-border-color);
+    box-shadow: var(--box-shadow-primary);
 }
 
 .jogo__wrapper {
@@ -36,19 +38,20 @@
     padding: 1rem;
 }
 
-.info-wrapper {
+.btn-show-compra-info {
+    border: none;
+    color: var(--primary);
     display: grid;
+    place-items: center;
     width: 100%;
-    z-index: 1;
     height: 100%;
+    z-index: 1;
     position: absolute;
     border-radius: .5rem;
     background-color: rgba(0, 0, 0, .6);
-    opacity: 0;
     transition: opacity 150ms ease;
+    opacity: 0;
 }
-
-
 
 .jogo__img {
     display: block;
@@ -56,40 +59,184 @@
     width: 100%;
 }
 
-.btn-show-key {
+.btn-show-compra-info > span {
     position: absolute;
     place-self: center;
     z-index: 2;
     border: none;
     display: grid;
     place-items: center;
-    background-color: transparent;
+    background-color: rgba(var(--primary-number), .1);
     color: var(--primary);
     border-radius: 50%;
     padding: .45rem;
     transform: translateY(100%);
     opacity: 0;
-    transition: 
-        background-color 150ms ease,
-        transform 300ms ease;
+    transition: all 300ms ease
+        
 }
 
-.btn-show-key > p {
+.btn-show-compra-info:hover > span {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+.btn-show-compra-info > p {
     font-size: var(--font-subtitles);
 }
 
-.btn-show-key:hover {
+.btn-show-compra-info:hover {
     cursor: pointer;
+}
+
+.jogo__wrapper:hover > .btn-show-compra-info {
+    opacity: 1;
+}
+
+.jogo-info {
+    max-width: 50%;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: black;
+    border-top: 1px solid var(--subtle-border-color);
+    box-shadow: var(--box-shadow-primary);
+}
+
+.jogo-info-nome-close-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.jogo-info__nome {
+    font-size: var(--font-titles);
+    color: var(--primary);
+}
+
+.jogo-info__detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-close-info {
+    border: none;
+    display: grid;
+    place-items: center;
+    padding: .5rem;
+    border-radius: 50%;
+    background-color: transparent;
+    color: rgb(var(--error));
+    transition: background-color 75ms ease;
+}
+
+.btn-close-info:hover {
+    cursor: pointer;
+    background-color: rgba(var(--error), .3);
+}
+
+.btn-close-info:active > span {
+    font-variation-settings: 'FILL' 1;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .5rem;
+
+}
+
+.label > span {
+    color: rgba(var(--primary-number), .5);
+    font-size: var(--font-subtitles);
+    border-radius: 50%;
+    padding: .25rem;
     background-color: rgba(var(--primary-number), .2);
 }
 
-.jogo__wrapper:hover > .info-wrapper {
-    opacity: 1;
+.input-wrapper {
+    border: 1px solid var(--subtle-border-color);
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    padding-inline-start: 1rem;
+    gap: .5rem;
+    border-radius: .5rem;
+    max-width: 50%;
 }
 
-.jogo__wrapper:hover > .info-wrapper > .btn-show-key {
-    transform: translateY(0%);
-    opacity: 1;
+.input-wrapper > input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.input-key--hidden {
+    font-size: var(--font-subtitles);
+}
+
+.btn-key {
+    border: none;
+    color: var(--primary);
+    background-color: rgba(var(--primary-number), .2);
+    display: grid;
+    place-items: center;
+    padding: .35rem;
+    border-radius: .35rem;
+    transition: background-color 150ms ease;
+}
+
+.btn-key:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-number), .3);
+}
+
+.btn-key:hover > span {
+    font-variation-settings: 'FILL' 1;
+}
+
+.btn-key:active {
+    background-color: rgba(var(--primary-number), .2);
+}
+
+.data-compra-actions-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.jogo-info__data-compra {
+    font-size: var(--font-smaller);
+    color: var(--secondary-text-dark);
+}
+
+.btn-avaliar {
+    border: none;
+    background-color: rgba(var(--primary-number), .2);
+    padding: .5rem;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--primary);
+    transition: background-color 150ms ease;
+}
+
+.btn-avaliar > span {
+    position: relative;
+    top: -1px;
+    font-size: var(--font-subtitles);
+}
+
+.btn-avaliar:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-number), .3);
+}
+
+.btn-avaliar:active {
+    background-color: rgba(var(--primary-number), .2);
+    transition: none;
 }
 
 

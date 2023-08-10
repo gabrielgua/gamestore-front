@@ -1,22 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
-import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Animations } from 'src/app/animations/animations';
+import { Compra } from 'src/app/models/compras/compra';
+import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 
 @Component({
   selector: 'app-usuario-jogos',
   templateUrl: './usuario-jogos.component.html',
-  styleUrls: ['./usuario-jogos.component.css']
+  styleUrls: ['./usuario-jogos.component.css'],
+  animations: [Animations]
 })
 export class UsuarioJogosComponent implements OnInit {
 
-  jogos$ = new Observable<JogoResumo[]>();
+  compras$ = new Observable<Compra[]>();
+  compra$ = new BehaviorSubject<Compra>({} as Compra);
   showKey: boolean = false;
+
   
-  constructor(private service: JogosUsuarioLogadoService) {}
+  constructor(private service: ComprasUsuarioService) {}
 
   ngOnInit(): void {
-    this.service.fetchJogos();
-    this.jogos$ = this.service.getJogos();
+    this.service.fetchCompras();
+    this.compras$ = this.service.getCompras();
   }
+
+  showInfo(compra: Compra): void {
+    if (compra.id === this.compra$.getValue().id) {
+      this.closeInfo();
+      return;
+    }
+    this.compra$.next(compra);
+  }
+
+  closeInfo(): void {
+    this.compra$.next({} as Compra);
+  }
+
+  
 }

@@ -4,7 +4,7 @@ import { Observable, Subscriber, Subscription, catchError, ignoreElements, map, 
 import { Animations } from 'src/app/animations/animations';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { StatusPedido } from 'src/app/models/pedidos/status.pedido';
-import { JogosUsuarioLogadoService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 import { PedidoService } from 'src/app/service/pedidos/pedido.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class PedidosListComponent implements OnInit, OnDestroy {
   constructor(
     private pedidoService: PedidoService, 
     private toastr: ToastrService, 
-    private jogosUsuarioService: JogosUsuarioLogadoService,) {}
+    private jogosUsuarioService: ComprasUsuarioService,) {}
   
 
   ngOnInit(): void {
@@ -74,7 +74,7 @@ export class PedidosListComponent implements OnInit, OnDestroy {
     this.getPedidos();
     this.stopPedidoLoading(pedido);
     this.toastrSuccess(`Pedido ${action} com sucesso.`);
-    this.jogosUsuarioService.refreshJogos();
+    this.jogosUsuarioService.refreshCompras();
   }
 
   private handleActionError(pedido: Pedido, action: string, title: string) {

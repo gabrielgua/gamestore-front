@@ -47,6 +47,7 @@ import { PedidoCreateComponent } from './components/usuario/logado/pedido-create
 import { CarrinhoButtonComponent } from './components/header/carrinho-button/carrinho-button.component';
 import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 import { PedidoSuccessComponent } from './components/usuario/logado/pedido-create/pedido-success/pedido-success.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -95,6 +96,7 @@ registerLocaleData(localePt);
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+    ClipboardModule,
     ToastrModule.forRoot({
       closeButton: true,
       easing: 'ease',
