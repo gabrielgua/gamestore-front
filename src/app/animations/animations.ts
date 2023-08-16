@@ -17,6 +17,10 @@ export const Animations = [
     transition(':enter', [
       style({ opacity: 0, transform: 'translateY(10%)' }),
       animate('150ms ease', style({ opacity: 1, transform: 'translateY(0)' })),
+    ]),
+    transition(':leave', [
+      style({ opacity: 1, transform: 'translateY(0)' }),
+      animate('150ms ease', style({ opacity: 0, transform: 'translateY(10%)' })),
     ])
   ]),
 

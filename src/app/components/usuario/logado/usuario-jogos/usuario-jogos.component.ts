@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { Compra } from 'src/app/models/compras/compra';
 import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { ModalService } from 'src/app/service/modal/modal.service';
 
 @Component({
   selector: 'app-usuario-jogos',
@@ -17,7 +18,7 @@ export class UsuarioJogosComponent implements OnInit {
   showKey: boolean = false;
 
   
-  constructor(private service: ComprasUsuarioService) {}
+  constructor(private service: ComprasUsuarioService, private modalService: ModalService, private viewContainerRef: ViewContainerRef) {}
 
   ngOnInit(): void {
     this.service.fetchCompras();
@@ -25,16 +26,15 @@ export class UsuarioJogosComponent implements OnInit {
   }
 
   showInfo(compra: Compra): void {
+    this.showKey = false;
     if (compra.id === this.compra$.getValue().id) {
       this.closeInfo();
       return;
     }
-    this.compra$.next(compra);
+    this.compra$.next(compra);    
   }
 
   closeInfo(): void {
     this.compra$.next({} as Compra);
   }
-
-  
 }

@@ -26,6 +26,4 @@ export class ModalComponent {
     this.elementRef.nativeElement.remove();
     this.submitEvent.emit(); 
   }
-  
-
 }

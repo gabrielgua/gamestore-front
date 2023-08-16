@@ -5,67 +5,71 @@
             <p>Meus jogos</p>
         </div>
         <section class="jogos" *ngIf="compras.length; else loading">
-            <div class="jogo" *ngFor="let compra of compras" @fromBottomToBottom>
+            <div class="jogo" *ngFor="let compra of compras">
                 <div class="jogo__wrapper">
                     <img class="jogo__img" src="{{compra.jogo.capsuleImg}}" alt="capsule">
                     <button class="btn-show-compra-info" (click)="showInfo(compra)">
                         <span class="material-symbols-rounded icon--filled-bolder">info</span>
-                    </button>
+                    </button>  
                 </div>
             </div>
         </section>
-        <ng-container *ngIf="compra$ | async as compra">
-            <section class="jogo-info" *ngIf="compra.id != null">
-                <div class="jogo-info-nome-close-wrapper">
-                    <p class="jogo-info__nome">{{compra.jogo.nome}}</p>
-                    <button class="btn-close-info" (click)="closeInfo()">
-                        <span class="material-symbols-rounded ">cancel</span>
-                    </button>
-                </div>
-                <div class="jogo-info__detalhes">
-                    <div class="key">
-                        <label class="label" for="key">
-                            <span class="material-symbols-rounded icon--filled">key</span>    
-                            <p>Chave de ativação</p>
-                        </label>
-                        <div class="input-wrapper">
-                            <input 
-                                id="key" 
-                                type="{{showKey ? 'text' : 'password'}}" 
-                                [value]="compra.chaveAtivacao" 
-                                [ngClass]="{'input-key--hidden': !showKey}" >
-                            <button class="btn-key" title="Copiar chave" [cdkCopyToClipboard]="compra.chaveAtivacao">
-                                <span class="material-symbols-rounded">content_copy</span>
-                            </button>
-                            <button class="btn-key" title="Esconder chave" (click)="showKey = !showKey">
-                                <span class="material-symbols-rounded">{{showKey ? 'visibility_off' : 'visibility'}}</span>
-                            </button>
-                        </div>
-                    </div>
-                    <section class="data-compra-actions-wrapper">
-                        <div class="data-compra">
-                            <div class="label">
-                                <span class="material-symbols-rounded icon--filled">calendar_month</span>
-                                <p>Data da compra</p>
-                            </div>
-                            <p class="jogo-info__data-compra">{{compra.dataCompra | date: 'dd/MM/yyyy'}} às {{compra.dataCompra | date: 'HH:mm'}}h</p>
-                            
-                        </div>
-                        <div class="jogo-info__actions">
-                            <button class="btn-avaliar">
-                                <span class="material-symbols-rounded icon--filled">star</span>
-                                <p>Escrever avaliação</p>
-                            </button>
-                        </div>
-                    </section>
-                </div>
-            </section>
-        </ng-container>
-        
         <ng-template #loading>
             <app-loader></app-loader>
         </ng-template>
     </div>
 </ng-container>
+<ng-container *ngIf="compra$ | async as compra">
+    <div class="backdrop" *ngIf="compra.id != null" (click)="closeInfo()" @fadeIn></div>
+    <section class="jogo-info-wrapper">
+        <div class="jogo-info" *ngIf="compra.id != null" @fromBottomToBottom>
+
+            <div class="jogo-info-nome-close-wrapper">
+                <p class="jogo-info__nome">{{compra.jogo.nome}}</p>
+                <button class="btn-close-info" (click)="closeInfo()">
+                    <span class="material-symbols-rounded ">cancel</span>
+                </button>
+            </div>
+            <div class="jogo-info__detalhes">
+                <div class="key">
+                    <label class="label" for="key">
+                        <span class="material-symbols-rounded icon--filled">key</span>    
+                        <p>Chave de ativação</p>
+                    </label>
+                    <div class="input-wrapper">
+                        <input 
+                            id="key" 
+                            type="{{showKey ? 'text' : 'password'}}" 
+                            [value]="compra.chaveAtivacao" 
+                            [ngClass]="{'input-key--hidden': !showKey}" >
+                        <button class="btn-key" title="Copiar chave" [cdkCopyToClipboard]="compra.chaveAtivacao">
+                            <span class="material-symbols-rounded">content_copy</span>
+                        </button>
+                        <button class="btn-key" title="Esconder chave" (click)="showKey = !showKey">
+                            <span class="material-symbols-rounded">{{showKey ? 'visibility_off' : 'visibility'}}</span>
+                        </button>
+                    </div>
+                </div>
+                <section class="data-compra-actions-wrapper">
+                    <div class="data-compra">
+                        <div class="label">
+                            <span class="material-symbols-rounded icon--filled">calendar_month</span>
+                            <p>Data da compra</p>
+                        </div>
+                        <p class="jogo-info__data-compra">{{compra.dataCompra | date: 'dd/MM/yyyy'}} às {{compra.dataCompra | date: 'HH:mm'}}h</p>
+                        
+                    </div>
+                    <div class="jogo-info__actions">
+                        <button class="btn-avaliar">
+                            <span class="material-symbols-rounded icon--filled">star</span>
+                            <p>Escrever avaliação</p>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</ng-container>
+
 
 

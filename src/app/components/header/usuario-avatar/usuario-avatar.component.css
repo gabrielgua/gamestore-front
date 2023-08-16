@@ -127,7 +127,6 @@
 }
 
 .btn-actions:last-child {
-  margin-top: 1rem;
   color: rgb(var(--error));
 }
 
