@@ -48,6 +48,7 @@ import { CarrinhoButtonComponent } from './components/header/carrinho-button/car
 import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 import { PedidoSuccessComponent } from './components/usuario/logado/pedido-create/pedido-success/pedido-success.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { PerfilComponent } from './components/usuario/logado/perfil/perfil.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -87,6 +88,7 @@ registerLocaleData(localePt);
     CarrinhoButtonComponent,
     UsuarioJogosComponent,
     PedidoSuccessComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,

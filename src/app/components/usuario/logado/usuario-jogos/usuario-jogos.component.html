@@ -1,10 +1,10 @@
-<ng-container *ngIf="compras$ | async as compras">
+<ng-container *ngIf="compras$ | async as compras; else loading">
     <div class="container">
         <div class="title">
             <span class="material-symbols-rounded icon--filled">gamepad</span>
             <p>Meus jogos</p>
         </div>
-        <section class="jogos" *ngIf="compras.length; else loading">
+        <section class="jogos" *ngIf="compras.length; else empty">
             <div class="jogo" *ngFor="let compra of compras">
                 <div class="jogo__wrapper">
                     <img class="jogo__img" src="{{compra.jogo.capsuleImg}}" alt="capsule">
@@ -14,11 +14,14 @@
                 </div>
             </div>
         </section>
-        <ng-template #loading>
-            <app-loader></app-loader>
+        <ng-template #empty>
+            <p @fadeIn>Você ainda não possui jogos.</p>
         </ng-template>
     </div>
 </ng-container>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>
 <ng-container *ngIf="compra$ | async as compra">
     <div class="backdrop" *ngIf="compra.id != null" (click)="closeInfo()" @fadeIn></div>
     <section class="jogo-info-wrapper">
