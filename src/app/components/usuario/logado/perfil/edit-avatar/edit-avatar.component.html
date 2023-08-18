@@ -1,5 +1,10 @@
 <section *ngIf="usuario">
+    <div class="perfil__nome">
+        <p>{{usuario.nome ? usuario.nome : usuario.username}}</p>
+        <span title="Admin" *ngIf="isAdmin()" class="material-symbols-rounded icon--filled">verified_user</span>
+    </div>
     <div class="perfil__avatar-actions">    
+
         <div class="perfil__avatar-wrapper">
             <div class="img-backdrop-loading" *ngIf="imageLoading">
                 <app-loader />
@@ -20,4 +25,5 @@
         </div>
         
     </div>
+
 </section>

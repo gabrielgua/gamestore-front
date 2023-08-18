@@ -1,3 +1,16 @@
+.perfil__nome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.perfil__nome > span {
+    color: var(--primary);
+    font-size: 1.35rem;
+}
+
 .perfil__avatar-actions {
     max-width: 12rem;
     width: 100%;

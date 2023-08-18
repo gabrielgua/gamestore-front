@@ -41,6 +41,10 @@ export class EditAvatarComponent {
     this.closeAvatarChange();
   }
 
+  isAdmin(): boolean {
+    return this.usuarioService.isAdmin();
+  }
+
 
 
 }
