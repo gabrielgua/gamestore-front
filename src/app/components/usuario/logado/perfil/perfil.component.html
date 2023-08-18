@@ -1,1 +1,49 @@
-<p>perfil works!</p>
+<ng-container *ngIf="usuario$ | async as usuario">
+    <div class="container">
+        <div class="title">
+            <span class="material-symbols-rounded icon--filled">person</span>
+            <p>Minha conta</p>
+        </div>
+        <section class="perfil">
+            <div class="perfil__menu">
+                <app-edit-avatar [usuario]="usuario"></app-edit-avatar>
+                <div class="perfil__menu-options">
+                    <button class="perfil__btn-gen-avatar">
+                        <span class="material-symbols-rounded ">person</span>
+                        <p>Conta</p>
+                    </button>
+                    <button class="perfil__btn-gen-avatar">
+                        <span class="material-symbols-rounded">key</span>
+                        <p>Atualizar senha</p>
+                    </button>
+                    <button class="perfil__btn-gen-avatar">
+                        <span class="material-symbols-rounded">info</span>
+                        <p>Mais informações</p>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="perfil__form">
+                <form>
+                    <div class="input-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" value="{{usuario.nome}}">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="text" value="{{usuario.email}}">
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Nome de usuário</label>
+                        <input type="text" value="{{usuario.username}}">
+                    </div>
+                    <button class="btn-submit" type="submit">Editar</button>
+                </form>
+            </div>
+            <!-- <div class="perfil__info">
+                <p>Usuário desde {{usuario.dataCadastro | date: 'mediumDate'}} - {{usuario.dataCadastro | date: 'HH:mm'}}h.</p>
+            </div> -->
+        </section>
+    </div>
+</ng-container>

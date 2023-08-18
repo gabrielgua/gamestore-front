@@ -49,6 +49,7 @@ import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos
 import { PedidoSuccessComponent } from './components/usuario/logado/pedido-create/pedido-success/pedido-success.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { PerfilComponent } from './components/usuario/logado/perfil/perfil.component';
+import { EditAvatarComponent } from './components/usuario/logado/perfil/edit-avatar/edit-avatar.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -89,6 +90,7 @@ registerLocaleData(localePt);
     UsuarioJogosComponent,
     PedidoSuccessComponent,
     PerfilComponent,
+    EditAvatarComponent,
   ],
   imports: [
     BrowserModule,

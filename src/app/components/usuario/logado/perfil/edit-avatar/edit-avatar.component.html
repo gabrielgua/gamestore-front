@@ -1,0 +1,23 @@
+<section *ngIf="usuario">
+    <div class="perfil__avatar-actions">    
+        <div class="perfil__avatar-wrapper">
+            <div class="img-backdrop-loading" *ngIf="imageLoading">
+                <app-loader />
+            </div>
+            <img (load)="imageLoading = false" @fadeIn class="perfil__avatar" src="{{randomAvatar.length ? randomAvatar : usuario.avatarUrl }}" alt="avatar">
+        </div>
+        <div class="avatar__actions">
+            <button @fromLeftToFade *ngIf="showConfirmAvatarButtons" class="perfil__btn-avatar-action btn-avatar-action--cancel" (click)="closeAvatarChange()" title="Cancelar">
+                <span class="material-symbols-rounded icon--filled">cancel</span>
+            </button>
+            <button [disabled]="imageLoading"  title="Gerar outro avatar" class="perfil__btn-gen-avatar btn-avatar-action--gen" (click)="gerarAvatar(usuario.username)">
+                <span class="material-symbols-rounded">refresh</span>
+    
+            </button>
+            <button @fromRightToFade *ngIf="showConfirmAvatarButtons" class="perfil__btn-avatar-action btn-avatar-action--confirm" (click)="confirmAvatarChange()" title="Confirmar">
+                <span class="material-symbols-rounded icon--filled">check_circle</span>
+            </button>
+        </div>
+        
+    </div>
+</section>

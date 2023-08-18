@@ -14,7 +14,7 @@ export class UsuarioService {
 
   private usuario$ = new BehaviorSubject<Usuario>(new Usuario());
 
-  constructor(private authService: AuthService, private http: HttpClient, ) {
+  constructor(private authService: AuthService, private http: HttpClient) {
     this.init();
   }
 
@@ -42,8 +42,11 @@ export class UsuarioService {
     return this.authService.temPermissao(TipoUsuario.ADMIN);
   }
 
- 
+  public changeAvatar(avatarUrl: string): void {
 
- 
+    this.http.post<Usuario>(`${environment.API_URL}/usuarios/trocar-avatar`, avatarUrl)
+      .pipe(startWith(new Usuario()))
+      .subscribe(usuario => this.usuario$.next(usuario));
+  }
 }
 

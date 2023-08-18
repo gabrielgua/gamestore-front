@@ -1,0 +1,110 @@
+.perfil__avatar-actions {
+    max-width: 12rem;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--subtle-border-color);
+    padding-bottom: 2rem;
+    position: relative;
+
+}
+
+.perfil__avatar-wrapper {
+    --bg-color: rgba(var(--primary-number), .15);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    outline: 2px solid rgba(var(--primary-number), .3);
+    position: relative;
+}
+
+.img-backdrop-loading {
+    z-index: 99;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}
+
+.perfil__avatar {
+    width: 100%;
+    display: block;
+}
+
+.avatar__actions {
+    position: absolute;
+    width: 100%;
+    bottom: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.avatar__actions--opened {
+    justify-content: space-between;
+}
+
+.perfil__btn-gen-avatar {
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    border-radius: .5rem;
+    padding: .5rem;
+    background-color: rgba(var(--primary-number), .3);
+    transition: all 100ms ease;
+
+}
+
+.perfil__btn-gen-avatar > span {
+    color: rgba(var(--primary-number), 1);
+    transition: all 300ms ease;
+}
+ 
+.perfil__btn-gen-avatar:hover {
+    cursor: pointer;
+}
+
+.perfil__btn-gen-avatar:hover > span {
+    transform: rotateZ(360deg);
+}
+
+.perfil__btn-avatar-action {
+    border: none;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    padding: .5rem;
+    color: rgb(var(--color));
+    background-color: transparent;
+}
+
+.perfil__btn-avatar-action:hover {
+    cursor: pointer;
+    background-color: rgba(var(--color), .3);
+}
+
+.confirm-actions {
+    display: flex;
+    gap: .25rem;
+}
+
+.btn-avatar-action--gen {
+    background-color: black;
+    border-radius: 50%;    
+}
+
+.btn-avatar-action--cancel {
+    --color: var(--error);
+}
+
+.btn-avatar-action--confirm {
+    --color: var(--success);
+}
