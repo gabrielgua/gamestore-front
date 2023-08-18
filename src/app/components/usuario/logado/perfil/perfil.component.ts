@@ -13,6 +13,11 @@ import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 export class PerfilComponent implements OnInit {
   usuario$ = new Observable<Usuario>();
   
+  menus = [
+    {id: 'edit-user',     name: 'Conta',            icon: 'person', show: true},
+    {id: 'edit-password', name: 'Atualizar senha',  icon: 'key',    show: false},
+    {id: 'more-info',     name: 'Mais informações', icon: 'info',   show: false},
+  ];
 
   constructor(private usuarioService: UsuarioService) {}
 
@@ -20,6 +25,22 @@ export class PerfilComponent implements OnInit {
     this.usuario$ = this.usuarioService.getUsuario();
   }
 
-  
- 
+  showMenu(id: string): void {
+    if (!id.length) {
+      return;
+    }
+
+    this.menus.forEach(menu => {
+      if (menu.id === id) {
+        menu.show = true;
+        return;
+      }
+
+      menu.show = false;
+    });    
+  }
+
+  isMenuOpened(id: string): boolean {
+    return !!this.menus.find(menu => menu.id === id)?.show;
+  }
 }

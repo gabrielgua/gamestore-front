@@ -1,3 +1,4 @@
+
 .perfil__nome {
     display: flex;
     align-items: center;
@@ -12,7 +13,6 @@
 }
 
 .perfil__avatar-actions {
-    max-width: 12rem;
     width: 100%;
     display: grid;
     place-items: center;
@@ -20,7 +20,6 @@
     border-bottom: 1px solid var(--subtle-border-color);
     padding-bottom: 2rem;
     position: relative;
-
 }
 
 .perfil__avatar-wrapper {
@@ -46,7 +45,7 @@
 }
 
 .perfil__avatar {
-    width: 100%;
+    width: 10rem;
     display: block;
 }
 

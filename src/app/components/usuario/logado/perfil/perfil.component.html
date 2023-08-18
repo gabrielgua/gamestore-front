@@ -7,43 +7,82 @@
         <section class="perfil">
             <div class="perfil__menu">
                 <app-edit-avatar [usuario]="usuario"></app-edit-avatar>
+
                 <div class="perfil__menu-options">
-                    <button class="perfil__btn-menu-option">
-                        <span class="material-symbols-rounded icon--filled-bolder">person</span>
-                        <p>Conta</p>
-                    </button>
-                    <button class="perfil__btn-menu-option">
-                        <span class="material-symbols-rounded icon--filled-bolder">key</span>
-                        <p>Atualizar senha</p>
-                    </button>
-                    <button class="perfil__btn-menu-option">
-                        <span class="material-symbols-rounded icon--filled-bolder">info</span>
-                        <p>Mais informações</p>
+                    <button *ngFor="let menu of menus" 
+                        class="perfil__btn-menu-option" 
+                        (click)="showMenu(menu.id)"
+                        [ngClass]="{'btn-menu-option--selected': isMenuOpened(menu.id)}"
+                        >
+                        
+                        <span class="material-symbols-rounded icon--filled-bolder">{{menu.icon}}</span>
+                        <p>{{menu.name}}</p>
                     </button>
                 </div>
-
             </div>
 
-            <div class="perfil__form">
+            <div class="perfil__form" *ngIf="isMenuOpened('edit-user')" @fromRightToRight>
+                <div class="form__title">
+                    <span class="material-symbols-rounded icon--filled">person</span>
+                    <p>Conta</p>
+                </div>
+                <form class="form">
+                    <div class="inputs">
+                        
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="text" value="{{usuario.email}}">
+                        </div>
+                        <div class="input-group">
+                            <label for="username">Nome de usuário</label>
+                            <input type="text" value="{{usuario.username}}">
+                        </div>
+                        <div class="input-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" value="{{usuario.nome}}">
+                        </div>
+                    </div>
+                    <button class="btn-submit" type="submit">
+                        <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
+                        <p>Confirmar</p>
+                    </button>
+                </form>
+            </div>
+
+            <div class="perfil__form" *ngIf="isMenuOpened('edit-password')" @fromRightToRight>
+                <div class="form__title">
+                    <span class="material-symbols-rounded icon--filled">key</span>
+                    <p>Atualizar senha</p>
+                </div>
                 <form>
-                    <div class="input-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" value="{{usuario.nome}}">
-                    </div>
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="text" value="{{usuario.email}}">
-                    </div>
-                    <div class="input-group">
-                        <label for="username">Nome de usuário</label>
-                        <input type="text" value="{{usuario.username}}">
+                    <div class="inputs inputs--password">
+                        <div class="input-group">
+                            <label for="senhaAtual">Senha atual</label>
+                            <input id="senhaAtual" type="password">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="senhaNova">Senha nova</label>
+                            <input id="senhaNova" type="password">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="confirmarSenha">Confirmar senha nova</label>
+                            <input id="confirmarSenha" type="password">
+                        </div>
                     </div>
                     <button class="btn-submit" type="submit">Editar</button>
                 </form>
             </div>
-            <!-- <div class="perfil__info">
-                <p>Usuário desde {{usuario.dataCadastro | date: 'mediumDate'}} - {{usuario.dataCadastro | date: 'HH:mm'}}h.</p>
-            </div> -->
+
+            <div class="perfil__form" *ngIf="isMenuOpened('more-info')" @fromRightToRight>
+                <div class="form__title">
+                    <span class="material-symbols-rounded icon--filled">info</span>
+                    <p>Mais informações</p>
+                </div>
+                <p>Usuário desde {{usuario.dataCadastro | date: 'longDate'}}.</p>
+            </div>
+            
         </section>
     </div>
 </ng-container>
