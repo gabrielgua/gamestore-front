@@ -85,72 +85,7 @@
     border-radius: .5rem;
 }
 
-.form__title > p {
-    font-size: var(--font-subtitles);
-}
 
-.form__title > span {
-    color: var(--primary);
-}
-
-
-
-.inputs {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: 1rem;
-}
-
-.inputs--password {
-    grid-template-columns: auto;
-}
-
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    font-size: var(--font-normal);
-}
-
-.input-group > input {
-    padding: 1rem;
-    border: 1px solid var(--subtle-border-color);
-    background-color: transparent;
-    border-radius: .5rem;
-    font-family: inherit;
-    transition: outline 50ms ease;
-}
-
-.input-group > input:focus {
-    outline: 2px solid var(--primary);
-}
-
-.btn-submit {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    font-family: inherit;
-    padding: .5rem;
-    border: none;
-    border-radius: .5rem;
-    background-color: rgba(var(--success), .2);
-    color: rgb(var(--success));
-}
-
-.btn-submit > span {
-    font-size: var(--font-subtitles);
-}
-
-.btn-submit:hover {
-    cursor: pointer;
-    background-color: rgba(var(--success), .3);
-}
-
-.btn-submit:active {
-    background-color: rgba(var(--success), .2);
-}
 
 
 

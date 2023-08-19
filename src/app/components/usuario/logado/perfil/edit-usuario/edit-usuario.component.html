@@ -1,0 +1,67 @@
+<ng-container *ngIf="usuario">
+    <form class="form" [formGroup]="form">
+        <div class="inputs">
+
+            <div class="input-group">
+            
+                <label>E-mail</label>
+                <div class="input-wrapper" [ngClass]="{'input--no-outline': isInvalid(email!)}">
+                    <input type="text" formControlName="email" >
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': email?.valid }">
+                        {{ isInvalid(email!) ? 'close' : ''}}
+                        {{ email?.valid ? 'check' : ''}}
+                        <div style="margin-right: .25rem;" *ngIf="email?.pending && email?.dirty">
+                            <app-loader></app-loader>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="errors" *ngIf="isInvalid(email!)">
+                    <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
+                    <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
+                    <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
+                </div>
+            </div>
+            
+            
+            <div class="input-group">
+            
+                <label >Nome de usuário</label>
+                <div class="input-wrapper" [ngClass]="{'input--no-outline': isInvalid(username!)}">
+                    <input type="text" formControlName="username">
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
+                        {{ isInvalid(username!) ? 'close' : ''}}
+                        {{ username?.valid ? 'check' : ''}}
+                        <div style="margin-right: .25rem;" *ngIf="username?.pending && username?.dirty">
+                            <app-loader></app-loader>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="errors" *ngIf="isInvalid(username!)">
+                    <p class="error" *ngIf="isError('username', 'taken')">Nome de usuário indisponível.</p>
+                    <p class="error" *ngIf="isError('username', 'required')">Nome de usuário é requerido.</p>
+                </div>
+            </div>
+            
+            <div class="input-group">
+            
+                <label>Nome</label>
+                <div class="input-wrapper" >
+                    <input type="text" formControlName="nome">
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(nome!), 'success': nome?.valid && nome?.touched }">
+                        {{ isInvalid(nome!) ? 'close' : ''}}
+                        {{ nome?.valid && nome?.touched && nome?.dirty ? 'check' : ''}}
+                        <div style="margin-right: .25rem;" *ngIf="nome?.pending">
+                            <app-loader></app-loader>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-submit" type="submit">
+            <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
+            <p>Confirmar</p>
+        </button>
+    </form>
+</ng-container>

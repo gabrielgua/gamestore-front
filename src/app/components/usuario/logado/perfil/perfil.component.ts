@@ -19,11 +19,15 @@ export class PerfilComponent implements OnInit {
     {id: 'more-info',     name: 'Mais informações', icon: 'info',   show: false},
   ];
 
+ 
+
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.usuario$ = this.usuarioService.getUsuario();
   }
+
+  
 
   showMenu(id: string): void {
     if (!id.length) {

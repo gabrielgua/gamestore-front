@@ -26,27 +26,7 @@
                     <span class="material-symbols-rounded icon--filled">person</span>
                     <p>Conta</p>
                 </div>
-                <form class="form">
-                    <div class="inputs">
-                        
-                        <div class="input-group">
-                            <label for="email">Email</label>
-                            <input type="text" value="{{usuario.email}}">
-                        </div>
-                        <div class="input-group">
-                            <label for="username">Nome de usuário</label>
-                            <input type="text" value="{{usuario.username}}">
-                        </div>
-                        <div class="input-group">
-                            <label for="nome">Nome</label>
-                            <input type="text" value="{{usuario.nome}}">
-                        </div>
-                    </div>
-                    <button class="btn-submit" type="submit">
-                        <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
-                        <p>Confirmar</p>
-                    </button>
-                </form>
+                <app-edit-usuario [usuario]="usuario"/>
             </div>
 
             <div class="perfil__form" *ngIf="isMenuOpened('edit-password')" @fromRightToRight>
