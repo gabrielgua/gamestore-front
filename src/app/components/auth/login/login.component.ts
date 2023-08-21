@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioRequest } from 'src/app/models/usuarios/usuarioRequest';
+import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { AuthRequest } from 'src/app/models/auth/auth.request';
 

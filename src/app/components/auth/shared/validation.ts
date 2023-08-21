@@ -1,5 +1,5 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { Observable, delay, map, of, switchMap } from "rxjs";
+import { Observable, delay, distinctUntilChanged, filter, map, of, switchMap } from "rxjs";
 import { AuthService } from "src/app/service/auth/auth.service";
 
 export default class Validation {
@@ -22,6 +22,19 @@ export default class Validation {
         }
     }
 
+    static compareToValue(controlName: string, valueToCompare: string): ValidatorFn {
+        return (abstractControl: AbstractControl) => {
+            const control = abstractControl.get(controlName);
+
+            if (control?.value.toLowerCase() === valueToCompare) {
+                control.setErrors({ sameValue: true })
+                return { sameValue: true }
+            }
+
+            return null;
+        }
+    }
+
 
     //usernameTaken
     static usernameTaken(service: AuthService): AsyncValidatorFn {
@@ -30,6 +43,7 @@ export default class Validation {
 
             return of(username).pipe(
                 delay(500),
+                distinctUntilChanged(),
                 switchMap((username) => service.checkUsername(username).pipe(
                     map( result => result ? {taken: true} : null )
                 ))
@@ -43,6 +57,7 @@ export default class Validation {
 
             return of(email).pipe(
                 delay(500),
+                distinctUntilChanged(),
                 switchMap((email) => service.checkEmail(email).pipe(
                     map( result => result ? {taken: true} : null )
                 ))

@@ -3,9 +3,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, firstValueFrom, of, tap } from 'rxjs';
 import { AuthRequest } from 'src/app/models/auth/auth.request';
-import { UsuarioRequest } from 'src/app/models/usuarios/usuarioRequest';
+import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { environment } from 'src/environments/environment';
 import { CarrinhoService } from '../carrinho/carrinho.service';
+import { Router } from '@angular/router';
 
 
 
@@ -22,7 +23,8 @@ export class AuthService {
   constructor(
     private http: HttpClient, 
     private jwtHelper: JwtHelperService,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoService,
+    private router: Router
     
     ) { 
       if (this.isLoggedIn()) {
@@ -54,12 +56,12 @@ export class AuthService {
   }
 
   public checkUsername(username: string): Observable<boolean> {
-    const request = { username: username }    
+    const request = { username: username, usuarioId: this.usuarioId$.getValue() }    
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
   }
 
   public checkEmail(email: string): Observable<boolean> {
-    const request = { email: email }
+    const request = { email: email, usuarioId: this.usuarioId$.getValue() }
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-email`, request);
   }
 
@@ -82,7 +84,7 @@ export class AuthService {
     ))
   }
 
-  public register(usuario: UsuarioRequest): Promise<any> {
+  public register(usuario: UsuarioSenhaRequest): Promise<any> {
     return firstValueFrom(this.http.post<any>(`${environment.API_URL}/auth/register`, usuario).pipe(
       tap(response => {
         this.armazenarAccessToken(response['access_token']);
@@ -116,9 +118,11 @@ export class AuthService {
   }
 
   public logout(): void {
+    
     this.carrinhoService.clearCarrinho();
     this.resetJwtPayload();
     this.limparLocalStorage();
+    this.router.navigate(['sing-in']);
   }
 
   private limparLocalStorage(): void {

@@ -34,11 +34,10 @@
     border: 1px solid var(--subtle-border-color);
     background-color: transparent;
     border-radius: .5rem;
-    transition: outline 50ms ease;
 }
 
 .input-wrapper:focus-within {
-    outline: 2px solid var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .input-wrapper > input {
@@ -79,7 +78,20 @@
     background-color: rgba(var(--success), .2);
 }
 
+.btn-submit--disabled {
+    opacity: .3;
+}
 
-.input--no-outline {
-    outline: none !important;
+.btn-submit--disabled:hover {
+    cursor: default;
+    background-color: rgba(var(--success), .2);
+}
+
+
+.input--invalid {
+    border: 1px solid rgba(var(--error), .4);
+}
+
+.input--valid {
+    border: 1px solid rgba(var(--success), .3);
 }

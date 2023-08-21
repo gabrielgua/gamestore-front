@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import Validation from 'src/app/components/auth/shared/validation';
 import { Usuario } from 'src/app/models/usuarios/usuario';
+import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -12,10 +14,11 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 export class EditUsuarioComponent implements OnChanges {
   
   @Input() usuario = new Usuario()
+  @Output() submitted = new EventEmitter<UsuarioRequest>();
 
   form: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastr: ToastrService) {}
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,10 +40,12 @@ export class EditUsuarioComponent implements OnChanges {
   }
 
   private buildForm(): void {
-    if (!this.usuario) {   
-      console.log('not usuario');
-         
+    if (!this.usuario) {            
       return;
+    }
+
+    if (!this.usuario.nome) {
+      this.usuario.nome = '';
     }
     
     this.form = this.formBuilder.group({
@@ -56,11 +61,45 @@ export class EditUsuarioComponent implements OnChanges {
   }
 
 
+  isValid(control: AbstractControl, currentValue?: any) {
+    return control?.dirty && control?.valid && currentValue !== control.value;
+  }
 
   isError(controlName: string, error: string): boolean {
     return this.form.controls[controlName].getError(error);
   }
 
+  isNotSubmittable() {
+    return !this.hasChanged() || this.form.invalid || this.username?.pending || this.email?.pending;
+  }
+
+  private hasChanged(): boolean {
+    return this.username!.value != this.usuario.username 
+      || this.email!.value != this.usuario.email
+      || this.nome!.value != this.usuario.nome;
+  }
+
+  handleSubmit(): void {
+    if (this.isNotSubmittable()) {
+      return;
+    }
 
 
+    let request: UsuarioRequest = {
+      nome: this.nome?.value,
+      username: this.username?.value,
+      email: this.email?.value
+    }
+
+
+    this.submitted.emit(request);
+
+    if (this.usuario.username != this.username?.value) {
+      this.authService.logout();
+      this.toastr.success('Credenciais alteradas com sucesso. Faça o login novamente')
+
+    } else {
+      this.toastr.success('Detalhes alterados com sucesso.')
+    }
+  }
 }

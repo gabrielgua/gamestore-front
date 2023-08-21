@@ -26,7 +26,7 @@
                     <span class="material-symbols-rounded icon--filled">person</span>
                     <p>Conta</p>
                 </div>
-                <app-edit-usuario [usuario]="usuario"/>
+                <app-edit-usuario [usuario]="usuario" (submitted)="editUsuario($event)"/>
             </div>
 
             <div class="perfil__form" *ngIf="isMenuOpened('edit-password')" @fromRightToRight>

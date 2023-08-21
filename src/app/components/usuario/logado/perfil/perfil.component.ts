@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { Usuario } from 'src/app/models/usuarios/usuario';
+import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 
 @Component({
@@ -21,13 +23,11 @@ export class PerfilComponent implements OnInit {
 
  
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.usuario$ = this.usuarioService.getUsuario();
   }
-
-  
 
   showMenu(id: string): void {
     if (!id.length) {
@@ -46,5 +46,9 @@ export class PerfilComponent implements OnInit {
 
   isMenuOpened(id: string): boolean {
     return !!this.menus.find(menu => menu.id === id)?.show;
+  }
+
+  editUsuario(request: UsuarioRequest): void {
+    this.usuarioService.editSelf(request);
   }
 }

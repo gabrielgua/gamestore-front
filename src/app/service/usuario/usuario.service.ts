@@ -6,6 +6,8 @@ import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
 import { Usuario } from 'src/app/models/usuarios/usuario';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
+import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
+import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,11 @@ export class UsuarioService {
 
     this.http.post<Usuario>(`${environment.API_URL}/usuarios/trocar-avatar`, avatarUrl)
       .pipe(startWith(new Usuario()))
+      .subscribe(usuario => this.usuario$.next(usuario));
+  }
+
+  public editSelf(usuarioRequest: UsuarioRequest): void {
+    this.http.put<Usuario>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}`, usuarioRequest)
       .subscribe(usuario => this.usuario$.next(usuario));
   }
 }

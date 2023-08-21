@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioRequest } from 'src/app/models/usuarios/usuarioRequest';
+import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import Validation from '../shared/validation';
 
@@ -38,7 +38,7 @@ export class CadastroComponent implements OnInit {
       return;
     }
 
-    const usuario: UsuarioRequest = {
+    const usuario: UsuarioSenhaRequest = {
       email: this.email?.value,
       senha: this.senha?.value,
       username: this.username?.value

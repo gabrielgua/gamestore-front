@@ -5,11 +5,11 @@
             <div class="input-group">
             
                 <label>E-mail</label>
-                <div class="input-wrapper" [ngClass]="{'input--no-outline': isInvalid(email!)}">
+                <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(email!), 'input--valid': isValid(email!, usuario.email)}">
                     <input type="text" formControlName="email" >
-                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': email?.valid }">
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': isValid(email!, usuario.email) }">
                         {{ isInvalid(email!) ? 'close' : ''}}
-                        {{ email?.valid ? 'check' : ''}}
+                        {{ isValid(email!, usuario.email) ? 'check' : ''}}
                         <div style="margin-right: .25rem;" *ngIf="email?.pending && email?.dirty">
                             <app-loader></app-loader>
                         </div>
@@ -27,11 +27,11 @@
             <div class="input-group">
             
                 <label >Nome de usuário</label>
-                <div class="input-wrapper" [ngClass]="{'input--no-outline': isInvalid(username!)}">
+                <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(username!), 'input--valid': isValid(username!, usuario.username)}">
                     <input type="text" formControlName="username">
-                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': username?.valid }">
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': isValid(username!, usuario.username)}">
                         {{ isInvalid(username!) ? 'close' : ''}}
-                        {{ username?.valid ? 'check' : ''}}
+                        {{ isValid(username!, usuario.username) ? 'check' : ''}}
                         <div style="margin-right: .25rem;" *ngIf="username?.pending && username?.dirty">
                             <app-loader></app-loader>
                         </div>
@@ -47,19 +47,15 @@
             <div class="input-group">
             
                 <label>Nome</label>
-                <div class="input-wrapper" >
+                <div class="input-wrapper" [ngClass]="{'input--valid': isValid(nome!, usuario.nome) }">
                     <input type="text" formControlName="nome">
-                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(nome!), 'success': nome?.valid && nome?.touched }">
-                        {{ isInvalid(nome!) ? 'close' : ''}}
-                        {{ nome?.valid && nome?.touched && nome?.dirty ? 'check' : ''}}
-                        <div style="margin-right: .25rem;" *ngIf="nome?.pending">
-                            <app-loader></app-loader>
-                        </div>
+                    <span class="material-symbols-rounded success">
+                        {{ isValid(nome!, usuario.nome) ? 'check' : ''}}
                     </span>
                 </div>
             </div>
         </div>
-        <button class="btn-submit" type="submit">
+        <button (click)="handleSubmit()" class="btn-submit" type="submit" [disabled]="isNotSubmittable()" [ngClass]="{'btn-submit--disabled': isNotSubmittable()}">
             <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
             <p>Confirmar</p>
         </button>
