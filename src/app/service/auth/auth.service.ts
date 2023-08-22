@@ -7,6 +7,8 @@ import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.reque
 import { environment } from 'src/environments/environment';
 import { CarrinhoService } from '../carrinho/carrinho.service';
 import { Router } from '@angular/router';
+import { CheckUsernameRequest } from 'src/app/models/usuarios/check-username.request';
+import { CheckEmailRequest } from 'src/app/models/usuarios/check-email.request';
 
 
 
@@ -56,12 +58,26 @@ export class AuthService {
   }
 
   public checkUsername(username: string): Observable<boolean> {
-    const request = { username: username, usuarioId: this.usuarioId$.getValue() }    
+    const request: CheckUsernameRequest = {
+      username: username
+    }    
+
+    if (this.isLoggedIn()) {
+      request.usuarioId = this.usuarioId$.getValue();
+    }
+    
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-username`, request);
   }
 
   public checkEmail(email: string): Observable<boolean> {
-    const request = { email: email, usuarioId: this.usuarioId$.getValue() }
+    const request: CheckEmailRequest = {
+      email: email
+    }
+
+    if (this.isLoggedIn()) {
+      request.usuarioId = this.usuarioId$.getValue();
+    }
+    
     return this.http.post<boolean>(`${environment.API_URL}/usuarios/check-email`, request);
   }
 
