@@ -7,16 +7,18 @@
                 <label>E-mail</label>
                 <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(email!), 'input--valid': isValid(email!, usuario.email)}">
                     <input type="text" formControlName="email" >
-                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': isValid(email!, usuario.email) }">
+                    
+                    <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(email!), 'success': isValid(email!, usuario.email)}">
                         {{ isInvalid(email!) ? 'close' : ''}}
                         {{ isValid(email!, usuario.email) ? 'check' : ''}}
-                        <div style="margin-right: .25rem;" *ngIf="email?.pending && email?.dirty">
-                            <app-loader></app-loader>
-                        </div>
                     </span>
+
+                    <div style="margin-right: .25rem;" *ngIf="email?.pending && email?.dirty" @fadeIn>
+                        <app-loader></app-loader>
+                    </div>
                 </div>
                 
-                <div class="errors" *ngIf="isInvalid(email!)">
+                <div class="errors" *ngIf="isInvalid(email!)" @fromTopToTop>
                     <p class="error" *ngIf="isError('email', 'taken')">E-mail já cadastrado.</p>
                     <p class="error" *ngIf="isError('email', 'required')">E-mail é requerido.</p>
                     <p class="error" *ngIf="isError('email', 'email')">E-mail inválido.</p>
@@ -26,19 +28,24 @@
             
             <div class="input-group">
             
-                <label >Nome de usuário</label>
+                <label>Nome de usuário</label>
                 <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(username!), 'input--valid': isValid(username!, usuario.username)}">
                     <input type="text" formControlName="username">
                     <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(username!), 'success': isValid(username!, usuario.username)}">
                         {{ isInvalid(username!) ? 'close' : ''}}
                         {{ isValid(username!, usuario.username) ? 'check' : ''}}
-                        <div style="margin-right: .25rem;" *ngIf="username?.pending && username?.dirty">
-                            <app-loader></app-loader>
-                        </div>
                     </span>
+                    <div style="margin-right: .25rem;" *ngIf="username?.pending && username?.dirty" @fadeIn>
+                        <app-loader></app-loader>
+                    </div>
+                </div>
+
+                <div class="warning" *ngIf="username?.dirty && isValid(username!, usuario.username)" @fromTopToTop>
+                    <span class="material-symbols-rounded">info</span>
+                    <p>Atualizar o nome de usuário resultará em relogar na aplicação.</p>
                 </div>
                 
-                <div class="errors" *ngIf="isInvalid(username!)">
+                <div class="errors" *ngIf="isInvalid(username!)" @fromTopToTop>
                     <p class="error" *ngIf="isError('username', 'taken')">Nome de usuário indisponível.</p>
                     <p class="error" *ngIf="isError('username', 'required')">Nome de usuário é requerido.</p>
                 </div>
@@ -49,9 +56,7 @@
                 <label>Nome</label>
                 <div class="input-wrapper" [ngClass]="{'input--valid': isValid(nome!, usuario.nome) }">
                     <input type="text" formControlName="nome">
-                    <span class="material-symbols-rounded success">
-                        {{ isValid(nome!, usuario.nome) ? 'check' : ''}}
-                    </span>
+                    <span class="material-symbols-rounded success" *ngIf="isValid(nome!, usuario.nome)">check</span>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Animations } from 'src/app/animations/animations';
 import Validation from 'src/app/components/auth/shared/validation';
 import { Usuario } from 'src/app/models/usuarios/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
@@ -9,7 +10,8 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 @Component({
   selector: 'app-edit-usuario',
   templateUrl: './edit-usuario.component.html',
-  styleUrls: ['./edit-usuario.component.css']
+  styleUrls: ['./edit-usuario.component.css'],
+  animations: [Animations]
 })
 export class EditUsuarioComponent implements OnChanges {
   

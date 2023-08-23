@@ -95,3 +95,18 @@
 .input--valid {
     border: 1px solid rgba(var(--success), .3);
 }
+
+.warning {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-small);
+    gap: .5rem;
+    color: rgb(255, 255, 0);
+}
+
+.warning span {
+    /* padding: .5rem; */
+    /* border-radius: 50%; */
+    font-size: var(--font-subtitles);
+    /* background-color: rgba(255, 255, 0, .1); */
+}
