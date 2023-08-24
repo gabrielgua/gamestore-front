@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Animations } from 'src/app/animations/animations';
 import Validation from 'src/app/components/auth/shared/validation';
 import { Usuario } from 'src/app/models/usuarios/usuario';
@@ -20,7 +19,7 @@ export class EditUsuarioComponent implements OnChanges {
 
   form: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastr: ToastrService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -95,13 +94,8 @@ export class EditUsuarioComponent implements OnChanges {
 
 
     this.submitted.emit(request);
-
     if (this.usuario.username != this.username?.value) {
       this.authService.logout();
-      this.toastr.success('Credenciais alteradas com sucesso. Faça o login novamente')
-
-    } else {
-      this.toastr.success('Detalhes alterados com sucesso.')
     }
   }
 }

@@ -23,6 +23,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
   ];
 
   senhaSub = new Subscription();
+  usuarioSub = new Subscription();
 
  
 
@@ -57,7 +58,14 @@ export class PerfilComponent implements OnInit, OnDestroy {
   }
 
   editUsuario(request: UsuarioRequest): void {
-    this.usuarioService.editSelf(request);
+    this.usuarioSub = this.usuarioService.editSelf(request)
+      .subscribe({
+        next: (usuario) => {
+          this.usuarioService.setUsuario(usuario);
+          this.toastr.success('Informações alteradas com sucesso.')
+        },
+        error: (err) => this.toastr.error(err.error.detail)
+      });
   }
 
   editSenha(request: AlterarSenhaRequest): void {

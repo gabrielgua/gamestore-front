@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
       .then(() => this.route.navigate(['']))
       .catch(error => {
         this.error = !!error
+        this.senha?.reset();
         this.submitting = false;        
       })
   }

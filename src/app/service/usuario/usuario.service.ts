@@ -24,6 +24,10 @@ export class UsuarioService {
   public getUsuario(): Observable<Usuario> {    
     return this.usuario$.asObservable();
   }
+
+  public setUsuario(usuario: Usuario): void {
+    this.usuario$.next(usuario);
+  }
   
 
   public init(): void { 
@@ -51,9 +55,8 @@ export class UsuarioService {
       .subscribe(usuario => this.usuario$.next(usuario));
   }
 
-  public editSelf(usuarioRequest: UsuarioRequest): void {
-    this.http.put<Usuario>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}`, usuarioRequest)
-      .subscribe(usuario => this.usuario$.next(usuario));
+  public editSelf(usuarioRequest: UsuarioRequest): Observable<Usuario> {
+    return this.http.put<Usuario>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}`, usuarioRequest);
   }
 
   public editPassword(senhaRequest: AlterarSenhaRequest): Observable<void> {
