@@ -12,6 +12,7 @@
 p {
     color: var(--secondary-text-dark);
     display: inline-block;
+    font-size: var(--font-small);
 }
 
 .favorite {
@@ -35,7 +36,7 @@ a {
     border-radius: 50%;
 }
 
-@media (width <= 400px) {
+@media (width <= 250px) {
     .container {
         flex-direction: column;
     }
