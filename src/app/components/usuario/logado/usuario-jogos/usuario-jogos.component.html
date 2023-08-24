@@ -44,7 +44,7 @@
                             id="key" 
                             type="{{showKey ? 'text' : 'password'}}" 
                             [value]="compra.chaveAtivacao" 
-                            [ngClass]="{'input-key--hidden': !showKey}" >
+                            [ngClass]="{'input-key--hidden': !showKey}" disabled>
                         <button class="btn-key" title="Copiar chave" [cdkCopyToClipboard]="compra.chaveAtivacao">
                             <span class="material-symbols-rounded">content_copy</span>
                         </button>
