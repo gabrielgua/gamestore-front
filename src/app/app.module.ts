@@ -51,6 +51,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { PerfilComponent } from './components/usuario/logado/perfil/perfil.component';
 import { EditAvatarComponent } from './components/usuario/logado/perfil/edit-avatar/edit-avatar.component';
 import { EditUsuarioComponent } from './components/usuario/logado/perfil/edit-usuario/edit-usuario.component';
+import { EditSenhaComponent } from './components/usuario/logado/perfil/edit-senha/edit-senha.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -93,6 +94,7 @@ registerLocaleData(localePt);
     PerfilComponent,
     EditAvatarComponent,
     EditUsuarioComponent,
+    EditSenhaComponent,
   ],
   imports: [
     BrowserModule,

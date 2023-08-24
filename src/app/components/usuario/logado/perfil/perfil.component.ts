@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
+import { AlterarSenhaRequest } from 'src/app/models/usuarios/alterar-senha.request';
 import { Usuario } from 'src/app/models/usuarios/usuario';
 import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
@@ -12,7 +13,7 @@ import { UsuarioService } from 'src/app/service/usuario/usuario.service';
   styleUrls: ['./perfil.component.css'],
   animations: [Animations]
 })
-export class PerfilComponent implements OnInit {
+export class PerfilComponent implements OnInit, OnDestroy {
   usuario$ = new Observable<Usuario>();
   
   menus = [
@@ -21,12 +22,19 @@ export class PerfilComponent implements OnInit {
     {id: 'more-info',     name: 'Mais informações', icon: 'info',   show: false},
   ];
 
+  senhaSub = new Subscription();
+
  
 
   constructor(private usuarioService: UsuarioService, private toastr: ToastrService) {}
 
+  
   ngOnInit(): void {
     this.usuario$ = this.usuarioService.getUsuario();
+  }
+  
+  ngOnDestroy(): void {
+    this.senhaSub.unsubscribe();
   }
 
   showMenu(id: string): void {
@@ -50,5 +58,13 @@ export class PerfilComponent implements OnInit {
 
   editUsuario(request: UsuarioRequest): void {
     this.usuarioService.editSelf(request);
+  }
+
+  editSenha(request: AlterarSenhaRequest): void {
+    this.senhaSub = this.usuarioService.editPassword(request)
+      .subscribe({
+        next: () => this.toastr.success('Senha alterada com sucesso.'),
+        error: (err) => this.toastr.error(err.error.detail)
+      });
   }
 }

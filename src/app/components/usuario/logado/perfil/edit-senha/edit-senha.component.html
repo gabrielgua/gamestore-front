@@ -1,0 +1,63 @@
+<form class="form" [formGroup]="form">
+    <div class="inputs">
+
+        <div class="input-group">
+        
+            <label>Senha atual</label>
+            <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(senhaAtual!), 'input--valid': senhaAtual?.valid }">
+                <input type="password" formControlName="senhaAtual">
+                
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(senhaAtual!), 'success': senhaAtual?.valid}">
+                    {{ isInvalid(senhaAtual!) ? 'close' : ''}}
+                    {{ senhaAtual?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            
+            <div class="errors" *ngIf="isInvalid(senhaAtual!)" @fromTopToTop>
+                <p class="error" *ngIf="isError('senhaAtual', 'required')">Senha atual é requerida.</p>
+            </div>
+        </div>
+        
+        
+        <div class="input-group">
+        
+            <label>Nova senha</label>
+            <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(senhaNova!), 'input--valid': senhaNova?.valid }">
+                <input type="password" formControlName="senhaNova">
+                
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(senhaNova!), 'success': senhaNova?.valid}">
+                    {{ isInvalid(senhaNova!) ? 'close' : ''}}
+                    {{ senhaNova?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            
+            <div class="errors" *ngIf="isInvalid(senhaNova!)" @fromTopToTop>
+                <p class="error" *ngIf="isError('senhaNova', 'required')">Senha nova é requerida.</p>
+                <p class="error" *ngIf="isError('senhaNova', 'minlength')">Senha nova precisa ter no mínimo 5 caractéres.</p>
+                <p class="error" *ngIf="isError('senhaNova', 'matchingOld')">Senha nova não pode ser igual à atual.</p>
+            </div>
+        </div>
+        <div class="input-group">
+        
+            <label>Confirmar nova senha</label>
+            <div class="input-wrapper" [ngClass]="{'input--invalid': isInvalid(confirmaSenhaNova!), 'input--valid': confirmaSenhaNova?.valid }">
+                <input type="password" formControlName="confirmaSenhaNova">
+                
+                <span class="material-symbols-rounded" [ngClass]="{ 'error': isInvalid(confirmaSenhaNova!), 'success': confirmaSenhaNova?.valid}">
+                    {{ isInvalid(confirmaSenhaNova!) ? 'close' : ''}}
+                    {{ confirmaSenhaNova?.valid ? 'check' : ''}}
+                </span>
+            </div>
+            
+            <div class="errors" *ngIf="isInvalid(confirmaSenhaNova!)" @fromTopToTop>
+                <p class="error" *ngIf="isError('confirmaSenhaNova', 'required')">Confirmação da senha nova é requerida.</p>
+                <p class="error" *ngIf="isError('confirmaSenhaNova', 'matching')">Senhas não coincidem.</p>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="handleSubmit()" class="btn-submit" type="submit" [disabled]="isNotSubmittable()" [ngClass]="{'btn-submit--disabled': isNotSubmittable()}">
+        <span class="material-symbols-rounded icon--filled-bolder">check_circle</span>
+        <p>Atualizar senha</p>
+    </button>
+</form>

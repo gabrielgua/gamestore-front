@@ -34,25 +34,7 @@
                     <span class="material-symbols-rounded icon--filled">key</span>
                     <p>Atualizar senha</p>
                 </div>
-                <form>
-                    <div class="inputs inputs--password">
-                        <div class="input-group">
-                            <label for="senhaAtual">Senha atual</label>
-                            <input id="senhaAtual" type="password">
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="senhaNova">Senha nova</label>
-                            <input id="senhaNova" type="password">
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="confirmarSenha">Confirmar senha nova</label>
-                            <input id="confirmarSenha" type="password">
-                        </div>
-                    </div>
-                    <button class="btn-submit" type="submit">Editar</button>
-                </form>
+                <app-edit-senha (submitted)="editSenha($event)"></app-edit-senha>
             </div>
 
             <div class="perfil__form" *ngIf="isMenuOpened('more-info')" @fromRightToRight>

@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
+import { AlterarSenhaRequest } from 'src/app/models/usuarios/alterar-senha.request';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,6 @@ export class UsuarioService {
   }
 
   public changeAvatar(avatarUrl: string): void {
-
     this.http.post<Usuario>(`${environment.API_URL}/usuarios/trocar-avatar`, avatarUrl)
       .pipe(startWith(new Usuario()))
       .subscribe(usuario => this.usuario$.next(usuario));
@@ -54,6 +54,10 @@ export class UsuarioService {
   public editSelf(usuarioRequest: UsuarioRequest): void {
     this.http.put<Usuario>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}`, usuarioRequest)
       .subscribe(usuario => this.usuario$.next(usuario));
+  }
+
+  public editPassword(senhaRequest: AlterarSenhaRequest): Observable<void> {
+    return this.http.put<void>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}/senha`, senhaRequest);
   }
 }
 

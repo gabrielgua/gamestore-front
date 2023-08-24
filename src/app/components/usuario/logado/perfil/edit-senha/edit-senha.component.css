@@ -24,8 +24,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
     border: 1px solid var(--subtle-border-color);
+    padding-inline-end: 1rem;
     background-color: transparent;
     border-radius: .5rem;
 }
@@ -40,6 +40,7 @@
     outline: none;
     border: none;
     width: 100%;
+    padding: 1rem;
 }
 
 .errors {
@@ -88,16 +89,4 @@
 
 .input--valid {
     border: 1px solid rgba(var(--success), .3);
-}
-
-.warning {
-    display: flex;
-    align-items: center;
-    font-size: var(--font-small);
-    gap: .5rem;
-    color: rgb(255, 255, 0);
-}
-
-.warning span {
-    font-size: var(--font-subtitles);
 }
