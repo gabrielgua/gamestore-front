@@ -12,10 +12,12 @@
     align-items: center;
     gap: 1rem;
 
-    > span {
-        font-size: 1.5rem;
-        color: var(--primary);
-    }
+    
+}
+
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
 }
 
 .jogos {
@@ -264,9 +266,16 @@
     }
 
     .jogo-info {
-        padding-bottom: 5rem;
+        padding-bottom: 0;
+    } 
 
+    .jogo-info__detalhes {
+        padding-bottom: 1rem;
     }
+
+
+    
+
 }
 
 

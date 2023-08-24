@@ -24,7 +24,7 @@
 </ng-template>
 <ng-container *ngIf="compra$ | async as compra">
     <div class="backdrop" *ngIf="compra.id != null" (click)="closeInfo()" @fadeIn></div>
-    <section class="jogo-info-wrapper">
+    <section  class="jogo-info-wrapper">
         <div class="jogo-info" *ngIf="compra.id != null" @fromBottomToBottom>
 
             <div class="jogo-info-nome-close-wrapper">
@@ -33,7 +33,7 @@
                     <span class="material-symbols-rounded ">cancel</span>
                 </button>
             </div>
-            <div class="jogo-info__detalhes">
+            <div #container class="jogo-info__detalhes">
                 <div class="key">
                     <label class="label" for="key">
                         <span class="material-symbols-rounded icon--filled">key</span>    
@@ -70,6 +70,7 @@
                     </div>
                 </section>
             </div>
+            <app-footer class="footer" *ngIf="isMobile(container.offsetWidth)"></app-footer>
         </div>
     </section>
 </ng-container>

@@ -37,4 +37,8 @@ export class UsuarioJogosComponent implements OnInit {
   closeInfo(): void {
     this.compra$.next({} as Compra);
   }
+
+  isMobile(width: number): boolean {    
+    return width < 569;
+  }
 }
