@@ -12,22 +12,28 @@
     align-items: center;
     gap: 1rem;
 
-    > span {
-        font-size: 1.5rem;
-        color: var(--primary);
-    }
+   
+}
+
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
 }
 
 .perfil {
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    gap: 5rem;
+    grid-template-columns: 1.2fr 4fr;
+    gap: 2rem;
 }
 
 .perfil__menu {
     display: flex;
+    height: max-content;
     flex-direction: column;
     gap: 1rem;
+    border: 1px solid var(--subtle-border-color);
+    padding: 1rem;
+    border-radius: .5rem
 }
 
 .perfil__menu-options {
@@ -91,6 +97,12 @@
 
 .form__title > span {
     color: var(--primary);
+}
+
+@media (width <= 900px) {
+    .perfil {
+        grid-template-columns: 1fr;
+    }
 }
 
 
