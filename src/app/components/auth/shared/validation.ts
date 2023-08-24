@@ -22,18 +22,25 @@ export default class Validation {
         }
     }
 
-    static compareToValue(controlName: string, valueToCompare: string): ValidatorFn {
-        return (abstractControl: AbstractControl) => {
-            const control = abstractControl.get(controlName);
+    static differs(controlName: string, checkControleName: string): ValidatorFn {
+        return (controls: AbstractControl) => {
+            const control = controls.get(controlName);
+            const checkControl = controls.get(checkControleName);
 
-            if (control?.value.toLowerCase() === valueToCompare) {
-                control.setErrors({ sameValue: true })
-                return { sameValue: true }
+            if (checkControl?.errors && !checkControl?.errors['differs']) {
+                return null;
             }
+
+            if (control?.value === checkControl?.value) {
+                controls.get(checkControleName)?.setErrors({ differs: true });
+                return { differs: true }
+            } 
 
             return null;
         }
     }
+
+    
 
 
     //usernameTaken

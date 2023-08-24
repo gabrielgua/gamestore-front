@@ -44,7 +44,7 @@ export class EditSenhaComponent implements OnInit {
       senhaAtual: [null, [Validators.required]],
       senhaNova: [null, [Validators.required, Validators.minLength(5)]],
       confirmaSenhaNova: [null, [Validators.required]]
-    }, { validators: [Validation.match('senhaNova', 'confirmaSenhaNova')]})
+    }, { validators: [Validation.match('senhaNova', 'confirmaSenhaNova'), Validation.differs('senhaAtual', 'senhaNova')]})
   }
 
 

@@ -34,7 +34,7 @@
             <div class="errors" *ngIf="isInvalid(senhaNova!)" @fromTopToTop>
                 <p class="error" *ngIf="isError('senhaNova', 'required')">Senha nova é requerida.</p>
                 <p class="error" *ngIf="isError('senhaNova', 'minlength')">Senha nova precisa ter no mínimo 5 caractéres.</p>
-                <p class="error" *ngIf="isError('senhaNova', 'matchingOld')">Senha nova não pode ser igual à atual.</p>
+            <p class="error" *ngIf="isError('senhaNova', 'differs')">Senha nova não pode ser igual à atual.</p>
             </div>
         </div>
         <div class="input-group">
