@@ -7,6 +7,7 @@ import { Requisito } from '../../models/requisitos/requisito';
 import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { DesejosService } from 'src/app/service/usuario-logado/desejos/desejos.service';
 
 @Component({
   selector: 'app-jogo',
@@ -23,7 +24,8 @@ export class JogoComponent implements OnInit, AfterViewInit {
     private carrinhoService: CarrinhoService,
     private jogosUsuarioService: ComprasUsuarioService,
     private service: JogoBuscarService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private desejosService: DesejosService
   ) {}
   
   @ViewChild('container') container!: ElementRef;
@@ -105,6 +107,17 @@ export class JogoComponent implements OnInit, AfterViewInit {
         this.carrinhoService.addJogo(jogoResumo);
       });
   }
+
+  favorite(jogoId: number): void {
+    this.router.navigate(['conta/desejos'])
+      .then(() => {
+        this.desejosService.adicionar(jogoId);
+      });
+  }
+
+  isFavorited(jogoId: number): boolean {
+    return this.desejosService.isPresent(jogoId);
+  } 
 
   jaPossuiJogo(jogoId: number): boolean {
     return this.jogosUsuarioService.isPresent(jogoId);

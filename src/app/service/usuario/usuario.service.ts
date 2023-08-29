@@ -9,6 +9,8 @@ import { AuthService } from '../auth/auth.service';
 import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { UsuarioRequest } from 'src/app/models/usuarios/usuario.request';
 import { AlterarSenhaRequest } from 'src/app/models/usuarios/alterar-senha.request';
+import { DesejosService } from '../usuario-logado/desejos/desejos.service';
+import { ComprasUsuarioService } from '../jogos/jogos-usuario-logado.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class UsuarioService {
 
   private usuario$ = new BehaviorSubject<Usuario>(new Usuario());
 
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(private authService: AuthService, private http: HttpClient, private desejosService: DesejosService, private compraService: ComprasUsuarioService) {
     this.init();
   }
 
@@ -42,8 +44,22 @@ export class UsuarioService {
 
     this.http.get<Usuario>(`${environment.API_URL}/usuarios/meus-dados`)
       .pipe(startWith(new Usuario()))
-      .subscribe(usuario => this.usuario$.next(usuario));
+      .subscribe(usuario => {
+        this.usuario$.next(usuario);
+
+        this.fetchDesejos();
+        this.fetchCompras();
+      });
+
       
+  }
+
+  private fetchDesejos(): void {
+    this.desejosService.fetchDesejos();
+  }
+
+  private fetchCompras(): void {
+    this.compraService.fetchCompras();
   }
 
   public isAdmin() {

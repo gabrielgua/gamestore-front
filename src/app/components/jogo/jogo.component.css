@@ -168,6 +168,10 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.possui-jogo {
+    grid-template-columns: 1fr !important;
+}
+
 .btn {
     width: 100%;
     border: none;

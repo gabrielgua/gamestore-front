@@ -43,16 +43,16 @@
                         <span *ngIf="jogo.preco === 0">Gratuito</span>
                         <span *ngIf="jogo.preco != 0">{{jogo.preco | currency: 'BRL'}}</span>
                     </p>
-                    <div class="actions-btns">
-                        <button class="btn btn-desejo">
-                            <span class="material-symbols-rounded">favorite</span>
+                    <div class="actions-btns" [ngClass]="{'possui-jogo': jaPossuiJogo(jogo.id)}" (click)="favorite(jogo.id)">
+                        <button class="btn btn-desejo" *ngIf="!jaPossuiJogo(jogo.id)">
+                            <span class="material-symbols-rounded" [ngClass]="{'icon--filled': isFavorited(jogo.id)}">favorite</span>
                             DESEJO
                         </button>
                         <button class="btn btn-carrinho" (click)="addToCart(jogo)" *ngIf="!jaPossuiJogo(jogo.id)">
                             <span class="material-symbols-rounded">shopping_cart</span>
                             <p>{{noCarrinho(jogo.id) ? 'NO CARRINHO': 'COMPRAR'}}</p>
                         </button>
-                        <button class="btn btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)">
+                        <button class="btn btn-carrinho" *ngIf="jaPossuiJogo(jogo.id)" routerLink="/conta/biblioteca">
                             <span class="material-symbols-rounded">bookmark</span>
                             NA BIBLIOTECA
                         </button>

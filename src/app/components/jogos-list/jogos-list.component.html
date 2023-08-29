@@ -59,7 +59,7 @@
                 <a routerLink="/jogos/{{jogo.uriNome}}">
                     <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
                 </a>
-                <button class="btn-desejo" (click)="favorite(jogo.id)">
+                <button class="btn-desejo" (click)="favorite(jogo.id)" *ngIf="!jaPossuiJogo(jogo.id)">
                     <span class="material-symbols-rounded" [ngClass]="{'icon--filled': isFavorited(jogo.id)}">favorite</span>
                 </button>
             </div>    
