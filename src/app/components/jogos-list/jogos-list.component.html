@@ -59,8 +59,8 @@
                 <a routerLink="/jogos/{{jogo.uriNome}}">
                     <img class="jogo__img" src="{{jogo.urlImagem}}" alt="{{jogo.nome}} - cover img">
                 </a>
-                <button class="btn-desejo" (click)="favorite(jogo.uriNome)">
-                    <span class="material-symbols-rounded">favorite</span>
+                <button class="btn-desejo" (click)="favorite(jogo.id)">
+                    <span class="material-symbols-rounded" [ngClass]="{'icon--filled': isFavorited(jogo.id)}">favorite</span>
                 </button>
             </div>    
             <div class="jogo__detalhes">

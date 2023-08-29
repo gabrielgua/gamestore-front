@@ -18,6 +18,7 @@ import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { Observable, Subscription, map, startWith } from 'rxjs';
 import { PageInfo } from 'src/app/models/pageables/page.info';
 import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
+import { DesejosService } from 'src/app/service/usuario-logado/desejos/desejos.service';
 
 export interface FilterItem {
   tipo: FilterTipo,
@@ -66,6 +67,7 @@ export class JogosListComponent implements OnInit, OnDestroy {
     private modoService: ModosListService,
     private router: Router,
     private carrinhoService: CarrinhoService,
+    private desejosService: DesejosService,
   ) {}
   
   
@@ -430,8 +432,11 @@ export class JogosListComponent implements OnInit, OnDestroy {
     })
   }
 
-  favorite(nome: string) {
-    console.log(nome);
+  favorite(jogoId: number) {
+    this.router.navigate(['conta/desejos'])
+      .then(() => {
+        this.desejosService.adicionar(jogoId);
+      });
   }
 
   addToCart(jogoResumo: JogoResumo): void {    
@@ -444,6 +449,12 @@ export class JogosListComponent implements OnInit, OnDestroy {
         this.carrinhoService.addJogo(jogoResumo);
       });
   }
+
+  isFavorited(jogoId: number): boolean {
+    return this.desejosService.isPresent(jogoId);
+  }
+
+  
 
   jaPossuiJogo(jogoId: number): boolean {
     return this.jogosUsuarioService.isPresent(jogoId);

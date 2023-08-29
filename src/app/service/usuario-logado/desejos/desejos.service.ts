@@ -41,4 +41,10 @@ export class DesejosService {
   private getUsuarioId(): void {
     this.authService.getUsuarioId().subscribe(usuarioId => this.usuarioId = usuarioId);
   }
+
+  public isPresent(jogoId: number): boolean {
+    return this.desejos$.getValue()
+      .map(jogo => jogo.id)
+      .includes(jogoId);
+  }
 }
