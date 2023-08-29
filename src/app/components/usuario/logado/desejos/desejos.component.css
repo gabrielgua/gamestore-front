@@ -1,0 +1,107 @@
+.container {
+    margin: 2rem auto;
+    width: min(100% - 3rem, var(--container-max-size));
+    display: grid;
+    gap: 1rem;
+}
+
+.title {
+    font-size: var(--font-titles);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.jogos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.jogo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--subtle-border-color);
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: black;
+}
+
+.btn-unfavorite {
+    background-color: transparent;
+    border: none;
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    transition: all 75ms ease;
+}
+
+.btn-unfavorite:hover {
+    cursor: pointer;
+    color: rgb(var(--error));
+}
+
+.btn-unfavorite:hover > span {
+    font-variation-settings: 'FILL' 0;
+}
+
+.jogo__img-wrapper {
+    max-width: 12rem;
+}
+
+.jogo__img {
+    border-radius: .25rem;
+    display: block;
+    max-width: 100%;
+}
+
+.jogo__nome {
+    font-size: var(--font-subtitles);
+}
+
+.jogo__comprar {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.jogo__preco {
+    color: var(--primary);
+}
+
+.btn-comprar {
+    gap: .25rem;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: rgba(var(--primary-number), .3);
+    border: none;
+    border-radius: .25rem;
+    transition: all 75ms ease;
+}
+
+.btn-comprar > span {
+    color: var(--primary);
+}
+
+.btn-comprar:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-number), .4);
+}
+
+.btn-comprar:hover > span {
+    font-variation-settings: 'FILL' 1;
+}
+
+

@@ -13,6 +13,7 @@ import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
 import { PedidoCreateComponent } from './components/usuario/logado/pedido-create/pedido-create.component';
 import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 import { PerfilComponent } from './components/usuario/logado/perfil/perfil.component';
+import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
 
 const routes: Routes = [
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'conta/pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
   {path: 'conta/biblioteca', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
   {path: 'conta/perfil', component: PerfilComponent, canActivate: [AuthGuard]},
+  {path: 'conta/desejos', component: DesejosComponent, canActivate: [AuthGuard]},
   {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
 
 

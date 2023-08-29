@@ -1,0 +1,38 @@
+<section class="container">
+    
+    <div class="title">
+        <span class="material-symbols-rounded icon--filled">favorite</span>
+        <p>Lista de desejos</p>
+    </div>
+    
+    <ng-template #empty>
+        <p>Você não possui jogos na lista de desejos.</p>
+    </ng-template>
+
+    <ng-container *ngIf="desejos$ | async as desejos; else loading">
+        <div class="jogos-wrapper" *ngIf="desejos.length; else empty">
+            <div class="jogo" *ngFor="let jogo of desejos">
+                <div class="jogo__unfavorite">
+                    <button class="btn-unfavorite" title="Remover" (click)="handleRemover(jogo.id)">
+                        <span class="material-symbols-rounded icon--filled">favorite</span>
+                    </button>
+                </div>
+                <div class="jogo__img-wrapper">
+                    <img class="jogo__img" src="{{jogo.urlImagem}}" alt="img- {{jogo.nome}}">
+                </div>
+                <p class="jogo__nome">{{jogo.nome}}</p>
+                <div class="jogo__comprar">
+                    <button class="btn-comprar" (click)="handleComprar(jogo)">
+                        <span class="material-symbols-rounded">shopping_cart</span>
+                        <p>{{jogo.preco === 0 ? 'Gratuito' : jogo.preco | currency: 'BRL'}}</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
+</section>
+<ng-template #loading>
+    <app-loader />
+</ng-template>
+

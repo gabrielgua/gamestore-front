@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, startWith } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
 import { Usuario } from 'src/app/models/usuarios/usuario';
@@ -24,6 +24,7 @@ export class UsuarioService {
   public getUsuario(): Observable<Usuario> {    
     return this.usuario$.asObservable();
   }
+
 
   public setUsuario(usuario: Usuario): void {
     this.usuario$.next(usuario);

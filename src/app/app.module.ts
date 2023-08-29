@@ -52,6 +52,7 @@ import { PerfilComponent } from './components/usuario/logado/perfil/perfil.compo
 import { EditAvatarComponent } from './components/usuario/logado/perfil/edit-avatar/edit-avatar.component';
 import { EditUsuarioComponent } from './components/usuario/logado/perfil/edit-usuario/edit-usuario.component';
 import { EditSenhaComponent } from './components/usuario/logado/perfil/edit-senha/edit-senha.component';
+import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -95,6 +96,7 @@ registerLocaleData(localePt);
     EditAvatarComponent,
     EditUsuarioComponent,
     EditSenhaComponent,
+    DesejosComponent,
   ],
   imports: [
     BrowserModule,
