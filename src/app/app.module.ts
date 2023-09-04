@@ -54,6 +54,7 @@ import { EditUsuarioComponent } from './components/usuario/logado/perfil/edit-us
 import { EditSenhaComponent } from './components/usuario/logado/perfil/edit-senha/edit-senha.component';
 import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
 import { AdminUsuariosListComponent } from './components/admin/usuarios/admin-usuarios-list/admin-usuarios-list.component';
+import { AdminHeaderComponent } from './components/header/admin-header/admin-header.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -99,6 +100,7 @@ registerLocaleData(localePt);
     EditSenhaComponent,
     DesejosComponent,
     AdminUsuariosListComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     BrowserModule,

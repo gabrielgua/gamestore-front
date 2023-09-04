@@ -11,14 +11,16 @@
 		<app-logo />
 		<nav *ngIf="!mobile">
 			<ul class="links">
-				<li><a routerLink="jogos">Jogos</a></li>
-				<li><a routerLink="">Desenvolvedoras</a></li>
+				<li>
+					<a routerLink="jogos">Todos os jogos</a>
+				</li>
 			</ul>
 			
 			<ul class="account-actions">
-				<app-search />
 				<app-carrinho-button />
+				<app-search />
 				<app-usuario-avatar />
+				<app-admin-header />
 			</ul>
 
 		</nav>

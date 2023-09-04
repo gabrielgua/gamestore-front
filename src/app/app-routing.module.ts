@@ -29,22 +29,21 @@ const routes: Routes = [
   {path: 'sing-up', component: CadastroComponent, canActivate: [LoggedInGuard]},
   {path: 'sing-in', component: LoginComponent, canActivate: [LoggedInGuard]},
 
-  //has to be logged in
+  // logged in
   {path: 'conta/pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
   {path: 'conta/biblioteca', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
   {path: 'conta/perfil', component: PerfilComponent, canActivate: [AuthGuard]},
   {path: 'conta/desejos', component: DesejosComponent, canActivate: [AuthGuard]},
   {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
 
-  //has to be admin
+  // admin
   {path: 'admin/usuarios', component: AdminUsuariosListComponent, canActivate: [AuthGuard, AdminGuard]},
-
 
   // errors
   {path: 'error/not-found', component: NotFoundComponent},
   {path: 'error/access-denied', component: AccessDeniedComponent},
 
-  //utils
+  // utils
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 

@@ -1,0 +1,18 @@
+<section class="container" *ngIf="isAdmin()">
+
+    <button id="btn-admin" class="btn-admin-dropdown" (click)="showMenu = !showMenu">
+        <span id="btn-admin" class="material-symbols-rounded">menu</span>
+    </button>
+
+    <div id="btn-admin" class="admin-dropdown-menu" *ngIf="showMenu" @fromTopToTop>
+        <p class="title">Admin Menu</p>
+
+        <div class="links-wrapper">
+            <a routerLink="admin/usuarios">Usuários</a>
+            <a routerLink="admin/jogos">Jogos</a>
+
+            <a routerLink="admin/plataformas">Plataformas</a>
+            <a routerLink="admin/categorias">Categorias</a>
+        </div>
+    </div>
+</section>
