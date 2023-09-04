@@ -5,12 +5,13 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AdminGuard  {
+  constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(): boolean {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/sing-in']);
+    
+    if (this.authService.isLoggedIn() && !this.authService.temPermissao('ADMIN')) {
+      this.router.navigate(['error/access-denied']);
       return false;
     }
 

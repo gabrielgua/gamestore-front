@@ -14,6 +14,8 @@ import { PedidoCreateComponent } from './components/usuario/logado/pedido-create
 import { UsuarioJogosComponent } from './components/usuario/logado/usuario-jogos/usuario-jogos.component';
 import { PerfilComponent } from './components/usuario/logado/perfil/perfil.component';
 import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
+import { AdminUsuariosListComponent } from './components/admin/usuarios/admin-usuarios-list/admin-usuarios-list.component';
+import { AdminGuard } from './guards/admin/admin.guard';
 
 const routes: Routes = [
 
@@ -27,12 +29,15 @@ const routes: Routes = [
   {path: 'sing-up', component: CadastroComponent, canActivate: [LoggedInGuard]},
   {path: 'sing-in', component: LoginComponent, canActivate: [LoggedInGuard]},
 
-  //private
+  //has to be logged in
   {path: 'conta/pedidos', component: PedidosListComponent, canActivate: [AuthGuard]},
   {path: 'conta/biblioteca', component: UsuarioJogosComponent, canActivate: [AuthGuard]},
   {path: 'conta/perfil', component: PerfilComponent, canActivate: [AuthGuard]},
   {path: 'conta/desejos', component: DesejosComponent, canActivate: [AuthGuard]},
   {path: 'carrinho', component: PedidoCreateComponent, canActivate: [AuthGuard]},
+
+  //has to be admin
+  {path: 'admin/usuarios', component: AdminUsuariosListComponent, canActivate: [AuthGuard, AdminGuard]},
 
 
   // errors
