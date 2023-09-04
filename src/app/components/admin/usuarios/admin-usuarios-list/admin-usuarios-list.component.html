@@ -1,1 +1,11 @@
-<p>admin-usuarios-list works!</p>
+<div class="container">
+    <div class="title">
+        <span class="material-symbols-rounded icon--filled">groups</span>
+        <p>Todos os usuários</p>
+
+
+        <ng-container *ngIf="usuarios$ | async as usuarios">
+            
+        </ng-container>
+    </div>
+</div>

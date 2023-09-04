@@ -1,0 +1,19 @@
+.container {
+    margin: 2rem auto;
+    width: min(100% - 3rem, var(--container-max-size));
+    display: grid;
+    gap: 1rem;
+}
+
+.title {
+    font-size: var(--font-titles);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title > span {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
