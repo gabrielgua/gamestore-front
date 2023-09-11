@@ -17,3 +17,55 @@
     font-size: 1.5rem;
     color: var(--primary);
 }
+
+.usuario {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--subtle-border-color);
+    border-radius: .25rem;
+}
+
+
+
+th {
+    text-align: start;
+    font-weight: normal;
+    font-size: var(--font-smaller);
+    padding: .25rem 0;
+}
+
+.table__titles {
+    width: max-content;
+    border-bottom: 1px solid var(--primary);
+}
+
+tr {
+}
+
+td {
+    padding: .25rem 1rem;
+    border: 1px solid var(--subtle-border-color);
+    border-radius: .25rem;
+}
+
+.usuario__id-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.usuario__avatar {
+    width: 3rem;
+}
+
+.usuario__avatar > img {
+    width: 100%;
+    display: block;
+}
+
+.info {
+    font-size: var(--font-smaller);
+    color: var(--secondary-text-dark);
+}
+

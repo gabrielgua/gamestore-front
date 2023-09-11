@@ -4,8 +4,50 @@
         <p>Todos os usuários</p>
 
 
-        <ng-container *ngIf="usuarios$ | async as usuarios">
-            
-        </ng-container>
+        
     </div>
+    <ng-container *ngIf="usuarios$ | async as usuarios">
+        <table>
+            <tr>
+                <th><p class="table__titles">Usuário</p></th>
+                <th><p class="table__titles">Nome</p></th>
+                <th><p class="table__titles">Username</p></th>
+                <th><p class="table__titles">E-mail</p></th>
+                <th><p class="table__titles">Cadastro</p></th>
+                <th><p class="table__titles">Admin</p></th>
+                <th><p class="table__titles">Ações</p></th>                
+            </tr>
+            <tr *ngFor="let usuario of usuarios" >
+                <td>
+                    <div class="usuario__id-avatar">
+                        <p style="color: var(--primary);">{{usuario.id}}</p>
+                        <div class="usuario__avatar">
+                            <img src="{{usuario.avatarUrl}}" alt="avatar">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p class="info">{{usuario.nome}}</p>
+                </td>
+                <td>
+                    <p class="info">{{usuario.username}}</p>
+                </td>
+                <td>
+                    <p class="info">{{usuario.email}}</p>
+                </td>
+                <td>
+                    <p class="info">{{usuario.dataCadastro | date: 'dd/MM/yyyy'}}</p>
+                </td>
+                <td>
+                    <p class="info">{{usuario.tipo}}</p>
+                </td>
+                <td>
+                    <div class="usuario__actions">
+                        <button class="btn-usuarios btn-editar">Editar</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+    </ng-container>
 </div>
