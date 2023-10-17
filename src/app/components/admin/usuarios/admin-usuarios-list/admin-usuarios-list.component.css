@@ -22,10 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .5rem;
+    gap: 1rem;
 }
 
 .btn-adicionar {
+    min-width: max-content;
     font-family: inherit;
     font-size: var(--font-smaller);
     display: flex;
@@ -35,8 +36,7 @@
     padding-inline-end: 1rem;
     border-radius: .25rem;
     background-color: transparent;
-    border: 1px solid  rgba(var(--primary-number), .1);
-
+    border: none;
 }
 
 .btn-adicionar > span {
@@ -121,7 +121,7 @@ td {
 .usuario__id-avatar {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     gap: 1rem;
 }
 
@@ -139,6 +139,27 @@ td {
     color: whitesmoke;
 }
 
+.usuario__tipo {
+    padding: 0 .25rem;
+    border-top: 1px solid rgba(var(--color), .15);
+    background-color: rgba(var(--color), .2);
+    width: max-content;
+    border-radius: .25rem;
+}
+
+.usuario__tipo > p {
+    color: rgb(var(--color));
+
+}
+
+.usuario__tipo--admin {
+    --color: var(--success);
+}
+
+.usuario__tipo--user {
+    --color: var(--primary-number);
+}
+
 .usuario-actions {
     position: relative;
     display: grid;
@@ -149,7 +170,6 @@ td {
     display: grid;
     align-items: center;
     width: 2.5rem;
-    /* height: 3rem; */
     aspect-ratio: 1;
     border: none;
     border-radius: 50%;
@@ -181,7 +201,7 @@ td {
     background-color: black;
     border-radius: .25rem;
     box-shadow: var(--box-shadow-primary);    
-
+    overflow: hidden;
 }
 
 .btn-action {
@@ -222,7 +242,7 @@ td {
 }
 
 .btn-action--delete:hover {
-    background-color: rgba(var(--error), .1);
+    background-color: rgba(var(--error), .15);
 }
 
 .usuario-actions--responsive {
@@ -286,6 +306,10 @@ td {
         content: 'tipo:';
     }
 
+    .usuario__id-avatar {
+        justify-content: flex-start;
+    }
+
     .usuario-actions {
         display: none;
     }
@@ -296,6 +320,16 @@ td {
         flex-direction: column;
         gap: .5rem;
         width: 100%;
+    }
+
+    .search-wrapper {
+        width: 100%;
+    }
+}
+
+@media (width <= 425px) {
+    .actions {
+        flex-wrap: wrap-reverse;
     }
 }
 

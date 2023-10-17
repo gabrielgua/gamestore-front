@@ -48,7 +48,9 @@
                     <p class="info">{{usuario.dataCadastro | date: 'dd/MM/yyyy'}}</p>
                 </td>
                 <td>
-                    <p class="info">{{usuario.tipo}}</p>
+                    <div class="usuario__tipo {{isAdmin(usuario.tipo) ? 'usuario__tipo--admin': 'usuario__tipo--user'}}">
+                        <p class="info">{{usuario.tipo}}</p>
+                    </div>
                 </td>
                 <td class="td-last">
                     <div class="usuario-actions">
