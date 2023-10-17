@@ -2,10 +2,20 @@
     <div class="title">
         <span class="material-symbols-rounded icon--filled">groups</span>
         <p>Todos os usuários</p>
-
-
-        
     </div>
+
+    <div class="actions">
+        <div class="search-wrapper">
+            <span class="material-symbols-rounded">search</span>
+            <input type="text" placeholder="Buscar usuários..." [(ngModel)]="searchTerm">
+        </div>
+        <button class="btn-adicionar">
+            <span class="material-symbols-rounded">add</span>
+            <p>Adicionar usuário</p>
+        </button>
+
+    </div>
+
     <ng-container *ngIf="usuarios$ | async as usuarios">
         <table>
             <tr>
@@ -15,9 +25,8 @@
                 <th><p class="table__titles">E-MAIL</p></th>
                 <th><p class="table__titles">CADASTRO</p></th>
                 <th><p class="table__titles">TIPO</p></th>
-                <!-- <th><p class="table__titles">AÇÕES</p></th>                 -->
             </tr>
-            <tr *ngFor="let usuario of usuarios">
+            <tr *ngFor="let usuario of usuarios | filter: searchTerm">
                 <td class="td-first">
                     <div class="usuario__id-avatar">
                         <p style="color: var(--primary);">{{usuario.id}}</p>

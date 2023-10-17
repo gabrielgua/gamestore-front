@@ -18,12 +18,75 @@
     color: var(--primary);
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+.btn-adicionar {
+    font-family: inherit;
+    font-size: var(--font-smaller);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+    padding-inline-end: 1rem;
+    border-radius: .25rem;
+    background-color: transparent;
+    border: 1px solid  rgba(var(--primary-number), .1);
+
+}
+
+.btn-adicionar > span {
+    transition: transform 150ms ease;
+    color: var(--primary);
+}
+
+.btn-adicionar:hover {
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.btn-adicionar:hover > span {
+    transform: rotateZ(90deg);
+}
+
+.search-wrapper {
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    background-color: black;
+    padding-inline-start: .75rem;
+    overflow: hidden;
+}
+
+.search-wrapper > input {
+    width: 100%;
+    border: none;
+    background-color: black;
+    padding: .75rem;
+    font-family: inherit;
+}
+
+.search-wrapper > input:focus {
+    outline: none;
+}
+
+.search-wrapper:focus-within {
+    outline: 1px solid var(--primary);
+}
+
+.search-wrapper > span {
+    color: var(--primary);
+}
+
 table {
     border-collapse: separate;
     border-spacing: 0 .25rem;
 }
-
-
 
 
 th {

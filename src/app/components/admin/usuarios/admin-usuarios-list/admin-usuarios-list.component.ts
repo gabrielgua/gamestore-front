@@ -17,6 +17,7 @@ export class AdminUsuariosListComponent implements OnInit {
   usuarios$ = new Observable<Usuario[]>();
 
   usuarioFilter = 0;
+  searchTerm = '';
 
   constructor(private service: UsuarioListService) {}
 
