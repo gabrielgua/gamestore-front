@@ -9,16 +9,16 @@
     <ng-container *ngIf="usuarios$ | async as usuarios">
         <table>
             <tr>
-                <th><p class="table__titles">Usuário</p></th>
-                <th><p class="table__titles">Nome</p></th>
-                <th><p class="table__titles">Username</p></th>
-                <th><p class="table__titles">E-mail</p></th>
-                <th><p class="table__titles">Cadastro</p></th>
-                <th><p class="table__titles">Admin</p></th>
-                <th><p class="table__titles">Ações</p></th>                
+                <th><p class="table__titles">#</p></th>
+                <th><p class="table__titles">NOME</p></th>
+                <th><p class="table__titles">USERNAME</p></th>
+                <th><p class="table__titles">E-MAIL</p></th>
+                <th><p class="table__titles">CADASTRO</p></th>
+                <th><p class="table__titles">TIPO</p></th>
+                <!-- <th><p class="table__titles">AÇÕES</p></th>                 -->
             </tr>
-            <tr *ngFor="let usuario of usuarios" >
-                <td>
+            <tr *ngFor="let usuario of usuarios">
+                <td class="td-first">
                     <div class="usuario__id-avatar">
                         <p style="color: var(--primary);">{{usuario.id}}</p>
                         <div class="usuario__avatar">
@@ -27,7 +27,7 @@
                     </div>
                 </td>
                 <td>
-                    <p class="info">{{usuario.nome}}</p>
+                    <p class="info">{{usuario.nome ?? '---'}}</p>
                 </td>
                 <td>
                     <p class="info">{{usuario.username}}</p>
@@ -41,9 +41,26 @@
                 <td>
                     <p class="info">{{usuario.tipo}}</p>
                 </td>
-                <td>
-                    <div class="usuario__actions">
-                        <button class="btn-usuarios btn-editar">Editar</button>
+                <td class="td-last">
+                    <div class="usuario-actions">
+                        <button id="btn-detalhes" class="btn-usuarios btn-detalhes" (click)="openActions(usuario.id)">
+                            <span id="btn-detalhes" class="material-symbols-rounded icon--filled">more_horiz</span>
+                        </button>
+
+                        <div class="actions-dropdown" *ngIf="showFilter(usuario.id)" @fromTopToTop>
+                            <button class="btn-action btn-action--success" *ngIf="!isAdmin(usuario.tipo)">
+                                <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
+                                <p>Tornar admin</p>
+                            </button>
+                            <button class="btn-action btn-action--danger" *ngIf="isAdmin(usuario.tipo)">
+                                <span class="material-symbols-rounded icon--filled error">arrow_downward</span>
+                                <p>Remover admin</p>
+                            </button>
+                            <button class="btn-action btn-action--delete">
+                                <span class="material-symbols-rounded icon--filled">delete</span>
+                                <p>Remover</p>
+                            </button>
+                        </div>
                     </div>
                 </td>
             </tr>
