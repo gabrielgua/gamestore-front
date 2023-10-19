@@ -3,11 +3,15 @@
     <div class="content">
         <ng-content></ng-content>
     </div>
-    <div class="footer" *ngIf="actions">
-        <div class="actions">
-            <button (click)="close()">Cancel</button>
-            <button (click)="submit()">Submit</button>
-        </div>
+    <div class="actions" *ngIf="actions">
+        <button class="btn-action btn-cancel" title="Cancelar" (click)="close()">
+            <span class="material-symbols-rounded icon--filled" >cancel</span>
+            <p>Cancelar</p>
+        </button>
+        <button class="btn-action btn-confirm" title="Confirmar" (click)="submit()">
+            <span class="material-symbols-rounded icon--filled" >check_circle</span>
+            <p>Confirmar</p>
+        </button>
     </div>
 </div>
 
