@@ -306,6 +306,10 @@ td {
         content: 'tipo:';
     }
 
+    td:last-child {
+        border-bottom: 1px solid var(--subtle-border-color);
+    }
+
     .usuario__id-avatar {
         justify-content: flex-start;
     }
