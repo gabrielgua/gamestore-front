@@ -59,7 +59,7 @@
                         </button>
 
                         <div class="actions-dropdown" *ngIf="showFilter(usuario.id)" @fromTopToTop>
-                            <button class="btn-action btn-action--success" *ngIf="!isAdmin(usuario.tipo)">
+                            <button class="btn-action btn-action--success" *ngIf="!isAdmin(usuario.tipo)" (click)="openModal(msgTornarAdmin(usuario.username), modalTemplate)">
                                 <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
                                 <p>Tornar admin</p>
                             </button>
@@ -93,4 +93,5 @@
         </table>
         
     </ng-container>
+    <ng-template #modalTemplate></ng-template>
 </div>

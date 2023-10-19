@@ -1,8 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
 import { Usuario } from 'src/app/models/usuarios/usuario';
+import { ModalService } from 'src/app/service/modal/modal.service';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 import { UsuarioListService } from 'src/app/service/usuarios/usuario-list.service';
 
@@ -14,12 +15,16 @@ import { UsuarioListService } from 'src/app/service/usuarios/usuario-list.servic
 })
 export class AdminUsuariosListComponent implements OnInit {
 
-  usuarios$ = new Observable<Usuario[]>();
+  
 
+  usuarios$ = new Observable<Usuario[]>();
   usuarioFilter = 0;
   searchTerm = '';
 
-  constructor(private service: UsuarioListService) {}
+  constructor(
+    private service: UsuarioListService, 
+    private modalService: ModalService,
+    private viewContainerRef: ViewContainerRef) {}
 
 
   ngOnInit(): void {
@@ -53,5 +58,21 @@ export class AdminUsuariosListComponent implements OnInit {
 
   isAdmin(tipo: TipoUsuario): boolean {
     return tipo === TipoUsuario.ADMIN;
+  }
+
+  openModal(title: string, template: TemplateRef<any>): void {
+    this.modalService.open(template, this.viewContainerRef, {title: title, actions: true});
+  }
+
+  msgTornarAdmin(username: string): string {
+    return 'Deseja tornar o usuário "' + username + '" admin?';
+  }
+
+  msgRemoverAdmin(username: string): string {
+    return 'Deseja remover as permissões de administrador para o usuário "' + username + '"?';
+  }
+
+  msgRemoverUsuario(username: string): string {
+    return 'Isso removerá o usuário "' + username +'" para sempre, deseja continuar?';
   }
 }

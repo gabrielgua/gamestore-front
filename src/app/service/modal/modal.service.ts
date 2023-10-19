@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ComponentRef, Inject, Injectable, Injector, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { Inject, Injectable, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ModalComponent } from 'src/app/components/shared/modal/modal.component';
 
