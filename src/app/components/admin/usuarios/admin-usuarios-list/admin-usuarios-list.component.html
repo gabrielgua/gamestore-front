@@ -63,11 +63,11 @@
                                 <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
                                 <p>Tornar admin</p>
                             </button>
-                            <button class="btn-action btn-action--danger" *ngIf="isAdmin(usuario.tipo)">
+                            <button class="btn-action btn-action--danger" *ngIf="isAdmin(usuario.tipo)" (click)="openModal(msgRemoverAdmin(usuario.username), modalTemplate)">
                                 <span class="material-symbols-rounded icon--filled error">arrow_downward</span>
                                 <p>Remover admin</p>
                             </button>
-                            <button class="btn-action btn-action--delete">
+                            <button class="btn-action btn-action--delete" (click)="openModal(msgRemoverUsuario(usuario.username), modalTemplate)">
                                 <span class="material-symbols-rounded icon--filled">delete</span>
                                 <p>Remover</p>
                             </button>
@@ -75,15 +75,15 @@
                     </div>
 
                     <div class="usuario-actions--responsive">
-                        <button class="btn-action btn-action--success btn-action--responsive" *ngIf="!isAdmin(usuario.tipo)">
+                        <button class="btn-action btn-action--success btn-action--responsive" *ngIf="!isAdmin(usuario.tipo)" (click)="openModal(msgTornarAdmin(usuario.username), modalTemplate)">
                             <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
                             <p>Tornar admin</p>
                         </button>
-                        <button class="btn-action btn-action--danger btn-action--responsive" *ngIf="isAdmin(usuario.tipo)">
+                        <button class="btn-action btn-action--danger btn-action--responsive" *ngIf="isAdmin(usuario.tipo)" (click)="openModal(msgRemoverAdmin(usuario.username), modalTemplate)">
                             <span class="material-symbols-rounded icon--filled error">arrow_downward</span>
                             <p>Remover admin</p>
                         </button>
-                        <button class="btn-action btn-action--delete btn-action--responsive">
+                        <button class="btn-action btn-action--delete btn-action--responsive" (click)="openModal(msgRemoverUsuario(usuario.username), modalTemplate)">
                             <span class="material-symbols-rounded icon--filled">delete</span>
                             <p>Remover</p>
                         </button>
