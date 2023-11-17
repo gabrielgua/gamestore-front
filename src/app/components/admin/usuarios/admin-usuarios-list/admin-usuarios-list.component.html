@@ -54,36 +54,37 @@
                 </td>
                 <td class="td-last">
                     <div class="usuario-actions">
-                        <button id="btn-detalhes" class="btn-usuarios btn-detalhes" (click)="openActions(usuario.id)">
+                        <button id="btn-detalhes" class="btn-usuarios btn-detalhes" *ngIf="!isUsuarioLogado(usuario.id)" (click)="openActions(usuario.id)">
                             <span id="btn-detalhes" class="material-symbols-rounded icon--filled">more_horiz</span>
                         </button>
 
                         <div class="actions-dropdown" *ngIf="showFilter(usuario.id)" @fromTopToTop>
-                            <button class="btn-action btn-action--success" *ngIf="!isAdmin(usuario.tipo)" (click)="openModal(msgTornarAdmin(usuario.username), modalTemplate)">
+                            <button class="btn-action btn-action--success" *ngIf="!isAdmin(usuario.tipo)" (click)="tornarAdmin(usuario)">
                                 <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
                                 <p>Tornar admin</p>
                             </button>
-                            <button class="btn-action btn-action--danger" *ngIf="isAdmin(usuario.tipo)" (click)="openModal(msgRemoverAdmin(usuario.username), modalTemplate)">
+                            <button class="btn-action btn-action--danger" *ngIf="isAdmin(usuario.tipo)" (click)="revogarAdmin(usuario)">
                                 <span class="material-symbols-rounded icon--filled error">arrow_downward</span>
                                 <p>Remover admin</p>
                             </button>
-                            <button class="btn-action btn-action--delete" (click)="openModal(msgRemoverUsuario(usuario.username), modalTemplate)">
+                            <button class="btn-action btn-action--delete" (click)="removerUsuario(usuario) ">
                                 <span class="material-symbols-rounded icon--filled">delete</span>
                                 <p>Remover</p>
                             </button>
+                            
                         </div>
                     </div>
 
-                    <div class="usuario-actions--responsive">
-                        <button class="btn-action btn-action--success btn-action--responsive" *ngIf="!isAdmin(usuario.tipo)" (click)="openModal(msgTornarAdmin(usuario.username), modalTemplate)">
+                    <div class="usuario-actions--responsive" *ngIf="!isUsuarioLogado(usuario.id)">
+                        <button class="btn-action btn-action--success btn-action--responsive" *ngIf="!isAdmin(usuario.tipo)" (click)="tornarAdmin(usuario)">
                             <span class="material-symbols-rounded icon--filled success">arrow_upward</span>
                         <p>Tornar admin</p>
                         </button>
-                        <button class="btn-action btn-action--danger btn-action--responsive" *ngIf="isAdmin(usuario.tipo)" (click)="openModal(msgRemoverAdmin(usuario.username), modalTemplate)">
+                        <button class="btn-action btn-action--danger btn-action--responsive" *ngIf="isAdmin(usuario.tipo)" (click)="revogarAdmin(usuario)">
                             <span class="material-symbols-rounded icon--filled error">arrow_downward</span>
                             <p>Remover admin</p>
                         </button>
-                        <button class="btn-action btn-action--delete btn-action--responsive" (click)="openModal(msgRemoverUsuario(usuario.username), modalTemplate)">
+                        <button class="btn-action btn-action--delete btn-action--responsive" (click)="removerUsuario(usuario)">
                             <span class="material-symbols-rounded icon--filled">delete</span>
                             <p>Remover</p>
                         </button>

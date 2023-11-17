@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { TipoUsuario } from 'src/app/models/usuarios/tipo.usuario';
@@ -16,16 +17,20 @@ import { UsuarioListService } from 'src/app/service/usuarios/usuario-list.servic
 export class AdminUsuariosListComponent implements OnInit {
 
   
-
+  @ViewChild('modalTemplate', { static: false })
+  modalTemplate!: TemplateRef<any>;
+  
   usuarios$ = new Observable<Usuario[]>();
   usuarioFilter = 0;
   searchTerm = '';
 
+
   constructor(
     private service: UsuarioListService, 
+    private usuarioLogadoService: UsuarioService,
     private modalService: ModalService,
-    private viewContainerRef: ViewContainerRef) {}
-
+    private viewContainerRef: ViewContainerRef,
+    private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.service.fetchUsuarios();
@@ -46,6 +51,7 @@ export class AdminUsuariosListComponent implements OnInit {
     }
 
     this.usuarioFilter = usuarioId
+    
   }
 
   closeActions(): void {
@@ -60,19 +66,53 @@ export class AdminUsuariosListComponent implements OnInit {
     return tipo === TipoUsuario.ADMIN;
   }
 
-  openModal(title: string, template: TemplateRef<any>): void {
-    this.modalService.open(template, this.viewContainerRef, {title: title, actions: true});
+  isUsuarioLogado(usuarioId: number): boolean {
+    return this.usuarioLogadoService.isUsuarioLogado(usuarioId);
   }
 
-  msgTornarAdmin(username: string): string {
+  openModal(title: string): Observable<string> {
+    return this.modalService.open(this.modalTemplate, this.viewContainerRef, {title: title, actions: true});
+  }
+
+  tornarAdmin(usuario: Usuario): void {
+    this.openModal(this.msgTornarAdmin(usuario.username))
+      .subscribe(res => {
+        if (res === 'close') {
+          return;
+        }
+
+        this.service.tornarAdmin(usuario.id);
+        this.toastr.success(`Permissões de admin concedidas ao usuário '${usuario.username}'.`, 'Sucesso');        
+      });
+  }
+
+  revogarAdmin(usuario: Usuario): void {
+    this.openModal(this.msgRemoverAdmin(usuario.username))
+    .subscribe(res => {
+      if (res === 'close') {
+        return;
+      }
+
+      this.service.revogarAdmin(usuario.id);
+      this.toastr.success(`Permissões de admin revogadas ao usuário '${usuario.username}'.`, 'Sucesso');        
+    });
+  }
+
+  removerUsuario(usuario: Usuario): void {
+    this.openModal(this.msgRemoverUsuario(usuario.username))
+      .subscribe(res => console.log(res));
+  }
+
+
+  private msgTornarAdmin(username: string): string {
     return 'Deseja tornar o usuário "' + username + '" admin?';
   }
 
-  msgRemoverAdmin(username: string): string {
+  private msgRemoverAdmin(username: string): string {
     return 'Deseja remover as permissões de administrador para o usuário "' + username + '"?';
   }
 
-  msgRemoverUsuario(username: string): string {
+  private msgRemoverUsuario(username: string): string {
     return 'Isso removerá o usuário "' + username +'" para sempre, deseja continuar?';
   }
 }

@@ -62,8 +62,12 @@ export class UsuarioService {
     this.compraService.fetchCompras();
   }
 
-  public isAdmin() {
+  public isAdmin(): boolean {
     return this.authService.temPermissao(TipoUsuario.ADMIN);
+  }
+
+  public isUsuarioLogado(usuarioId: number): boolean {
+    return this.usuario$.getValue().id === usuarioId;
   }
 
   public changeAvatar(avatarUrl: string): void {
@@ -79,5 +83,6 @@ export class UsuarioService {
   public editPassword(senhaRequest: AlterarSenhaRequest): Observable<void> {
     return this.http.put<void>(`${environment.API_URL}/usuarios/${this.usuario$.getValue().id}/senha`, senhaRequest);
   }
+
 }
 

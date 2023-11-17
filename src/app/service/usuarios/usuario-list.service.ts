@@ -22,4 +22,15 @@ export class UsuarioListService {
     this.http.get<Usuario[]>(`${environment.API_URL}/usuarios`)
       .subscribe(usuarios => this.usuarios$.next(usuarios));
   }
+
+
+  tornarAdmin(usuarioId: number): void {
+    this.http.put(`${environment.API_URL}/usuarios/${usuarioId}/admin`, {})
+      .subscribe(() => this.fetchUsuarios());
+  }
+
+  revogarAdmin(usuarioId: number): void {
+    this.http.delete(`${environment.API_URL}/usuarios/${usuarioId}/admin`, {})
+      .subscribe(() => this.fetchUsuarios());
+  }
 } 
