@@ -135,5 +135,9 @@ a {
     color: rgb(var(--success));
 }
 
+.primary {
+    color: var(--primary);
+}
+
 
 

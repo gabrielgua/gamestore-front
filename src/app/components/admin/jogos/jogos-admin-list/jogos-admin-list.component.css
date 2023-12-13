@@ -209,6 +209,10 @@ td {
     color: rgb(var(--success));
 }
 
+.btn-action--default:hover {
+    color: rgb(var(--primary-number));
+}
+
 .btn-action--danger:hover {
     color: rgb(var(--error));
 }

@@ -49,6 +49,10 @@
                         </button>
 
                         <div class="actions-dropdown" *ngIf="showFilter(jogo.id)" @fromTopToTop>
+                            <button class="btn-action btn-action--default">
+                                <span class="material-symbols-rounded icon--filled primary">visibility</span>
+                                <p>Detalhes</p>
+                            </button>
                             <button class="btn-action btn-action--success">
                                 <span class="material-symbols-rounded icon--filled success">edit</span>
                                 <p>Editar</p>
@@ -63,11 +67,14 @@
                     </div>
 
                     <div class="jogo-actions--responsive">
+                        <button class="btn-action btn-action--default btn-action--responsive">
+                            <span class="material-symbols-rounded icon--filled primary">visibility</span>
+                            <p>Detalhes</p>
+                        </button>
                         <button class="btn-action btn-action--success btn-action--responsive"  >
                             <span class="material-symbols-rounded icon--filled success">edit</span>
                         <p>Editar</p>
                         </button>
-                        
                         <button class="btn-action btn-action--delete btn-action--responsive" >
                             <span class="material-symbols-rounded icon--filled">delete</span>
                             <p>Remover</p>
