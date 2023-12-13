@@ -27,8 +27,14 @@
     
             <tr *ngFor="let jogo of pageableJogos.content">
                 <td class="td-first">
-                    <p class="info">{{jogo.id}}</p>
+                    <div class="jogo__id-img">
+                        <p class="info">{{jogo.id}}</p>
+                        <div class="jogo__img">
+                            <img  src="{{jogo.urlImagem}}" alt="{{jogo.nome}} image.">
+                        </div>
+                    </div>
                 </td>
+                
                 <td>
                     <p class="info">{{jogo.nome}}</p>
                 </td>

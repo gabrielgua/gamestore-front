@@ -126,11 +126,13 @@ td {
 }
 
 .jogo__img {
-    width: 3rem;
+    width: 6rem;
 }
 
 .jogo__img > img {
     width: 100%;
+    border-radius: .5rem;
+
     display: block;
 }
 
