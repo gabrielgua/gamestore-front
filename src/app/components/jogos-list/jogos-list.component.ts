@@ -1,24 +1,23 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { JogosListService } from '../../service/jogos/jogos-list.service';
-import { Animations } from '../../animations/animations';
-import { Jogo } from '../../models/jogos/jogo';
-import { PageableModel } from '../../models/pageables/pageable.model';
-import { JogoPageableRequest } from '../../models/jogos/jogo.pageable';
-import { JogoFilter } from '../../models/jogos/jogo.filter';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Categoria } from '../../models/categorias/categoria';
-import { Modo } from '../../models/modos/modo';
-import { Plataforma } from '../../models/plataformas/plataforma';
-import { CategoriasListService } from '../../service/categorias/categorias-list.service';
-import { ModosListService } from '../../service/modos/modos-list.service';
-import { PlataformasListService } from '../../service/plataformas/plataformas-list.service';
-import { JogoResumo, toJogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { Router } from '@angular/router';
-import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
-import { Observable, Subscription, map, startWith } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { PageInfo } from 'src/app/models/pageables/page.info';
+import { CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 import { DesejosService } from 'src/app/service/usuario-logado/desejos/desejos.service';
+import { Animations } from '../../animations/animations';
+import { Categoria } from '../../models/categorias/categoria';
+import { JogoFilter } from '../../models/jogos/jogo.filter';
+import { JogoPageableRequest } from '../../models/jogos/jogo.pageable';
+import { Modo } from '../../models/modos/modo';
+import { PageableModel } from '../../models/pageables/pageable.model';
+import { Plataforma } from '../../models/plataformas/plataforma';
+import { CategoriasListService } from '../../service/categorias/categorias-list.service';
+import { JogosListService } from '../../service/jogos/jogos-list.service';
+import { ModosListService } from '../../service/modos/modos-list.service';
+import { PlataformasListService } from '../../service/plataformas/plataformas-list.service';
 
 export interface FilterItem {
   tipo: FilterTipo,

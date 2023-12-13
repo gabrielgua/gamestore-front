@@ -16,6 +16,7 @@ import { PerfilComponent } from './components/usuario/logado/perfil/perfil.compo
 import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
 import { AdminUsuariosListComponent } from './components/admin/usuarios/admin-usuarios-list/admin-usuarios-list.component';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { JogosAdminListComponent } from './components/admin/jogos/jogos-admin-list/jogos-admin-list.component';
 
 const routes: Routes = [
 
@@ -38,7 +39,8 @@ const routes: Routes = [
 
   // admin
   {path: 'admin/usuarios', component: AdminUsuariosListComponent, canActivate: [AuthGuard, AdminGuard]},
-
+  {path: 'admin/jogos', component: JogosAdminListComponent, canActivate: [AuthGuard, AdminGuard]},
+  
   // errors
   {path: 'error/not-found', component: NotFoundComponent},
   {path: 'error/access-denied', component: AccessDeniedComponent},

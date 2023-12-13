@@ -55,6 +55,7 @@ import { EditSenhaComponent } from './components/usuario/logado/perfil/edit-senh
 import { DesejosComponent } from './components/usuario/logado/desejos/desejos.component';
 import { AdminUsuariosListComponent } from './components/admin/usuarios/admin-usuarios-list/admin-usuarios-list.component';
 import { AdminHeaderComponent } from './components/header/admin-header/admin-header.component';
+import { JogosAdminListComponent } from './components/admin/jogos/jogos-admin-list/jogos-admin-list.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -101,6 +102,7 @@ registerLocaleData(localePt);
     DesejosComponent,
     AdminUsuariosListComponent,
     AdminHeaderComponent,
+    JogosAdminListComponent,
   ],
   imports: [
     BrowserModule,
