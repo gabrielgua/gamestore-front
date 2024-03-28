@@ -1,14 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable, firstValueFrom, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, tap } from 'rxjs';
 import { AuthRequest } from 'src/app/models/auth/auth.request';
+import { CheckEmailRequest } from 'src/app/models/usuarios/check-email.request';
+import { CheckUsernameRequest } from 'src/app/models/usuarios/check-username.request';
 import { UsuarioSenhaRequest } from 'src/app/models/usuarios/usuario.senha.request';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from '../carrinho/carrinho.service';
-import { Router } from '@angular/router';
-import { CheckUsernameRequest } from 'src/app/models/usuarios/check-username.request';
-import { CheckEmailRequest } from 'src/app/models/usuarios/check-email.request';
 
 
 
@@ -20,12 +19,13 @@ export class AuthService {
   
   private token_payload: any;
   private usuarioId$ = new BehaviorSubject<number>(0);
+  private logout$ = new BehaviorSubject<Boolean>(false);
+
 
 
   constructor(
     private http: HttpClient, 
     private jwtHelper: JwtHelperService,
-    private carrinhoService: CarrinhoService,
     private router: Router
     
     ) { 
@@ -46,6 +46,10 @@ export class AuthService {
 
   public getUsuarioId() {
     return this.usuarioId$.asObservable();
+  }
+
+  public getLogout() {
+    return this.logout$.asObservable();
   }
 
  
@@ -134,11 +138,12 @@ export class AuthService {
   }
 
   public logout(): void {
-    
-    this.carrinhoService.clearCarrinho();
+
+    this.logout$.next(true);
     this.resetJwtPayload();
     this.limparLocalStorage();
-    this.router.navigate(['sing-in']);
+    this.router.navigate(['']);
+    window.location.reload();
   }
 
   private limparLocalStorage(): void {

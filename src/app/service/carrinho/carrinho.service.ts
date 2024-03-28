@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { FormaPagamento } from 'src/app/models/formas-pagamento/forma.pagamento';
 import { FormaPagamentoId } from 'src/app/models/formas-pagamento/forma.pagamento.id';
 import { JogoId } from 'src/app/models/jogos/jogo.id';
 import { JogoResumo } from 'src/app/models/jogos/jogo.resumo';
 import { PedidoCreate } from 'src/app/models/pedidos/pedido.create';
+import { UsuarioService } from '../usuario/usuario.service';
+import { AuthService } from '../auth/auth.service';
 
 export interface Carrinho {
   formaPagamentoId?: FormaPagamentoId,
@@ -23,7 +24,7 @@ export class CarrinhoService {
 
   private carrinho$ = new BehaviorSubject<Carrinho>(this.defaultCarrinho);
 
-  constructor() { 
+  constructor(private auth: AuthService) { 
     const currentCarrinho = JSON.parse(localStorage.getItem('carrinho')!);
     if (currentCarrinho) {  
       this.carrinho$ = new BehaviorSubject<Carrinho>(currentCarrinho);   
@@ -41,6 +42,10 @@ export class CarrinhoService {
 
   addJogo(jogo: JogoResumo): void {
     if (this.isPresent(jogo.id)) {
+      return;
+    }
+
+    if (!this.auth.isLoggedIn()) {
       return;
     }
     
@@ -69,8 +74,11 @@ export class CarrinhoService {
   }
 
   clearCarrinho(): void {
-    this.carrinho$.next(this.defaultCarrinho);
-    localStorage.removeItem('carrinho');
+
+    this.auth.getLogout().subscribe(() => {
+      this.carrinho$.next(this.defaultCarrinho);
+      localStorage.removeItem('carrinho');
+    }); 
   }
 
   transformarIntoPedidoCreate(): PedidoCreate {

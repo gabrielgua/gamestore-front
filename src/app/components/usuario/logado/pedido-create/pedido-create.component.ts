@@ -2,16 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable, Subscription, filter, map, tap } from 'rxjs';
+import { Observable, Subscription, filter, map } from 'rxjs';
 import { Animations } from 'src/app/animations/animations';
 import { FormaPagamento } from 'src/app/models/formas-pagamento/forma.pagamento';
-import { Jogo } from 'src/app/models/jogos/jogo';
-import { JogoId } from 'src/app/models/jogos/jogo.id';
 import { Pedido } from 'src/app/models/pedidos/pedido';
 import { PedidoCreate } from 'src/app/models/pedidos/pedido.create';
 import { Carrinho, CarrinhoService } from 'src/app/service/carrinho/carrinho.service';
 import { FormasPagamentoListService } from 'src/app/service/formas-pagamento/formas-pagamento-list.service';
-import { ComprasUsuarioService } from 'src/app/service/jogos/jogos-usuario-logado.service';
 import { PedidoService } from 'src/app/service/pedidos/pedido.service';
 
 @Component({
